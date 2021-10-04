@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "LookUpForEat@1x.png",
+      "filename" : "LookUpForEatBackground@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "LookUpForEat@2x.png",
+      "filename" : "LookUpForEatBackground@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "LookUpForEat@3x.png",
+      "filename" : "LookUpForEatBackground@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

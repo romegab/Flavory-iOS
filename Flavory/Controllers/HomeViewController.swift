@@ -10,10 +10,12 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var dailyMenuImage: UIImageView!
-    @IBOutlet weak var lookUpForEat: UIImageView!
+    @IBOutlet weak var lookUpForEatImage: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchFilterButton: UIButton!
     @IBOutlet weak var collecitonView: UICollectionView!
+    @IBOutlet weak var lookUpForEatText: UILabel!
+    @IBOutlet weak var dailyMenuText: UILabel!
     
     let search: Search = Search()
     var searchResults = [ClippedRecipe]()
@@ -25,6 +27,7 @@ class HomeViewController: UIViewController {
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
         
+        //Loading the carousel random recipies
             search.performRandomSearch(7) { result in
                 switch result{
                 case .success(let recipies):
@@ -44,14 +47,15 @@ class HomeViewController: UIViewController {
 
         dailyMenuImage.clipsToBounds = true
         dailyMenuImage.layer.masksToBounds = true
-        dailyMenuImage.layer.cornerRadius = 5
-        //dailyMenuImage.layer.masksToBounds = true
-        //dailyMenuImage.clipsToBounds = true
-        lookUpForEat.clipsToBounds = true
-        lookUpForEat.layer.masksToBounds = true
-        lookUpForEat.layer.cornerRadius = 5
-        lookUpForEat.clipsToBounds = true
-        lookUpForEat.layer.masksToBounds = true
+        dailyMenuImage.layer.cornerRadius = 7.5
+        
+        lookUpForEatImage.clipsToBounds = true
+        lookUpForEatImage.layer.masksToBounds = true
+        lookUpForEatImage.layer.cornerRadius = 7.5
+        
+        dailyMenuText.text = "GET\nYOUR\nDAILY\nMENU"
+        lookUpForEatText.text = "LOOK\nUP\nFOR\nEAT"
+        
     }
 }
 

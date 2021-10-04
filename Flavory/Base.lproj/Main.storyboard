@@ -38,8 +38,8 @@
                                 <rect key="frame" x="0.0" y="44" width="428" height="90"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="FLAVORY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbi-A0-8fJ">
-                                        <rect key="frame" x="154.33333333333334" y="5" width="119.66666666666666" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
+                                        <rect key="frame" x="152" y="5" width="124.33333333333331" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
                                         <color key="textColor" systemColor="systemBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -78,8 +78,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m35-vW-SrO" userLabel="CarouselView" customClass="RecipeCard" customModule="Flavory">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="344"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="SUGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-cp-uVN">
-                                                <rect key="frame" x="156.33333333333334" y="20" width="115.33333333333334" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="SUGGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-cp-uVN">
+                                                <rect key="frame" x="149.66666666666666" y="20" width="128.99999999999997" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                 <color key="textColor" name="blackOrange"/>
                                                 <nil key="highlightedColor"/>
@@ -94,7 +94,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCard" customModule="Flavory" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCard" customModule="Flavory" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="22" width="249" height="236"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o31-U7-fYC">
@@ -119,7 +119,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="CTi-Vj-p2X" userLabel="Separator">
-                                        <rect key="frame" x="10" y="354" width="408" height="1"/>
+                                        <rect key="frame" x="10" y="359" width="408" height="1"/>
                                         <color key="backgroundColor" name="blackOrange"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="QSh-Ov-qlq"/>
@@ -128,34 +128,78 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qck-xf-bsc" userLabel="MenuAndExploreView">
                                         <rect key="frame" x="0.0" y="365" width="428" height="344"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="FOR YOU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x42-4K-bFr">
-                                                <rect key="frame" x="174.33333333333334" y="0.0" width="79.666666666666657" height="79"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" verticalCompressionResistancePriority="760" text="FOR YOU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmp-Fl-Fed">
+                                                <rect key="frame" x="174.33333333333334" y="5" width="79.666666666666657" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
-                                                <color key="textColor" name="blackOrange"/>
+                                                <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GM0-rp-s57">
-                                                <rect key="frame" x="10" y="89" width="408" height="240"/>
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="GM0-rp-s57">
+                                                <rect key="frame" x="15" y="34" width="398" height="295"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="indianFood" translatesAutoresizingMaskIntoConstraints="NO" id="nwm-Fk-Pyh">
-                                                        <rect key="frame" x="0.0" y="0.0" width="204" height="240"/>
-                                                    </imageView>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LookUpForEat" translatesAutoresizingMaskIntoConstraints="NO" id="spw-cs-oHL">
-                                                        <rect key="frame" x="204" y="0.0" width="204" height="240"/>
-                                                    </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWI-GI-VbY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="194" height="295"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GetDailyMenuBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="nwm-Fk-Pyh">
+                                                                <rect key="frame" x="0.0" y="0.0" width="194" height="295"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GET YOUR DAILY MENU" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rs4-Sa-ZXZ">
+                                                                <rect key="frame" x="10" y="10" width="148.66666666666666" height="64.666666666666671"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="rs4-Sa-ZXZ" firstAttribute="leading" secondItem="xWI-GI-VbY" secondAttribute="leading" constant="10" id="07m-lu-q1o"/>
+                                                            <constraint firstItem="nwm-Fk-Pyh" firstAttribute="top" secondItem="xWI-GI-VbY" secondAttribute="top" id="IqZ-RG-1SH"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rs4-Sa-ZXZ" secondAttribute="trailing" constant="10" id="UVm-f6-Ekt"/>
+                                                            <constraint firstItem="rs4-Sa-ZXZ" firstAttribute="top" secondItem="xWI-GI-VbY" secondAttribute="top" constant="10" id="Yl4-Ce-IzE"/>
+                                                            <constraint firstItem="nwm-Fk-Pyh" firstAttribute="leading" secondItem="xWI-GI-VbY" secondAttribute="leading" id="hPN-Ve-xOD"/>
+                                                            <constraint firstAttribute="trailing" secondItem="nwm-Fk-Pyh" secondAttribute="trailing" id="lhf-k8-aVF"/>
+                                                            <constraint firstAttribute="bottom" secondItem="nwm-Fk-Pyh" secondAttribute="bottom" id="spX-d4-daF"/>
+                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rs4-Sa-ZXZ" secondAttribute="bottom" constant="10" id="u2S-3a-Bol"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bv-w7-hs2">
+                                                        <rect key="frame" x="204" y="0.0" width="194" height="295"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LookUpForEatBackground" translatesAutoresizingMaskIntoConstraints="NO" id="spw-cs-oHL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="194" height="295"/>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOOK UP FOR EAT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhX-pp-DvZ">
+                                                                <rect key="frame" x="15.000000000000007" y="15" width="114.66666666666669" height="64.666666666666671"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="spw-cs-oHL" secondAttribute="bottom" id="7ch-tC-U4y"/>
+                                                            <constraint firstItem="hhX-pp-DvZ" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" constant="15" id="Aq6-ln-6qG"/>
+                                                            <constraint firstItem="hhX-pp-DvZ" firstAttribute="leading" secondItem="0bv-w7-hs2" secondAttribute="leading" constant="15" id="CLh-J3-xKS"/>
+                                                            <constraint firstItem="spw-cs-oHL" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" id="Ox6-zI-0JF"/>
+                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hhX-pp-DvZ" secondAttribute="bottom" constant="15" id="TPh-BV-xu2"/>
+                                                            <constraint firstAttribute="trailing" secondItem="spw-cs-oHL" secondAttribute="trailing" id="c5D-pj-mZs"/>
+                                                            <constraint firstItem="spw-cs-oHL" firstAttribute="leading" secondItem="0bv-w7-hs2" secondAttribute="leading" id="elK-Vc-Kyr"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hhX-pp-DvZ" secondAttribute="trailing" constant="15" id="lat-Sv-fmb"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="x42-4K-bFr" secondAttribute="trailing" constant="20" id="CUB-EA-dVO"/>
-                                            <constraint firstItem="x42-4K-bFr" firstAttribute="centerX" secondItem="qck-xf-bsc" secondAttribute="centerX" id="Jn0-sX-Z5P"/>
-                                            <constraint firstItem="GM0-rp-s57" firstAttribute="leading" secondItem="qck-xf-bsc" secondAttribute="leading" constant="10" id="MLm-pN-FHu"/>
-                                            <constraint firstItem="x42-4K-bFr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qck-xf-bsc" secondAttribute="leading" constant="20" id="PUb-gD-SkF"/>
-                                            <constraint firstItem="GM0-rp-s57" firstAttribute="top" secondItem="x42-4K-bFr" secondAttribute="bottom" constant="10" id="lke-R0-dlb"/>
-                                            <constraint firstItem="x42-4K-bFr" firstAttribute="top" secondItem="qck-xf-bsc" secondAttribute="top" id="mey-GN-iNd"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jmp-Fl-Fed" secondAttribute="trailing" constant="20" id="D5n-ur-C7j"/>
+                                            <constraint firstItem="GM0-rp-s57" firstAttribute="top" secondItem="jmp-Fl-Fed" secondAttribute="bottom" constant="5" id="Fqu-hb-dA6"/>
+                                            <constraint firstItem="jmp-Fl-Fed" firstAttribute="centerX" secondItem="qck-xf-bsc" secondAttribute="centerX" id="Hvr-pa-1hi"/>
+                                            <constraint firstItem="GM0-rp-s57" firstAttribute="leading" secondItem="qck-xf-bsc" secondAttribute="leading" constant="15" id="MLm-pN-FHu"/>
+                                            <constraint firstItem="jmp-Fl-Fed" firstAttribute="top" secondItem="qck-xf-bsc" secondAttribute="top" constant="5" id="SAk-E1-DXo"/>
+                                            <constraint firstItem="jmp-Fl-Fed" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qck-xf-bsc" secondAttribute="leading" constant="20" id="kEf-nR-QCf"/>
                                             <constraint firstAttribute="bottom" secondItem="GM0-rp-s57" secondAttribute="bottom" constant="15" id="u73-vh-0aB"/>
-                                            <constraint firstAttribute="trailing" secondItem="GM0-rp-s57" secondAttribute="trailing" constant="10" id="yzH-fD-qHL"/>
+                                            <constraint firstAttribute="trailing" secondItem="GM0-rp-s57" secondAttribute="trailing" constant="15" id="yzH-fD-qHL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -163,8 +207,8 @@
                                 <constraints>
                                     <constraint firstItem="m35-vW-SrO" firstAttribute="leading" secondItem="2hB-HH-UYh" secondAttribute="leading" id="AeI-tM-Sl6"/>
                                     <constraint firstAttribute="trailing" secondItem="CTi-Vj-p2X" secondAttribute="trailing" constant="10" id="AmC-UC-JXb"/>
-                                    <constraint firstItem="qck-xf-bsc" firstAttribute="top" secondItem="CTi-Vj-p2X" secondAttribute="bottom" constant="10" id="DiX-Dq-FA3"/>
-                                    <constraint firstItem="CTi-Vj-p2X" firstAttribute="top" secondItem="m35-vW-SrO" secondAttribute="bottom" constant="10" id="Oin-sv-pw5"/>
+                                    <constraint firstItem="qck-xf-bsc" firstAttribute="top" secondItem="CTi-Vj-p2X" secondAttribute="bottom" constant="5" id="DiX-Dq-FA3"/>
+                                    <constraint firstItem="CTi-Vj-p2X" firstAttribute="top" secondItem="m35-vW-SrO" secondAttribute="bottom" constant="15" id="Oin-sv-pw5"/>
                                     <constraint firstAttribute="trailing" secondItem="qck-xf-bsc" secondAttribute="trailing" id="QFg-r9-HhE"/>
                                     <constraint firstItem="m35-vW-SrO" firstAttribute="height" secondItem="qck-xf-bsc" secondAttribute="height" id="QSG-cT-dvm"/>
                                     <constraint firstAttribute="bottom" secondItem="qck-xf-bsc" secondAttribute="bottom" id="Wb1-KY-cf0"/>
@@ -191,7 +235,9 @@
                     <connections>
                         <outlet property="collecitonView" destination="WAS-ur-BUi" id="Ong-MR-GHZ"/>
                         <outlet property="dailyMenuImage" destination="nwm-Fk-Pyh" id="6fR-rF-ha7"/>
-                        <outlet property="lookUpForEat" destination="spw-cs-oHL" id="gh8-Vg-E6M"/>
+                        <outlet property="dailyMenuText" destination="rs4-Sa-ZXZ" id="ENq-FR-OfQ"/>
+                        <outlet property="lookUpForEatImage" destination="spw-cs-oHL" id="blI-4Z-V2H"/>
+                        <outlet property="lookUpForEatText" destination="hhX-pp-DvZ" id="clz-1i-mxq"/>
                         <outlet property="searchBar" destination="dPk-Kq-4oR" id="uSk-Ux-1Ui"/>
                         <outlet property="searchFilterButton" destination="pgV-ry-mFe" id="xqE-Ka-eq4"/>
                     </connections>
@@ -220,8 +266,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LookUpForEat" width="160" height="240"/>
-        <image name="indianFood" width="139" height="208.66667175292969"/>
+        <image name="GetDailyMenuBackGround" width="139" height="208.66667175292969"/>
+        <image name="LookUpForEatBackground" width="160" height="240"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <namedColor name="blackOrange">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

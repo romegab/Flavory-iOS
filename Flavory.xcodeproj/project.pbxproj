@@ -81,8 +81,6 @@
 				BC3A60FD27030371008A9EB4 /* Models */,
 				BC21EBFF26FDF6F500AE44CC /* AppDelegate.swift */,
 				BC21EC0126FDF6F500AE44CC /* SceneDelegate.swift */,
-				BC21EC0526FDF6F500AE44CC /* Main.storyboard */,
-				BC21EC0D26FDF6F600AE44CC /* LaunchScreen.storyboard */,
 				BC21EC1026FDF6F600AE44CC /* Info.plist */,
 				BC21EC0826FDF6F500AE44CC /* Flavory.xcdatamodeld */,
 				BC3A60FB2701D7F8008A9EB4 /* UIImageView+DownloadImage.swift */,
@@ -103,6 +101,7 @@
 		BC3A60FE2703039E008A9EB4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BC3A61092704A768008A9EB4 /* RecipeCardController.swift */,
 				BC21EC0326FDF6F500AE44CC /* HomeViewController.swift */,
 			);
 			path = Controllers;
@@ -120,8 +119,9 @@
 		BC3A61022704A37A008A9EB4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BC3A61092704A768008A9EB4 /* RecipeCardController.swift */,
 				BC3A610A2704A768008A9EB4 /* RecipeCardView.xib */,
+				BC21EC0526FDF6F500AE44CC /* Main.storyboard */,
+				BC21EC0D26FDF6F600AE44CC /* LaunchScreen.storyboard */,
 			);
 			path = Views;
 			sourceTree = "<group>";

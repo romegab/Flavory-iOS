@@ -141,7 +141,7 @@
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="fork.knife.circle" catalog="system" width="128" height="121"/>
         <namedColor name="orangeYellow">
-            <color red="1" green="0.67843137254901964" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.67799997329711914" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,8 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var dailyMenuImage: UIImageView!
-    @IBOutlet weak var lookUpView: UIView!
-    @IBOutlet weak var dailyMenuView: UIView!
+    @IBOutlet weak var lookUpForEat: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchFilterButton: UIButton!
     @IBOutlet weak var collecitonView: UICollectionView!
@@ -42,10 +41,17 @@ class HomeViewController: UIViewController {
         
         collecitonView.dataSource = self
         collecitonView.delegate = self
-        lookUpView.layer.cornerRadius = 10
-        //dailyMenuView.layer.cornerRadius = 10
+
+        dailyMenuImage.clipsToBounds = true
+        dailyMenuImage.layer.masksToBounds = true
         dailyMenuImage.layer.cornerRadius = 5
-        
+        //dailyMenuImage.layer.masksToBounds = true
+        //dailyMenuImage.clipsToBounds = true
+        lookUpForEat.clipsToBounds = true
+        lookUpForEat.layer.masksToBounds = true
+        lookUpForEat.layer.cornerRadius = 5
+        lookUpForEat.clipsToBounds = true
+        lookUpForEat.layer.masksToBounds = true
     }
 }
 

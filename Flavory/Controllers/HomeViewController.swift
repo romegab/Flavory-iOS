@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var dailyMenuText: UILabel!
     
     let search: Search = Search()
+    var selectedRecipe: ClippedRecipe? = nil
     var searchResults = [ClippedRecipe]()
     let queue = DispatchQueue.global()
     
@@ -57,6 +58,18 @@ class HomeViewController: UIViewController {
         lookUpForEatText.text = "LOOK\nUP\nFOR\nEAT"
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is RecipePreviewController {
+            
+            let vc = segue.destination as? RecipePreviewController
+            
+            if let recipe = selectedRecipe{
+                vc?.recipe = recipe
+            } 
+        }
+    }
 }
 
 extension HomeViewController: UISearchBarDelegate {
@@ -87,6 +100,11 @@ extension HomeViewController: UICollectionViewDataSource{
         cell.recipe = searchResult
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedRecipe = searchResults[indexPath.row]
+        performSegue(withIdentifier: "showRecipePreview", sender: nil)
     }
 }
 

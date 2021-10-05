@@ -9,7 +9,7 @@ import Foundation
 
 class RecipeDetails{
     
-    let regex = try! NSRegularExpression(pattern: "<b>*<b>")
+    let regex = try! NSRegularExpression(pattern: "<b>[a-z, 0-9]*</b>")
     
     var calories: String?
     var protein: String?

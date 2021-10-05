@@ -9,7 +9,7 @@ import UIKit
 
 class RecipeCardController: UICollectionViewCell {
 
-    var recipe: ClippedRecipe = ClippedRecipe(){
+    var recipe: ClippedRecipe?{
         didSet{
             updateUI()
         }
@@ -36,14 +36,18 @@ class RecipeCardController: UICollectionViewCell {
     }
     
     func updateUI(){
-        recipeTitle.text = recipe.title
-        recipePreparationTime.text = "\(recipe.readyInMinutes ?? 0) min"
-        recipeServings.text = "\(recipe.servings ?? 0) servs"
-        recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
-        
-        recipeImage.image = UIImage(named: "Placeholder")
-        if let smallURL = URL(string: recipe.imageURL) {
-          downloadTask = recipeImage.loadImage(url: smallURL)
+        if let recipe = recipe{
+            
+            recipeTitle.text = recipe.title
+            recipePreparationTime.text = "\(recipe.readyInMinutes ?? 0) min"
+            recipeServings.text = "\(recipe.servings ?? 0) servs"
+            recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
+            
+            recipeImage.image = UIImage(named: "Placeholder")
+            if let smallURL = URL(string: recipe.imageURL) {
+              downloadTask = recipeImage.loadImage(url: smallURL)
+                
+            }
         }
     }
 }

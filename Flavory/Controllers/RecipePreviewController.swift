@@ -9,7 +9,7 @@ import UIKit
 
 class RecipePreviewController: UIViewController {
     
-    var recipe: ClippedRecipe = ClippedRecipe()
+    var recipe: ClippedRecipe?
     
     @IBOutlet weak var closeButton: UIButton!
     

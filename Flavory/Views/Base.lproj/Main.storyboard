@@ -264,7 +264,7 @@
                                     <action selector="closeButtonPressed:" destination="j2N-ny-Vot" eventType="touchUpInside" id="dBx-Lx-4u3"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chicken nugets" translatesAutoresizingMaskIntoConstraints="NO" id="sQi-m0-e8e">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sQi-m0-e8e">
                                 <rect key="frame" x="20" y="74.000000000000014" width="408" height="251.33333333333337"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZCh-hW-IrR">
@@ -431,7 +431,6 @@
     <resources>
         <image name="GetDailyMenuBackGround" width="139" height="208.66667175292969"/>
         <image name="LookUpForEatBackground" width="160" height="240"/>
-        <image name="chicken nugets" width="156" height="115.5"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <namedColor name="blackOrange">

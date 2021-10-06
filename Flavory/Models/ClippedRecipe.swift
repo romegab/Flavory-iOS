@@ -38,7 +38,6 @@ class ClippedRecipe: Codable {
         readyInMinutes = try values.decode(Int.self, forKey: .readyInMinutes)
         servings = try values.decode(Int.self, forKey: .servings)
         summary = try values.decode(String.self, forKey: .summary)
-        print(summary)
         recipeDetails = RecipeDetails()
         
         if let summary = summary{

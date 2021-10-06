@@ -46,7 +46,6 @@ class RecipeCardController: UICollectionViewCell {
             recipeImage.image = UIImage(named: "Placeholder")
             if let smallURL = URL(string: recipe.imageURL) {
               downloadTask = recipeImage.loadImage(url: smallURL)
-                
             }
         }
     }

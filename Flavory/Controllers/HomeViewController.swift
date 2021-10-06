@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
         
         super.viewDidLoad()
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
+        
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
         
         //Loading the carousel random recipies
@@ -90,7 +91,6 @@ extension HomeViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return searchResults.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

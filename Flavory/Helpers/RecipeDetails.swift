@@ -14,21 +14,11 @@ class RecipeDetails{
     var calories: Int?
     var protein: Int?
     var fat: Int?
-    
+    var description: String = ""
     
     func loadData( recipeSumary: String){
         
-        var sentences: [String] = []
-        recipeSumary.enumerateSubstrings(in: recipeSumary.startIndex..., options: .bySentences) { (string, range, enclosingRamge, stop) in
-            if sentences.count < 4{
-                if var sentence = string{
-                    sentence = sentence.replacingOccurrences(of: "<b>", with: "")
-                    sentence = sentence.replacingOccurrences(of: "</b>", with: "")
-                    sentences.append(sentence)
-                }
-            }
-        }
-        print(sentences)
+        description = extractSynthesizedDescription(recipeSummary: recipeSumary)
         
         let rawDetails = extractRawDetails(recipeSumary: recipeSumary)
         for detail in rawDetails {
@@ -53,5 +43,20 @@ class RecipeDetails{
     private func extractRawDetails(recipeSumary: String) -> [String] {
         let results = regex.matches(in: recipeSumary, range: NSRange(recipeSumary.startIndex..., in: recipeSumary))
         return results.map { String(recipeSumary[Range($0.range, in: recipeSumary)!]) }
+    }
+    
+    private func extractSynthesizedDescription(recipeSummary: String) -> String {
+        
+        var sentences: [String] = []
+        recipeSummary.enumerateSubstrings(in: recipeSummary.startIndex..., options: .bySentences) { (string, range, enclosingRamge, stop) in
+            if sentences.count < 4{
+                if var sentence = string{
+                    sentence = sentence.replacingOccurrences(of: "<b>", with: "")
+                    sentence = sentence.replacingOccurrences(of: "</b>", with: "")
+                    sentences.append(sentence)
+                }
+            }
+        }
+        return sentences.joined(separator: " ")
     }
 }

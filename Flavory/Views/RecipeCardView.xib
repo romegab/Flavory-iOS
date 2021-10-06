@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="596" height="715"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chicken-wings" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-aH-TAJ">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-aH-TAJ">
                         <rect key="frame" x="0.0" y="0.0" width="596" height="357.5"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jY3-58-2S1">
@@ -137,8 +137,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="chicken-wings" width="212" height="131"/>
         <image name="clock" catalog="system" width="128" height="121"/>
+        <image name="defaultRecipeImage" width="293.5" height="263.5"/>
         <image name="fork.knife.circle" catalog="system" width="128" height="121"/>
         <namedColor name="orangeYellow">
             <color red="1" green="0.67799997329711914" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

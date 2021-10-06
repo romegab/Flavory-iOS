@@ -52,6 +52,7 @@ class RecipePreviewController: UIViewController {
               downloadTask = recipeImage.loadImage(url: smallURL)
             }
             recipeDescription.text = recipe.recipeDetails.description
+            recipePrice.text = "$\(recipe.recipePrice)"
         }
     }
     

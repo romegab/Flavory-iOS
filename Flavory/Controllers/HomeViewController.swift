@@ -56,7 +56,9 @@ class HomeViewController: UIViewController {
         lookUpForEatImage.layer.cornerRadius = 7.5
         
         dailyMenuText.text = "GET\nYOUR\nDAILY\nMENU"
+        dailyMenuText.adjustsFontSizeToFitWidth = true
         lookUpForEatText.text = "LOOK\nUP\nFOR\nEAT"
+        lookUpForEatText.adjustsFontSizeToFitWidth = true
         
     }
     

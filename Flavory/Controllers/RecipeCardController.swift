@@ -36,6 +36,11 @@ class RecipeCardController: UICollectionViewCell {
     }
     
     func updateUI(){
+        
+        recipeTitle.adjustsFontSizeToFitWidth = true
+        recipePreparationTime.adjustsFontSizeToFitWidth = true
+        recipeServings.adjustsFontSizeToFitWidth = true
+        
         if let recipe = recipe{
             
             recipeTitle.text = recipe.title

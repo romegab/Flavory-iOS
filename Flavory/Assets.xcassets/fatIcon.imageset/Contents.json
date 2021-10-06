@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "fatIcon.png",
+      "filename" : "fatIcon copy@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "fatIcon copy@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "fatIcon copy@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -16,9 +16,20 @@ class ClippedRecipe: Codable {
         return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
         }
     }
+    
+    var recipePrice: Double {
+        //if let pricePerServing = pricePerServing{
+        //    if let servings = servings{
+        //        return Double((Int(pricePerServing) * servings) / 100)
+        //    }
+        //}
+        
+        return 0.0
+    }
     var title: String = ""
     var id: Int = 0
     var readyInMinutes: Int?
+    var pricePerServing: Int?
     var servings: Int?
     var summary: String?
     
@@ -28,6 +39,7 @@ class ClippedRecipe: Codable {
         case readyInMinutes
         case servings
         case summary
+        case pricePerServing
     }
     
     required init(from decoder:Decoder) throws {

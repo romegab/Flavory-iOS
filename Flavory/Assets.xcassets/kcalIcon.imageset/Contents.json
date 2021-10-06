@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "kcalIcon.png",
+      "filename" : "kcalIcon copy@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "kcalIcon copy@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "kcalIcon copy@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

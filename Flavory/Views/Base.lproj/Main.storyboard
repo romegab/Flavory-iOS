@@ -79,13 +79,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="344"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="SUGGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-cp-uVN">
-                                                <rect key="frame" x="149.66666666666666" y="20" width="128.99999999999997" height="24"/>
+                                                <rect key="frame" x="149.66666666666666" y="10" width="128.99999999999997" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                 <color key="textColor" name="blackOrange"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WAS-ur-BUi">
-                                                <rect key="frame" x="0.0" y="64" width="428" height="280"/>
+                                                <rect key="frame" x="0.0" y="44" width="428" height="300"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4Uc-c1-JAc" customClass="RecipesFlowLayout" customModule="Flavory" customModuleProvider="target">
                                                     <size key="itemSize" width="128" height="128"/>
@@ -95,7 +95,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCard" customModule="Flavory" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="22" width="249" height="236"/>
+                                                        <rect key="frame" x="0.0" y="32" width="249" height="236"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o31-U7-fYC">
                                                             <rect key="frame" x="0.0" y="0.0" width="249" height="236"/>
@@ -108,12 +108,12 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="WAS-ur-BUi" firstAttribute="top" secondItem="fxJ-cp-uVN" secondAttribute="bottom" constant="20" id="4RF-Hf-xvJ"/>
+                                            <constraint firstItem="WAS-ur-BUi" firstAttribute="top" secondItem="fxJ-cp-uVN" secondAttribute="bottom" constant="10" id="4RF-Hf-xvJ"/>
                                             <constraint firstItem="WAS-ur-BUi" firstAttribute="leading" secondItem="m35-vW-SrO" secondAttribute="leading" id="Fdj-La-hER"/>
                                             <constraint firstAttribute="trailing" secondItem="WAS-ur-BUi" secondAttribute="trailing" id="Qdd-SL-65Y"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fxJ-cp-uVN" secondAttribute="trailing" constant="20" id="ZTq-6x-eTe"/>
                                             <constraint firstItem="fxJ-cp-uVN" firstAttribute="centerX" secondItem="m35-vW-SrO" secondAttribute="centerX" id="buv-Bx-Z1U"/>
-                                            <constraint firstItem="fxJ-cp-uVN" firstAttribute="top" secondItem="m35-vW-SrO" secondAttribute="top" constant="20" id="es5-RG-l0J"/>
+                                            <constraint firstItem="fxJ-cp-uVN" firstAttribute="top" secondItem="m35-vW-SrO" secondAttribute="top" constant="10" id="es5-RG-l0J"/>
                                             <constraint firstItem="fxJ-cp-uVN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m35-vW-SrO" secondAttribute="leading" constant="20" id="rft-6L-dgK"/>
                                             <constraint firstAttribute="bottom" secondItem="WAS-ur-BUi" secondAttribute="bottom" id="rvD-iL-3b9"/>
                                         </constraints>
@@ -159,7 +159,7 @@
                                                             <constraint firstItem="nwm-Fk-Pyh" firstAttribute="leading" secondItem="xWI-GI-VbY" secondAttribute="leading" id="hPN-Ve-xOD"/>
                                                             <constraint firstAttribute="trailing" secondItem="nwm-Fk-Pyh" secondAttribute="trailing" id="lhf-k8-aVF"/>
                                                             <constraint firstAttribute="bottom" secondItem="nwm-Fk-Pyh" secondAttribute="bottom" id="spX-d4-daF"/>
-                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rs4-Sa-ZXZ" secondAttribute="bottom" constant="10" id="u2S-3a-Bol"/>
+                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rs4-Sa-ZXZ" secondAttribute="bottom" constant="30" id="u2S-3a-Bol"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0bv-w7-hs2">
@@ -169,7 +169,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="194" height="295"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOOK UP FOR EAT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhX-pp-DvZ">
-                                                                <rect key="frame" x="15.000000000000007" y="15" width="114.66666666666669" height="64.666666666666671"/>
+                                                                <rect key="frame" x="15.000000000000007" y="10" width="114.66666666666669" height="64.666666666666671"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -178,10 +178,10 @@
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="spw-cs-oHL" secondAttribute="bottom" id="7ch-tC-U4y"/>
-                                                            <constraint firstItem="hhX-pp-DvZ" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" constant="15" id="Aq6-ln-6qG"/>
+                                                            <constraint firstItem="hhX-pp-DvZ" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" constant="10" id="Aq6-ln-6qG"/>
                                                             <constraint firstItem="hhX-pp-DvZ" firstAttribute="leading" secondItem="0bv-w7-hs2" secondAttribute="leading" constant="15" id="CLh-J3-xKS"/>
                                                             <constraint firstItem="spw-cs-oHL" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" id="Ox6-zI-0JF"/>
-                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hhX-pp-DvZ" secondAttribute="bottom" constant="15" id="TPh-BV-xu2"/>
+                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hhX-pp-DvZ" secondAttribute="bottom" constant="30" id="TPh-BV-xu2"/>
                                                             <constraint firstAttribute="trailing" secondItem="spw-cs-oHL" secondAttribute="trailing" id="c5D-pj-mZs"/>
                                                             <constraint firstItem="spw-cs-oHL" firstAttribute="leading" secondItem="0bv-w7-hs2" secondAttribute="leading" id="elK-Vc-Kyr"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hhX-pp-DvZ" secondAttribute="trailing" constant="15" id="lat-Sv-fmb"/>
@@ -529,10 +529,10 @@
     <resources>
         <image name="GetDailyMenuBackGround" width="139" height="208.66667175292969"/>
         <image name="LookUpForEatBackground" width="160" height="240"/>
-        <image name="fatIcon" width="512" height="512"/>
+        <image name="fatIcon" width="170.66667175292969" height="170.66667175292969"/>
         <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="kcalIcon" width="512" height="512"/>
-        <image name="proteinIcon" width="256" height="256"/>
+        <image name="kcalIcon" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="proteinIcon" width="85.333335876464844" height="85.333335876464844"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <namedColor name="blackOrange">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -17,19 +17,21 @@ class ClippedRecipe: Codable {
         }
     }
     
-    var recipePrice: Double {
-        //if let pricePerServing = pricePerServing{
-        //    if let servings = servings{
-        //        return Double((Int(pricePerServing) * servings) / 100)
-        //    }
-        //}
-        
-        return 0.0
+    var recipePrice: Double{
+        get{
+            if let pricePerServing = pricePerServing{
+                if let servings = servings{
+                    return Double((Int(pricePerServing) * servings) / 100)
+                }
+            }
+            
+            return 0.0
+        }
     }
     var title: String = ""
     var id: Int = 0
     var readyInMinutes: Int?
-    var pricePerServing: Int?
+    var pricePerServing: Double?
     var servings: Int?
     var summary: String?
     
@@ -50,6 +52,7 @@ class ClippedRecipe: Codable {
         readyInMinutes = try values.decode(Int.self, forKey: .readyInMinutes)
         servings = try values.decode(Int.self, forKey: .servings)
         summary = try values.decode(String.self, forKey: .summary)
+        pricePerServing = try values.decode(Double.self, forKey: .pricePerServing)
         recipeDetails = RecipeDetails()
         
         if let summary = summary{

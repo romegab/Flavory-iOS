@@ -46,13 +46,13 @@ class RecipePreviewController: UIViewController {
         if let recipe = recipe{
             
             recipeTitle.text = recipe.title
-            recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
+            recipeTitle.adjustsFontSizeToFitWidth = true
             recipeImage.image = UIImage(named: "Placeholder")
             if let smallURL = URL(string: recipe.imageURL) {
               downloadTask = recipeImage.loadImage(url: smallURL)
             }
             recipeDescription.text = recipe.recipeDetails.description
-            recipePrice.text = "$\(recipe.recipePrice)"
+            recipePrice.text = "$\(String(format: "%.2f", recipe.recipePrice))"
         }
     }
     

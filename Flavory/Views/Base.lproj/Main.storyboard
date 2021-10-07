@@ -94,7 +94,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCard" customModule="Flavory" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCard" customModule="Flavory" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="32" width="249" height="236"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o31-U7-fYC">
@@ -310,7 +310,7 @@
                                             <constraint firstItem="aB2-i2-Iy2" firstAttribute="top" secondItem="Y4H-SB-bB9" secondAttribute="bottom" constant="10" id="ZMC-2g-fQp"/>
                                             <constraint firstAttribute="trailing" secondItem="aB2-i2-Iy2" secondAttribute="trailing" id="jtA-EQ-RsQ"/>
                                             <constraint firstAttribute="trailing" secondItem="Y4H-SB-bB9" secondAttribute="trailing" id="kOz-ZW-WA6"/>
-                                            <constraint firstItem="Y4H-SB-bB9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oqx-MW-suu" secondAttribute="trailing" constant="30" id="l7e-pE-VsN"/>
+                                            <constraint firstItem="Y4H-SB-bB9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="oqx-MW-suu" secondAttribute="trailing" constant="40" id="l7e-pE-VsN"/>
                                             <constraint firstItem="J6B-hU-fvc" firstAttribute="leading" secondItem="a7p-GU-AcZ" secondAttribute="leading" id="rRZ-I7-bxh"/>
                                         </constraints>
                                     </view>

@@ -20,6 +20,7 @@
 		BC3A610127030542008A9EB4 /* SearchResultParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A610027030542008A9EB4 /* SearchResultParser.swift */; };
 		BC3A610B2704A768008A9EB4 /* RecipeCardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3A61092704A768008A9EB4 /* RecipeCardController.swift */; };
 		BC3A610C2704A768008A9EB4 /* RecipeCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC3A610A2704A768008A9EB4 /* RecipeCardView.xib */; };
+		BCA188B0270EDDE500B7A3F4 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA188AF270EDDE500B7A3F4 /* Cache.swift */; };
 		BCA4A77E270B216000F3EFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA4A77D270B216000F3EFBE /* Assets.xcassets */; };
 		BCA4A780270B404B00F3EFBE /* RecipePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA4A77F270B404B00F3EFBE /* RecipePreviewController.swift */; };
 		BCA9E9982706EFBE00783488 /* RecipesFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9E9972706EFBE00783488 /* RecipesFlowLayout.swift */; };
@@ -42,6 +43,7 @@
 		BC3A610027030542008A9EB4 /* SearchResultParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultParser.swift; sourceTree = "<group>"; };
 		BC3A61092704A768008A9EB4 /* RecipeCardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCardController.swift; sourceTree = "<group>"; };
 		BC3A610A2704A768008A9EB4 /* RecipeCardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeCardView.xib; sourceTree = "<group>"; };
+		BCA188AF270EDDE500B7A3F4 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		BCA4A77D270B216000F3EFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCA4A77F270B404B00F3EFBE /* RecipePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePreviewController.swift; sourceTree = "<group>"; };
 		BCA9E9972706EFBE00783488 /* RecipesFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesFlowLayout.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				BC21EC0826FDF6F500AE44CC /* Flavory.xcdatamodeld */,
 				BC3A60FB2701D7F8008A9EB4 /* UIImageView+DownloadImage.swift */,
 				BCA4A77D270B216000F3EFBE /* Assets.xcassets */,
+				BCA188AF270EDDE500B7A3F4 /* Cache.swift */,
 			);
 			path = Flavory;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCA188B0270EDDE500B7A3F4 /* Cache.swift in Sources */,
 				BC21EC0426FDF6F500AE44CC /* HomeViewController.swift in Sources */,
 				BC3A60F22701AD30008A9EB4 /* ResultArray.swift in Sources */,
 				BC21EC0026FDF6F500AE44CC /* AppDelegate.swift in Sources */,

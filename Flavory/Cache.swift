@@ -4,8 +4,6 @@
 //
 //  Created by Ivan Stoilov on 7.10.21.
 //
-
-import Foundation
 import UIKit
 
 final class Cache<Key: Hashable, UIImage> {
@@ -14,6 +12,8 @@ final class Cache<Key: Hashable, UIImage> {
     func insert(_ value: UIImage, forKey key: Key) {
         let entry = Entry(value: value)
         wrapped.setObject(entry, forKey: WrappedKey(key))
+        
+        print("image cached with id \(key)")
     }
 
     func value(forKey key: Key) -> UIImage? {

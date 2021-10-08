@@ -8,13 +8,9 @@
 import UIKit
 
 class RecipePreviewController: UIViewController {
+    private var imageRequest: Cancellable?
     
-    var downloadTask: URLSessionDownloadTask?
-    var recipe: ClippedRecipe?{
-        didSet{
-            
-        }
-    }
+    var recipe: ClippedRecipe?
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -26,20 +22,22 @@ class RecipePreviewController: UIViewController {
     @IBOutlet weak var recipeProtein: UILabel!
     @IBOutlet weak var recipeKcal: UILabel!
     @IBOutlet weak var recipePrice: UILabel!
+    @IBOutlet weak var startCoookingButotn: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     override func viewDidLoad() {
         
         updateUI()
         setUpCloseButton()
         setUpRecipeImage()
-        setUpRecipeNutrients() 
+        setUpRecipeNutrients()
+        
+        //set button appear settings
+        startCoookingButotn.layer.cornerRadius = 15
+        //likeButton.layer.cornerRadius = 15
     }
     
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    private func loadRecipeInformation() {
-        
     }
         
     private func updateUI() {
@@ -48,8 +46,16 @@ class RecipePreviewController: UIViewController {
             recipeTitle.text = recipe.title
             recipeTitle.adjustsFontSizeToFitWidth = true
             recipeImage.image = UIImage(named: "Placeholder")
-            if let smallURL = URL(string: recipe.imageURL) {
-              downloadTask = recipeImage.loadImage(url: smallURL)
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.imageURL) { [weak self] result in
+                
+                switch result{
+                case .success(let image):
+                    self?.recipeImage.image = image
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
+                }
             }
             recipeDescription.text = recipe.recipeDetails.description
             recipePrice.text = "$\(String(format: "%.2f", recipe.recipePrice))"

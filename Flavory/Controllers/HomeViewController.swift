@@ -20,7 +20,6 @@ class HomeViewController: UIViewController {
     let search: Search = Search()
     var selectedRecipe: ClippedRecipe? = nil
     var searchResults = [ClippedRecipe]()
-    let queue = DispatchQueue.global()
     
     override func viewDidLoad() {
         
@@ -30,13 +29,13 @@ class HomeViewController: UIViewController {
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
         
         //Loading the carousel random recipies
-            search.performRandomSearch(7) { result in
+            search.performRandomSearch(7) { [weak self] result in
                 switch result{
                 case .success(let recipies):
-                    self.searchResults = recipies
-                    self.collecitonView.reloadData()
+                    self?.searchResults = recipies
+                    self?.collecitonView.reloadData()
                     let indexPath = IndexPath(item: 4, section: 0)
-                    self.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
                 case .failure(let error):
                     DispatchQueue.main.async {
                         print(error.localizedDescription)
@@ -99,6 +98,7 @@ extension HomeViewController: UICollectionViewDataSource{
         
         let cell = collecitonView.dequeueReusableCell(withReuseIdentifier: "RecipeCard", for: indexPath) as! RecipeCardController
         let searchResult = searchResults[indexPath.row]
+        
         cell.recipe = searchResult
         
         return cell

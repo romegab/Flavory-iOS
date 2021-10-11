@@ -257,15 +257,15 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfc-zm-0kv" userLabel="CloseButton">
                                 <rect key="frame" x="15.000000000000004" y="15" width="41.333333333333343" height="32"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
-                                <color key="tintColor" name="systemOpposite"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" name="orangeYellow"/>
                                 <buttonConfiguration key="configuration" style="plain"/>
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="0ZY-Cs-kwT" eventType="touchUpInside" id="gl1-al-FVe"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjv-Wg-B2S">
-                                <rect key="frame" x="0.0" y="67" width="428" height="721"/>
+                                <rect key="frame" x="0.0" y="67" width="428" height="706"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cca-zd-Rmb">
                                         <rect key="frame" x="10" y="0.0" width="408" height="251.33333333333334"/>
@@ -443,7 +443,7 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oov-fe-P6T" userLabel="BottomBarButtons">
-                                <rect key="frame" x="0.0" y="788" width="428" height="50"/>
+                                <rect key="frame" x="0.0" y="773" width="428" height="65"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prd-wR-Mla">
                                         <rect key="frame" x="20" y="0.0" width="388" height="50"/>
@@ -462,7 +462,7 @@
                                     <constraint firstItem="prd-wR-Mla" firstAttribute="leading" secondItem="oov-fe-P6T" secondAttribute="leading" constant="20" id="17f-wo-VNd"/>
                                     <constraint firstItem="prd-wR-Mla" firstAttribute="top" secondItem="oov-fe-P6T" secondAttribute="top" id="LvK-de-KoH"/>
                                     <constraint firstAttribute="trailing" secondItem="prd-wR-Mla" secondAttribute="trailing" constant="20" id="Y5q-oB-NBB"/>
-                                    <constraint firstAttribute="bottom" secondItem="prd-wR-Mla" secondAttribute="bottom" id="rCj-3D-PCB"/>
+                                    <constraint firstAttribute="bottom" secondItem="prd-wR-Mla" secondAttribute="bottom" constant="15" id="rCj-3D-PCB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -499,6 +499,62 @@
             </objects>
             <point key="canvasLocation" x="1533.6448598130839" y="-550.10799136069113"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="h9d-oL-0rd">
+            <objects>
+                <viewController id="Lgg-bV-gOL" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hzy-1A-6tU">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yrF-r7-c1s">
+                                <rect key="frame" x="138.66666666666666" y="54" width="150.99999999999997" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HYr-KQ-JpS">
+                                <rect key="frame" x="0.0" y="105" width="428" height="44"/>
+                                <items>
+                                    <navigationItem id="Y3U-YX-npz">
+                                        <nil key="title"/>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="XkF-re-9e0">
+                                            <rect key="frame" x="128.66666666666666" y="6" width="170.99999999999997" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="First"/>
+                                                <segment title="Second"/>
+                                            </segments>
+                                        </segmentedControl>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="j0l-Ss-iQV">
+                                <rect key="frame" x="0.0" y="149" width="428" height="743"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="o9j-WF-6BB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="j0l-Ss-iQV" firstAttribute="leading" secondItem="o9j-WF-6BB" secondAttribute="leading" id="2iL-XU-Gg0"/>
+                            <constraint firstItem="HYr-KQ-JpS" firstAttribute="trailing" secondItem="o9j-WF-6BB" secondAttribute="trailing" id="8db-Sx-FMR"/>
+                            <constraint firstItem="HYr-KQ-JpS" firstAttribute="leading" secondItem="o9j-WF-6BB" secondAttribute="leading" id="SIU-E2-cdg"/>
+                            <constraint firstItem="j0l-Ss-iQV" firstAttribute="top" secondItem="HYr-KQ-JpS" secondAttribute="bottom" id="UIs-JK-Zch"/>
+                            <constraint firstItem="HYr-KQ-JpS" firstAttribute="top" secondItem="yrF-r7-c1s" secondAttribute="bottom" constant="15" id="ky2-Gd-Qer"/>
+                            <constraint firstItem="o9j-WF-6BB" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yrF-r7-c1s" secondAttribute="trailing" constant="20" id="lh6-Fx-Y74"/>
+                            <constraint firstItem="o9j-WF-6BB" firstAttribute="trailing" secondItem="j0l-Ss-iQV" secondAttribute="trailing" id="rnd-2Y-Tze"/>
+                            <constraint firstItem="yrF-r7-c1s" firstAttribute="centerX" secondItem="Hzy-1A-6tU" secondAttribute="centerX" id="t9G-ku-mQc"/>
+                            <constraint firstItem="o9j-WF-6BB" firstAttribute="bottom" secondItem="j0l-Ss-iQV" secondAttribute="bottom" id="tRJ-w3-86Z"/>
+                            <constraint firstItem="yrF-r7-c1s" firstAttribute="top" secondItem="o9j-WF-6BB" secondAttribute="top" constant="10" id="xLw-sB-tk9"/>
+                            <constraint firstItem="yrF-r7-c1s" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="o9j-WF-6BB" secondAttribute="leading" constant="20" id="zrE-sO-RPb"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z1p-U3-q91" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2441" y="-550"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="iuh-eP-Jwe">
             <objects>
@@ -531,12 +587,6 @@
         <namedColor name="orangeYellow">
             <color red="1" green="0.67799997329711914" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="systemOpposite">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

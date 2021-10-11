@@ -31,9 +31,7 @@ class Search {
                 
             case .failure(let error):
                 print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    completionHandler(.failure(.badConnection))
-                }
+                completionHandler(.failure(.badConnection))
             }
         }
     }
@@ -61,13 +59,15 @@ class Search {
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         
         let session = URLSession.shared
+        
+        
         session.dataTask(with: url) {data, response, error in
-                
+            
             if let error = error as NSError?, error.code == -999{
                 DispatchQueue.main.async {
                     completionHandler(.failure(.badConnection))
                 }
-            } else if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
+                } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                 if let data = data {
                     DispatchQueue.main.async{
                         completionHandler(.success(SearchResultParser.parse(data: data)))

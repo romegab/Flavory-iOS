@@ -9,7 +9,9 @@ import UIKit
 
 class RecipeCardController: UICollectionViewCell {
 
-    var recipe: ClippedRecipe = ClippedRecipe(){
+    private var imageRequest: Cancellable?
+    
+    var recipe: ClippedRecipe?{
         didSet{
             updateUI()
         }
@@ -35,15 +37,41 @@ class RecipeCardController: UICollectionViewCell {
         
     }
     
-    func updateUI(){
-        recipeTitle.text = recipe.title
-        recipePreparationTime.text = "\(recipe.readyInMinutes ?? 0) min"
-        recipeServings.text = "\(recipe.servings ?? 0) servs"
-        recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
+    override func prepareForReuse() {
+        super.prepareForReuse()
         
-        recipeImage.image = UIImage(named: "Placeholder")
-        if let smallURL = URL(string: recipe.imageURL) {
-          downloadTask = recipeImage.loadImage(url: smallURL)
+        recipeImage.image = nil
+        
+        //imageRequest?.cancel()
+    }
+    
+    func updateUI(){
+        
+        recipeTitle.adjustsFontSizeToFitWidth = true
+        recipePreparationTime.adjustsFontSizeToFitWidth = true
+        recipeServings.adjustsFontSizeToFitWidth = true
+        
+        if let recipe = recipe{
+            
+            recipeTitle.text = recipe.title
+            recipePreparationTime.text = "\(recipe.readyInMinutes ?? 0) min"
+            recipeServings.text = "\(recipe.servings ?? 0) servs"
+            recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
+            
+            recipeImage.image = UIImage(named: "Placeholder")
+            
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.imageURL) { [weak self] result in
+                
+                switch result{
+                case .success(let image):
+                    self?.recipeImage.image = image
+                case .failure(let error):
+                    
+                    print("fire from the recipe card")
+                    print(error.localizedDescription)
+                    
+                }
+            }
         }
     }
 }

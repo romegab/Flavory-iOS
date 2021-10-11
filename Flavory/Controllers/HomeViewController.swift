@@ -18,23 +18,24 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var dailyMenuText: UILabel!
     
     let search: Search = Search()
+    var selectedRecipe: ClippedRecipe? = nil
     var searchResults = [ClippedRecipe]()
-    let queue = DispatchQueue.global()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
+        
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
         
         //Loading the carousel random recipies
-            search.performRandomSearch(7) { result in
+            search.performRandomSearch(7) { [weak self] result in
                 switch result{
                 case .success(let recipies):
-                    self.searchResults = recipies
-                    self.collecitonView.reloadData()
+                    self?.searchResults = recipies
+                    self?.collecitonView.reloadData()
                     let indexPath = IndexPath(item: 4, section: 0)
-                    self.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
                 case .failure(let error):
                     DispatchQueue.main.async {
                         print(error.localizedDescription)
@@ -54,8 +55,22 @@ class HomeViewController: UIViewController {
         lookUpForEatImage.layer.cornerRadius = 7.5
         
         dailyMenuText.text = "GET\nYOUR\nDAILY\nMENU"
+        dailyMenuText.adjustsFontSizeToFitWidth = true
         lookUpForEatText.text = "LOOK\nUP\nFOR\nEAT"
+        lookUpForEatText.adjustsFontSizeToFitWidth = true
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is RecipePreviewController {
+            
+            let vc = segue.destination as? RecipePreviewController
+            
+            if let recipe = selectedRecipe{
+                vc?.recipe = recipe
+            } 
+        }
     }
 }
 
@@ -77,16 +92,21 @@ extension HomeViewController: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return searchResults.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collecitonView.dequeueReusableCell(withReuseIdentifier: "RecipeCard", for: indexPath) as! RecipeCardController
         let searchResult = searchResults[indexPath.row]
+        
         cell.recipe = searchResult
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedRecipe = searchResults[indexPath.row]
+        performSegue(withIdentifier: "showRecipePreview", sender: nil)
     }
 }
 

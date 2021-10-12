@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC214041271456BE00893DCC /* RecipeIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC214040271456BE00893DCC /* RecipeIngredient.swift */; };
+		BC21404427145BC300893DCC /* IngredientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21404227145BC300893DCC /* IngredientCell.swift */; };
+		BC21404527145BC300893DCC /* IngredientCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC21404327145BC300893DCC /* IngredientCell.xib */; };
 		BC21EC0026FDF6F500AE44CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21EBFF26FDF6F500AE44CC /* AppDelegate.swift */; };
 		BC21EC0226FDF6F500AE44CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21EC0126FDF6F500AE44CC /* SceneDelegate.swift */; };
 		BC21EC0426FDF6F500AE44CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC21EC0326FDF6F500AE44CC /* HomeViewController.swift */; };
@@ -26,10 +29,14 @@
 		BCBA861E2710204F00912308 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA861D2710204F00912308 /* ImageService.swift */; };
 		BCBA86212710265000912308 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA86202710265000912308 /* Cancellable.swift */; };
 		BCBA862327102DC200912308 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA862227102DC200912308 /* Cache.swift */; };
+		BCC06D2327146CC7007A451F /* RecipeCookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC06D2227146CC7007A451F /* RecipeCookingController.swift */; };
 		BCC58EA7270C2787001942EA /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC58EA6270C2787001942EA /* RecipeDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC214040271456BE00893DCC /* RecipeIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeIngredient.swift; sourceTree = "<group>"; };
+		BC21404227145BC300893DCC /* IngredientCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientCell.swift; sourceTree = "<group>"; };
+		BC21404327145BC300893DCC /* IngredientCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IngredientCell.xib; sourceTree = "<group>"; };
 		BC21EBFC26FDF6F500AE44CC /* Flavory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flavory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC21EBFF26FDF6F500AE44CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC21EC0126FDF6F500AE44CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +58,7 @@
 		BCBA861D2710204F00912308 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		BCBA86202710265000912308 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
 		BCBA862227102DC200912308 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		BCC06D2227146CC7007A451F /* RecipeCookingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCookingController.swift; sourceTree = "<group>"; };
 		BCC58EA6270C2787001942EA /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,9 +121,11 @@
 		BC3A60FE2703039E008A9EB4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BC21404227145BC300893DCC /* IngredientCell.swift */,
 				BC3A61092704A768008A9EB4 /* RecipeCardController.swift */,
 				BC21EC0326FDF6F500AE44CC /* HomeViewController.swift */,
 				BCA4A77F270B404B00F3EFBE /* RecipePreviewController.swift */,
+				BCC06D2227146CC7007A451F /* RecipeCookingController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -132,6 +142,7 @@
 		BC3A61022704A37A008A9EB4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BC21404327145BC300893DCC /* IngredientCell.xib */,
 				BC3A610A2704A768008A9EB4 /* RecipeCardView.xib */,
 				BC21EC0526FDF6F500AE44CC /* Main.storyboard */,
 				BC21EC0D26FDF6F600AE44CC /* LaunchScreen.storyboard */,
@@ -177,6 +188,7 @@
 			children = (
 				BCC58EA6270C2787001942EA /* RecipeDetails.swift */,
 				BCA188B1270F095D00B7A3F4 /* ImageManager.swift */,
+				BC214040271456BE00893DCC /* RecipeIngredient.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -240,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC21EC0F26FDF6F600AE44CC /* LaunchScreen.storyboard in Resources */,
+				BC21404527145BC300893DCC /* IngredientCell.xib in Resources */,
 				BC3A610C2704A768008A9EB4 /* RecipeCardView.xib in Resources */,
 				BCA4A77E270B216000F3EFBE /* Assets.xcassets in Resources */,
 				BC21EC0726FDF6F500AE44CC /* Main.storyboard in Resources */,
@@ -255,6 +268,9 @@
 			files = (
 				BCBA86212710265000912308 /* Cancellable.swift in Sources */,
 				BC21EC0426FDF6F500AE44CC /* HomeViewController.swift in Sources */,
+				BC21404427145BC300893DCC /* IngredientCell.swift in Sources */,
+				BCC06D2327146CC7007A451F /* RecipeCookingController.swift in Sources */,
+				BC214041271456BE00893DCC /* RecipeIngredient.swift in Sources */,
 				BC3A60F22701AD30008A9EB4 /* ResultArray.swift in Sources */,
 				BC21EC0026FDF6F500AE44CC /* AppDelegate.swift in Sources */,
 				BC3A60EC27018BD4008A9EB4 /* Search.swift in Sources */,

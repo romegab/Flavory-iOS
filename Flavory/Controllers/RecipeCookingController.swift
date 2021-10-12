@@ -17,9 +17,9 @@ class RecipeCookingController: UIViewController {
         
         super.viewDidLoad()
         
-        let cellNib = UINib(nibName: "ingredientCell", bundle: nil)
+        let cellNib = UINib(nibName: "IngredientCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier:
-                                    "ingredientCell")
+                                    "IngredientCell")
         
         tableView.reloadData()
     }

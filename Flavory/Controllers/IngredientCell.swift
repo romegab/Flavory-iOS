@@ -34,6 +34,8 @@ class IngredientCell: UITableViewCell {
                 switch result{
                 case .success(let image):
                     self?.ingredientImage.image = image
+                    self?.ingredientName.text = ingredient.name
+                    self?.ingredientDescription.text = ingredient.original
                 case .failure(let error):
                     print("fire from the ingredient cell card")
                     print(error.localizedDescription)

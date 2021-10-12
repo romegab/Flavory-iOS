@@ -13,7 +13,7 @@ class RecipeIngredient: Codable {
     private let image: String?
     var imageURL: String {
         get {
-            return ("https://spoonacular.com/cdn/ingredients_500x500/\(image ?? "asdasdasd")")
+            return ("https://spoonacular.com/cdn/ingredients_250x250/\(image ?? "asdasdasd")")
         }
     }
     private enum CodingKeys: String, CodingKey {

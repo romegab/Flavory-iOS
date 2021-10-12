@@ -10,7 +10,7 @@ class IngredientCell: UITableViewCell {
     @IBOutlet weak var ingredientName: UILabel!
     @IBOutlet weak var ingredientDescription: UILabel!
     
-    private var ingredient: RecipeIngredient? {
+    var ingredient: RecipeIngredient? {
         didSet {
             updateUI()
         }

@@ -456,7 +456,8 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="START COOCKING"/>
                                         <connections>
-                                            <segue destination="fbI-il-dFp" kind="presentation" modalPresentationStyle="fullScreen" id="n8H-GH-6pK"/>
+                                            <action selector="startCookingButtonPressed:" destination="0ZY-Cs-kwT" eventType="touchUpInside" id="XT3-EZ-IIO"/>
+                                            <segue destination="fbI-il-dFp" kind="presentation" identifier="StartCookingSegue" modalPresentationStyle="fullScreen" id="n8H-GH-6pK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -495,7 +496,7 @@
                         <outlet property="recipePrice" destination="Y4H-SB-bB9" id="0UZ-GK-9y3"/>
                         <outlet property="recipeProtein" destination="ryr-lm-sen" id="Djk-XI-DTG"/>
                         <outlet property="recipeTitle" destination="oqx-MW-suu" id="EgM-ve-1eP"/>
-                        <outlet property="startCoookingButotn" destination="prd-wR-Mla" id="0hG-V7-sXZ"/>
+                        <outlet property="startCoookingButotn" destination="prd-wR-Mla" id="p7p-9Q-5Og"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tm0-Hb-Lsf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -553,6 +554,16 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1qI-JN-hqE">
                                 <rect key="frame" x="0.0" y="149" width="428" height="695"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="h8J-bV-iSc">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h8J-bV-iSc" id="8Jw-Y3-veo">
+                                            <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oys-HU-lta">
                                 <rect key="frame" x="0.0" y="844" width="428" height="48"/>

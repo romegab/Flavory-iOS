@@ -41,7 +41,7 @@ class ClippedRecipe: Codable {
     let pricePerServing: Double?
     let servings: Int?
     private var summary: String?
-    private var extendedIngredients: [RecipeIngredient]?
+    var extendedIngredients: [RecipeIngredient]?
     
     private enum CodingKeys: String, CodingKey {
         case title

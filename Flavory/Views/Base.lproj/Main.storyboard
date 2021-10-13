@@ -541,17 +541,18 @@
                                     <navigationItem id="FPU-7V-vZc">
                                         <nil key="title"/>
                                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="aup-RD-vAc">
-                                            <rect key="frame" x="128.66666666666666" y="6" width="170.99999999999997" height="32"/>
+                                            <rect key="frame" x="114.66666666666669" y="5.6666666666666679" width="199" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <segments>
-                                                <segment title="First"/>
-                                                <segment title="Second"/>
+                                                <segment title="Ingredients"/>
+                                                <segment title="Step By Step"/>
                                             </segments>
+                                            <color key="selectedSegmentTintColor" name="orangeYellow"/>
                                         </segmentedControl>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="5" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1qI-JN-hqE">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1qI-JN-hqE">
                                 <rect key="frame" x="0.0" y="149" width="428" height="695"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
@@ -568,22 +569,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIB-nf-RWg">
-                                <rect key="frame" x="20" y="54" width="69" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiL-V4-anF">
+                                <rect key="frame" x="10" y="54" width="68.333333333333329" height="36"/>
+                                <color key="tintColor" name="blackOrange"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="&lt; Back"/>
+                                <buttonConfiguration key="configuration" style="gray" title="&lt; Back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="fbI-il-dFp" eventType="touchUpInside" id="wSO-yt-pRj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cWH-RA-1SY"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                         <constraints>
                             <constraint firstItem="8XT-hR-wVL" firstAttribute="top" secondItem="LNV-tA-NE5" secondAttribute="bottom" constant="15" id="0d1-gc-0qN"/>
+                            <constraint firstItem="8XT-hR-wVL" firstAttribute="top" secondItem="BiL-V4-anF" secondAttribute="bottom" constant="15" id="3Hq-QZ-Jtm"/>
                             <constraint firstItem="8XT-hR-wVL" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" id="4zT-uv-eVN"/>
                             <constraint firstItem="8XT-hR-wVL" firstAttribute="trailing" secondItem="cWH-RA-1SY" secondAttribute="trailing" id="BmQ-BM-sUM"/>
                             <constraint firstItem="1qI-JN-hqE" firstAttribute="top" secondItem="8XT-hR-wVL" secondAttribute="bottom" id="KoL-96-hkk"/>
+                            <constraint firstItem="LNV-tA-NE5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BiL-V4-anF" secondAttribute="trailing" constant="20" id="XOP-yQ-Ru9"/>
+                            <constraint firstItem="BiL-V4-anF" firstAttribute="top" secondItem="cWH-RA-1SY" secondAttribute="top" constant="10" id="cbX-Yc-XgV"/>
                             <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="1qI-JN-hqE" secondAttribute="trailing" id="dCQ-te-Yj3"/>
                             <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="oys-HU-lta" secondAttribute="trailing" id="eN9-1B-kR4"/>
+                            <constraint firstItem="BiL-V4-anF" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" constant="10" id="eUt-Vr-bJh"/>
                             <constraint firstItem="LNV-tA-NE5" firstAttribute="centerX" secondItem="HAd-pP-YsK" secondAttribute="centerX" id="gei-5T-gnO"/>
                             <constraint firstItem="oys-HU-lta" firstAttribute="top" secondItem="1qI-JN-hqE" secondAttribute="bottom" id="iBt-gE-i5F"/>
                             <constraint firstItem="1qI-JN-hqE" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" id="oy1-f1-7Nm"/>
@@ -600,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grO-IA-kEM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2438" y="-544"/>
+            <point key="canvasLocation" x="2440.6542056074763" y="-550.10799136069113"/>
         </scene>
     </scenes>
     <resources>

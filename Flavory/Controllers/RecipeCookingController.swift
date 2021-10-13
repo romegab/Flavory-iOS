@@ -32,6 +32,9 @@ class RecipeCookingController: UIViewController {
         label.text = ""
       }
     }
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - Table View Delegate
@@ -46,6 +49,7 @@ extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
       let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as! IngredientCell
       let currentIngredient = ingredients[indexPath.row]
       cell.ingredient = currentIngredient
+      configureCheckmark(for: cell, with: currentIngredient)
       return cell
     }
   
@@ -56,7 +60,7 @@ extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
         item.isChecked.toggle()
         configureCheckmark(for: cell, with: item)
       }
-      tableView.deselectRow(at: indexPath, animated: true)
+      //tableView.deselectRow(at: indexPath, animated: true)
     }
 
 //  func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

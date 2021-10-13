@@ -568,6 +568,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIB-nf-RWg">
+                                <rect key="frame" x="20" y="54" width="69" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="&lt; Back"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cWH-RA-1SY"/>
                         <color key="backgroundColor" name="orangeYellow"/>
@@ -577,7 +583,6 @@
                             <constraint firstItem="8XT-hR-wVL" firstAttribute="trailing" secondItem="cWH-RA-1SY" secondAttribute="trailing" id="BmQ-BM-sUM"/>
                             <constraint firstItem="1qI-JN-hqE" firstAttribute="top" secondItem="8XT-hR-wVL" secondAttribute="bottom" id="KoL-96-hkk"/>
                             <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="1qI-JN-hqE" secondAttribute="trailing" id="dCQ-te-Yj3"/>
-                            <constraint firstItem="LNV-tA-NE5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cWH-RA-1SY" secondAttribute="leading" constant="20" id="eE0-KJ-efF"/>
                             <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="oys-HU-lta" secondAttribute="trailing" id="eN9-1B-kR4"/>
                             <constraint firstItem="LNV-tA-NE5" firstAttribute="centerX" secondItem="HAd-pP-YsK" secondAttribute="centerX" id="gei-5T-gnO"/>
                             <constraint firstItem="oys-HU-lta" firstAttribute="top" secondItem="1qI-JN-hqE" secondAttribute="bottom" id="iBt-gE-i5F"/>
@@ -595,7 +600,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grO-IA-kEM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2440.6542056074763" y="-550.10799136069113"/>
+            <point key="canvasLocation" x="2438" y="-544"/>
         </scene>
     </scenes>
     <resources>

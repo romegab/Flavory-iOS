@@ -9,6 +9,7 @@ class IngredientCell: UITableViewCell {
     @IBOutlet weak var ingredientImage: UIImageView!
     @IBOutlet weak var ingredientName: UILabel!
     @IBOutlet weak var ingredientDescription: UILabel!
+    @IBOutlet weak var checkMark: UILabel!
     
     var ingredient: RecipeIngredient? {
         didSet {

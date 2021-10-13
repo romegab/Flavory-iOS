@@ -13,7 +13,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientCell" rowHeight="118" id="KGk-i7-Jjw" customClass="IngredientCell" customModule="Flavory" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -21,22 +21,21 @@
                         <rect key="frame" x="15" y="5" width="80" height="80"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYI-Y5-tFP" userLabel="TextDescription">
-                        <rect key="frame" x="105" y="5" width="210" height="88"/>
+                        <rect key="frame" x="105" y="5" width="82.5" height="52"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lime juice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hN5-Cr-c47">
-                                <rect key="frame" x="0.0" y="0.0" width="210" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ing name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hN5-Cr-c47">
+                                <rect key="frame" x="0.0" y="0.0" width="82.5" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¼ cup freshly squeezed lime juice (from about 1 medium lime)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfR-eW-sdX">
-                                <rect key="frame" x="0.0" y="34" width="210" height="54"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ing det" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfR-eW-sdX">
+                                <rect key="frame" x="0.0" y="34" width="82.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="hN5-Cr-c47" firstAttribute="top" secondItem="VYI-Y5-tFP" secondAttribute="top" id="0rv-Yd-dO3"/>
                             <constraint firstItem="hN5-Cr-c47" firstAttribute="leading" secondItem="VYI-Y5-tFP" secondAttribute="leading" id="HHr-Ia-UvG"/>
@@ -47,22 +46,32 @@
                             <constraint firstItem="tfR-eW-sdX" firstAttribute="leading" secondItem="VYI-Y5-tFP" secondAttribute="leading" id="oxf-zq-msW"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2c-ha-2Xs">
+                        <rect key="frame" x="10" y="5" width="0.0" height="52"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Q8z-WP-pmh" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.25" id="1b1-fX-RFq"/>
-                    <constraint firstAttribute="trailing" secondItem="VYI-Y5-tFP" secondAttribute="trailing" constant="5" id="3wD-sY-oG3"/>
+                    <constraint firstAttribute="bottom" secondItem="Q2c-ha-2Xs" secondAttribute="bottom" constant="5" id="30l-7a-Ynx"/>
                     <constraint firstItem="Q8z-WP-pmh" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.25" id="TSk-NW-Jc1"/>
                     <constraint firstItem="VYI-Y5-tFP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="WWZ-Jk-Naa"/>
                     <constraint firstItem="VYI-Y5-tFP" firstAttribute="leading" secondItem="Q8z-WP-pmh" secondAttribute="trailing" constant="10" id="bF2-Zt-KxP"/>
+                    <constraint firstItem="Q2c-ha-2Xs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dAu-5u-j7a"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VYI-Y5-tFP" secondAttribute="trailing" constant="5" id="fEY-Hw-zWr"/>
                     <constraint firstItem="Q8z-WP-pmh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="fJG-BE-wbW"/>
-                    <constraint firstItem="Q8z-WP-pmh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="iUc-n9-aBQ"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="VYI-Y5-tFP" secondAttribute="bottom" constant="5" id="jFQ-Yk-TKg"/>
+                    <constraint firstItem="Q2c-ha-2Xs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="t1b-JK-gUy"/>
                     <constraint firstAttribute="bottom" secondItem="Q8z-WP-pmh" secondAttribute="bottom" constant="5" id="u0n-SL-LAw"/>
+                    <constraint firstItem="Q8z-WP-pmh" firstAttribute="leading" secondItem="Q2c-ha-2Xs" secondAttribute="trailing" constant="5" id="z45-GG-2DG"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <connections>
+                <outlet property="checkMark" destination="Q2c-ha-2Xs" id="dBx-zC-gNC"/>
                 <outlet property="ingredientDescription" destination="tfR-eW-sdX" id="fMm-ox-Dza"/>
                 <outlet property="ingredientImage" destination="Q8z-WP-pmh" id="cvx-ka-afe"/>
                 <outlet property="ingredientName" destination="hN5-Cr-c47" id="Mbo-aF-S4W"/>

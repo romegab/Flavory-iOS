@@ -23,6 +23,15 @@ class RecipeCookingController: UIViewController {
         
         tableView.reloadData()
     }
+    
+    func configureCheckmark(for cell: UITableViewCell, with item: RecipeIngredient) {
+      let label = cell.viewWithTag(1001) as! UILabel
+      if item.isChecked {
+        label.text = "✓"
+      } else {
+        label.text = ""
+      }
+    }
 }
 
 // MARK: - Table View Delegate
@@ -41,10 +50,14 @@ extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
     }
   
 
-//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    tableView.deselectRow(at: indexPath, animated: true)
-//    performSegue(withIdentifier: "ShowDetail", sender: indexPath)
-//  }
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      if let cell = tableView.cellForRow(at: indexPath) {
+        let item = ingredients[indexPath.row]
+        item.isChecked.toggle()
+        configureCheckmark(for: cell, with: item)
+      }
+      tableView.deselectRow(at: indexPath, animated: true)
+    }
 
 //  func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
 //    switch search.state {
@@ -54,4 +67,6 @@ extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
 //      return indexPath
 //    }
 //  }
+    
+   
 }

@@ -26,7 +26,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPR-ZA-K14">
                         <rect key="frame" x="10" y="5" width="23" height="125"/>
                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                        <color key="textColor" name="orangeYellow"/>
+                        <color key="textColor" name="blackOrange"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -50,8 +50,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <namedColor name="orangeYellow">
-            <color red="1" green="0.67799997329711914" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="blackOrange">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -12,14 +12,8 @@ class CookingStepCell: UITableViewCell, Checkable {
     var isChecked: Bool = false
     {
         didSet {
-            cookingStep?.isChecked = isChecked
-            configureCheckmark()
-            if isChecked {
-                addBackground(color: UIColor.systemOrange)
-            }
-            else {
-                addBackground(color: UIColor.white)
-            }
+            cookingStep?.isChecked.toggle()
+            updateUI()
         }
     }
     
@@ -27,13 +21,13 @@ class CookingStepCell: UITableViewCell, Checkable {
     @IBOutlet weak var checkMark: UILabel!
     
     var cookingStep: RecipeStep? {
-        
-        didSet {
-            if cookingStep != nil {
-                updateUI()
-            }
+    
+    didSet {
+        if cookingStep != nil {
+            updateUI()
         }
     }
+}
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -49,6 +43,13 @@ class CookingStepCell: UITableViewCell, Checkable {
     private func updateUI() {
         if let cookingStep = cookingStep {
             stepDescription.text = cookingStep.step
+            
+            if cookingStep.isChecked {
+                addBackground(color: UIColor.systemOrange)
+            }
+            else {
+                addBackground(color: UIColor.white)
+            }
         }
         configureCheckmark()
     }

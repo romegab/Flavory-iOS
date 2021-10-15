@@ -18,6 +18,7 @@ class RecipeCookingController: UIViewController {
     @IBOutlet weak var recipeTitleLable: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var readyButton: UIButton!
     
     override func viewDidLoad() {
         
@@ -25,6 +26,7 @@ class RecipeCookingController: UIViewController {
         
         recipeTitleLable.text = recipeTitle
         recipeTitleLable.adjustsFontSizeToFitWidth = true
+        readyButton.layer.cornerRadius = 15
         
         let ingredientCellNib = UINib(nibName: "IngredientCell", bundle: nil)
         tableView.register(ingredientCellNib, forCellReuseIdentifier:
@@ -50,6 +52,11 @@ class RecipeCookingController: UIViewController {
         }
         
         tableView.reloadData()
+    }
+    
+    
+    @IBAction func readyButtonClicked(_ sender: Any) {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil) 
     }
 }
 
@@ -87,15 +94,4 @@ extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
           tableView.deselectRow(at: indexPath, animated: true)
     }
   }
-    
-//  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//      cell.alpha = 0
-//
-//      UIView.animate(
-//          withDuration: 0.6,
-//          delay: 0.05 * Double(indexPath.row),
-//          animations: {
-//              cell.alpha = 1
-//      })
-//  }
 }

@@ -6,7 +6,7 @@ class IngredientCell: UITableViewCell, Checkable {
     
     var isChecked: Bool = false {
         didSet {
-            ingredient?.isChecked = isChecked
+            ingredient?.isChecked.toggle()
             configureCheckmark()
         }
     }

@@ -62,20 +62,32 @@ class RecipePreviewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.destination is RecipeCookingController {
+            
+            let vc = segue.destination as? RecipeCookingController
+            
+            if let ingredients = recipe?.extendedIngredients, let cookingSteps = recipe?.steps{
+                vc?.ingredients = ingredients
+                vc?.cookingSteps = cookingSteps
+                if let title = recipe?.title{
+                    vc?.recipeTitle = title
+                }
+            }
+        }
+    }
+    
+    @IBAction func startCookingButtonPressed(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "StartCookingSegue", sender: nil)
+    }
+    
     private func setUpCloseButton() {
         closeButton.layer.cornerRadius = 30
         closeButton.layer.masksToBounds = false
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
         
-        if UITraitCollection.current.userInterfaceStyle == .dark {
-            closeButton.backgroundColor = UIColor.black
-            closeButton.tintColor = UIColor.white
-        }
-        else {
-            
-            closeButton.backgroundColor = UIColor.white
-            closeButton.tintColor = UIColor.black
-        }
     }
     
     private func setUpRecipeImage() {

@@ -75,7 +75,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-HH-UYh" userLabel="ContentView">
                                 <rect key="frame" x="0.0" y="134" width="428" height="709"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m35-vW-SrO" userLabel="CarouselView" customClass="RecipeCard" customModule="Flavory">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m35-vW-SrO" userLabel="CarouselView">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="344"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="SUGGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-cp-uVN">
@@ -94,7 +94,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCard" customModule="Flavory" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCardController" customModule="Flavory">
                                                         <rect key="frame" x="0.0" y="32" width="249" height="236"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o31-U7-fYC">
@@ -257,15 +257,18 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfc-zm-0kv" userLabel="CloseButton">
                                 <rect key="frame" x="15.000000000000004" y="15" width="41.333333333333343" height="32"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="tintColor" name="orangeYellow"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
+
+                                <color key="tintColor" name="systemOpposite"/>
+                                <buttonConfiguration key="configuration" style="gray"/>
+
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="0ZY-Cs-kwT" eventType="touchUpInside" id="gl1-al-FVe"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjv-Wg-B2S">
-                                <rect key="frame" x="0.0" y="67" width="428" height="706"/>
+
+                                <rect key="frame" x="0.0" y="67" width="428" height="711"/>
+
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cca-zd-Rmb">
                                         <rect key="frame" x="10" y="0.0" width="408" height="251.33333333333334"/>
@@ -443,7 +446,8 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oov-fe-P6T" userLabel="BottomBarButtons">
-                                <rect key="frame" x="0.0" y="773" width="428" height="65"/>
+                                <rect key="frame" x="0.0" y="778" width="428" height="60"/>
+
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prd-wR-Mla">
                                         <rect key="frame" x="20" y="0.0" width="388" height="50"/>
@@ -455,6 +459,10 @@
                                         <color key="tintColor" name="orangeYellow"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="START COOCKING"/>
+                                        <connections>
+                                            <action selector="startCookingButtonPressed:" destination="0ZY-Cs-kwT" eventType="touchUpInside" id="XT3-EZ-IIO"/>
+                                            <segue destination="fbI-il-dFp" kind="presentation" identifier="StartCookingSegue" modalPresentationStyle="fullScreen" id="n8H-GH-6pK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" name="orangeYellow"/>
@@ -462,7 +470,9 @@
                                     <constraint firstItem="prd-wR-Mla" firstAttribute="leading" secondItem="oov-fe-P6T" secondAttribute="leading" constant="20" id="17f-wo-VNd"/>
                                     <constraint firstItem="prd-wR-Mla" firstAttribute="top" secondItem="oov-fe-P6T" secondAttribute="top" id="LvK-de-KoH"/>
                                     <constraint firstAttribute="trailing" secondItem="prd-wR-Mla" secondAttribute="trailing" constant="20" id="Y5q-oB-NBB"/>
-                                    <constraint firstAttribute="bottom" secondItem="prd-wR-Mla" secondAttribute="bottom" constant="15" id="rCj-3D-PCB"/>
+
+                                    <constraint firstAttribute="bottom" secondItem="prd-wR-Mla" secondAttribute="bottom" constant="10" id="rCj-3D-PCB"/>
+
                                 </constraints>
                             </view>
                         </subviews>
@@ -492,7 +502,7 @@
                         <outlet property="recipePrice" destination="Y4H-SB-bB9" id="0UZ-GK-9y3"/>
                         <outlet property="recipeProtein" destination="ryr-lm-sen" id="Djk-XI-DTG"/>
                         <outlet property="recipeTitle" destination="oqx-MW-suu" id="EgM-ve-1eP"/>
-                        <outlet property="startCoookingButotn" destination="prd-wR-Mla" id="0hG-V7-sXZ"/>
+                        <outlet property="startCoookingButotn" destination="prd-wR-Mla" id="p7p-9Q-5Og"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tm0-Hb-Lsf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -573,6 +583,110 @@
             </objects>
             <point key="canvasLocation" x="-270" y="-247"/>
         </scene>
+        <!--Recipe Cooking Controller-->
+        <scene sceneID="u7s-Wc-kM1">
+            <objects>
+                <viewController id="fbI-il-dFp" customClass="RecipeCookingController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HAd-pP-YsK">
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNV-tA-NE5">
+                                <rect key="frame" x="157.66666666666666" y="54" width="112.99999999999997" height="35"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XT-hR-wVL">
+                                <rect key="frame" x="0.0" y="99" width="428" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem id="FPU-7V-vZc">
+                                        <nil key="title"/>
+                                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="aup-RD-vAc">
+                                            <rect key="frame" x="114.66666666666669" y="5.6666666666666679" width="199" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <segments>
+                                                <segment title="Ingredients"/>
+                                                <segment title="Step By Step"/>
+                                            </segments>
+                                            <color key="selectedSegmentTintColor" name="orangeYellow"/>
+                                            <connections>
+                                                <action selector="segmentChanged:" destination="fbI-il-dFp" eventType="valueChanged" id="uqf-df-YJK"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1qI-JN-hqE">
+                                <rect key="frame" x="0.0" y="143" width="428" height="679"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="fbI-il-dFp" id="05c-CA-JbP"/>
+                                    <outlet property="delegate" destination="fbI-il-dFp" id="vdu-41-Sfc"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiL-V4-anF">
+                                <rect key="frame" x="10" y="59" width="68.333333333333329" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="8fX-nb-NOS"/>
+                                </constraints>
+                                <color key="tintColor" name="blackOrange"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="&lt; Back"/>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="fbI-il-dFp" eventType="touchUpInside" id="wSO-yt-pRj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o0r-ne-J7Y">
+                                <rect key="frame" x="20" y="832" width="388" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0O5-Fu-jMJ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="READY">
+                                    <color key="baseForegroundColor" name="orangeYellow"/>
+                                    <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="readyButtonClicked:" destination="fbI-il-dFp" eventType="touchUpInside" id="ZHT-Kz-Z3U"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cWH-RA-1SY"/>
+                        <color key="backgroundColor" name="orangeYellow"/>
+                        <constraints>
+                            <constraint firstItem="8XT-hR-wVL" firstAttribute="top" secondItem="LNV-tA-NE5" secondAttribute="bottom" constant="10" id="0d1-gc-0qN"/>
+                            <constraint firstItem="8XT-hR-wVL" firstAttribute="top" secondItem="BiL-V4-anF" secondAttribute="bottom" constant="15" id="3Hq-QZ-Jtm"/>
+                            <constraint firstItem="8XT-hR-wVL" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" id="4zT-uv-eVN"/>
+                            <constraint firstItem="o0r-ne-J7Y" firstAttribute="top" secondItem="1qI-JN-hqE" secondAttribute="bottom" constant="10" id="85H-0R-Og3"/>
+                            <constraint firstItem="8XT-hR-wVL" firstAttribute="trailing" secondItem="cWH-RA-1SY" secondAttribute="trailing" id="BmQ-BM-sUM"/>
+                            <constraint firstItem="1qI-JN-hqE" firstAttribute="top" secondItem="8XT-hR-wVL" secondAttribute="bottom" id="KoL-96-hkk"/>
+                            <constraint firstItem="LNV-tA-NE5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BiL-V4-anF" secondAttribute="trailing" constant="20" id="XOP-yQ-Ru9"/>
+                            <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="o0r-ne-J7Y" secondAttribute="trailing" constant="20" id="Y4I-Ss-Efy"/>
+                            <constraint firstItem="BiL-V4-anF" firstAttribute="top" secondItem="cWH-RA-1SY" secondAttribute="top" constant="15" id="cbX-Yc-XgV"/>
+                            <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="1qI-JN-hqE" secondAttribute="trailing" id="dCQ-te-Yj3"/>
+                            <constraint firstItem="BiL-V4-anF" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" constant="10" id="eUt-Vr-bJh"/>
+                            <constraint firstItem="o0r-ne-J7Y" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" constant="20" id="f2t-Nv-t5v"/>
+                            <constraint firstItem="LNV-tA-NE5" firstAttribute="centerX" secondItem="HAd-pP-YsK" secondAttribute="centerX" id="gei-5T-gnO"/>
+                            <constraint firstItem="1qI-JN-hqE" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" id="oy1-f1-7Nm"/>
+                            <constraint firstItem="LNV-tA-NE5" firstAttribute="top" secondItem="cWH-RA-1SY" secondAttribute="top" constant="10" id="vSE-dy-ZOY"/>
+                            <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LNV-tA-NE5" secondAttribute="trailing" constant="20" id="wLf-7x-Ye6"/>
+                            <constraint firstItem="cWH-RA-1SY" firstAttribute="bottom" secondItem="o0r-ne-J7Y" secondAttribute="bottom" constant="10" id="xg6-5d-hQm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mVL-fG-CRB"/>
+                    <connections>
+                        <outlet property="readyButton" destination="o0r-ne-J7Y" id="r5J-5R-5Yx"/>
+                        <outlet property="recipeTitleLable" destination="LNV-tA-NE5" id="njt-WQ-3o2"/>
+                        <outlet property="segmentedControl" destination="aup-RD-vAc" id="YqN-ql-nPQ"/>
+                        <outlet property="tableView" destination="1qI-JN-hqE" id="rKS-h0-LQc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="grO-IA-kEM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2440.6542056074763" y="-550.10799136069113"/>
+        </scene>
     </scenes>
     <resources>
         <image name="GetDailyMenuBackGround" width="139" height="208.66667175292969"/>
@@ -587,6 +701,11 @@
         <namedColor name="orangeYellow">
             <color red="1" green="0.67799997329711914" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+
+        <namedColor name="systemOpposite">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

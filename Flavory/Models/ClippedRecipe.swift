@@ -9,7 +9,14 @@ import Foundation
 
 class ClippedRecipe: Codable {
     
-    let recipeDetails: RecipeDetails
+    lazy var recipeDetails: RecipeDetails = {
+        let details = RecipeDetails()
+        
+        if let summary = summary {
+            details.loadData(recipeSumary: summary)
+        }
+        return details
+    }()
     
     var imageURL: String {
         get {
@@ -28,12 +35,25 @@ class ClippedRecipe: Codable {
             return 0.0
         }
     }
-    var title: String = ""
-    var id: Int = 0
-    var readyInMinutes: Int?
-    var pricePerServing: Double?
-    var servings: Int?
-    var summary: String?
+    
+    var steps: [RecipeStep]? {
+        get {
+            if let analyzedInstructions = analyzedInstructions{
+            return analyzedInstructions[0].steps
+            } else {
+                return nil
+            }
+        }
+    }
+    
+    let title: String
+    let id: Int
+    let readyInMinutes: Int?
+    let pricePerServing: Double?
+    let servings: Int?
+    private var summary: String?
+    var extendedIngredients: [RecipeIngredient]?
+    private var analyzedInstructions: [AnalyzedInstruction]?
     
     private enum CodingKeys: String, CodingKey {
         case title
@@ -42,21 +62,7 @@ class ClippedRecipe: Codable {
         case servings
         case summary
         case pricePerServing
-    }
-    
-    required init(from decoder:Decoder) throws {
-        
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        title = try values.decode(String.self, forKey: .title)
-        id = try values.decode(Int.self, forKey: .id)
-        readyInMinutes = try values.decode(Int.self, forKey: .readyInMinutes)
-        servings = try values.decode(Int.self, forKey: .servings)
-        summary = try values.decode(String.self, forKey: .summary)
-        pricePerServing = try values.decode(Double.self, forKey: .pricePerServing)
-        recipeDetails = RecipeDetails()
-        
-        if let summary = summary{
-            recipeDetails.loadData(recipeSumary: summary)
-        }
+        case extendedIngredients
+        case analyzedInstructions
     }
 }

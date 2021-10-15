@@ -35,6 +35,17 @@ class ClippedRecipe: Codable {
             return 0.0
         }
     }
+    
+    var steps: [RecipeStep]? {
+        get {
+            if let analyzedInstructions = analyzedInstructions{
+            return analyzedInstructions[0].steps
+            } else {
+                return nil
+            }
+        }
+    }
+    
     let title: String
     let id: Int
     let readyInMinutes: Int?
@@ -42,6 +53,7 @@ class ClippedRecipe: Codable {
     let servings: Int?
     private var summary: String?
     var extendedIngredients: [RecipeIngredient]?
+    private var analyzedInstructions: [AnalyzedInstruction]?
     
     private enum CodingKeys: String, CodingKey {
         case title
@@ -51,5 +63,6 @@ class ClippedRecipe: Codable {
         case summary
         case pricePerServing
         case extendedIngredients
+        case analyzedInstructions
     }
 }

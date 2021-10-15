@@ -42,7 +42,7 @@ class RecipeCardController: UICollectionViewCell {
         
         recipeImage.image = nil
         
-        //imageRequest?.cancel()
+        imageRequest?.cancel()
     }
     
     func updateUI(){

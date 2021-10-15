@@ -75,7 +75,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hB-HH-UYh" userLabel="ContentView">
                                 <rect key="frame" x="0.0" y="134" width="428" height="709"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m35-vW-SrO" userLabel="CarouselView" customClass="RecipeCard" customModule="Flavory">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m35-vW-SrO" userLabel="CarouselView">
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="344"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="SUGGESTIONS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-cp-uVN">
@@ -94,7 +94,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCard" customModule="Flavory" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCardController" customModule="Flavory">
                                                         <rect key="frame" x="0.0" y="32" width="249" height="236"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o31-U7-fYC">
@@ -257,9 +257,8 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="close" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfc-zm-0kv" userLabel="CloseButton">
                                 <rect key="frame" x="15.000000000000004" y="15" width="41.333333333333343" height="32"/>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <color key="tintColor" name="systemOpposite"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
+                                <buttonConfiguration key="configuration" style="gray"/>
                                 <connections>
                                     <action selector="closeButtonPressed:" destination="0ZY-Cs-kwT" eventType="touchUpInside" id="gl1-al-FVe"/>
                                 </connections>
@@ -529,14 +528,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNV-tA-NE5">
-                                <rect key="frame" x="138.66666666666666" y="54" width="150.99999999999997" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipe Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNV-tA-NE5">
+                                <rect key="frame" x="156" y="54" width="116" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8XT-hR-wVL">
-                                <rect key="frame" x="0.0" y="105" width="428" height="44"/>
+                                <rect key="frame" x="0.0" y="99" width="428" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem id="FPU-7V-vZc">
                                         <nil key="title"/>
@@ -548,12 +548,15 @@
                                                 <segment title="Step By Step"/>
                                             </segments>
                                             <color key="selectedSegmentTintColor" name="orangeYellow"/>
+                                            <connections>
+                                                <action selector="segmentChanged:" destination="fbI-il-dFp" eventType="valueChanged" id="uqf-df-YJK"/>
+                                            </connections>
                                         </segmentedControl>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="1qI-JN-hqE">
-                                <rect key="frame" x="0.0" y="149" width="428" height="695"/>
+                                <rect key="frame" x="0.0" y="143" width="428" height="701"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="fbI-il-dFp" id="05c-CA-JbP"/>
@@ -569,8 +572,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiL-V4-anF">
-                                <rect key="frame" x="10" y="54" width="68.333333333333329" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BiL-V4-anF">
+                                <rect key="frame" x="10" y="59" width="68.333333333333329" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="8fX-nb-NOS"/>
+                                </constraints>
                                 <color key="tintColor" name="blackOrange"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="gray" title="&lt; Back"/>
@@ -582,13 +588,13 @@
                         <viewLayoutGuide key="safeArea" id="cWH-RA-1SY"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                         <constraints>
-                            <constraint firstItem="8XT-hR-wVL" firstAttribute="top" secondItem="LNV-tA-NE5" secondAttribute="bottom" constant="15" id="0d1-gc-0qN"/>
+                            <constraint firstItem="8XT-hR-wVL" firstAttribute="top" secondItem="LNV-tA-NE5" secondAttribute="bottom" constant="10" id="0d1-gc-0qN"/>
                             <constraint firstItem="8XT-hR-wVL" firstAttribute="top" secondItem="BiL-V4-anF" secondAttribute="bottom" constant="15" id="3Hq-QZ-Jtm"/>
                             <constraint firstItem="8XT-hR-wVL" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" id="4zT-uv-eVN"/>
                             <constraint firstItem="8XT-hR-wVL" firstAttribute="trailing" secondItem="cWH-RA-1SY" secondAttribute="trailing" id="BmQ-BM-sUM"/>
                             <constraint firstItem="1qI-JN-hqE" firstAttribute="top" secondItem="8XT-hR-wVL" secondAttribute="bottom" id="KoL-96-hkk"/>
                             <constraint firstItem="LNV-tA-NE5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BiL-V4-anF" secondAttribute="trailing" constant="20" id="XOP-yQ-Ru9"/>
-                            <constraint firstItem="BiL-V4-anF" firstAttribute="top" secondItem="cWH-RA-1SY" secondAttribute="top" constant="10" id="cbX-Yc-XgV"/>
+                            <constraint firstItem="BiL-V4-anF" firstAttribute="top" secondItem="cWH-RA-1SY" secondAttribute="top" constant="15" id="cbX-Yc-XgV"/>
                             <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="1qI-JN-hqE" secondAttribute="trailing" id="dCQ-te-Yj3"/>
                             <constraint firstItem="cWH-RA-1SY" firstAttribute="trailing" secondItem="oys-HU-lta" secondAttribute="trailing" id="eN9-1B-kR4"/>
                             <constraint firstItem="BiL-V4-anF" firstAttribute="leading" secondItem="cWH-RA-1SY" secondAttribute="leading" constant="10" id="eUt-Vr-bJh"/>
@@ -603,6 +609,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="mVL-fG-CRB"/>
                     <connections>
+                        <outlet property="recipeTitleLable" destination="LNV-tA-NE5" id="njt-WQ-3o2"/>
+                        <outlet property="segmentedControl" destination="aup-RD-vAc" id="YqN-ql-nPQ"/>
                         <outlet property="tableView" destination="1qI-JN-hqE" id="rKS-h0-LQc"/>
                     </connections>
                 </viewController>
@@ -627,9 +635,6 @@
         <namedColor name="systemOpposite">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

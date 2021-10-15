@@ -2,7 +2,14 @@
 
 import UIKit
 
-class IngredientCell: UITableViewCell {
+class IngredientCell: UITableViewCell, Checkable {
+    
+    var isChecked: Bool = false {
+        didSet {
+            ingredient?.isChecked = isChecked
+            configureCheckmark()
+        }
+    }
     
     private var imageRequest: Cancellable?
     
@@ -14,6 +21,7 @@ class IngredientCell: UITableViewCell {
     var ingredient: RecipeIngredient? {
         didSet {
             updateUI()
+            configureCheckmark()
         }
     }
 
@@ -26,6 +34,17 @@ class IngredientCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    private func configureCheckmark() {
+        if let ingredient = ingredient {
+            if ingredient.isChecked {
+                checkMark.text = "✓"
+            }
+            else {
+                checkMark.text = ""
+            }
+        }
     }
     
     private func updateUI() {

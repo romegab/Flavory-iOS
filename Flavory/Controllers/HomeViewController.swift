@@ -24,9 +24,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
+        collecitonView.collectionViewLayout.invalidateLayout()
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
@@ -36,6 +34,7 @@ class HomeViewController: UIViewController {
                 switch result{
                 case .success(let recipies):
                     self?.searchResults = recipies
+                    
                     self?.collecitonView.reloadData()
                     let indexPath = IndexPath(item: 4, section: 0)
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)

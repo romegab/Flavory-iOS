@@ -68,9 +68,12 @@ class RecipePreviewController: UIViewController {
             
             let vc = segue.destination as? RecipeCookingController
             
-            if let ingredients = recipe?.extendedIngredients{
+            if let ingredients = recipe?.extendedIngredients, let cookingSteps = recipe?.steps{
                 vc?.ingredients = ingredients
-                print("---------------\(ingredients)")
+                vc?.cookingSteps = cookingSteps
+                if let title = recipe?.title{
+                    vc?.recipeTitle = title
+                }
             }
         }
     }
@@ -85,15 +88,6 @@ class RecipePreviewController: UIViewController {
         closeButton.layer.masksToBounds = false
         closeButton.layer.cornerRadius = closeButton.frame.height / 2
         
-        if UITraitCollection.current.userInterfaceStyle == .dark {
-            closeButton.backgroundColor = UIColor.black
-            closeButton.tintColor = UIColor.white
-        }
-        else {
-            
-            closeButton.backgroundColor = UIColor.white
-            closeButton.tintColor = UIColor.black
-        }
     }
     
     private func setUpRecipeImage() {

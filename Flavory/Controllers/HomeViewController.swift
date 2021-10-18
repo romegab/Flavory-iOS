@@ -11,8 +11,6 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var dailyMenuImage: UIImageView!
     @IBOutlet weak var lookUpForEatImage: UIImageView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var searchFilterButton: UIButton!
     @IBOutlet weak var collecitonView: UICollectionView!
     @IBOutlet weak var lookUpForEatText: UILabel!
     @IBOutlet weak var dailyMenuText: UILabel!
@@ -21,42 +19,52 @@ class HomeViewController: UIViewController {
     var selectedRecipe: ClippedRecipe? = nil
     var searchResults = [ClippedRecipe]()
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
-//        print("-----------------------")
-//        let applicationDocumentsDirectory: URL = {
-//          let paths = FileManager.default.urls(for: .documentDirectory,
-//                                                in: .userDomainMask)
-//          return paths[0]
-//        }()
-//
-//        print(applicationDocumentsDirectory)
         
-        collecitonView.collectionViewLayout.invalidateLayout()
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
-        
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
         
-        //Loading the carousel random recipies
-            search.performRandomSearch(7) { [weak self] result in
-                switch result{
-                case .success(let recipies):
-                    self?.searchResults = recipies
-                    
-                    self?.collecitonView.reloadData()
-                    let indexPath = IndexPath(item: 4, section: 0)
-                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
-                case .failure(let error):
-                    DispatchQueue.main.async {
-                        print(error.localizedDescription)
-                    }
+        adjustNavigationBar()
+        loadCarouselContent()
+        adjustBottomSection()
+        
+    }
+    
+    func adjustNavigationBar() {
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.searchBar.placeholder = "Search for eat"
+        
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    func loadCarouselContent() {
+        search.performRandomSearch(7) { [weak self] result in
+            switch result{
+            case .success(let recipies):
+                self?.searchResults = recipies
+                
+                self?.collecitonView.reloadData()
+                let indexPath = IndexPath(item: 4, section: 0)
+                self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    print(error.localizedDescription)
                 }
             }
-        
+        }
+    
         collecitonView.dataSource = self
         collecitonView.delegate = self
-
+    }
+    
+    func adjustBottomSection() {
         dailyMenuImage.clipsToBounds = true
         dailyMenuImage.layer.masksToBounds = true
         dailyMenuImage.layer.cornerRadius = 7.5
@@ -69,7 +77,6 @@ class HomeViewController: UIViewController {
         dailyMenuText.adjustsFontSizeToFitWidth = true
         lookUpForEatText.text = "LOOK\nUP\nFOR\nEAT"
         lookUpForEatText.adjustsFontSizeToFitWidth = true
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
@@ -82,17 +89,6 @@ class HomeViewController: UIViewController {
                 vc?.recipe = recipe
             } 
         }
-    }
-}
-
-extension HomeViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-    }
-    
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .topAttached
     }
 }
 
@@ -126,5 +122,12 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collecitonView.frame.width) * 0.6, height: collecitonView.frame.height)
     }
+}
+
+extension HomeViewController: UISearchResultsUpdating {
+  func updateSearchResults(for searchController: UISearchController) {
+      
+      let searchBar = searchController.searchBar
+  }
 }
 

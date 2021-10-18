@@ -48,7 +48,7 @@ class ClippedRecipe: Codable {
     
     let title: String
     let id: Int
-    let readyInMinutes: Int
+    let readyInMinutes: Int?
     let pricePerServing: Double?
     let servings: Int?
     private var summary: String?

@@ -20,7 +20,7 @@ class DataManager {
         
         newRecipe.id = recipe.id
         newRecipe.title = recipe.title
-        newRecipe.preparationTime = recipe.readyInMinutes
+        newRecipe.preparationTime = recipe.readyInMinutes ?? 0
         newRecipe.price = recipe.recipePrice
         newRecipe.detail = saveDetail(detail: recipe.recipeDetails)
         newRecipe.servings = recipe.servings ?? 0

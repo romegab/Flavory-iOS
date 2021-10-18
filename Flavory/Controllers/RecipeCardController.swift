@@ -54,7 +54,7 @@ class RecipeCardController: UICollectionViewCell {
         if let recipe = recipe{
             
             recipeTitle.text = recipe.title
-            recipePreparationTime.text = "\(recipe.readyInMinutes) min"
+            recipePreparationTime.text = "\(recipe.readyInMinutes ?? 0) min"
             recipeServings.text = "\(recipe.servings ?? 0) servs"
             recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
             

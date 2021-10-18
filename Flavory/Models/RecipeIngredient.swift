@@ -8,6 +8,7 @@
 import Foundation
 
 class RecipeIngredient: Codable {
+    let id: Int
     let name: String
     let original: String
     var isChecked: Bool = false
@@ -19,6 +20,7 @@ class RecipeIngredient: Codable {
     }
     private enum CodingKeys: String, CodingKey {
         
+        case id
         case name
         case original
         case image

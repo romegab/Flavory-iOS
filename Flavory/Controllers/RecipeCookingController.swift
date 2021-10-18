@@ -8,7 +8,7 @@
 import UIKit
 
 class RecipeCookingController: UIViewController {
-    
+    var recipe: ClippedRecipe?
     var ingredients: [RecipeIngredient] = [RecipeIngredient]()
     var cookingSteps: [RecipeStep] = [RecipeStep]()
     var recipeTitle: String = ""
@@ -56,7 +56,13 @@ class RecipeCookingController: UIViewController {
     
     
     @IBAction func readyButtonClicked(_ sender: Any) {
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil) 
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let recipe = recipe {
+            DataManager.shared.updateRecipe(recipe)
+        }
     }
 }
 

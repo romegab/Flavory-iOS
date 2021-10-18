@@ -13,10 +13,9 @@ class SearchResultParser{
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode(ResultArray.self, from:data)
-            
-            
-            
+  
             return result.recipes
+            
         } catch {
             print("JSON Error: \(error)")
             return []

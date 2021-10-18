@@ -1,4 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19206" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Detail" representedClassName="Detail" syncable="YES">
+        <attribute name="calories" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fat" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="protein" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="recipeDescription" optional="YES" attributeType="String"/>
+        <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeModel" inverseName="detail" inverseEntity="RecipeModel"/>
+    </entity>
+    <entity name="Ingredient" representedClassName="Ingredient" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String"/>
+        <attribute name="ingredientDescription" optional="YES" attributeType="String"/>
+        <attribute name="isChecked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeModel" inverseName="ingredient" inverseEntity="RecipeModel"/>
+    </entity>
+    <entity name="RecipeModel" representedClassName="RecipeModel" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="preparationTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="servings" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Detail" inverseName="origin" inverseEntity="Detail"/>
+        <relationship name="ingredient" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Ingredient" inverseName="origin" inverseEntity="Ingredient"/>
+        <relationship name="step" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Step" inverseName="origin" inverseEntity="Step"/>
+    </entity>
+    <entity name="Step" representedClassName="Step" syncable="YES">
+        <attribute name="isChecked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="step" optional="YES" attributeType="String"/>
+        <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RecipeModel" inverseName="step" inverseEntity="RecipeModel"/>
+    </entity>
+    <elements>
+        <element name="Detail" positionX="-18" positionY="27" width="128" height="104"/>
+        <element name="Ingredient" positionX="36" positionY="108" width="128" height="119"/>
+        <element name="RecipeModel" positionX="9" positionY="99" width="128" height="149"/>
+        <element name="Step" positionX="18" positionY="126" width="128" height="89"/>
+    </elements>
 </model>

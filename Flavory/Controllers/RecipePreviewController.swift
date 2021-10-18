@@ -66,11 +66,13 @@ class RecipePreviewController: UIViewController {
     {
         if segue.destination is RecipeCookingController {
             
+            
             let vc = segue.destination as? RecipeCookingController
             
-            if let ingredients = recipe?.extendedIngredients, let cookingSteps = recipe?.steps{
+            if  let ingredients = recipe?.extendedIngredients, let cookingSteps = recipe?.steps{
                 vc?.ingredients = ingredients
                 vc?.cookingSteps = cookingSteps
+                vc?.recipe = recipe
                 if let title = recipe?.title{
                     vc?.recipeTitle = title
                 }
@@ -79,7 +81,9 @@ class RecipePreviewController: UIViewController {
     }
     
     @IBAction func startCookingButtonPressed(_ sender: UIButton) {
-        
+        if let recipe = recipe{
+            DataManager.shared.saveRecipe(recipe)
+        }
         performSegue(withIdentifier: "StartCookingSegue", sender: nil)
     }
     

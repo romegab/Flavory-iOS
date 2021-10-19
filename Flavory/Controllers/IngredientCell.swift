@@ -49,17 +49,17 @@ class IngredientCell: UITableViewCell, Checkable {
     
     private func updateUI() {
         if let ingredient = ingredient {
+            ingredientName.text = ingredient.name
+            ingredientDescription.text = ingredient.original
+            
             imageRequest = ImageService.shared.getImage(rawUrl: ingredient.imageURL) { [weak self] result in
                 
                 switch result{
                 case .success(let image):
                     self?.ingredientImage.image = image
-                    self?.ingredientName.text = ingredient.name
-                    self?.ingredientDescription.text = ingredient.original
                 case .failure(let error):
                     print("fire from the ingredient cell card")
                     print(error.localizedDescription)
-                    
                 }
             }
         }

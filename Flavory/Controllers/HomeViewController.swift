@@ -19,11 +19,16 @@ class HomeViewController: UIViewController {
     var selectedRecipe: ClippedRecipe? = nil
     var searchResults = [ClippedRecipe]()
     
-    let searchController = UISearchController(searchResultsController: nil)
+    let resultsTableController = self.storyboard?.instantiateViewController(withIdentifier "SearchResultController") as? SearchResultController
+    let searchController = UISearchController(searchResultsController: SearchResultController())
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        
+        
+        
         
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
@@ -39,6 +44,9 @@ class HomeViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = true
         searchController.searchBar.placeholder = "Search for eat"
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.frame
         
         navigationItem.searchController = searchController
         definesPresentationContext = true

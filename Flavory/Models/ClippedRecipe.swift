@@ -18,7 +18,12 @@ class ClippedRecipe: Codable {
         return details
     }()
     
-    var imageURL: String {
+    var largeImageURL: String {
+        get {
+        return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
+        }
+    }
+    var smallImageURL: String {
         get {
         return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
         }

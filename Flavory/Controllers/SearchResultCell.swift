@@ -31,6 +31,7 @@ class SearchResultCell: UITableViewCell {
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.frame
         self.backgroundView = blurEffectView
+        recipeImage.layer.cornerRadius = 15
         
     }
 
@@ -45,7 +46,7 @@ class SearchResultCell: UITableViewCell {
             
             recipeTitle.text = recipe.title
             
-            imageRequest = ImageService.shared.getImage(rawUrl: recipe.imageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.smallImageURL) { [weak self] result in
     
                 switch result{
                 case .success(let image):

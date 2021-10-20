@@ -14,12 +14,17 @@ class SearchResultParser{
             let decoder = JSONDecoder()
             let result = try decoder.decode(ResultArray.self, from:data)
   
-            return result.recipes
-            
+            if result.recipes != nil {
+                return result.recipes!
+            } else if result.results != nil {
+                return result.results!
+            }
         } catch {
             print("JSON Error: \(error)")
             return []
         }
+        
+        return [ClippedRecipe]()
     }
     
 }

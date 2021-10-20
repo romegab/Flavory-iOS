@@ -180,23 +180,61 @@
                                     <constraint firstItem="CTi-Vj-p2X" firstAttribute="leading" secondItem="2hB-HH-UYh" secondAttribute="leading" constant="10" id="ngo-Ns-noL"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yCo-ES-27t" userLabel="SearchResultVIew">
+                                <rect key="frame" x="0.0" y="88" width="428" height="755"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="qpR-cl-GJm" userLabel="ResultTableView">
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="755"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kde-To-fMs">
+                                                <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kde-To-fMs" id="aJ7-im-uZ7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Wxn-Ov-OGA" id="bVb-oT-GgP"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <accessibility key="accessibilityConfiguration" identifier="SearchResultVIew"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="qpR-cl-GJm" secondAttribute="bottom" id="AXL-QJ-7RL"/>
+                                    <constraint firstAttribute="trailing" secondItem="qpR-cl-GJm" secondAttribute="trailing" id="DSA-rR-pln"/>
+                                    <constraint firstItem="qpR-cl-GJm" firstAttribute="top" secondItem="yCo-ES-27t" secondAttribute="top" id="JVu-wY-GYI"/>
+                                    <constraint firstItem="qpR-cl-GJm" firstAttribute="leading" secondItem="yCo-ES-27t" secondAttribute="leading" id="woX-DO-tYm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ncr-6g-B5W"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                         <constraints>
+                            <constraint firstItem="Ncr-6g-B5W" firstAttribute="bottom" secondItem="yCo-ES-27t" secondAttribute="bottom" id="5e8-l7-Zgw"/>
                             <constraint firstItem="2hB-HH-UYh" firstAttribute="leading" secondItem="Ncr-6g-B5W" secondAttribute="leading" id="HXG-gh-fGI"/>
                             <constraint firstItem="Ncr-6g-B5W" firstAttribute="trailing" secondItem="2hB-HH-UYh" secondAttribute="trailing" id="M7p-Fq-pZU"/>
                             <constraint firstItem="Ncr-6g-B5W" firstAttribute="bottom" secondItem="2hB-HH-UYh" secondAttribute="bottom" id="Yts-NG-l2x"/>
                             <constraint firstItem="2hB-HH-UYh" firstAttribute="top" secondItem="Ncr-6g-B5W" secondAttribute="top" id="cL9-kr-8wJ"/>
+                            <constraint firstItem="yCo-ES-27t" firstAttribute="top" secondItem="Ncr-6g-B5W" secondAttribute="top" id="hUJ-pu-J2v"/>
+                            <constraint firstItem="yCo-ES-27t" firstAttribute="leading" secondItem="Ncr-6g-B5W" secondAttribute="leading" id="hZ4-f6-BS4"/>
+                            <constraint firstItem="Ncr-6g-B5W" firstAttribute="trailing" secondItem="yCo-ES-27t" secondAttribute="trailing" id="n9p-P1-Uq0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="FLAVORY" id="jMd-BE-Wfn"/>
                     <connections>
+                        <outlet property="ResultTableView" destination="qpR-cl-GJm" id="ZIP-no-FzL"/>
                         <outlet property="collecitonView" destination="WAS-ur-BUi" id="Ong-MR-GHZ"/>
                         <outlet property="dailyMenuImage" destination="nwm-Fk-Pyh" id="6fR-rF-ha7"/>
                         <outlet property="dailyMenuText" destination="rs4-Sa-ZXZ" id="ENq-FR-OfQ"/>
                         <outlet property="lookUpForEatImage" destination="spw-cs-oHL" id="blI-4Z-V2H"/>
                         <outlet property="lookUpForEatText" destination="hhX-pp-DvZ" id="clz-1i-mxq"/>
+                        <outlet property="resultView" destination="yCo-ES-27t" id="eEg-NU-tPN"/>
                         <segue destination="0ZY-Cs-kwT" kind="presentation" identifier="showRecipePreview" id="4g2-nC-IWM"/>
                     </connections>
                 </viewController>
@@ -649,6 +687,8 @@
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
                         </textAttributes>
+                        <navigationBarAppearance key="standardAppearance"/>
+                        <navigationBarAppearance key="compactAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

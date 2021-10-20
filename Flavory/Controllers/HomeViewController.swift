@@ -9,29 +9,55 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    
+    @IBOutlet weak var resultView: UIView!
+    @IBOutlet weak var ResultTableView: UITableView!
     @IBOutlet weak var dailyMenuImage: UIImageView!
     @IBOutlet weak var lookUpForEatImage: UIImageView!
     @IBOutlet weak var collecitonView: UICollectionView!
     @IBOutlet weak var lookUpForEatText: UILabel!
     @IBOutlet weak var dailyMenuText: UILabel!
     
+    let searchController = UISearchController()
+    
     let search: Search = Search()
     var selectedRecipe: ClippedRecipe? = nil
-    var searchResults = [ClippedRecipe]()
+    var carouselRecipes = [ClippedRecipe]()
+    var searchResult = [ClippedRecipe]() {
+        didSet {
+            ResultTableView.reloadData()
+        }
+    }
     
-    let resultsTableController = self.storyboard?.instantiateViewController(withIdentifier "SearchResultController") as? SearchResultController
-    let searchController = UISearchController(searchResultsController: SearchResultController())
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        
-        
-        
-        
+//        ResultTableView.delegate = self
+//        ResultTableView.dataSource = self
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
+        
+        ResultTableView.keyboardDismissMode = .onDrag
+        
+        let resultCellNib = UINib(nibName: "SearchResultCell" , bundle: nil)
+        ResultTableView.register(resultCellNib, forCellReuseIdentifier: "SearchResultCell")
+        
+        resultView.backgroundColor = .clear
+        // 2
+        let blurEffect = UIBlurEffect(style: .dark)
+        // 3
+        let blurView = UIVisualEffectView(effect: blurEffect)
+        // 4
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        resultView.insertSubview(blurView, at: 0)
+        
+        NSLayoutConstraint.activate([
+          blurView.topAnchor.constraint(equalTo: searchController.topAnchor),
+          blurView.leadingAnchor.constraint(equalTo: resultView.leadingAnchor),
+          blurView.heightAnchor.constraint(equalTo: resultView.heightAnchor),
+          blurView.widthAnchor.constraint(equalTo: resultView.widthAnchor)
+        ])
         
         adjustNavigationBar()
         loadCarouselContent()
@@ -42,11 +68,12 @@ class HomeViewController: UIViewController {
     func adjustNavigationBar() {
         
         searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = true
+        searchController.view.backgroundColor = .clear
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search for eat"
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.view.frame
+        searchController.hidesNavigationBarDuringPresentation = false
         
         navigationItem.searchController = searchController
         definesPresentationContext = true
@@ -56,7 +83,7 @@ class HomeViewController: UIViewController {
         search.performRandomSearch(7) { [weak self] result in
             switch result{
             case .success(let recipies):
-                self?.searchResults = recipies
+                self?.carouselRecipes = recipies
                 
                 self?.collecitonView.reloadData()
                 let indexPath = IndexPath(item: 4, section: 0)
@@ -98,6 +125,7 @@ class HomeViewController: UIViewController {
             } 
         }
     }
+    
 }
 
 extension HomeViewController: UICollectionViewDataSource{
@@ -106,13 +134,13 @@ extension HomeViewController: UICollectionViewDataSource{
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return searchResults.count
+        return carouselRecipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collecitonView.dequeueReusableCell(withReuseIdentifier: "RecipeCard", for: indexPath) as! RecipeCardController
-        let searchResult = searchResults[indexPath.row]
+        let searchResult = carouselRecipes[indexPath.row]
         
         cell.recipe = searchResult
         
@@ -120,7 +148,7 @@ extension HomeViewController: UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedRecipe = searchResults[indexPath.row]
+        selectedRecipe = carouselRecipes[indexPath.row]
         performSegue(withIdentifier: "showRecipePreview", sender: nil)
     }
 }
@@ -135,7 +163,60 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: UISearchResultsUpdating {
   func updateSearchResults(for searchController: UISearchController) {
       
-      let searchBar = searchController.searchBar
+    search.performRecipeSearch(searchController.searchBar.text ?? "") { [weak self] result in
+
+        switch result{
+            case .success(let result):
+              print(result)
+            self?.searchResult = result
+              self?.ResultTableView.reloadData()
+            case .failure(let error):
+              DispatchQueue.main.async {
+                  print(error.localizedDescription)
+              }
+            }
+        }
   }
 }
 
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+      searchResult.count
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      
+      
+      let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
+        let currentRecipe = searchResult[indexPath.row]
+        cell.recipe = currentRecipe
+        return cell
+      
+  }
+  
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      print("recipeSele")
+  }
+}
+
+
+extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
+    
+    func presentSearchController(_ searchController: UISearchController) {
+        resultView.isHidden = false
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        UIView.animate(withDuration: 0.3) {
+            self.resultView.alpha = 0
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        UIView.animate(withDuration: 0.3) {
+            self.resultView.alpha = 1
+        }
+    }
+}

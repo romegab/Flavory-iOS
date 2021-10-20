@@ -13,11 +13,18 @@ enum NetworkError: Error {
 
 
 class Search {
+    private var isRequestFinished = true
     var searchResults: [ClippedRecipe]? = [ClippedRecipe]()
     var dataTask: URLSessionDataTask?
     let queue = DispatchQueue.global()
     
-    private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
+    private let apiKey: String = "12cbc8a03407496290efed34fba57028"
+    
+    func terminateRequest() {
+        if !isRequestFinished{
+            dataTask?.cancel()
+        }
+    }
     
     func performRandomSearch(_ count: Int, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void){
         let url: URL = randomSearchURL(count)
@@ -58,17 +65,20 @@ class Search {
     
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         
+        isRequestFinished = false
         let session = URLSession.shared
-        
         
         session.dataTask(with: url) {data, response, error in
             
             if let error = error as NSError?, error.code == -999{
                 DispatchQueue.main.async {
+                    self.isRequestFinished = true
                     completionHandler(.failure(.badConnection))
                 }
                 } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                    self.isRequestFinished = true
                 if let data = data {
+                    
                     DispatchQueue.main.async{
                         completionHandler(.success(SearchResultParser.parse(data: data)))
                     }

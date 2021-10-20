@@ -46,7 +46,7 @@ class RecipePreviewController: UIViewController {
             recipeTitle.text = recipe.title
             recipeTitle.adjustsFontSizeToFitWidth = true
             recipeImage.image = UIImage(named: "Placeholder")
-            imageRequest = ImageService.shared.getImage(rawUrl: recipe.imageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
                 
                 switch result{
                 case .success(let image):

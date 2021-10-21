@@ -21,28 +21,22 @@ class HomeViewController: UIViewController {
     let searchController = UISearchController()
     
     let search: Search = Search()
-    var selectedRecipe: ClippedRecipe? = nil
+    var selectedRecipe: ClippedRecipe?
     var carouselRecipes = [ClippedRecipe]()
-    var searchResult = [ClippedRecipe]() {
-        didSet {
-            ResultTableView.reloadData()
-        }
-    }
+    var searchResult = [ClippedRecipe]()
     
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-//        ResultTableView.delegate = self
-//        ResultTableView.dataSource = self
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
-        
-        ResultTableView.keyboardDismissMode = .onDrag
         
         let resultCellNib = UINib(nibName: "SearchResultCell" , bundle: nil)
         ResultTableView.register(resultCellNib, forCellReuseIdentifier: "SearchResultCell")
         
+        ResultTableView.keyboardDismissMode = .onDrag
+        ResultTableView.delegate = self
         resultView.backgroundColor = .clear
         // 2
         let blurEffect = UIBlurEffect(style: .dark)
@@ -53,7 +47,7 @@ class HomeViewController: UIViewController {
         resultView.insertSubview(blurView, at: 0)
         
         NSLayoutConstraint.activate([
-          blurView.topAnchor.constraint(equalTo: searchController.topAnchor),
+          blurView.topAnchor.constraint(equalTo: resultView.topAnchor),
           blurView.leadingAnchor.constraint(equalTo: resultView.leadingAnchor),
           blurView.heightAnchor.constraint(equalTo: resultView.heightAnchor),
           blurView.widthAnchor.constraint(equalTo: resultView.widthAnchor)
@@ -83,12 +77,13 @@ class HomeViewController: UIViewController {
         search.performRandomSearch(7) { [weak self] result in
             switch result{
             case .success(let recipies):
-                self?.carouselRecipes = recipies
-                
-                self?.collecitonView.reloadData()
                 let indexPath = IndexPath(item: 4, section: 0)
-                self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
-            case .failure(let error):
+                DispatchQueue.main.async {
+                    self?.carouselRecipes = recipies
+                    self?.collecitonView.reloadData()
+                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+                }
+                case .failure(let error):
                 DispatchQueue.main.async {
                     print(error.localizedDescription)
                 }
@@ -169,7 +164,7 @@ extension HomeViewController: UISearchResultsUpdating {
             case .success(let result):
               print(result)
             self?.searchResult = result
-              self?.ResultTableView.reloadData()
+            self?.ResultTableView.reloadData()
             case .failure(let error):
               DispatchQueue.main.async {
                   print(error.localizedDescription)
@@ -197,10 +192,27 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
   
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      print("recipeSele")
+      
+    let id: String = String(searchResult[indexPath.row].id)
+    var currentRecipe: ClippedRecipe?
+      
+    search.performSearchByID(id) { [weak self] result in
+          switch result{
+          case .success(let recipe):
+              currentRecipe = recipe
+              self?.selectedRecipe = currentRecipe
+              DispatchQueue.main.async {
+                  self?.performSegue(withIdentifier: "showRecipePreview", sender: nil)
+                  self?.searchController.isActive = false
+              }
+          case .failure(let error):
+              DispatchQueue.main.async {
+                  print(error.localizedDescription)
+              }
+          }
+    }
   }
 }
-
 
 extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
@@ -211,12 +223,14 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func willDismissSearchController(_ searchController: UISearchController) {
         UIView.animate(withDuration: 0.3) {
             self.resultView.alpha = 0
+            self.ResultTableView.alpha = 0
         }
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         UIView.animate(withDuration: 0.3) {
             self.resultView.alpha = 1
+            self.ResultTableView.alpha = 1
         }
     }
 }

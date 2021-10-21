@@ -23,6 +23,14 @@ class SearchResultCell: UITableViewCell {
         super.awakeFromNib()
         setUpLook()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        recipeImage.image = nil
+        
+        imageRequest?.cancel()
+    }
 
     private func setUpLook() {
         

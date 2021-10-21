@@ -10,7 +10,7 @@ import Foundation
 enum NetworkError: Error {
     case badConnection
 }
-
+//https://api.spoonacular.com/recipes/663150/information?apiKey=12cbc8a03407496290efed34fba57028
 
 class Search {
     private var isRequestFinished = true
@@ -18,7 +18,7 @@ class Search {
     var dataTask: URLSessionDataTask?
     let queue = DispatchQueue.global()
     
-    private let apiKey: String = "12cbc8a03407496290efed34fba57028"
+    private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
     
     func terminateRequest() {
         if !isRequestFinished{
@@ -63,6 +63,29 @@ class Search {
         }
     }
     
+    func performSearchByID (_ id: String, completionHandler: @escaping (Result<ClippedRecipe, NetworkError>) -> Void){
+        
+        let url:URL = idSearchURL(id)
+        
+        isRequestFinished = false
+        let session = URLSession.shared
+        
+        session.dataTask(with: url) {data, response, error in
+            
+            if let error = error as NSError?, error.code == -999{
+                DispatchQueue.main.async {
+                    self.isRequestFinished = true
+                    completionHandler(.failure(.badConnection))
+                }
+                } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                    self.isRequestFinished = true
+                if let data = data {
+                    completionHandler(.success(SearchResultParser.parseCertainRecipe(data: data)!))
+                }
+            }
+        }.resume()
+    }
+    
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         
         isRequestFinished = false
@@ -78,10 +101,7 @@ class Search {
                 } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                     self.isRequestFinished = true
                 if let data = data {
-                    
-                    DispatchQueue.main.async{
-                        completionHandler(.success(SearchResultParser.parse(data: data)))
-                    }
+                    completionHandler(.success(SearchResultParser.parse(data: data)))
                 }
             }
         }.resume()
@@ -89,6 +109,12 @@ class Search {
 
     private func randomSearchURL(_ count: Int) -> URL {
         let urlString = "https://api.spoonacular.com/recipes/random?number=\(count)&apiKey=\(apiKey)"
+        let url = URL(string: urlString)
+        return url!
+    }
+    
+    private func idSearchURL(_ id: String) -> URL {
+        let urlString = "https://api.spoonacular.com/recipes/\(id)/information?apiKey=\(apiKey)"
         let url = URL(string: urlString)
         return url!
     }

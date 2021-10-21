@@ -27,4 +27,17 @@ class SearchResultParser{
         return [ClippedRecipe]()
     }
     
+    static func parseCertainRecipe(data: Data) -> ClippedRecipe? {
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(ClippedRecipe.self, from:data)
+
+            return result
+            
+        } catch {
+            print("JSON Error: \(error)")
+        }
+
+        return nil
+    }
 }

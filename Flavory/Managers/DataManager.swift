@@ -102,7 +102,7 @@ class DataManager {
         newIngredient.ingredientDescription = ingredient.original
         newIngredient.isChecked = ingredient.isChecked
         newIngredient.imageURL = ingredient.imageURL
-        newIngredient.id = ingredient.id
+        newIngredient.id = ingredient.id ?? 0
         
         do {
             try self.context.save()

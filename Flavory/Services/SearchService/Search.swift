@@ -10,7 +10,6 @@ import Foundation
 enum NetworkError: Error {
     case badConnection
 }
-//https://api.spoonacular.com/recipes/663150/information?apiKey=12cbc8a03407496290efed34fba57028
 
 class Search {
     private var isRequestFinished = true
@@ -18,7 +17,7 @@ class Search {
     var dataTask: URLSessionDataTask?
     let queue = DispatchQueue.global()
     
-    private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
+    private let apiKey: String = "12cbc8a03407496290efed34fba57028"
     
     func terminateRequest() {
         if !isRequestFinished{
@@ -33,12 +32,14 @@ class Search {
             switch result{
             case .success(let recipies):
                 self.searchResults = recipies
-               
-                completionHandler(.success(recipies))
-                
+                DispatchQueue.main.async{
+                    completionHandler(.success(recipies))
+                }
             case .failure(let error):
                 print(error.localizedDescription)
-                completionHandler(.failure(.badConnection))
+                DispatchQueue.main.async {
+                    completionHandler(.failure(.badConnection))
+                }
             }
         }
     }
@@ -101,6 +102,8 @@ class Search {
                 } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                     self.isRequestFinished = true
                 if let data = data {
+                    
+
                     completionHandler(.success(SearchResultParser.parse(data: data)))
                 }
             }

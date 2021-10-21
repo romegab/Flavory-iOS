@@ -39,7 +39,7 @@ class HomeViewController: UIViewController {
         ResultTableView.delegate = self
         resultView.backgroundColor = .clear
         // 2
-        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffect = UIBlurEffect(style: .light)
         // 3
         let blurView = UIVisualEffectView(effect: blurEffect)
         // 4
@@ -76,10 +76,10 @@ class HomeViewController: UIViewController {
     func loadCarouselContent() {
         search.performRandomSearch(7) { [weak self] result in
             switch result{
-            case .success(let recipies):
+            case .success(let recipes):
                 let indexPath = IndexPath(item: 4, section: 0)
+                self?.carouselRecipes = recipes
                 DispatchQueue.main.async {
-                    self?.carouselRecipes = recipies
                     self?.collecitonView.reloadData()
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
                 }
@@ -193,6 +193,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
+    tableView.deselectRow(at: indexPath, animated: true)
+      
     let id: String = String(searchResult[indexPath.row].id)
     var currentRecipe: ClippedRecipe?
       
@@ -203,7 +205,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
               self?.selectedRecipe = currentRecipe
               DispatchQueue.main.async {
                   self?.performSegue(withIdentifier: "showRecipePreview", sender: nil)
-                  self?.searchController.isActive = false
               }
           case .failure(let error):
               DispatchQueue.main.async {

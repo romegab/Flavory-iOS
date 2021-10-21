@@ -7,10 +7,10 @@
 
 import Foundation
 
-class RecipeIngredient: Codable {
-    let id: Int
-    let name: String
-    let original: String
+struct RecipeIngredient: Codable {
+    let id: Int?
+    let name: String?
+    let original: String?
     var isChecked: Bool = false
     private let image: String?
     var imageURL: String {

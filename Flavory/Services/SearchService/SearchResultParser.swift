@@ -10,10 +10,11 @@ import Foundation
 class SearchResultParser{
     
     static func parse(data: Data) -> [ClippedRecipe] {
+        
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode(ResultArray.self, from:data)
-  
+            
             if result.recipes != nil {
                 return result.recipes!
             } else if result.results != nil {
@@ -21,13 +22,13 @@ class SearchResultParser{
             }
         } catch {
             print("JSON Error: \(error)")
-            return []
         }
         
         return [ClippedRecipe]()
     }
     
     static func parseCertainRecipe(data: Data) -> ClippedRecipe? {
+       
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode(ClippedRecipe.self, from:data)

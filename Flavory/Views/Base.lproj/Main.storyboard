@@ -24,12 +24,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yq-UY-gr1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1509.8130841121495" y="57.667386609071279"/>
+            <point key="canvasLocation" x="1508" y="137"/>
         </scene>
         <!--FLAVORY-->
         <scene sceneID="RYe-Ws-mTs">
             <objects>
-                <viewController id="Wxn-Ov-OGA" customClass="HomeViewController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" id="Wxn-Ov-OGA" customClass="HomeViewController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WIk-s0-aGI">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,18 +187,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="428" height="755"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="kde-To-fMs">
-                                                <rect key="frame" x="0.0" y="44.666666030883789" width="428" height="43.666667938232422"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kde-To-fMs" id="aJ7-im-uZ7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="428" height="43.666667938232422"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </tableViewCellContentView>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </tableViewCell>
-                                        </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="Wxn-Ov-OGA" id="bVb-oT-GgP"/>
                                         </connections>
@@ -245,7 +233,7 @@
         <!--Recipe Preview Controller-->
         <scene sceneID="71v-9S-lOu">
             <objects>
-                <viewController id="0ZY-Cs-kwT" customClass="RecipePreviewController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecipePreview" id="0ZY-Cs-kwT" customClass="RecipePreviewController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GFL-PJ-nHQ">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="872"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -500,7 +488,7 @@
         <!--View Controller-->
         <scene sceneID="h9d-oL-0rd">
             <objects>
-                <viewController id="Lgg-bV-gOL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CookingView" id="Lgg-bV-gOL" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hzy-1A-6tU">
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

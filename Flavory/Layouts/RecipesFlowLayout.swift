@@ -76,10 +76,9 @@ class RecipesFlowLayout: UICollectionViewFlowLayout {
         self.collectionView!.decelerationRate = UIScrollView.DecelerationRate.fast
      
         let collectionSize = collectionView!.bounds.size
-        let yInset = (collectionSize.height - self.itemSize.height) / 2
         let xInset = (collectionSize.width - self.itemSize.width) / 2
       
-        self.sectionInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
+        self.sectionInset = UIEdgeInsets(top: 0, left: xInset, bottom: 0, right: xInset)
       
     }
 }

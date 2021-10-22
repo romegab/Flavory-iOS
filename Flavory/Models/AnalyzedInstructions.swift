@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AnalyzedInstruction: Codable {
+class AnalyzedInstruction: Codable {
     
     let name: String?
     let steps: [RecipeStep]

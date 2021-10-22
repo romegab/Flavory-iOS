@@ -69,14 +69,7 @@ class RecipePreviewController: UIViewController {
             
             let vc = segue.destination as? RecipeCookingController
             
-            if  let ingredients = recipe?.extendedIngredients, let cookingSteps = recipe?.steps{
-                vc?.ingredients = ingredients
-                vc?.cookingSteps = cookingSteps
-                vc?.recipe = recipe
-                if let title = recipe?.title{
-                    vc?.recipeTitle = title
-                }
-            }
+            vc?.recipe = recipe
         }
     }
     

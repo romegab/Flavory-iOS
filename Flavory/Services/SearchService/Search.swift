@@ -17,7 +17,7 @@ class Search {
     var dataTask: URLSessionDataTask?
     let queue = DispatchQueue.global()
     
-    private let apiKey: String = "12cbc8a03407496290efed34fba57028"
+    private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
         if !isRequestFinished{

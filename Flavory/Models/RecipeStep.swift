@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeStep: Codable {
+class RecipeStep: Codable {
     let number: Int
     let step: String
     var isChecked: Bool = false

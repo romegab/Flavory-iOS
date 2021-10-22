@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ResultArray: Codable {
+class ResultArray: Codable {
     let recipes: [ClippedRecipe]?
     let results: [ClippedRecipe]?
     

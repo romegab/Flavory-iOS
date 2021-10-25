@@ -84,6 +84,7 @@ class HomeViewController: UIViewController {
     }
     
     func loadCarouselContent() {
+        
         search.performRandomSearch(7) { [weak self] result in
             switch result{
             case .success(let recipes):
@@ -154,6 +155,12 @@ extension HomeViewController: UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedRecipe = carouselRecipes[indexPath.row]
+        
+        let loadedRecipe: RecipeModel? = DataManager.shared.getRecipeByID(id: selectedRecipe?.id ?? -1)
+          if let loadedRecipe = loadedRecipe{
+              selectedRecipe = ClippedRecipe(loadedRecipe: loadedRecipe)
+        }
+        
         performSegue(withIdentifier: "showRecipePreview", sender: nil)
     }
 }

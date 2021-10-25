@@ -3,6 +3,7 @@
     <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -10,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item 2-->
+        <!--Started-->
         <scene sceneID="UHk-lE-Qhj">
             <objects>
                 <viewController id="lY4-C5-2nT" sceneMemberID="viewController">
@@ -20,11 +21,11 @@
                         <viewLayoutGuide key="safeArea" id="iXh-1T-T88"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="VRs-xP-Sh5"/>
+                    <tabBarItem key="tabBarItem" title="Started" image="circle.lefthalf.filled" catalog="system" id="VRs-xP-Sh5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yq-UY-gr1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1508" y="137"/>
+            <point key="canvasLocation" x="608" y="207"/>
         </scene>
         <!--FLAVORY-->
         <scene sceneID="RYe-Ws-mTs">
@@ -214,7 +215,9 @@
                             <constraint firstItem="Ncr-6g-B5W" firstAttribute="trailing" secondItem="yCo-ES-27t" secondAttribute="trailing" id="n9p-P1-Uq0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FLAVORY" id="jMd-BE-Wfn"/>
+                    <navigationItem key="navigationItem" title="FLAVORY" id="jMd-BE-Wfn">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="slider.horizontal.3" catalog="system" id="NQY-Vj-2TE"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="ResultTableView" destination="qpR-cl-GJm" id="ZIP-no-FzL"/>
                         <outlet property="collecitonView" destination="WAS-ur-BUi" id="Ong-MR-GHZ"/>
@@ -549,6 +552,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="aqu-YL-do1" kind="relationship" relationship="viewControllers" id="y6k-Wh-asR"/>
@@ -663,20 +667,21 @@
             </objects>
             <point key="canvasLocation" x="3340.6542056074763" y="-550.10799136069113"/>
         </scene>
-        <!--Item 1-->
+        <!--Home-->
         <scene sceneID="syZ-z2-GHn">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aqu-YL-do1" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="mbe-SQ-kkv"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="mbe-SQ-kkv">
+                        <imageReference key="image" image="house" catalog="system" symbolScale="medium"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mme-Xj-IrG">
                         <rect key="frame" x="0.0" y="44" width="428" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
-                        <navigationBarAppearance key="standardAppearance"/>
-                        <navigationBarAppearance key="compactAppearance"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -691,9 +696,12 @@
     <resources>
         <image name="GetDailyMenuBackGround" width="139" height="208.66667175292969"/>
         <image name="LookUpForEatBackground" width="160" height="240"/>
+        <image name="circle.lefthalf.filled" catalog="system" width="128" height="121"/>
         <image name="fatIcon" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="house" catalog="system" width="128" height="106"/>
         <image name="kcalIcon" width="170.66667175292969" height="170.66667175292969"/>
         <image name="proteinIcon" width="85.333335876464844" height="85.333335876464844"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="100"/>
         <namedColor name="blackOrange">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

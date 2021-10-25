@@ -70,11 +70,9 @@ class RecipePreviewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is RecipeCookingController {
-            
-            
             let vc = segue.destination as? RecipeCookingController
-            
             vc?.recipe = recipe
+            startCoookingButotn.setTitle("CONTINUE COOKING", for: .normal)
         }
     }
     
@@ -84,7 +82,7 @@ class RecipePreviewController: UIViewController {
             DataManager.shared.saveRecipe(recipe)
         }
         performSegue(withIdentifier: "StartCookingSegue", sender: nil)
-        startCoookingButotn.setTitle("CONTINUE COOKING", for: .normal)
+        
     }
     
     private func setUpCloseButton() {

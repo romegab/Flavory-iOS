@@ -53,6 +53,9 @@ class RecipeCookingController: UIViewController {
     
     
     @IBAction func readyButtonClicked(_ sender: Any) {
+        if let recipe = recipe {
+            recipe.isInProgress.toggle()
+        }
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     

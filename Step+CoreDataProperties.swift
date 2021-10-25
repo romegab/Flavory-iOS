@@ -2,7 +2,7 @@
 //  Step+CoreDataProperties.swift
 //  Flavory
 //
-//  Created by Ivan Stoilov on 15.10.21.
+//  Created by Ivan Stoilov on 25.10.21.
 //
 //
 
@@ -16,9 +16,9 @@ extension Step {
         return NSFetchRequest<Step>(entityName: "Step")
     }
 
+    @NSManaged public var isChecked: Bool
     @NSManaged public var number: Int
     @NSManaged public var step: String?
-    @NSManaged public var isChecked: Bool
     @NSManaged public var origin: RecipeModel?
 
 }

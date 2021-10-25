@@ -22,6 +22,7 @@ class HomeViewController: UIViewController {
     
     let search: Search = Search()
     var selectedRecipe: ClippedRecipe?
+    var recipeInProgress: RecipeModel?
     var carouselRecipes = [ClippedRecipe]()
     var searchResult = [ClippedRecipe]()
     
@@ -126,7 +127,7 @@ class HomeViewController: UIViewController {
             
             if let recipe = selectedRecipe{
                 vc?.recipe = recipe
-            } 
+            }
         }
     }
     
@@ -205,21 +206,30 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     tableView.deselectRow(at: indexPath, animated: true)
       
     let id: String = String(searchResult[indexPath.row].id)
-    var currentRecipe: ClippedRecipe?
       
-    search.performSearchByID(id) { [weak self] result in
-          switch result{
-          case .success(let recipe):
-              currentRecipe = recipe
-              self?.selectedRecipe = currentRecipe
-              DispatchQueue.main.async {
-                  self?.performSegue(withIdentifier: "showRecipePreview", sender: nil)
-              }
-          case .failure(let error):
-              DispatchQueue.main.async {
-                  print(error.localizedDescription)
-              }
-          }
+    let loadedRecipe: RecipeModel? = DataManager.shared.getRecipeByID(id: Int(id) ?? -1)
+      if let loadedRecipe = loadedRecipe{
+          selectedRecipe = ClippedRecipe(loadedRecipe: loadedRecipe)
+        performSegue(withIdentifier: "showRecipePreview", sender: nil)
+    }
+    
+    else{
+        var currentRecipe: ClippedRecipe?
+      
+        search.performSearchByID(id) { [weak self] result in
+            switch result{
+            case .success(let recipe):
+                currentRecipe = recipe
+                self?.selectedRecipe = currentRecipe
+                DispatchQueue.main.async {
+                    self?.performSegue(withIdentifier: "showRecipePreview", sender: nil)
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
   }
 }

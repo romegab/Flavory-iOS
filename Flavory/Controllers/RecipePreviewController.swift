@@ -10,7 +10,9 @@ import UIKit
 class RecipePreviewController: UIViewController {
     private var imageRequest: Cancellable?
     
+    //recipe will be != nil if it is from the API response
     var recipe: ClippedRecipe?
+
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -24,6 +26,7 @@ class RecipePreviewController: UIViewController {
     @IBOutlet weak var recipePrice: UILabel!
     @IBOutlet weak var startCoookingButotn: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    
     override func viewDidLoad() {
         
         updateUI()
@@ -42,7 +45,9 @@ class RecipePreviewController: UIViewController {
         
     private func updateUI() {
         if let recipe = recipe{
-            
+            if recipe.isInProgress {
+                startCoookingButotn.setTitle("CONTINUE COOKING", for: .normal)
+            }
             recipeTitle.text = recipe.title
             recipeTitle.adjustsFontSizeToFitWidth = true
             recipeImage.image = UIImage(named: "Placeholder")
@@ -74,7 +79,8 @@ class RecipePreviewController: UIViewController {
     }
     
     @IBAction func startCookingButtonPressed(_ sender: UIButton) {
-        if let recipe = recipe{
+        if let recipe = recipe, !recipe.isInProgress{
+            recipe.isInProgress.toggle()
             DataManager.shared.saveRecipe(recipe)
         }
         performSegue(withIdentifier: "StartCookingSegue", sender: nil)
@@ -94,9 +100,12 @@ class RecipePreviewController: UIViewController {
     }
     
     private func setUpRecipeNutrients() {
-        recipeKcal.text = String(recipe?.recipeDetails.calories ?? 0)
-        recipeProtein.text = String(recipe?.recipeDetails.protein ?? 0)
-        recipeFat.text = String(recipe?.recipeDetails.fat ?? 0)
+        if let recipe = recipe {
+            recipeKcal.text = String(recipe.recipeDetails.calories ?? 0)
+            recipeProtein.text = String(recipe.recipeDetails.protein ?? 0)
+            recipeFat.text = String(recipe.recipeDetails.fat ?? 0)
+        }
+        
     }
 }
 

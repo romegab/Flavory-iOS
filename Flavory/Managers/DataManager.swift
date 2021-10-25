@@ -24,7 +24,7 @@ class DataManager {
         )
         
         do {
-            let loadedRecipe = try context.fetch(recipeFetchRequest).first
+            let loadedRecipe = try context.fetch(recipeFetchRequest).first(where: { $0.isInProgress == true})
             
             return loadedRecipe
         }

@@ -84,6 +84,7 @@ class RecipePreviewController: UIViewController {
             DataManager.shared.saveRecipe(recipe)
         }
         performSegue(withIdentifier: "StartCookingSegue", sender: nil)
+        startCoookingButotn.setTitle("CONTINUE COOKING", for: .normal)
     }
     
     private func setUpCloseButton() {

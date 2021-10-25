@@ -55,6 +55,13 @@ class RecipeCookingController: UIViewController {
     @IBAction func readyButtonClicked(_ sender: Any) {
         if let recipe = recipe {
             recipe.isInProgress.toggle()
+            for currentIngredient in recipe.extendedIngredients ?? [] {
+                currentIngredient.isChecked = false
+            }
+            
+            for currentStep in recipe.steps ?? [] {
+                currentStep.isChecked = false
+            }
         }
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }

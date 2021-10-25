@@ -18,7 +18,12 @@ class ClippedRecipe: Codable {
         return details
     }()
     
-    var imageURL: String {
+    var largeImageURL: String {
+        get {
+        return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
+        }
+    }
+    var smallImageURL: String {
         get {
         return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
         }
@@ -44,6 +49,9 @@ class ClippedRecipe: Codable {
                 return nil
             }
         }
+        set {
+            
+        }
     }
     
     let title: String
@@ -54,6 +62,7 @@ class ClippedRecipe: Codable {
     private var summary: String?
     var extendedIngredients: [RecipeIngredient]?
     private var analyzedInstructions: [AnalyzedInstruction]?
+    var isInProgress: Bool = false
     
     private enum CodingKeys: String, CodingKey {
         case title
@@ -64,5 +73,64 @@ class ClippedRecipe: Codable {
         case pricePerServing
         case extendedIngredients
         case analyzedInstructions
+    }
+    
+    func extractSteps(rawSteps: [Step]) -> [RecipeStep]
+    {
+        var result: [RecipeStep] = [RecipeStep]()
+        
+        for step in rawSteps {
+            let currentStep = RecipeStep(from: step)
+            
+            result.append(currentStep)
+        }
+        
+        return result
+    }
+    
+    func extractIngrediets(rawIngredients: [Ingredient]) -> [RecipeIngredient]
+    {
+        var result: [RecipeIngredient] = [RecipeIngredient]()
+        
+        for ingredient in rawIngredients {
+            let currentIngredient = RecipeIngredient(from: ingredient)
+            
+            result.append(currentIngredient)
+        }
+        
+        return result
+    }
+    
+    init (loadedRecipe: RecipeModel) {
+        
+        //extract the details from the already loaded recipe
+        let details: RecipeDetails = RecipeDetails()
+        details.description = loadedRecipe.detail?.recipeDescription ?? ""
+        details.protein = loadedRecipe.detail?.protein
+        details.fat = loadedRecipe.detail?.fat
+        details.calories = loadedRecipe.detail?.calories
+        
+        //extracting the steps from the already loaded recipe
+        
+        self.title = loadedRecipe.title ?? ""
+        self.id = loadedRecipe.id
+        self.readyInMinutes = loadedRecipe.preparationTime
+        self.pricePerServing = loadedRecipe.price
+        self.servings = loadedRecipe.servings
+        self.recipeDetails = details
+        self.isInProgress = loadedRecipe.isInProgress
+        
+        if let rawSteps = loadedRecipe.step {
+            let extractedSteps: [RecipeStep] = extractSteps(rawSteps: rawSteps)
+            var instructions: [AnalyzedInstruction] = [AnalyzedInstruction]()
+            instructions.append(AnalyzedInstruction(steps: extractedSteps))
+            self.analyzedInstructions = instructions
+        }
+        
+        if let rawIngredients = loadedRecipe.ingredient {
+            let extractedIngredients: [RecipeIngredient] = extractIngrediets(rawIngredients: rawIngredients)
+            self.extendedIngredients = extractedIngredients
+        }
+        
     }
 }

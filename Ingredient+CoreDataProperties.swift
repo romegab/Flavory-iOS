@@ -2,7 +2,7 @@
 //  Ingredient+CoreDataProperties.swift
 //  Flavory
 //
-//  Created by Ivan Stoilov on 15.10.21.
+//  Created by Ivan Stoilov on 25.10.21.
 //
 //
 
@@ -17,10 +17,10 @@ extension Ingredient {
     }
 
     @NSManaged public var id: Int
-    @NSManaged public var name: String?
+    @NSManaged public var image: String?
     @NSManaged public var ingredientDescription: String?
     @NSManaged public var isChecked: Bool
-    @NSManaged public var imageURL: String?
+    @NSManaged public var name: String?
     @NSManaged public var origin: RecipeModel?
 
 }

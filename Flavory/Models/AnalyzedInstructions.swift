@@ -7,13 +7,15 @@
 
 import Foundation
 
-struct AnalyzedInstruction: Codable {
+class AnalyzedInstruction: Codable {
     
-    let name: String?
     let steps: [RecipeStep]
     
     private enum CodingKeys: String, CodingKey {
-        case name
         case steps
+    }
+    
+    init(steps: [RecipeStep]) {
+        self.steps = steps
     }
 }

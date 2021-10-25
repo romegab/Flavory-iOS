@@ -8,6 +8,7 @@
 import Foundation
 
 class RecipeStep: Codable {
+    
     let number: Int
     let step: String
     var isChecked: Bool = false
@@ -15,5 +16,11 @@ class RecipeStep: Codable {
     private enum CodingKeys: String, CodingKey {
         case number
         case step
+    }
+    
+    init(from laodedStep: Step) {
+        self.number = laodedStep.number
+        self.step = laodedStep.step?.description ?? ""
+        self.isChecked = laodedStep.isChecked
     }
 }

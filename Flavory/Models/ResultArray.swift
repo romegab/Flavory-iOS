@@ -8,8 +8,8 @@
 import Foundation
 
 class ResultArray: Codable {
-    var recipes = [ClippedRecipe]()
-    var results: [ClippedRecipe]?
+    let recipes: [ClippedRecipe]?
+    let results: [ClippedRecipe]?
     
     private enum CodingKeys: String, CodingKey {
         case recipes

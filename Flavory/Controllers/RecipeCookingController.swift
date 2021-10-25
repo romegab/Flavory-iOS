@@ -9,9 +9,6 @@ import UIKit
 
 class RecipeCookingController: UIViewController {
     var recipe: ClippedRecipe?
-    var ingredients: [RecipeIngredient] = [RecipeIngredient]()
-    var cookingSteps: [RecipeStep] = [RecipeStep]()
-    var recipeTitle: String = ""
     
     private var currentSegmentIndex = 1
    
@@ -24,7 +21,7 @@ class RecipeCookingController: UIViewController {
         
         super.viewDidLoad()
         
-        recipeTitleLable.text = recipeTitle
+        recipeTitleLable.text = recipe?.title
         recipeTitleLable.adjustsFontSizeToFitWidth = true
         readyButton.layer.cornerRadius = 15
         
@@ -56,6 +53,16 @@ class RecipeCookingController: UIViewController {
     
     
     @IBAction func readyButtonClicked(_ sender: Any) {
+        if let recipe = recipe {
+            recipe.isInProgress.toggle()
+            for currentIngredient in recipe.extendedIngredients ?? [] {
+                currentIngredient.isChecked = false
+            }
+            
+            for currentStep in recipe.steps ?? [] {
+                currentStep.isChecked = false
+            }
+        }
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
@@ -71,9 +78,9 @@ extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
       if currentSegmentIndex == 1{
-          return ingredients.count
+          return recipe?.extendedIngredients?.count ?? 0
       } else {
-          return cookingSteps.count
+          return recipe?.steps?.count ?? 0
       }
   }
 
@@ -81,13 +88,13 @@ extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
       
       if currentSegmentIndex == 1 {
           let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as! IngredientCell
-          let currentIngredient = ingredients[indexPath.row]
+          let currentIngredient = recipe?.extendedIngredients?[indexPath.row]
           cell.ingredient = currentIngredient
           return cell
       }
       else {
           let cell = tableView.dequeueReusableCell(withIdentifier: "CookingStepCell", for: indexPath) as! CookingStepCell
-          let currentStep = cookingSteps[indexPath.row]
+          let currentStep = recipe?.steps?[indexPath.row]
           cell.cookingStep = currentStep
           return cell
       }

@@ -10,7 +10,9 @@ import UIKit
 class RecipePreviewController: UIViewController {
     private var imageRequest: Cancellable?
     
+    //recipe will be != nil if it is from the API response
     var recipe: ClippedRecipe?
+
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -24,6 +26,7 @@ class RecipePreviewController: UIViewController {
     @IBOutlet weak var recipePrice: UILabel!
     @IBOutlet weak var startCoookingButotn: UIButton!
     @IBOutlet weak var likeButton: UIButton!
+    
     override func viewDidLoad() {
         
         updateUI()
@@ -42,11 +45,13 @@ class RecipePreviewController: UIViewController {
         
     private func updateUI() {
         if let recipe = recipe{
-            
+            if recipe.isInProgress {
+                startCoookingButotn.setTitle("CONTINUE COOKING", for: .normal)
+            }
             recipeTitle.text = recipe.title
             recipeTitle.adjustsFontSizeToFitWidth = true
             recipeImage.image = UIImage(named: "Placeholder")
-            imageRequest = ImageService.shared.getImage(rawUrl: recipe.imageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
                 
                 switch result{
                 case .success(let image):
@@ -65,26 +70,19 @@ class RecipePreviewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is RecipeCookingController {
-            
-            
             let vc = segue.destination as? RecipeCookingController
-            
-            if  let ingredients = recipe?.extendedIngredients, let cookingSteps = recipe?.steps{
-                vc?.ingredients = ingredients
-                vc?.cookingSteps = cookingSteps
-                vc?.recipe = recipe
-                if let title = recipe?.title{
-                    vc?.recipeTitle = title
-                }
-            }
+            vc?.recipe = recipe
+            startCoookingButotn.setTitle("CONTINUE COOKING", for: .normal)
         }
     }
     
     @IBAction func startCookingButtonPressed(_ sender: UIButton) {
-        if let recipe = recipe{
+        if let recipe = recipe, !recipe.isInProgress{
+            recipe.isInProgress.toggle()
             DataManager.shared.saveRecipe(recipe)
         }
         performSegue(withIdentifier: "StartCookingSegue", sender: nil)
+        
     }
     
     private func setUpCloseButton() {
@@ -101,9 +99,12 @@ class RecipePreviewController: UIViewController {
     }
     
     private func setUpRecipeNutrients() {
-        recipeKcal.text = String(recipe?.recipeDetails.calories ?? 0)
-        recipeProtein.text = String(recipe?.recipeDetails.protein ?? 0)
-        recipeFat.text = String(recipe?.recipeDetails.fat ?? 0)
+        if let recipe = recipe {
+            recipeKcal.text = String(recipe.recipeDetails.calories ?? 0)
+            recipeProtein.text = String(recipe.recipeDetails.protein ?? 0)
+            recipeFat.text = String(recipe.recipeDetails.fat ?? 0)
+        }
+        
     }
 }
 

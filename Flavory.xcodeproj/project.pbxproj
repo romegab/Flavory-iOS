@@ -108,14 +108,6 @@
 		BC21EBF326FDF6F500AE44CC = {
 			isa = PBXGroup;
 			children = (
-				BCBE56FC2726DBC900705A91 /* Ingredient+CoreDataClass.swift */,
-				BCBE56FD2726DBC900705A91 /* Ingredient+CoreDataProperties.swift */,
-				BCBE56FE2726DBC900705A91 /* Step+CoreDataClass.swift */,
-				BCBE56FF2726DBC900705A91 /* Step+CoreDataProperties.swift */,
-				BCBE57002726DBC900705A91 /* Detail+CoreDataClass.swift */,
-				BCBE57012726DBC900705A91 /* Detail+CoreDataProperties.swift */,
-				BCBE57022726DBC900705A91 /* RecipeModel+CoreDataClass.swift */,
-				BCBE57032726DBC900705A91 /* RecipeModel+CoreDataProperties.swift */,
 				BC21EBFE26FDF6F500AE44CC /* Flavory */,
 				BC21EBFD26FDF6F500AE44CC /* Products */,
 			);
@@ -202,6 +194,14 @@
 		BC5154F72719B7400011E90F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				BCBE56FC2726DBC900705A91 /* Ingredient+CoreDataClass.swift */,
+				BCBE56FD2726DBC900705A91 /* Ingredient+CoreDataProperties.swift */,
+				BCBE56FE2726DBC900705A91 /* Step+CoreDataClass.swift */,
+				BCBE56FF2726DBC900705A91 /* Step+CoreDataProperties.swift */,
+				BCBE57002726DBC900705A91 /* Detail+CoreDataClass.swift */,
+				BCBE57012726DBC900705A91 /* Detail+CoreDataProperties.swift */,
+				BCBE57022726DBC900705A91 /* RecipeModel+CoreDataClass.swift */,
+				BCBE57032726DBC900705A91 /* RecipeModel+CoreDataProperties.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";

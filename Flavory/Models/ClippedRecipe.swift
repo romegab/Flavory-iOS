@@ -25,8 +25,10 @@ class ClippedRecipe: Codable {
         if totalStages != 0 {
             return Double( doneStages / ( totalStages / 100 ) )
         }
+        else {
+            return 0.0
+        }
         
-        else return 0.0
     }()
     
     var largeImageURL: String {

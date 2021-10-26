@@ -18,6 +18,17 @@ class ClippedRecipe: Codable {
         return details
     }()
     
+    lazy var progress: Double = {
+        var totalStages = (extendedIngredients?.count ?? 0) + (steps?.count ?? 0)
+        var doneStages = ((extendedIngredients?.filter{  $0.isChecked == true })?.count ?? 0) + ((steps?.filter{  $0.isChecked == true })?.count ?? 0)
+        
+        if totalStages != 0 {
+            return Double( doneStages / ( totalStages / 100 ) )
+        }
+        
+        else return 0.0
+    }()
+    
     var largeImageURL: String {
         get {
         return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
@@ -63,6 +74,7 @@ class ClippedRecipe: Codable {
     var extendedIngredients: [RecipeIngredient]?
     private var analyzedInstructions: [AnalyzedInstruction]?
     var isInProgress: Bool = false
+    
     
     private enum CodingKeys: String, CodingKey {
         case title
@@ -133,4 +145,6 @@ class ClippedRecipe: Codable {
         }
         
     }
+    
+    
 }

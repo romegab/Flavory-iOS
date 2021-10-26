@@ -35,6 +35,26 @@ class DataManager {
         return nil
     }
     
+    func getStartedRecipes() -> [RecipeModel]? {
+        let recipeFetchRequest: NSFetchRequest<RecipeModel>
+        recipeFetchRequest = RecipeModel.fetchRequest()
+        
+        recipeFetchRequest.predicate = NSPredicate(
+            format: "isInProgress = %isInProgress", true
+        )
+        
+        do {
+            let loadedRecipes = try context.fetch(recipeFetchRequest)
+            
+            return loadedRecipes
+        }
+        catch {
+            print("get started recipes is not wokring properly")
+        }
+        
+        return nil
+    }
+    
     func saveRecipe(_ recipe: ClippedRecipe) {
         let newRecipe = RecipeModel(context: self.context)
         

@@ -1,9 +1,11 @@
 
 import UIKit
+import CoreData
 
 class StartedRecipeController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewTitle: UILabel!
     
     var startedRecipes: [ClippedRecipe] = [ClippedRecipe]()
     var selectedRecipe: ClippedRecipe?
@@ -20,6 +22,15 @@ class StartedRecipeController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let loadedRecipes: [RecipeModel]? = DataManager.shared.getStartedRecipes()
+        startedRecipes = processLoadedRecipies(loadedRecipies: loadedRecipes)
         
         tableView.reloadData()
     }
@@ -44,6 +55,11 @@ class StartedRecipeController: UIViewController {
                 result.append(ClippedRecipe(loadedRecipe: rawRecipe))
             }
         }
+        
+        result.sort {
+            $0.progress > $1.progress
+        }
+        
         return result
     }
 }

@@ -10,8 +10,11 @@ import UIKit
 class RecipePreviewController: UIViewController {
     private var imageRequest: Cancellable?
     
-    //recipe will be != nil if it is from the API response
-    var recipe: ClippedRecipe?
+    var recipe: ClippedRecipe? {
+        didSet {
+            print(recipe?.recipePrice)
+        }
+    }
 
     
     @IBOutlet weak var closeButton: UIButton!

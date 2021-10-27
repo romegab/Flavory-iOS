@@ -22,8 +22,10 @@ class ClippedRecipe: Codable {
         var totalStages = (extendedIngredients?.count ?? 0) + (steps?.count ?? 0)
         var doneStages = ((extendedIngredients?.filter{  $0.isChecked == true })?.count ?? 0) + ((steps?.filter{  $0.isChecked == true })?.count ?? 0)
         
-        if totalStages != 0 {
-            return Double( doneStages / ( totalStages / 100 ) )
+        if totalStages != 0, doneStages != 0 {
+            let valuePerPercent: Double = Double( Double( totalStages ) / 100.0 )
+            let result: Double = ceil( Double( doneStages ) / valuePerPercent )
+            return result
         }
         else {
             return 0.0
@@ -44,9 +46,10 @@ class ClippedRecipe: Codable {
     
     var recipePrice: Double{
         get{
+            
             if let pricePerServing = pricePerServing{
                 if let servings = servings{
-                    return Double((Int(pricePerServing) * servings) / 100)
+                    return Double(  pricePerServing * Double( servings ) / 100.0)
                 }
             }
             
@@ -129,6 +132,7 @@ class ClippedRecipe: Codable {
         self.title = loadedRecipe.title ?? ""
         self.id = loadedRecipe.id
         self.readyInMinutes = loadedRecipe.preparationTime
+        
         self.pricePerServing = loadedRecipe.price
         self.servings = loadedRecipe.servings
         self.recipeDetails = details

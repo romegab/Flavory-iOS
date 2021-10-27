@@ -32,8 +32,10 @@ class StartedRecipeCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-       
+        recipeProgress.backgroundColor = UIColor.green
         recipeImage.layer.cornerRadius = 15
+        recipeProgress.layer.masksToBounds = true
+        recipeProgress.layer.cornerRadius = 15
         
         self.layer.shadowColor = UIColor.black.cgColor
 
@@ -63,6 +65,17 @@ class StartedRecipeCell: UITableViewCell {
         if let recipe = recipe {
             
             recipeTitle.text = recipe.title
+            
+            recipeProgress.text = String("\(recipe.progress)% done")
+            if (0...25).contains(recipe.progress) {
+                recipeProgress.backgroundColor = UIColor.init(named: "0-25green")
+            } else if (26...50).contains(recipe.progress) {
+                recipeProgress.backgroundColor = UIColor.init(named: "26-50green")
+            } else if (51...75).contains(recipe.progress) {
+                recipeProgress.backgroundColor = UIColor.init(named: "51-75green")
+            } else if (76...100).contains(recipe.progress) {
+                recipeProgress.backgroundColor = UIColor.init(named: "76-100green")
+            }
             
             imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
                 switch result{

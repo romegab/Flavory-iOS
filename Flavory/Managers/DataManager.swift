@@ -62,7 +62,7 @@ class DataManager {
         newRecipe.imageURL = recipe.largeImageURL
         newRecipe.title = recipe.title
         newRecipe.preparationTime = recipe.readyInMinutes ?? 0
-        newRecipe.price = recipe.recipePrice
+        newRecipe.price = recipe.pricePerServing ?? 0
         newRecipe.detail = saveDetail(detail: recipe.recipeDetails)
         newRecipe.servings = recipe.servings ?? 0
         newRecipe.isInProgress = recipe.isInProgress

@@ -13,7 +13,7 @@ class DataManager {
     
     static let shared = DataManager()
 
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func getRecipeByID(id: Int) -> RecipeModel? {
         let recipeFetchRequest: NSFetchRequest<RecipeModel>

@@ -2,23 +2,43 @@
 import UIKit
 import CoreData
 
-class StartedRecipeController: UIViewController {
+class StartedRecipeController: UIViewController, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewTitle: UILabel!
-    
-    var startedRecipes: [ClippedRecipe] = [ClippedRecipe]()
+
     var selectedRecipe: ClippedRecipe?
     
+    fileprivate lazy var fetchedResultsController: NSFetchedResultsController<RecipeModel> = {
+
+        let fetchRequest: NSFetchRequest<RecipeModel> = RecipeModel.fetchRequest()
+        
+        fetchRequest.predicate = NSPredicate(
+            format: "isInProgress = %isInProgress", true
+        )
+        
+        let sortDescriptor = NSSortDescriptor(key: "isInProgress", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
+
+        return fetchedResultsController
+    }()
+    
     override func viewDidLoad() {
+        
+        fetchedResultsController.delegate = self
         
         tableView.separatorColor = UIColor.clear
                 
         let recipeCellNib = UINib(nibName: "StartedRecipeCell", bundle: nil)
         tableView.register(recipeCellNib, forCellReuseIdentifier: "StartedRecipeCell")
         
-        let loadedRecipes: [RecipeModel]? = DataManager.shared.getStartedRecipes()
-        startedRecipes = processLoadedRecipies(loadedRecipies: loadedRecipes)
+        do {
+          try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+          print("Fetching error: \(error), \(error.userInfo)")
+        }
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -28,9 +48,6 @@ class StartedRecipeController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let loadedRecipes: [RecipeModel]? = DataManager.shared.getStartedRecipes()
-        startedRecipes = processLoadedRecipies(loadedRecipies: loadedRecipes)
         
         tableView.reloadData()
     }
@@ -62,19 +79,24 @@ class StartedRecipeController: UIViewController {
         
         return result
     }
+    
+    func controllerDidChangeContent(_ controller:
+      NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        tableView.reloadData()
+    }
 }
 
 extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
     
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-      startedRecipes.count
+      return fetchedResultsController.fetchedObjects?.count ?? 0
   }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
         let cell = tableView.dequeueReusableCell(withIdentifier: "StartedRecipeCell", for: indexPath) as! StartedRecipeCell
-        let currentRecipe = startedRecipes[indexPath.row]
+        let currentRecipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
         cell.recipe = currentRecipe
       
         return cell
@@ -84,7 +106,7 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
       
         tableView.deselectRow(at: indexPath, animated: true)
 
-        selectedRecipe = startedRecipes[indexPath.row]
+        selectedRecipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
         performSegue(withIdentifier: "presentRecipePreview", sender: nil)
     }
     
@@ -92,6 +114,21 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
         var cellHeight:CGFloat = CGFloat()
         cellHeight = floor(UIScreen.main.bounds.width * 0.4)
         return cellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let recipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
+                recipe.isInProgress.toggle()
+                for currentIngredient in recipe.extendedIngredients ?? [] {
+                    currentIngredient.isChecked = false
+                }
+                
+                for currentStep in recipe.steps ?? [] {
+                    currentStep.isChecked = false
+                }
+            DataManager.shared.updateRecipe(recipe)
+        }
     }
 }
 

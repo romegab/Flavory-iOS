@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
                 self?.carouselRecipes = recipes
                 DispatchQueue.main.async {
                     self?.collecitonView.reloadData()
-                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
                 }
                 case .failure(let error):
                 DispatchQueue.main.async {

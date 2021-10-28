@@ -19,19 +19,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FZJ-pn-sWI">
-                                <rect key="frame" x="0.0" y="132" width="428" height="711"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="FZJ-pn-sWI">
+                                <rect key="frame" x="0.0" y="128.33333333333331" width="428" height="714.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexTrackingBackgroundColor" name="orangeYellow"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qmF-Pg-opd">
-                                <rect key="frame" x="0.0" y="88" width="428" height="44"/>
+                                <rect key="frame" x="0.0" y="88" width="428" height="40.333333333333343"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IN PROGRESS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pma-Zt-DYk">
-                                        <rect key="frame" x="10" y="10" width="408" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                                        <rect key="frame" x="10" y="9.9999999999999982" width="408" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -58,11 +58,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="FLAVORY" id="nxN-J1-M6g">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="OeW-bf-qTJ">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="OeW-bf-qTJ">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="editButtonPressed:" destination="lY4-C5-2nT" id="RO0-jt-ud1"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="OeW-bf-qTJ" id="cz1-no-EjB"/>
                         <outlet property="tableView" destination="FZJ-pn-sWI" id="jqu-7o-3m2"/>
                         <outlet property="viewTitle" destination="pma-Zt-DYk" id="QMC-Rv-Xtr"/>
                         <segue destination="0ZY-Cs-kwT" kind="presentation" identifier="presentRecipePreview" id="9n9-hm-KMj"/>
@@ -593,7 +597,7 @@
         <scene sceneID="iuh-eP-Jwe">
             <objects>
                 <tabBarController id="GYT-jo-G7W" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wQn-ok-TBu">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="wQn-ok-TBu">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" name="orangeYellow"/>

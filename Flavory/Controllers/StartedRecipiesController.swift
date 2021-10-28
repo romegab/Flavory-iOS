@@ -5,12 +5,19 @@ import CoreData
 class StartedRecipeController: UIViewController, NSFetchedResultsControllerDelegate, StartedRecipeCellDelegate {
     
     
+    @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewTitle: UILabel!
-
-    var selectedRecipe: ClippedRecipe?
     
-    fileprivate lazy var fetchedResultsController: NSFetchedResultsController<RecipeModel> = {
+    var selectedRecipe: ClippedRecipe?
+    private var isInEditingMood: Bool = false {
+        didSet {
+            configureEditButton()
+            tableView.reloadData()
+        }
+    }
+    
+    private lazy var fetchedResultsController: NSFetchedResultsController<RecipeModel> = {
 
         let fetchRequest: NSFetchRequest<RecipeModel> = RecipeModel.fetchRequest()
         
@@ -18,7 +25,7 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
             format: "isInProgress = %isInProgress", true
         )
         
-        let sortDescriptor = NSSortDescriptor(key: "isInProgress", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "progress", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
 
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
@@ -55,6 +62,9 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
+        
+        isInEditingMood = false
+        
         if segue.destination is RecipePreviewController {
             
             let vc = segue.destination as? RecipePreviewController
@@ -63,22 +73,6 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
                 vc?.recipe = recipe
             }
         }
-    }
-    
-    private func processLoadedRecipies( loadedRecipies: [RecipeModel]? ) -> [ClippedRecipe] {
-        var result: [ClippedRecipe] = [ClippedRecipe]()
-        
-        if let loadedRecipies = loadedRecipies{
-            for rawRecipe in loadedRecipies {
-                result.append(ClippedRecipe(loadedRecipe: rawRecipe))
-            }
-        }
-        
-        result.sort {
-            $0.progress > $1.progress
-        }
-        
-        return result
     }
     
     func controllerDidChangeContent(_ controller:
@@ -100,6 +94,20 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         DataManager.shared.updateRecipe(recipe)
     
     }
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        isInEditingMood.toggle()
+    }
+    
+    private func configureEditButton(){
+        
+        if isInEditingMood {
+            editButton.title = "Done"
+        } else {
+            editButton.title = "Edit"
+        }
+        
+    }
+    
 }
 
 extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
@@ -114,6 +122,9 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
         let currentRecipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
         cell.recipe = currentRecipe
         cell.delegate = self
+        
+        cell.deleteButton.isHidden = !isInEditingMood
+        
         return cell
     }
 
@@ -127,7 +138,7 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var cellHeight:CGFloat = CGFloat()
-        cellHeight = floor(UIScreen.main.bounds.width * 0.4)
+        cellHeight = floor(UIScreen.main.bounds.width * 0.3)
         return cellHeight
     }
 }

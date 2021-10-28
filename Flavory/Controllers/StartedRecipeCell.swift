@@ -11,6 +11,7 @@ protocol StartedRecipeCellDelegate: AnyObject {
     
     func deleteCell(withRecipe recipe: inout ClippedRecipe)
     
+    
 }
 
 class StartedRecipeCell: UITableViewCell {
@@ -33,16 +34,19 @@ class StartedRecipeCell: UITableViewCell {
         imageRequest?.cancel()
     }
     
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var recipeProgress: UILabel!
     @IBOutlet weak var background: UIView!
     
     
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         recipeProgress.backgroundColor = UIColor.green
-        recipeImage.layer.cornerRadius = 15
+        recipeImage.layer.cornerRadius = 10
         recipeProgress.layer.masksToBounds = true
         recipeProgress.layer.cornerRadius = 15
         

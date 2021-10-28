@@ -60,7 +60,7 @@ class ClippedRecipe: Codable {
     var steps: [RecipeStep]? {
         get {
             if let analyzedInstructions = analyzedInstructions{
-            return analyzedInstructions[0].steps
+                return analyzedInstructions[0].steps
             } else {
                 return nil
             }

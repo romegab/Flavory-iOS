@@ -66,6 +66,7 @@ class DataManager {
         newRecipe.detail = saveDetail(detail: recipe.recipeDetails)
         newRecipe.servings = recipe.servings ?? 0
         newRecipe.isInProgress = recipe.isInProgress
+        newRecipe.progress = Int(recipe.progress)
         
         if let ingredients = recipe.extendedIngredients {
             for currentIngredient in ingredients{

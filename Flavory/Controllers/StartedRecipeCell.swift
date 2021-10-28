@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol StartedRecipeCellDelegate: AnyObject {
+    
+    func deleteCell(withRecipe recipe: inout ClippedRecipe)
+    
+}
+
 class StartedRecipeCell: UITableViewCell {
 
     var recipe: ClippedRecipe? {
@@ -14,6 +20,9 @@ class StartedRecipeCell: UITableViewCell {
             updateUI()
         }
     }
+    
+    weak var delegate: StartedRecipeCellDelegate?
+    
     private var imageRequest: Cancellable?
     
     override func prepareForReuse() {
@@ -37,7 +46,7 @@ class StartedRecipeCell: UITableViewCell {
         recipeProgress.layer.masksToBounds = true
         recipeProgress.layer.cornerRadius = 15
         
-        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowColor = UIColor.darkGray.cgColor
 
         // the shadow will be 5pt right and 5pt below the image view
         // negative value will place it on left / above of the image view
@@ -47,7 +56,7 @@ class StartedRecipeCell: UITableViewCell {
         self.layer.shadowRadius = 4
 
         // opacity of the shadow
-        self.layer.shadowOpacity = 0.5
+        self.layer.shadowOpacity = 0.2
         
         
         background.layer.cornerRadius = 10
@@ -87,6 +96,13 @@ class StartedRecipeCell: UITableViewCell {
                     
                 }
             }
+        }
+    }
+    
+    @IBAction func deleteButtonClicked(_ sender: UIButton) {
+     
+        if var recipe = recipe {
+            delegate?.deleteCell(withRecipe: &recipe)
         }
     }
 }

@@ -2,7 +2,8 @@
 import UIKit
 import CoreData
 
-class StartedRecipeController: UIViewController, NSFetchedResultsControllerDelegate {
+class StartedRecipeController: UIViewController, NSFetchedResultsControllerDelegate, StartedRecipeCellDelegate {
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var viewTitle: UILabel!
@@ -85,6 +86,20 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         
         tableView.reloadData()
     }
+    
+    func deleteCell(withRecipe recipe: inout ClippedRecipe) {
+        
+        recipe.isInProgress.toggle()
+        for currentIngredient in recipe.extendedIngredients ?? [] {
+            currentIngredient.isChecked = false
+        }
+        
+        for currentStep in recipe.steps ?? [] {
+            currentStep.isChecked = false
+        }
+        DataManager.shared.updateRecipe(recipe)
+    
+    }
 }
 
 extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
@@ -98,7 +113,7 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StartedRecipeCell", for: indexPath) as! StartedRecipeCell
         let currentRecipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
         cell.recipe = currentRecipe
-      
+        cell.delegate = self
         return cell
     }
 
@@ -114,21 +129,6 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
         var cellHeight:CGFloat = CGFloat()
         cellHeight = floor(UIScreen.main.bounds.width * 0.4)
         return cellHeight
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCell.EditingStyle.delete {
-            let recipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
-                recipe.isInProgress.toggle()
-                for currentIngredient in recipe.extendedIngredients ?? [] {
-                    currentIngredient.isChecked = false
-                }
-                
-                for currentStep in recipe.steps ?? [] {
-                    currentStep.isChecked = false
-                }
-            DataManager.shared.updateRecipe(recipe)
-        }
     }
 }
 

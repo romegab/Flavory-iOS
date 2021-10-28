@@ -57,7 +57,11 @@
                             <constraint firstItem="qmF-Pg-opd" firstAttribute="top" secondItem="iXh-1T-T88" secondAttribute="top" id="tYO-of-Hk3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FLAVORY" id="nxN-J1-M6g"/>
+                    <navigationItem key="navigationItem" title="FLAVORY" id="nxN-J1-M6g">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="OeW-bf-qTJ">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="FZJ-pn-sWI" id="jqu-7o-3m2"/>
                         <outlet property="viewTitle" destination="pma-Zt-DYk" id="QMC-Rv-Xtr"/>

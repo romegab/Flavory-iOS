@@ -4,10 +4,9 @@ import CoreData
 
 class StartedRecipeController: UIViewController, NSFetchedResultsControllerDelegate, StartedRecipeCellDelegate {
     
-    
-    @IBOutlet weak var editButton: UIBarButtonItem!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var viewTitle: UILabel!
+    @IBOutlet fileprivate weak var editButton: UIBarButtonItem!
+    @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet fileprivate weak var viewTitle: UILabel!
     
     var selectedRecipe: ClippedRecipe?
     private var isInEditingMood: Bool = false {
@@ -18,7 +17,7 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
     }
     
     private lazy var fetchedResultsController: NSFetchedResultsController<RecipeModel> = {
-
+        
         let fetchRequest: NSFetchRequest<RecipeModel> = RecipeModel.fetchRequest()
         
         fetchRequest.predicate = NSPredicate(
@@ -27,25 +26,25 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         
         let sortDescriptor = NSSortDescriptor(key: "progress", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
-
+        
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
-
+        
         return fetchedResultsController
     }()
     
     override func viewDidLoad() {
-        
         fetchedResultsController.delegate = self
         
         tableView.separatorColor = UIColor.clear
-                
+        
         let recipeCellNib = UINib(nibName: "StartedRecipeCell", bundle: nil)
         tableView.register(recipeCellNib, forCellReuseIdentifier: "StartedRecipeCell")
         
         do {
-          try fetchedResultsController.performFetch()
+            try fetchedResultsController.performFetch()
+            
         } catch let error as NSError {
-          print("Fetching error: \(error), \(error.userInfo)")
+            print("Fetching error: \(error), \(error.userInfo)")
         }
         
         tableView.delegate = self
@@ -62,7 +61,6 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        
         isInEditingMood = false
         
         if segue.destination is RecipePreviewController {
@@ -75,14 +73,11 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         }
     }
     
-    func controllerDidChangeContent(_ controller:
-      NSFetchedResultsController<NSFetchRequestResult>) {
-        
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.reloadData()
     }
     
     func deleteCell(withRecipe recipe: inout ClippedRecipe) {
-        
         recipe.isInProgress.toggle()
         for currentIngredient in recipe.extendedIngredients ?? [] {
             currentIngredient.isChecked = false
@@ -92,32 +87,28 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
             currentStep.isChecked = false
         }
         DataManager.shared.updateRecipe(recipe)
-    
     }
+    
     @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
         isInEditingMood.toggle()
     }
     
     private func configureEditButton(){
-        
         if isInEditingMood {
             editButton.title = "Done"
         } else {
             editButton.title = "Edit"
         }
-        
     }
-    
 }
 
 extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
     
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return fetchedResultsController.fetchedObjects?.count ?? 0
-  }
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
         let cell = tableView.dequeueReusableCell(withIdentifier: "StartedRecipeCell", for: indexPath) as! StartedRecipeCell
         let currentRecipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
         cell.recipe = currentRecipe
@@ -127,11 +118,10 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
         tableView.deselectRow(at: indexPath, animated: true)
-
+        
         selectedRecipe = ClippedRecipe(loadedRecipe: fetchedResultsController.object(at: indexPath))
         performSegue(withIdentifier: "presentRecipePreview", sender: nil)
     }

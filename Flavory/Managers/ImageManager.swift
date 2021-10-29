@@ -30,7 +30,7 @@ class ImageManager{
         }
     }
     
-    func downlaodImage(url: URL, completionHandler: @escaping (Result<UIImage, NetworkError>) -> Void){
+    private func downlaodImage(url: URL, completionHandler: @escaping (Result<UIImage, NetworkError>) -> Void){
         let session = URLSession.shared
         session.downloadTask(with: url, completionHandler: { url, response, error in
             if error == nil, let url = url,

@@ -8,18 +8,18 @@
 import UIKit
 
 class RecipesFlowLayout: UICollectionViewFlowLayout {
-
-    let standartItemAlpha: CGFloat = 0.6
-    let standartItemScale: CGFloat = 0.9
     
-    var isSetup = false
+    private let standartItemAlpha: CGFloat = 0.6
+    private let standartItemScale: CGFloat = 0.9
+    
+    private var isSetup = false
     
     override func prepare() {
-      super.prepare()
-      if isSetup == false {
-        setupCollectionView()
-        isSetup = true
-      }
+        super.prepare()
+        if isSetup == false {
+            setupCollectionView()
+            isSetup = true
+        }
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
@@ -32,8 +32,6 @@ class RecipesFlowLayout: UICollectionViewFlowLayout {
             changeLayoutAttributes(itemAttributesCopy)
             attributesCopy.append(itemAttributesCopy)
         }
-        
-        
         return attributesCopy
     }
     
@@ -41,8 +39,8 @@ class RecipesFlowLayout: UICollectionViewFlowLayout {
         return true
     }
     
-    func changeLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes){
-        let collectionCenter = collectionView!.frame.size.width/2
+    func changeLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes) {
+        let collectionCenter = collectionView!.frame.size.width / 2
         let offset = collectionView!.contentOffset.x
         let normalizedCenter = attributes.center.x - offset
         
@@ -58,27 +56,25 @@ class RecipesFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-      
-      let layoutAttributes = self.layoutAttributesForElements(in: collectionView!.bounds)
-      
-      let center = collectionView!.bounds.size.width / 2
-      let proposedContentOffsetCenterOrigin = proposedContentOffset.x + center
-      
-      let closest = layoutAttributes!.sorted { abs($0.center.x - proposedContentOffsetCenterOrigin) < abs($1.center.x - proposedContentOffsetCenterOrigin) }.first ?? UICollectionViewLayoutAttributes()
-      
-      let targetContentOffset = CGPoint(x:floor(closest.center.x - center), y: proposedContentOffset.y)
-      
-      return targetContentOffset
+        let layoutAttributes = self.layoutAttributesForElements(in: collectionView!.bounds)
+        
+        let center = collectionView!.bounds.size.width / 2
+        let proposedContentOffsetCenterOrigin = proposedContentOffset.x + center
+        
+        let closest = layoutAttributes!.sorted { abs($0.center.x - proposedContentOffsetCenterOrigin) < abs($1.center.x - proposedContentOffsetCenterOrigin) }.first ?? UICollectionViewLayoutAttributes()
+        
+        let targetContentOffset = CGPoint(x:floor(closest.center.x - center), y: proposedContentOffset.y)
+        
+        return targetContentOffset
     }
-
+    
     
     func setupCollectionView() {
         self.collectionView!.decelerationRate = UIScrollView.DecelerationRate.fast
-     
+        
         let collectionSize = collectionView!.bounds.size
         let xInset = (collectionSize.width - self.itemSize.width) / 2
-      
+        
         self.sectionInset = UIEdgeInsets(top: 0, left: xInset, bottom: 0, right: xInset)
-      
     }
 }

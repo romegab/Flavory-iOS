@@ -8,17 +8,16 @@
 import UIKit
 
 class RecipeCookingController: UIViewController {
-    var recipe: ClippedRecipe?
     
+    @IBOutlet fileprivate weak var recipeTitleLable: UILabel!
+    @IBOutlet fileprivate weak var segmentedControl: UISegmentedControl!
+    @IBOutlet fileprivate weak var tableView: UITableView!
+    @IBOutlet fileprivate weak var readyButton: UIButton!
+    
+    var recipe: ClippedRecipe?
     private var currentSegmentIndex = 1
-   
-    @IBOutlet weak var recipeTitleLable: UILabel!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var readyButton: UIButton!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         recipeTitleLable.text = recipe?.title
@@ -26,12 +25,10 @@ class RecipeCookingController: UIViewController {
         readyButton.layer.cornerRadius = 15
         
         let ingredientCellNib = UINib(nibName: "IngredientCell", bundle: nil)
-        tableView.register(ingredientCellNib, forCellReuseIdentifier:
-                                    "IngredientCell")
+        tableView.register(ingredientCellNib, forCellReuseIdentifier: "IngredientCell")
         
         let cookingStepCellNib = UINib(nibName: "CookingStepCell", bundle: nil)
-        tableView.register(cookingStepCellNib, forCellReuseIdentifier:
-                                    "CookingStepCell")
+        tableView.register(cookingStepCellNib, forCellReuseIdentifier: "CookingStepCell")
         
         tableView.reloadData()
     }
@@ -50,7 +47,6 @@ class RecipeCookingController: UIViewController {
         
         tableView.reloadData()
     }
-    
     
     @IBAction func readyButtonClicked(_ sender: Any) {
         if let recipe = recipe {
@@ -75,36 +71,34 @@ class RecipeCookingController: UIViewController {
 
 // MARK: - Table View Delegate
 extension RecipeCookingController: UITableViewDelegate, UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-      if currentSegmentIndex == 1{
-          return recipe?.extendedIngredients?.count ?? 0
-      } else {
-          return recipe?.steps?.count ?? 0
-      }
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-      
-      if currentSegmentIndex == 1 {
-          let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as! IngredientCell
-          let currentIngredient = recipe?.extendedIngredients?[indexPath.row]
-          cell.ingredient = currentIngredient
-          return cell
-      }
-      else {
-          let cell = tableView.dequeueReusableCell(withIdentifier: "CookingStepCell", for: indexPath) as! CookingStepCell
-          let currentStep = recipe?.steps?[indexPath.row]
-          cell.cookingStep = currentStep
-          return cell
-      }
-  }
-  
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      if var cell: Checkable = tableView.cellForRow(at: indexPath) as? Checkable{
-          cell.isChecked.toggle()
-          tableView.deselectRow(at: indexPath, animated: true)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if currentSegmentIndex == 1{
+            return recipe?.extendedIngredients?.count ?? 0
+        } else {
+            return recipe?.steps?.count ?? 0
+        }
     }
-  }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if currentSegmentIndex == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath) as! IngredientCell
+            let currentIngredient = recipe?.extendedIngredients?[indexPath.row]
+            cell.ingredient = currentIngredient
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CookingStepCell", for: indexPath) as! CookingStepCell
+            let currentStep = recipe?.steps?[indexPath.row]
+            cell.cookingStep = currentStep
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if var cell: Checkable = tableView.cellForRow(at: indexPath) as? Checkable{
+            cell.isChecked.toggle()
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
 }

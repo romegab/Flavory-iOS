@@ -8,27 +8,21 @@
 import UIKit
 
 class RecipePreviewController: UIViewController {
+    
+    @IBOutlet fileprivate weak var closeButton: UIButton!
+    @IBOutlet fileprivate weak var recipeImage: UIImageView!
+    @IBOutlet fileprivate weak var recipeTitle: UILabel!
+    @IBOutlet fileprivate weak var recipeCategory: UILabel!
+    @IBOutlet fileprivate weak var recipeDescription: UILabel!
+    
+    @IBOutlet fileprivate weak var recipeFat: UILabel!
+    @IBOutlet fileprivate weak var recipeProtein: UILabel!
+    @IBOutlet fileprivate weak var recipeKcal: UILabel!
+    @IBOutlet fileprivate weak var recipePrice: UILabel!
+    @IBOutlet fileprivate weak var startCoookingButotn: UIButton!
+    
     private var imageRequest: Cancellable?
-    
-    var recipe: ClippedRecipe? {
-        didSet {
-            print(recipe?.recipePrice)
-        }
-    }
-
-    
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var recipeCategory: UILabel!
-    @IBOutlet weak var recipeDescription: UILabel!
-    
-    @IBOutlet weak var recipeFat: UILabel!
-    @IBOutlet weak var recipeProtein: UILabel!
-    @IBOutlet weak var recipeKcal: UILabel!
-    @IBOutlet weak var recipePrice: UILabel!
-    @IBOutlet weak var startCoookingButotn: UIButton!
-    @IBOutlet weak var likeButton: UIButton!
+    var recipe: ClippedRecipe?
     
     override func viewDidLoad() {
         
@@ -39,13 +33,12 @@ class RecipePreviewController: UIViewController {
         
         //set button appear settings
         startCoookingButotn.layer.cornerRadius = 15
-        //likeButton.layer.cornerRadius = 15
     }
     
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
-        
+    
     private func updateUI() {
         if let recipe = recipe{
             if recipe.isInProgress {
@@ -70,8 +63,7 @@ class RecipePreviewController: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is RecipeCookingController {
             let vc = segue.destination as? RecipeCookingController
             vc?.recipe = recipe
@@ -107,7 +99,6 @@ class RecipePreviewController: UIViewController {
             recipeProtein.text = String(recipe.recipeDetails.protein ?? 0)
             recipeFat.text = String(recipe.recipeDetails.fat ?? 0)
         }
-        
     }
 }
 

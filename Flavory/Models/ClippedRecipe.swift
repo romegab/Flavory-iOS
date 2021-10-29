@@ -35,18 +35,17 @@ class ClippedRecipe: Codable {
     
     var largeImageURL: String {
         get {
-        return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
+            return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
         }
     }
     var smallImageURL: String {
         get {
-        return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
+            return "https://spoonacular.com/recipeImages/\(id)-636x393.jpg"
         }
     }
     
     var recipePrice: Double{
         get{
-            
             if let pricePerServing = pricePerServing{
                 if let servings = servings{
                     return Double(  pricePerServing * Double( servings ) / 100.0)
@@ -59,14 +58,13 @@ class ClippedRecipe: Codable {
     
     var steps: [RecipeStep]? {
         get {
-            if let analyzedInstructions = analyzedInstructions{
+            if let analyzedInstructions = analyzedInstructions, analyzedInstructions.count > 0{
                 return analyzedInstructions[0].steps
             } else {
                 return nil
             }
         }
         set {
-            
         }
     }
     
@@ -79,7 +77,6 @@ class ClippedRecipe: Codable {
     var extendedIngredients: [RecipeIngredient]?
     private var analyzedInstructions: [AnalyzedInstruction]?
     var isInProgress: Bool = false
-    
     
     private enum CodingKeys: String, CodingKey {
         case title
@@ -149,8 +146,5 @@ class ClippedRecipe: Codable {
             let extractedIngredients: [RecipeIngredient] = extractIngrediets(rawIngredients: rawIngredients)
             self.extendedIngredients = extractedIngredients
         }
-        
     }
-    
-    
 }

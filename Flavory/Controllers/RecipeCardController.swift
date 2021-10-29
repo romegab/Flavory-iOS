@@ -8,22 +8,21 @@
 import UIKit
 
 class RecipeCardController: UICollectionViewCell {
-
+    
+    @IBOutlet fileprivate weak var recipeImage: UIImageView!
+    @IBOutlet fileprivate weak var recipeTitle: UILabel!
+    @IBOutlet fileprivate weak var background: UIView!
+    @IBOutlet fileprivate weak var recipePreparationTime: UILabel!
+    @IBOutlet fileprivate weak var recipeServings: UILabel!
+    
     private var imageRequest: Cancellable?
     
-    var recipe: ClippedRecipe?{
+    var recipe: ClippedRecipe? {
         didSet{
             updateUI()
         }
     }
     var downloadTask: URLSessionDownloadTask?
-    
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var background: UIView!
-    @IBOutlet weak var recipePreparationTime: UILabel!
-    @IBOutlet weak var detailsView: UIView!
-    @IBOutlet weak var recipeServings: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,18 +39,16 @@ class RecipeCardController: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        //recipeImage.image = nil
-        
         imageRequest?.cancel()
     }
     
-    func updateUI(){
+    func updateUI() {
         
         recipeTitle.adjustsFontSizeToFitWidth = true
         recipePreparationTime.adjustsFontSizeToFitWidth = true
         recipeServings.adjustsFontSizeToFitWidth = true
         
-        if let recipe = recipe{
+        if let recipe = recipe {
             
             recipeTitle.text = recipe.title
             recipePreparationTime.text = "\(recipe.readyInMinutes ?? 0) min"
@@ -60,7 +57,7 @@ class RecipeCardController: UICollectionViewCell {
             
             imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
                 
-                switch result{
+                switch result {
                 case .success(let image):
                     self?.recipeImage.image = image
                 case .failure(let error):

@@ -13,10 +13,10 @@ class IngredientCell: UITableViewCell, Checkable {
     
     private var imageRequest: Cancellable?
     
-    @IBOutlet weak var ingredientImage: UIImageView!
-    @IBOutlet weak var ingredientName: UILabel!
-    @IBOutlet weak var ingredientDescription: UILabel!
-    @IBOutlet weak var checkMark: UILabel!
+    @IBOutlet fileprivate weak var ingredientImage: UIImageView!
+    @IBOutlet fileprivate weak var ingredientName: UILabel!
+    @IBOutlet fileprivate weak var ingredientDescription: UILabel!
+    @IBOutlet fileprivate weak var checkMark: UILabel!
     
     var ingredient: RecipeIngredient? {
         didSet {
@@ -24,15 +24,15 @@ class IngredientCell: UITableViewCell, Checkable {
             configureCheckmark()
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

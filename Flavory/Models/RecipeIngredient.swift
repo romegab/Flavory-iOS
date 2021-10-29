@@ -29,7 +29,6 @@ class RecipeIngredient: Codable {
     }
     
     init (from ingredient: Ingredient) {
-
         self.id = ingredient.id
         self.name = ingredient.name
         self.original = ingredient.ingredientDescription

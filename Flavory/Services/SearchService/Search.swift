@@ -12,10 +12,9 @@ enum NetworkError: Error {
 }
 
 class Search {
+    
     private var isRequestFinished = true
-    var searchResults: [ClippedRecipe]? = [ClippedRecipe]()
-    var dataTask: URLSessionDataTask?
-    let queue = DispatchQueue.global()
+    private var dataTask: URLSessionDataTask?
     
     private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
     
@@ -31,7 +30,6 @@ class Search {
         performRequest(with: url) { result in
             switch result{
             case .success(let recipies):
-                self.searchResults = recipies
                 DispatchQueue.main.async{
                     completionHandler(.success(recipies))
                 }
@@ -45,13 +43,11 @@ class Search {
     }
     
     func performRecipeSearch (_ recipe: String, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void){
-        
         let url:URL = searchURL(searchText: recipe)
         
         performRequest(with: url) { result in
             switch result{
             case .success(let recipies):
-                self.searchResults = recipies
                 DispatchQueue.main.async{
                     completionHandler(.success(recipies))
                 }
@@ -65,7 +61,6 @@ class Search {
     }
     
     func performSearchByID (_ id: String, completionHandler: @escaping (Result<ClippedRecipe, NetworkError>) -> Void){
-        
         let url:URL = idSearchURL(id)
         
         isRequestFinished = false
@@ -78,8 +73,8 @@ class Search {
                     self.isRequestFinished = true
                     completionHandler(.failure(.badConnection))
                 }
-                } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
-                    self.isRequestFinished = true
+            } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                self.isRequestFinished = true
                 if let data = data {
                     completionHandler(.success(SearchResultParser.parseCertainRecipe(data: data)!))
                 }
@@ -88,28 +83,26 @@ class Search {
     }
     
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
-        
         isRequestFinished = false
         let session = URLSession.shared
         
         session.dataTask(with: url) {data, response, error in
-            
             if let error = error as NSError?, error.code == -999{
                 DispatchQueue.main.async {
                     self.isRequestFinished = true
                     completionHandler(.failure(.badConnection))
                 }
-                } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
-                    self.isRequestFinished = true
+            } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                self.isRequestFinished = true
                 if let data = data {
                     
-
+                    
                     completionHandler(.success(SearchResultParser.parse(data: data)))
                 }
             }
         }.resume()
     }
-
+    
     private func randomSearchURL(_ count: Int) -> URL {
         let urlString = "https://api.spoonacular.com/recipes/random?number=\(count)&apiKey=\(apiKey)"
         let url = URL(string: urlString)
@@ -128,5 +121,5 @@ class Search {
         let url = URL(string: urlString)
         return url!
     }
-
+    
 }

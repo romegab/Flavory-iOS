@@ -40,7 +40,7 @@ class RecipeCardController: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        recipeImage.image = nil
+        //recipeImage.image = nil
         
         imageRequest?.cancel()
     }
@@ -57,8 +57,6 @@ class RecipeCardController: UICollectionViewCell {
             recipePreparationTime.text = "\(recipe.readyInMinutes ?? 0) min"
             recipeServings.text = "\(recipe.servings ?? 0) servs"
             recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
-            
-            recipeImage.image = UIImage(named: "Placeholder")
             
             imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
                 

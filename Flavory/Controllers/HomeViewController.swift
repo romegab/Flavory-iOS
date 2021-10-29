@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
     var recipeInProgress: RecipeModel?
     var carouselRecipes = [ClippedRecipe]()
     var searchResult = [ClippedRecipe]()
+    private var carouselDidLoad = false
     
     
     override func viewDidLoad() {
@@ -88,6 +89,7 @@ class HomeViewController: UIViewController {
         search.performRandomSearch(7) { [weak self] result in
             switch result{
             case .success(let recipes):
+                self?.carouselDidLoad = true
                 let indexPath = IndexPath(item: 4, section: 0)
                 self?.carouselRecipes = recipes
                 DispatchQueue.main.async {
@@ -139,29 +141,34 @@ extension HomeViewController: UICollectionViewDataSource{
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return carouselRecipes.count
+        if carouselRecipes.count > 0 {
+            return carouselRecipes.count
+        } else {
+            return 3
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collecitonView.dequeueReusableCell(withReuseIdentifier: "RecipeCard", for: indexPath) as! RecipeCardController
-        let searchResult = carouselRecipes[indexPath.row]
-        
-        cell.recipe = searchResult
+        if carouselDidLoad{
+            let searchResult = carouselRecipes[indexPath.row]
+            cell.recipe = searchResult
+        }
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedRecipe = carouselRecipes[indexPath.row]
+        if carouselDidLoad {
+            selectedRecipe = carouselRecipes[indexPath.row]
         
-        let loadedRecipe: RecipeModel? = DataManager.shared.getRecipeByID(id: selectedRecipe?.id ?? -1)
-          if let loadedRecipe = loadedRecipe{
-              selectedRecipe = ClippedRecipe(loadedRecipe: loadedRecipe)
+            let loadedRecipe: RecipeModel? = DataManager.shared.getRecipeByID(id: selectedRecipe?.id ?? -1)
+            if let loadedRecipe = loadedRecipe{
+                selectedRecipe = ClippedRecipe(loadedRecipe: loadedRecipe)
+            }
+            performSegue(withIdentifier: "showRecipePreview", sender: nil)
         }
-        
-        performSegue(withIdentifier: "showRecipePreview", sender: nil)
     }
 }
 
@@ -173,6 +180,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension HomeViewController: UISearchResultsUpdating {
+    
   func updateSearchResults(for searchController: UISearchController) {
       
     search.performRecipeSearch(searchController.searchBar.text ?? "") { [weak self] result in

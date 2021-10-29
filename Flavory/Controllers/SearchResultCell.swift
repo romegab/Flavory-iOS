@@ -27,7 +27,7 @@ class SearchResultCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
-        recipeImage.image = nil
+        //recipeImage.image = nil
         
         imageRequest?.cancel()
     }

@@ -32,6 +32,7 @@ class ImageService{
                      completionHandler(.success(image))
                  case .failure(let error):
                      print("fire from get image")
+                     print("???????????\(error)")
                      print(error.localizedDescription)
                      completionHandler(.failure(.badConnection))
                  }
@@ -53,6 +54,7 @@ class ImageService{
             }
             if error != nil {
                 print("fire from download image")
+                print("???????????\(error)")
                 completionHandler(.failure(.badConnection))
             }
         })

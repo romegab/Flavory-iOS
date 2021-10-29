@@ -22,7 +22,7 @@
                         <rect key="frame" x="10" y="5" width="445" height="129"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tfq-zx-fXz">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="Tfq-zx-fXz">
                         <rect key="frame" x="10" y="5" width="186" height="129"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWh-gR-sjQ">
@@ -104,6 +104,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="DefaultRecipeImage" width="185.5" height="123.5"/>
         <namedColor name="orangeYellow">
             <color red="1" green="0.67799997329711914" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

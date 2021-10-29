@@ -22,13 +22,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="596" height="715"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-aH-TAJ">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-aH-TAJ">
                         <rect key="frame" x="0.0" y="0.0" width="596" height="357.5"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jY3-58-2S1">
                         <rect key="frame" x="0.0" y="357.5" width="596" height="317.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Something awful for eating" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKX-uP-GLQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recipe title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKX-uP-GLQ">
                                 <rect key="frame" x="10" y="10" width="576" height="307.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <color key="textColor" systemColor="systemBackgroundColor"/>
@@ -137,6 +137,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="DefaultRecipeImage" width="185.5" height="123.5"/>
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="fork.knife.circle" catalog="system" width="128" height="121"/>
         <namedColor name="orangeYellow">

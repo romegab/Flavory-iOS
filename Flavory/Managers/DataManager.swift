@@ -12,13 +12,13 @@ import CoreData
 class DataManager {
     
     static let shared = DataManager()
-
-    private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     func getRecipeByID(id: Int) -> RecipeModel? {
         let recipeFetchRequest: NSFetchRequest<RecipeModel>
         recipeFetchRequest = RecipeModel.fetchRequest()
-
+        
         recipeFetchRequest.predicate = NSPredicate(
             format: "id = %id", id
         )
@@ -35,6 +35,26 @@ class DataManager {
         return nil
     }
     
+    func getStartedRecipes() -> [RecipeModel]? {
+        let recipeFetchRequest: NSFetchRequest<RecipeModel>
+        recipeFetchRequest = RecipeModel.fetchRequest()
+        
+        recipeFetchRequest.predicate = NSPredicate(
+            format: "isInProgress = %isInProgress", true
+        )
+        
+        do {
+            let loadedRecipes = try context.fetch(recipeFetchRequest)
+            
+            return loadedRecipes
+        }
+        catch {
+            print("get started recipes is not wokring properly")
+        }
+        
+        return nil
+    }
+    
     func saveRecipe(_ recipe: ClippedRecipe) {
         let newRecipe = RecipeModel(context: self.context)
         
@@ -42,10 +62,11 @@ class DataManager {
         newRecipe.imageURL = recipe.largeImageURL
         newRecipe.title = recipe.title
         newRecipe.preparationTime = recipe.readyInMinutes ?? 0
-        newRecipe.price = recipe.recipePrice
+        newRecipe.price = recipe.pricePerServing ?? 0
         newRecipe.detail = saveDetail(detail: recipe.recipeDetails)
         newRecipe.servings = recipe.servings ?? 0
         newRecipe.isInProgress = recipe.isInProgress
+        newRecipe.progress = Int(recipe.progress)
         
         if let ingredients = recipe.extendedIngredients {
             for currentIngredient in ingredients{
@@ -91,7 +112,6 @@ class DataManager {
                     ingredientToChange.isChecked = currentIngredient.isChecked
                 }
             }
-            
             try self.context.save()
         }
         catch {
@@ -102,13 +122,13 @@ class DataManager {
     private func updateSteps(_ recipe: ClippedRecipe, _ loadedRecipe: RecipeModel) {
         do {
             let loadedSteps = loadedRecipe.step ?? [Step]()
-            
-            for currentStep in recipe.steps! {
-                if let stepToChange = loadedSteps.first(where: { $0.step == currentStep.step}) {
-                    stepToChange.isChecked = currentStep.isChecked
+            if let steps = recipe.steps{
+                for currentStep in steps {
+                    if let stepToChange = loadedSteps.first(where: { $0.step == currentStep.step}) {
+                        stepToChange.isChecked = currentStep.isChecked
+                    }
                 }
             }
-            
             try self.context.save()
         }
         catch {
@@ -116,7 +136,7 @@ class DataManager {
         }
     }
     
-    private func saveIngredient(ingredient: RecipeIngredient) -> Ingredient{
+    private func saveIngredient(ingredient: RecipeIngredient) -> Ingredient {
         let newIngredient = Ingredient(context: self.context)
         
         newIngredient.name = ingredient.name
@@ -135,7 +155,7 @@ class DataManager {
         return newIngredient
     }
     
-    private func saveStep(step: RecipeStep) -> Step{
+    private func saveStep(step: RecipeStep) -> Step {
         let newStep = Step(context: self.context)
         
         newStep.number = step.number
@@ -152,7 +172,7 @@ class DataManager {
         return newStep
     }
     
-    private func saveDetail(detail: RecipeDetails) -> Detail{
+    private func saveDetail(detail: RecipeDetails) -> Detail {
         let newDetail = Detail(context: self.context)
         
         newDetail.calories = detail.calories ?? 0
@@ -169,5 +189,4 @@ class DataManager {
         
         return newDetail
     }
-    
 }

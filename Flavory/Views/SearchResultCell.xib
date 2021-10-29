@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-wF-7C4">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="DefaultRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-wF-7C4">
                         <rect key="frame" x="10" y="10" width="128" height="93"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgB-wt-iwJ">
@@ -46,4 +46,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="61.941964285714285"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="DefaultRecipeImage" width="185.5" height="123.5"/>
+    </resources>
 </document>

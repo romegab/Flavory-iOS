@@ -46,7 +46,6 @@ class RecipeDetails{
     }
     
     private func extractSynthesizedDescription(recipeSummary: String) -> String {
-        
         var sentences: [String] = []
         recipeSummary.enumerateSubstrings(in: recipeSummary.startIndex..., options: .bySentences) { (string, range, enclosingRamge, stop) in
             if sentences.count < 4{

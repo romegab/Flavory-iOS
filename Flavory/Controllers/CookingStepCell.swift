@@ -9,35 +9,30 @@ import UIKit
 
 class CookingStepCell: UITableViewCell, Checkable {
     
-    var isChecked: Bool = false
-    {
+    var isChecked: Bool = false {
         didSet {
             cookingStep?.isChecked.toggle()
             updateUI()
         }
     }
     
-    @IBOutlet weak var stepDescription: UILabel!
-    @IBOutlet weak var checkMark: UILabel!
+    @IBOutlet fileprivate weak var stepDescription: UILabel!
+    @IBOutlet fileprivate weak var checkMark: UILabel!
     
     var cookingStep: RecipeStep? {
-    
-    didSet {
-        if cookingStep != nil {
-            updateUI()
+        didSet {
+            if cookingStep != nil {
+                updateUI()
+            }
         }
     }
-}
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     private func updateUI() {
@@ -65,8 +60,7 @@ class CookingStepCell: UITableViewCell, Checkable {
         }
     }
     
-    private func addBackground(color: UIColor)
-    {
+    private func addBackground(color: UIColor) {
         self.backgroundColor = color.withAlphaComponent(0.5)
     }
 }

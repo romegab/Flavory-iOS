@@ -18,26 +18,23 @@ class ImageService{
     }
     
     func getImage( rawUrl: String, completionHandler: @escaping (Result<UIImage, NetworkError>) -> Void) -> Cancellable?{
-        
         let url = URL(string: rawUrl)
-         if let cached = cache[rawUrl] {
-             completionHandler(.success(cached))
-             print("image loaded from cache \(rawUrl)")
-         }
-         else {
-             let task = downlaodImage(url: url!) { result in
-                 switch result{
-                 case .success(let image):
-                     self.cache.insert(image, forKey: rawUrl)
-                     completionHandler(.success(image))
-                 case .failure(let error):
-                     print("fire from get image")
-                     print(error.localizedDescription)
-                     completionHandler(.failure(.badConnection))
-                 }
-             }
-             return task
-         }
+        if let cached = cache[rawUrl] {
+            completionHandler(.success(cached))
+        }
+        else {
+            let task = downlaodImage(url: url!) { result in
+                switch result{
+                case .success(let image):
+                    self.cache.insert(image, forKey: rawUrl)
+                    completionHandler(.success(image))
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completionHandler(.failure(.badConnection))
+                }
+            }
+            return task
+        }
         return nil
     }
     
@@ -52,7 +49,6 @@ class ImageService{
                 }
             }
             if error != nil {
-                print("fire from download image")
                 completionHandler(.failure(.badConnection))
             }
         })

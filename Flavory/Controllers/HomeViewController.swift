@@ -28,7 +28,6 @@ class HomeViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
@@ -128,6 +127,11 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func getDailyMenuClicked(_ sender: UIButton) {
+        performSegue(withIdentifier: "getDailyMenu", sender: nil)
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDataSource {

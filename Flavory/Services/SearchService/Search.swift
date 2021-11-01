@@ -82,6 +82,28 @@ class Search {
         }.resume()
     }
     
+    func performMenuSearch (completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void){
+        let url:URL = menuURL()
+        
+        isRequestFinished = false
+        let session = URLSession.shared
+        
+        session.dataTask(with: url) {data, response, error in
+            
+            if let error = error as NSError?, error.code == -999{
+                DispatchQueue.main.async {
+                    self.isRequestFinished = true
+                    completionHandler(.failure(.badConnection))
+                }
+            } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                self.isRequestFinished = true
+                if let data = data {
+                    completionHandler(.success(SearchResultParser.parseDailyMenu(data: data)))
+                }
+            }
+        }.resume()
+    }
+    
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         isRequestFinished = false
         let session = URLSession.shared
@@ -118,6 +140,12 @@ class Search {
     private func searchURL(searchText: String) -> URL {
         let encodedText = searchText.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         let urlString = "https://api.spoonacular.com/recipes/complexSearch?query=\(encodedText)&apiKey=\(apiKey)"
+        let url = URL(string: urlString)
+        return url!
+    }
+    
+    private func menuURL() -> URL {
+        let urlString = "https://api.spoonacular.com/mealplanner/generate?timeFrame=day&apiKey=\(apiKey)"
         let url = URL(string: urlString)
         return url!
     }

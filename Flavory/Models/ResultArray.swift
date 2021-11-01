@@ -10,9 +10,11 @@ import Foundation
 class ResultArray: Codable {
     let recipes: [ClippedRecipe]?
     let results: [ClippedRecipe]?
+    let meals: [ClippedRecipe]?
     
     private enum CodingKeys: String, CodingKey {
         case recipes
         case results
+        case meals
     }
 }

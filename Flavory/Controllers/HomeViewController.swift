@@ -30,6 +30,14 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let applicationDocumentsDirectory: URL = {
+                  let paths = FileManager.default.urls(for: .documentDirectory,
+                                                        in: .userDomainMask)
+                  return paths[0]
+                }()
+                
+                print(applicationDocumentsDirectory)
+        
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
         

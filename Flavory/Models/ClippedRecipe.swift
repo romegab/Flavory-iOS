@@ -89,7 +89,7 @@ class ClippedRecipe: Codable {
         case analyzedInstructions
     }
     
-    func extractSteps(rawSteps: [Step]) -> [RecipeStep]
+    private func extractSteps(rawSteps: [Step]) -> [RecipeStep]
     {
         var result: [RecipeStep] = [RecipeStep]()
         
@@ -102,7 +102,7 @@ class ClippedRecipe: Codable {
         return result
     }
     
-    func extractIngrediets(rawIngredients: [Ingredient]) -> [RecipeIngredient]
+    private func extractIngrediets(rawIngredients: [Ingredient]) -> [RecipeIngredient]
     {
         var result: [RecipeIngredient] = [RecipeIngredient]()
         

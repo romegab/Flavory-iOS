@@ -16,7 +16,7 @@ class Search {
     private var isRequestFinished = true
     private var dataTask: URLSessionDataTask?
     
-    private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
+    private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
         if !isRequestFinished{
@@ -82,7 +82,7 @@ class Search {
         }.resume()
     }
     
-    func performMenuSearch (completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void){
+    func performMenuSearch (completionHandler: @escaping (Result<([ClippedRecipe], MenuNutrients), NetworkError>) -> Void){
         let url:URL = menuURL()
         
         isRequestFinished = false

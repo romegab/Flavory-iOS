@@ -52,7 +52,7 @@
                                                 <rect key="frame" x="0.0" y="285" width="355" height="277"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="P4o-a1-cXI">
-                                                        <rect key="frame" x="30" y="43.5" width="295" height="69.5"/>
+                                                        <rect key="frame" x="30" y="48.5" width="295" height="69.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QnZ-B6-cud">
                                                                 <rect key="frame" x="0.0" y="0.0" width="146.5" height="69.5"/>
@@ -61,7 +61,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="146.5" height="52"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uc0-yL-oiv">
-                                                                        <rect key="frame" x="0.0" y="57" width="146.5" height="12.5"/>
+                                                                        <rect key="frame" x="0.0" y="55" width="146.5" height="14.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                                                     <constraint firstItem="Uc0-yL-oiv" firstAttribute="leading" secondItem="QnZ-B6-cud" secondAttribute="leading" id="fTF-fZ-7ub"/>
                                                                     <constraint firstItem="S6E-9J-GQe" firstAttribute="leading" secondItem="QnZ-B6-cud" secondAttribute="leading" id="ip5-hf-PRd"/>
                                                                     <constraint firstAttribute="trailing" secondItem="Uc0-yL-oiv" secondAttribute="trailing" id="kda-d9-8gw"/>
-                                                                    <constraint firstItem="Uc0-yL-oiv" firstAttribute="top" secondItem="S6E-9J-GQe" secondAttribute="bottom" constant="5" id="lcJ-at-Z7g"/>
+                                                                    <constraint firstItem="Uc0-yL-oiv" firstAttribute="top" secondItem="S6E-9J-GQe" secondAttribute="bottom" constant="3" id="lcJ-at-Z7g"/>
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p4X-8m-5yg">
@@ -86,7 +86,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="146.5" height="52"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6M-3z-xwd">
-                                                                        <rect key="frame" x="0.0" y="57" width="146.5" height="12.5"/>
+                                                                        <rect key="frame" x="0.0" y="55" width="146.5" height="14.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -101,13 +101,13 @@
                                                                     <constraint firstItem="Ddr-Vb-HND" firstAttribute="top" secondItem="p4X-8m-5yg" secondAttribute="top" id="ZdK-3K-m7C"/>
                                                                     <constraint firstItem="Ddr-Vb-HND" firstAttribute="height" secondItem="p4X-8m-5yg" secondAttribute="height" multiplier="0.75" id="bkl-uN-sgB"/>
                                                                     <constraint firstAttribute="trailing" secondItem="D6M-3z-xwd" secondAttribute="trailing" id="puK-cP-WoK"/>
-                                                                    <constraint firstItem="D6M-3z-xwd" firstAttribute="top" secondItem="Ddr-Vb-HND" secondAttribute="bottom" constant="5" id="vNf-Gs-TY2"/>
+                                                                    <constraint firstItem="D6M-3z-xwd" firstAttribute="top" secondItem="Ddr-Vb-HND" secondAttribute="bottom" constant="3" id="vNf-Gs-TY2"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VqW-BK-oI8">
-                                                        <rect key="frame" x="30" y="128" width="305" height="69"/>
+                                                        <rect key="frame" x="30" y="133" width="305" height="69"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDP-CO-O73">
                                                                 <rect key="frame" x="0.0" y="0.0" width="151.5" height="69"/>
@@ -162,17 +162,20 @@
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B3U-q1-X7s">
-                                                        <rect key="frame" x="15" y="212" width="325" height="50"/>
+                                                        <rect key="frame" x="15" y="217" width="325" height="45"/>
                                                         <color key="backgroundColor" name="orangeYellow"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="psW-qB-lHz"/>
+                                                            <constraint firstAttribute="height" constant="45" id="psW-qB-lHz"/>
                                                         </constraints>
                                                         <color key="tintColor" name="orangeYellow"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="filled" title="GET NEW MENU"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="GET NEW MENU"/>
+                                                        <connections>
+                                                            <action selector="getNewMenuButtonClicked:" destination="MOt-fs-ASi" eventType="touchUpInside" id="d8d-4n-eaf"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="MENU INDEXES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qkT-Fz-iWT">
-                                                        <rect key="frame" x="20" y="0.0" width="315" height="33.5"/>
+                                                        <rect key="frame" x="20" y="0.0" width="315" height="38.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -222,17 +225,29 @@
                             <constraint firstItem="MgD-Ko-38w" firstAttribute="centerX" secondItem="YbP-lw-ItE" secondAttribute="centerX" id="whP-Dl-5DQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FLAVORY" id="uwt-bh-cEz"/>
+                    <navigationItem key="navigationItem" title="FLAVORY" id="uwt-bh-cEz">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="oIs-Tm-zDj">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="backButtonClikced:" destination="MOt-fs-ASi" id="Msu-iF-bQz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="caloriesLabel" destination="Uc0-yL-oiv" id="0wr-az-ZDu"/>
+                        <outlet property="carbohydratesLabel" destination="Cg9-N5-JCS" id="aKg-yt-Awh"/>
                         <outlet property="collectionView" destination="WPA-Qf-BnX" id="8Bl-7W-eef"/>
+                        <outlet property="fatLabel" destination="vYE-0X-hLh" id="0gY-fB-95Y"/>
                         <outlet property="getNewMenuButton" destination="B3U-q1-X7s" id="AMx-Q2-RNp"/>
                         <outlet property="menuIndexesView" destination="WYM-UF-6Fa" id="u1V-Fd-ACn"/>
+                        <outlet property="proteinLabel" destination="D6M-3z-xwd" id="p6w-eC-8yh"/>
                         <outlet property="segmentControl" destination="MgD-Ko-38w" id="aMd-bv-MGl"/>
+                        <segue destination="0ZY-Cs-kwT" kind="presentation" identifier="showRecipePreview" id="d55-1f-qSf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPn-Ji-vIB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1504.8" y="-5.8470764617691158"/>
+            <point key="canvasLocation" x="1504.8" y="-6.746626686656672"/>
         </scene>
         <!--FLAVORY-->
         <scene sceneID="UHk-lE-Qhj">
@@ -971,7 +986,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4g2-nC-IWM"/>
+        <segue reference="d55-1f-qSf"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="GetDailyMenuBackGround" width="139" height="208.5"/>

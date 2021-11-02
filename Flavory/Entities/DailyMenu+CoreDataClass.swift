@@ -1,5 +1,5 @@
 //
-//  RecipeModel+CoreDataClass.swift
+//  DailyMenu+CoreDataClass.swift
 //  Flavory
 //
 //  Created by Ivan Stoilov on 1.11.21.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(RecipeModel)
-public class RecipeModel: NSManagedObject {
+@objc(DailyMenu)
+public class DailyMenu: NSManagedObject {
 
 }

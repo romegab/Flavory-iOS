@@ -7,6 +7,7 @@ class IngredientCell: UITableViewCell, Checkable {
     var isChecked: Bool = false {
         didSet {
             ingredient?.isChecked.toggle()
+            //self.ingredientImage.alpha = 0
             configureCheckmark()
         }
     }
@@ -17,16 +18,19 @@ class IngredientCell: UITableViewCell, Checkable {
     @IBOutlet fileprivate weak var ingredientName: UILabel!
     @IBOutlet fileprivate weak var ingredientDescription: UILabel!
     @IBOutlet fileprivate weak var checkMark: UILabel!
+    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
     
     var ingredient: RecipeIngredient? {
         didSet {
             updateUI()
+            //imageLoadingIndicator.startAnimating()
             configureCheckmark()
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        imageLoadingIndicator.startAnimating()
         // Initialization code
     }
     
@@ -34,6 +38,14 @@ class IngredientCell: UITableViewCell, Checkable {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        ingredientImage.image = nil
+        
+        imageRequest?.cancel()
     }
     
     private func configureCheckmark() {
@@ -56,7 +68,11 @@ class IngredientCell: UITableViewCell, Checkable {
                 
                 switch result{
                 case .success(let image):
+                    self?.imageLoadingIndicator.stopAnimating()
                     self?.ingredientImage.image = image
+                    UIView.animate(withDuration: 0.5) {
+                        self?.ingredientImage .alpha = 1
+                    }
                 case .failure(let error):
                     print("fire from the ingredient cell card")
                     print(error.localizedDescription)

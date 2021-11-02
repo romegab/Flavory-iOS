@@ -34,6 +34,9 @@ class RecipeCookingController: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
+        if let recipe = recipe {
+            DataManager.shared.updateRecipe(recipe)
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

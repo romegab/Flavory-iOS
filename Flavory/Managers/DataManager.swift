@@ -55,7 +55,69 @@ class DataManager {
         return nil
     }
     
-    func saveRecipe(_ recipe: ClippedRecipe) {
+    func getDailyMenu() -> (DailyMenu?) {
+        let currentData = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        let formattedDate = format.string(from: currentData)
+        
+        let dailyMenuFetchRequest: NSFetchRequest<DailyMenu>
+        dailyMenuFetchRequest = DailyMenu.fetchRequest()
+        
+        
+        
+        do {
+            let loadedMenu = try context.fetch(dailyMenuFetchRequest).first(where: { $0.date == formattedDate})
+            
+            return loadedMenu
+        }
+        catch {
+            print("get recipe by id is not wokring properly")
+        }
+        
+        return nil
+    }
+    
+    func removeDailyMenu() {
+        if let currentDaiLyMenu = getDailyMenu() {
+            context.delete(currentDaiLyMenu)
+        }
+        do {
+            try self.context.save()
+        }
+        catch {
+            print("!!! problem with removing daily menu")
+        }
+    }
+    
+    func saveMenu(_ recipes: [ClippedRecipe], nutrients: MenuNutrients) {
+        
+        let newMenu = DailyMenu(context: self.context)
+        
+        let currentData = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        let formattedDate = format.string(from: currentData)
+        
+        newMenu.date = formattedDate
+        newMenu.calories = nutrients.calories ?? 0
+        newMenu.protein = nutrients.protein ?? 0
+        newMenu.fat = nutrients.fat ?? 0
+        newMenu.carbohydrates = nutrients.carbohydrates ?? 0
+        
+        for currentRecipe in recipes {
+            newMenu.addToRecipes(saveRecipe(currentRecipe))
+        }
+        
+        do {
+            try self.context.save()
+        }
+        catch {
+            print("!!! problem with saving the menu")
+        }
+    }
+    
+    func saveRecipe(_ recipe: ClippedRecipe) -> RecipeModel{
         let newRecipe = RecipeModel(context: self.context)
         
         newRecipe.id = recipe.id
@@ -86,15 +148,20 @@ class DataManager {
         catch {
             print("!!! problem with saving the recipe")
         }
+        
+        return newRecipe
     }
     
     func updateRecipe(_ recipe: ClippedRecipe) {
         do{
-            if let loadedRecipe = getRecipeByID(id: recipe.id){
+            if let loadedRecipe = getRecipeByID(id: recipe.id) {
+                
+                loadedRecipe.isInProgress = recipe.isInProgress
+                loadedRecipe.progress = Int(recipe.progress)
+                print(recipe.progress)
                 updateIngredients(recipe, loadedRecipe)
                 updateSteps(recipe, loadedRecipe)
                 
-                loadedRecipe.isInProgress = recipe.isInProgress
                 try self.context.save()
             }
         }
@@ -107,12 +174,15 @@ class DataManager {
         do {
             let loadedIngredients: [Ingredient] = loadedRecipe.ingredient ?? [Ingredient]()
             
-            for currentIngredient in recipe.extendedIngredients! {
-                if let ingredientToChange = loadedIngredients.first(where: { $0.id == currentIngredient.id}) {
-                    ingredientToChange.isChecked = currentIngredient.isChecked
+            if let extendedIngredients = recipe.extendedIngredients {
+                for currentIngredient in extendedIngredients {
+                    if let ingredientToChange = loadedIngredients.first(where: { $0.id == currentIngredient.id}) {
+                        ingredientToChange.isChecked = currentIngredient.isChecked
+                    }
                 }
+                
+                try self.context.save()
             }
-            try self.context.save()
         }
         catch {
             print("!!! problem with saving the ingredient")

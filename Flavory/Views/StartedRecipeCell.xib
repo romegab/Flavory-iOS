@@ -25,6 +25,23 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="Tfq-zx-fXz">
                         <rect key="frame" x="10" y="5" width="186" height="129"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zxq-GL-OMe" userLabel="imageLoadingView">
+                        <rect key="frame" x="0.0" y="0.0" width="186" height="129"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Vqf-3k-a3M">
+                                <rect key="frame" x="73" y="44.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WGx-au-Tv0"/>
+                                    <constraint firstAttribute="width" constant="40" id="dDH-0O-Qy3"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Vqf-3k-a3M" firstAttribute="centerY" secondItem="Zxq-GL-OMe" secondAttribute="centerY" id="ILr-Lo-b47"/>
+                            <constraint firstItem="Vqf-3k-a3M" firstAttribute="centerX" secondItem="Zxq-GL-OMe" secondAttribute="centerX" id="RMD-Xc-Qil"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWh-gR-sjQ">
                         <rect key="frame" x="206" y="10" width="254" height="134"/>
                         <subviews>
@@ -75,14 +92,18 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="iWh-gR-sjQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="2QF-we-KHx"/>
+                    <constraint firstItem="Zxq-GL-OMe" firstAttribute="width" secondItem="Tfq-zx-fXz" secondAttribute="width" id="9Dk-pg-0fx"/>
                     <constraint firstAttribute="trailing" secondItem="eJ4-41-r5d" secondAttribute="trailing" constant="10" id="9vh-tc-SSB"/>
+                    <constraint firstItem="Zxq-GL-OMe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="IYv-X5-zXC"/>
                     <constraint firstItem="Tfq-zx-fXz" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="Kof-cV-W74"/>
                     <constraint firstAttribute="trailing" secondItem="iWh-gR-sjQ" secondAttribute="trailing" constant="5" id="LNh-jA-CtB"/>
                     <constraint firstItem="eJ4-41-r5d" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Q5Z-Zz-mGZ"/>
                     <constraint firstAttribute="bottom" secondItem="eJ4-41-r5d" secondAttribute="bottom" constant="10" id="XSW-lX-lWb"/>
                     <constraint firstItem="iWh-gR-sjQ" firstAttribute="leading" secondItem="Tfq-zx-fXz" secondAttribute="trailing" constant="10" id="ibr-E7-czh"/>
+                    <constraint firstItem="Zxq-GL-OMe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="las-KY-ype"/>
                     <constraint firstAttribute="bottom" secondItem="iWh-gR-sjQ" secondAttribute="bottom" id="nSn-dk-Pbr"/>
                     <constraint firstItem="Tfq-zx-fXz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="qBd-ak-nOq"/>
+                    <constraint firstItem="Zxq-GL-OMe" firstAttribute="height" secondItem="Tfq-zx-fXz" secondAttribute="height" id="w0J-sy-XVm"/>
                     <constraint firstAttribute="bottom" secondItem="Tfq-zx-fXz" secondAttribute="bottom" constant="10" id="wKT-ov-Lub"/>
                     <constraint firstItem="eJ4-41-r5d" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="zya-VQ-oyn"/>
                 </constraints>
@@ -96,6 +117,7 @@
             <connections>
                 <outlet property="background" destination="eJ4-41-r5d" id="9wx-el-FY1"/>
                 <outlet property="deleteButton" destination="449-Lk-A2m" id="gtH-eQ-3Ft"/>
+                <outlet property="imageLoadingIndicator" destination="Vqf-3k-a3M" id="cSC-vj-Iwa"/>
                 <outlet property="recipeImage" destination="Tfq-zx-fXz" id="m2N-xE-KRl"/>
                 <outlet property="recipeProgress" destination="PgZ-z0-13V" id="HwR-Sw-miK"/>
                 <outlet property="recipeTitle" destination="5oy-UK-ue6" id="VHH-mg-pga"/>

@@ -38,4 +38,16 @@ class SearchResultParser{
         }
         return nil
     }
+    
+    static func parseDailyMenu(data: Data) -> ([ClippedRecipe], MenuNutrients) {
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(ResultArray.self, from:data)
+            
+            return (result.meals!, result.nutrients!)
+        } catch {
+            print("JSON Error: \(error)")
+        }
+        return ([ClippedRecipe](), MenuNutrients())
+    }
 }

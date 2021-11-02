@@ -20,6 +20,7 @@ class HomeViewController: UIViewController {
     let searchController = UISearchController()
     
     private let search: Search = Search()
+    private var isSearchTrothelled = false
     var selectedRecipe: ClippedRecipe?
     var recipeInProgress: RecipeModel?
     var carouselRecipes = [ClippedRecipe]()
@@ -28,8 +29,15 @@ class HomeViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        let applicationDocumentsDirectory: URL = {
+                  let paths = FileManager.default.urls(for: .documentDirectory,
+                                                        in: .userDomainMask)
+                  return paths[0]
+                }()
+                
+                print(applicationDocumentsDirectory)
         
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")
@@ -62,6 +70,7 @@ class HomeViewController: UIViewController {
     }
     
     private func loadCarouselContent() {
+
         
         search.performRandomSearch(7) { [weak self] result in
             switch result{
@@ -128,6 +137,11 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func getDailyMenuClicked(_ sender: UIButton) {
+        performSegue(withIdentifier: "getDailyMenu", sender: nil)
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDataSource {
@@ -149,7 +163,6 @@ extension HomeViewController: UICollectionViewDataSource {
             let searchResult = carouselRecipes[indexPath.row]
             cell.recipe = searchResult
         }
-        
         return cell
     }
     
@@ -176,14 +189,27 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
+        //search.terminateRequest()
         
-        search.performRecipeSearch(searchController.searchBar.text ?? "") { [weak self] result in
+        if !isSearchTrothelled{
+            isSearchTrothelled = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                self.performSearch(query: searchController.searchBar.text ?? "asdasdasd")
+                self.isSearchTrothelled = false
+            }
+        }
+    }
+    
+    private func performSearch(query: String?) {
+        search.performRecipeSearch(query ?? "") { [weak self] result in
             
             switch result{
             case .success(let result):
                 print(result)
                 self?.searchResult = result
-                self?.ResultTableView.reloadData()
+                DispatchQueue.main.async {
+                    self?.ResultTableView.reloadData()
+                }
             case .failure(let error):
                 DispatchQueue.main.async {
                     print(error.localizedDescription)
@@ -200,7 +226,6 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         let currentRecipe = searchResult[indexPath.row]

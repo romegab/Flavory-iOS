@@ -68,15 +68,14 @@ class DailyMenuController: UIViewController {
             loadMenuNutritients()
             showCurrentRecipe()
             
-            
-        }else {
+        } else {
             search.performMenuSearch() { [weak self] result in
                 switch result{
-                case .success(let recipes):
-                    self?.menu = recipes.0
-                    self?.menuNutritients = recipes.1
-                    DataManager.shared.saveMenu(self!.menu, nutrients: self!.menuNutritients)
+                case .success(let results):
+                    self?.menu = results.0
+                    self?.menuNutritients = results.1
                     DispatchQueue.main.async {
+                        DataManager.shared.saveMenu(self!.menu, nutrients: self!.menuNutritients)
                         self?.loadMenuNutritients()
                         self?.showCurrentRecipe()
                     }
@@ -122,24 +121,6 @@ class DailyMenuController: UIViewController {
         
         DataManager.shared.removeDailyMenu()
         
-        search.performMenuSearch() { [weak self] result in
-            switch result{
-            case .success(let recipes):
-                self?.menu = recipes.0
-                self?.menuNutritients = recipes.1
-                
-                DataManager.shared.saveMenu(self!.menu, nutrients: self!.menuNutritients)
-                DispatchQueue.main.async {
-                    self?.loadMenuNutritients()
-                    self?.showCurrentRecipe()
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        
         loadDailyMenu()
     }
     
@@ -163,16 +144,22 @@ extension DailyMenuController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        search.performSearchByID(String(currentRecipe?.id ?? -1)) { [weak self] result in
-            switch result{
-            case .success(let recipe):
-                self?.selectedRecipe = recipe
-                DispatchQueue.main.async {
-                    self?.performSegue(withIdentifier: "showRecipePreview", sender: nil)
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    print(error.localizedDescription)
+        let loadedRecipe: RecipeModel? = DataManager.shared.getRecipeByID(id: Int(currentRecipe?.id ?? -1))
+        if let loadedRecipe = loadedRecipe{
+            selectedRecipe = ClippedRecipe(loadedRecipe: loadedRecipe)
+            performSegue(withIdentifier: "showRecipePreview", sender: nil)
+        } else {
+            search.performSearchByID(String(currentRecipe?.id ?? -1)) { [weak self] result in
+                switch result{
+                case .success(let recipe):
+                    self?.selectedRecipe = recipe
+                    DispatchQueue.main.async {
+                        self?.performSegue(withIdentifier: "showRecipePreview", sender: nil)
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }

@@ -20,12 +20,16 @@ class RecipePreviewController: UIViewController {
     @IBOutlet fileprivate weak var recipeKcal: UILabel!
     @IBOutlet fileprivate weak var recipePrice: UILabel!
     @IBOutlet fileprivate weak var startCoookingButotn: UIButton!
+    @IBOutlet fileprivate weak var imageLoadingIndicator: UIActivityIndicatorView!
     
     private var imageRequest: Cancellable?
-    var recipe: ClippedRecipe?
+    var recipe: ClippedRecipe? 
     
     override func viewDidLoad() {
         
+        recipeImage.alpha = 0
+        
+        imageLoadingIndicator.startAnimating()
         updateUI()
         setUpCloseButton()
         setUpRecipeImage()
@@ -51,7 +55,11 @@ class RecipePreviewController: UIViewController {
                 
                 switch result{
                 case .success(let image):
+                    self?.imageLoadingIndicator.stopAnimating()
                     self?.recipeImage.image = image
+                    UIView.animate(withDuration: 0.5) {
+                        self?.recipeImage.alpha = 1
+                    }
                 case .failure(let error):
                     DispatchQueue.main.async {
                         print(error.localizedDescription)

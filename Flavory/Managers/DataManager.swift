@@ -154,11 +154,14 @@ class DataManager {
     
     func updateRecipe(_ recipe: ClippedRecipe) {
         do{
-            if let loadedRecipe = getRecipeByID(id: recipe.id){
+            if let loadedRecipe = getRecipeByID(id: recipe.id) {
+                
+                loadedRecipe.isInProgress = recipe.isInProgress
+                loadedRecipe.progress = Int(recipe.progress)
+                print(recipe.progress)
                 updateIngredients(recipe, loadedRecipe)
                 updateSteps(recipe, loadedRecipe)
                 
-                loadedRecipe.isInProgress = recipe.isInProgress
                 try self.context.save()
             }
         }

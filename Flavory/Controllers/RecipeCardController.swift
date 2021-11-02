@@ -14,11 +14,15 @@ class RecipeCardController: UICollectionViewCell {
     @IBOutlet fileprivate weak var background: UIView!
     @IBOutlet fileprivate weak var recipePreparationTime: UILabel!
     @IBOutlet fileprivate weak var recipeServings: UILabel!
+    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
+    
     
     private var imageRequest: Cancellable?
     
     var recipe: ClippedRecipe? {
         didSet{
+            recipeImage.alpha = 0
+            imageLoadingIndicator.startAnimating()
             updateUI()
         }
     }
@@ -26,6 +30,8 @@ class RecipeCardController: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        imageLoadingIndicator.startAnimating()
         
         recipeTitle.adjustsFontSizeToFitWidth = true
         recipePreparationTime.adjustsFontSizeToFitWidth = true
@@ -43,6 +49,7 @@ class RecipeCardController: UICollectionViewCell {
     }
     
     func updateUI() {
+        recipeImage.image = nil
         
         recipeTitle.adjustsFontSizeToFitWidth = true
         recipePreparationTime.adjustsFontSizeToFitWidth = true
@@ -59,7 +66,11 @@ class RecipeCardController: UICollectionViewCell {
                 
                 switch result {
                 case .success(let image):
+                    self?.imageLoadingIndicator.stopAnimating()
                     self?.recipeImage.image = image
+                    UIView.animate(withDuration: 0.5) {
+                        self?.recipeImage.alpha = 1
+                    }
                 case .failure(let error):
                     
                     print("fire from the recipe card")

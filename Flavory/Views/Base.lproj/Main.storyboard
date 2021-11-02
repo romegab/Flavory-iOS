@@ -107,16 +107,16 @@
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="VqW-BK-oI8">
-                                                        <rect key="frame" x="30" y="133" width="305" height="69"/>
+                                                        <rect key="frame" x="30" y="133" width="295" height="69"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDP-CO-O73">
-                                                                <rect key="frame" x="0.0" y="0.0" width="151.5" height="69"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="146.5" height="69"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kcalIcon" translatesAutoresizingMaskIntoConstraints="NO" id="hEh-eI-7gH">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="151.5" height="51.5"/>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fatIcon" translatesAutoresizingMaskIntoConstraints="NO" id="hEh-eI-7gH">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="146.5" height="51.5"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYE-0X-hLh">
-                                                                        <rect key="frame" x="0.0" y="56.5" width="151.5" height="12.5"/>
+                                                                        <rect key="frame" x="0.0" y="56.5" width="146.5" height="12.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -135,13 +135,13 @@
                                                                 </constraints>
                                                             </view>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeI-Yp-P1o">
-                                                                <rect key="frame" x="153.5" y="0.0" width="151.5" height="69"/>
+                                                                <rect key="frame" x="148.5" y="0.0" width="146.5" height="69"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proteinIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5wj-ud-Kic">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="151.5" height="51.5"/>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CarbohydratesIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5wj-ud-Kic">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="146.5" height="51.5"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cg9-N5-JCS">
-                                                                        <rect key="frame" x="0.0" y="56.5" width="151.5" height="12.5"/>
+                                                                        <rect key="frame" x="0.0" y="56.5" width="146.5" height="12.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -197,7 +197,7 @@
                                                     <constraint firstItem="P4o-a1-cXI" firstAttribute="height" relation="lessThanOrEqual" secondItem="WYM-UF-6Fa" secondAttribute="height" multiplier="0.25" id="pkI-QO-Bg0"/>
                                                     <constraint firstItem="B3U-q1-X7s" firstAttribute="leading" secondItem="WYM-UF-6Fa" secondAttribute="leading" constant="15" id="tKs-KH-kYU"/>
                                                     <constraint firstItem="VqW-BK-oI8" firstAttribute="top" secondItem="P4o-a1-cXI" secondAttribute="bottom" constant="15" id="voJ-Gw-7g3"/>
-                                                    <constraint firstAttribute="trailing" secondItem="VqW-BK-oI8" secondAttribute="trailing" constant="20" id="wNl-oJ-XcZ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="VqW-BK-oI8" secondAttribute="trailing" constant="30" id="wNl-oJ-XcZ"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -549,6 +549,23 @@
                                     <action selector="closeButtonPressed:" destination="0ZY-Cs-kwT" eventType="touchUpInside" id="gl1-al-FVe"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UED-Y6-LHg" userLabel="ImageLoadingView">
+                                <rect key="frame" x="10" y="60" width="355" height="194"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hCQ-Zc-QAf">
+                                        <rect key="frame" x="157.5" y="77" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="8Da-c9-vPU"/>
+                                            <constraint firstAttribute="height" constant="40" id="oKE-Dl-uD5"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="hCQ-Zc-QAf" firstAttribute="centerY" secondItem="UED-Y6-LHg" secondAttribute="centerY" id="bkD-5e-CN2"/>
+                                    <constraint firstItem="hCQ-Zc-QAf" firstAttribute="centerX" secondItem="UED-Y6-LHg" secondAttribute="centerX" id="dn1-1p-v6o"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pjv-Wg-B2S">
                                 <rect key="frame" x="0.0" y="67" width="375" height="520"/>
                                 <subviews>
@@ -764,15 +781,21 @@
                             <constraint firstItem="Yfc-zm-0kv" firstAttribute="leading" secondItem="lOk-b3-UnF" secondAttribute="leading" constant="15" id="9pK-rk-9RW"/>
                             <constraint firstItem="oov-fe-P6T" firstAttribute="trailing" secondItem="lOk-b3-UnF" secondAttribute="trailing" id="Neg-nH-Qra"/>
                             <constraint firstItem="oov-fe-P6T" firstAttribute="leading" secondItem="lOk-b3-UnF" secondAttribute="leading" id="O96-VK-GWz"/>
+                            <constraint firstItem="UED-Y6-LHg" firstAttribute="leading" secondItem="lOk-b3-UnF" secondAttribute="leading" constant="10" id="Ppl-dN-hWE"/>
                             <constraint firstItem="Yfc-zm-0kv" firstAttribute="top" secondItem="lOk-b3-UnF" secondAttribute="top" constant="15" id="Q0i-C6-T8f"/>
+                            <constraint firstItem="UED-Y6-LHg" firstAttribute="top" secondItem="lOk-b3-UnF" secondAttribute="top" constant="60" id="T9d-IW-fZh"/>
                             <constraint firstItem="lOk-b3-UnF" firstAttribute="bottom" secondItem="oov-fe-P6T" secondAttribute="bottom" id="X15-i2-bGd"/>
+                            <constraint firstItem="UED-Y6-LHg" firstAttribute="height" secondItem="cca-zd-Rmb" secondAttribute="height" id="h1T-DN-eIK"/>
+                            <constraint firstItem="lOk-b3-UnF" firstAttribute="trailing" secondItem="UED-Y6-LHg" secondAttribute="trailing" constant="10" id="iBn-kc-Krv"/>
                             <constraint firstItem="cca-zd-Rmb" firstAttribute="height" secondItem="lOk-b3-UnF" secondAttribute="height" multiplier="0.3" id="iuU-fQ-QXQ"/>
                             <constraint firstItem="pjv-Wg-B2S" firstAttribute="trailing" secondItem="lOk-b3-UnF" secondAttribute="trailing" id="o7E-HN-SgH"/>
                             <constraint firstItem="oov-fe-P6T" firstAttribute="top" secondItem="pjv-Wg-B2S" secondAttribute="bottom" id="xDk-Ly-mm8"/>
+                            <constraint firstItem="UED-Y6-LHg" firstAttribute="width" secondItem="cca-zd-Rmb" secondAttribute="width" id="zbN-sg-hPR"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="Yfc-zm-0kv" id="fSW-Gr-fJb"/>
+                        <outlet property="imageLoadingIndicator" destination="hCQ-Zc-QAf" id="OY1-Yd-YOB"/>
                         <outlet property="recipeCategory" destination="J6B-hU-fvc" id="Qb3-9N-lKu"/>
                         <outlet property="recipeDescription" destination="N89-Ev-IHI" id="1mS-QG-o8O"/>
                         <outlet property="recipeFat" destination="d61-oD-Shl" id="06o-7Y-RX5"/>
@@ -989,6 +1012,7 @@
         <segue reference="d55-1f-qSf"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="CarbohydratesIcon" width="120" height="120"/>
         <image name="GetDailyMenuBackGround" width="139" height="208.5"/>
         <image name="LookUpForEatBackground" width="160" height="240"/>
         <image name="circle.lefthalf.filled" catalog="system" width="128" height="121"/>

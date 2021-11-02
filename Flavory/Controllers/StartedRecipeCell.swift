@@ -17,6 +17,8 @@ class StartedRecipeCell: UITableViewCell {
     
     var recipe: ClippedRecipe? {
         didSet {
+            recipeImage.alpha = 0
+            imageLoadingIndicator.startAnimating()
             updateUI()
         }
     }
@@ -38,10 +40,13 @@ class StartedRecipeCell: UITableViewCell {
     @IBOutlet fileprivate weak var recipeTitle: UILabel!
     @IBOutlet fileprivate weak var recipeProgress: UILabel!
     @IBOutlet fileprivate weak var background: UIView!
+    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        recipeImage.alpha = 0
+        imageLoadingIndicator.startAnimating()
         setUpCornerRadius()
         setUpShadow()
     }
@@ -55,7 +60,11 @@ class StartedRecipeCell: UITableViewCell {
             imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
                 switch result{
                 case .success(let image):
+                    self?.imageLoadingIndicator.stopAnimating()
                     self?.recipeImage.image = image
+                    UIView.animate(withDuration: 0.5) {
+                        self?.recipeImage.alpha = 1
+                    }
                 case .failure(let error):
                     print("fire from the ingredient cell card")
                     print(error.localizedDescription)

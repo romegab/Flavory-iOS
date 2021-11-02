@@ -13,15 +13,19 @@ enum NetworkError: Error {
 
 class Search {
     
-    private var isRequestFinished = true
+    private var isRequestFinished = false
     private var dataTask: URLSessionDataTask?
-    
-    private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
+    private let session = URLSession.shared
+    private let apiKey: String = "12cbc8a03407496290efed34fba57028"
+    //private let apiKey: String = "5d9a3e69b4234101a69aab06fbae2aae"
+    //private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
+    //private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
-        if !isRequestFinished{
+        
+            session.invalidateAndCancel()
             dataTask?.cancel()
-        }
+        
     }
     
     func performRandomSearch(_ count: Int, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void){
@@ -106,7 +110,7 @@ class Search {
     
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         isRequestFinished = false
-        let session = URLSession.shared
+        //let session = URLSession.shared
         
         session.dataTask(with: url) {data, response, error in
             if let error = error as NSError?, error.code == -999{
@@ -117,8 +121,7 @@ class Search {
             } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                 self.isRequestFinished = true
                 if let data = data {
-                    
-                    
+
                     completionHandler(.success(SearchResultParser.parse(data: data)))
                 }
             }

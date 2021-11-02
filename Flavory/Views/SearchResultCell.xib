@@ -19,8 +19,25 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" image="DefaultRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="VPY-wF-7C4">
                         <rect key="frame" x="10" y="10" width="128" height="93"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pV1-74-xQv" userLabel="LoadingIndicatorView">
+                        <rect key="frame" x="10" y="10" width="128" height="93"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="WjV-51-Jso">
+                                <rect key="frame" x="44" y="26.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="Lfq-cf-byf"/>
+                                    <constraint firstAttribute="height" constant="40" id="pMh-qH-Gwb"/>
+                                </constraints>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="WjV-51-Jso" firstAttribute="centerX" secondItem="pV1-74-xQv" secondAttribute="centerX" id="RzF-km-KT0"/>
+                            <constraint firstItem="WjV-51-Jso" firstAttribute="centerY" secondItem="pV1-74-xQv" secondAttribute="centerY" id="gTN-dX-Zk6"/>
+                        </constraints>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgB-wt-iwJ">
-                        <rect key="frame" x="148" y="10" width="162" height="20.5"/>
+                        <rect key="frame" x="148" y="10" width="162" height="93"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -28,18 +45,24 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="VPY-wF-7C4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="Fda-py-ybg"/>
+                    <constraint firstAttribute="bottom" secondItem="pV1-74-xQv" secondAttribute="bottom" constant="10" id="IgW-9V-Pqy"/>
+                    <constraint firstItem="pV1-74-xQv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PFV-5G-u4p"/>
                     <constraint firstAttribute="trailing" secondItem="mgB-wt-iwJ" secondAttribute="trailing" constant="10" id="QIz-aM-ihk"/>
                     <constraint firstItem="mgB-wt-iwJ" firstAttribute="leading" secondItem="VPY-wF-7C4" secondAttribute="trailing" constant="10" id="W7z-y6-KW0"/>
                     <constraint firstItem="VPY-wF-7C4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ajf-d3-gsV"/>
                     <constraint firstItem="VPY-wF-7C4" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="cnp-n7-eCm"/>
                     <constraint firstAttribute="bottom" secondItem="VPY-wF-7C4" secondAttribute="bottom" constant="10" id="gqC-v6-ycB"/>
                     <constraint firstAttribute="bottom" secondItem="mgB-wt-iwJ" secondAttribute="bottom" constant="10" id="mKO-PA-eEm"/>
+                    <constraint firstItem="pV1-74-xQv" firstAttribute="width" secondItem="VPY-wF-7C4" secondAttribute="width" id="nR2-zp-R1I"/>
+                    <constraint firstItem="pV1-74-xQv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="qM6-dV-lDh"/>
                     <constraint firstItem="mgB-wt-iwJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="sGe-u1-2SW"/>
+                    <constraint firstItem="pV1-74-xQv" firstAttribute="height" secondItem="VPY-wF-7C4" secondAttribute="height" id="v7c-Qd-Vfl"/>
                     <constraint firstItem="VPY-wF-7C4" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.29" id="wk0-OY-54U"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="loadingIndicator" destination="WjV-51-Jso" id="2eQ-SZ-hu9"/>
                 <outlet property="recipeImage" destination="VPY-wF-7C4" id="0bQ-hf-hCV"/>
                 <outlet property="recipeTitle" destination="mgB-wt-iwJ" id="MxS-L3-GAJ"/>
             </connections>

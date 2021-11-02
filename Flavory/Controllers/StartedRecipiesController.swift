@@ -24,7 +24,7 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
             format: "isInProgress = %isInProgress", true
         )
         
-        let sortDescriptor = NSSortDescriptor(key: "progress", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "progress", ascending: false)
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: DataManager.shared.context, sectionNameKeyPath: nil, cacheName: nil)
@@ -40,15 +40,15 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         let recipeCellNib = UINib(nibName: "StartedRecipeCell", bundle: nil)
         tableView.register(recipeCellNib, forCellReuseIdentifier: "StartedRecipeCell")
         
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         do {
             try fetchedResultsController.performFetch()
             
         } catch let error as NSError {
             print("Fetching error: \(error), \(error.userInfo)")
         }
-        
-        tableView.delegate = self
-        tableView.dataSource = self
         
         tableView.reloadData()
     }

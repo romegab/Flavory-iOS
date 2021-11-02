@@ -18,20 +18,21 @@ class ClippedRecipe: Codable {
         return details
     }()
     
-    lazy var progress: Double = {
-        var totalStages = (extendedIngredients?.count ?? 0) + (steps?.count ?? 0)
-        var doneStages = ((extendedIngredients?.filter{  $0.isChecked == true })?.count ?? 0) + ((steps?.filter{  $0.isChecked == true })?.count ?? 0)
-        
-        if totalStages != 0, doneStages != 0 {
-            let valuePerPercent: Double = Double( Double( totalStages ) / 100.0 )
-            let result: Double = ceil( Double( doneStages ) / valuePerPercent )
-            return result
-        }
-        else {
-            return 0.0
-        }
-        
-    }()
+     var progress: Double{
+         get{
+            let totalStages = (extendedIngredients?.count ?? 0) + (steps?.count ?? 0)
+            let doneStages = ((extendedIngredients?.filter{  $0.isChecked == true })?.count ?? 0) + ((steps?.filter{  $0.isChecked ==       true })?.count ?? 0)
+            
+            if totalStages != 0, doneStages != 0 {
+                let valuePerPercent: Double = Double( Double( totalStages ) / 100.0 )
+                let result: Double = ceil( Double( doneStages ) / valuePerPercent )
+                return result
+            }
+            else {
+                return 0.0
+            }
+         }
+     }
     
     var largeImageURL: String {
         get {

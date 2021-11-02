@@ -22,7 +22,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="596" height="715"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultRecipeImage" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-aH-TAJ">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQB-6c-wDF" userLabel="ImageSection">
+                        <rect key="frame" x="0.0" y="0.0" width="596" height="357.5"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="shf-Bv-cTu">
+                                <rect key="frame" x="278" y="159" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="EN4-17-pYw"/>
+                                    <constraint firstAttribute="width" constant="40" id="SrD-A3-6C0"/>
+                                </constraints>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="shf-Bv-cTu" firstAttribute="centerY" secondItem="vQB-6c-wDF" secondAttribute="centerY" id="LLg-hd-Mbz"/>
+                            <constraint firstItem="shf-Bv-cTu" firstAttribute="centerX" secondItem="vQB-6c-wDF" secondAttribute="centerX" id="vzl-As-Zun"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fjd-aH-TAJ">
                         <rect key="frame" x="0.0" y="0.0" width="596" height="357.5"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jY3-58-2S1">
@@ -114,20 +132,25 @@
                 <constraint firstItem="fjd-aH-TAJ" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="BNj-ra-gn2"/>
                 <constraint firstAttribute="bottom" secondItem="EyH-c9-LYD" secondAttribute="bottom" id="DS4-2o-guZ"/>
                 <constraint firstItem="jrF-aM-hrm" firstAttribute="top" secondItem="jY3-58-2S1" secondAttribute="bottom" id="DeI-Ln-S1p"/>
+                <constraint firstItem="vQB-6c-wDF" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MlU-ng-1jx"/>
                 <constraint firstAttribute="bottom" secondItem="jrF-aM-hrm" secondAttribute="bottom" constant="10" id="S4D-0W-2ZM"/>
                 <constraint firstItem="fjd-aH-TAJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Y3T-lz-yNF"/>
+                <constraint firstItem="vQB-6c-wDF" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.5" id="a34-B6-wE8"/>
                 <constraint firstItem="jY3-58-2S1" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bad-wH-pzl"/>
+                <constraint firstAttribute="trailing" secondItem="vQB-6c-wDF" secondAttribute="trailing" id="cqc-Z8-1Rk"/>
                 <constraint firstItem="jY3-58-2S1" firstAttribute="top" secondItem="fjd-aH-TAJ" secondAttribute="bottom" id="f1V-Nh-LrW"/>
                 <constraint firstAttribute="trailing" secondItem="EyH-c9-LYD" secondAttribute="trailing" id="icp-0c-M6g"/>
                 <constraint firstAttribute="trailing" secondItem="jrF-aM-hrm" secondAttribute="trailing" id="o9R-x0-ekL"/>
                 <constraint firstItem="fjd-aH-TAJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ocT-lc-Av2"/>
                 <constraint firstItem="EyH-c9-LYD" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="rdW-dy-jFD"/>
+                <constraint firstItem="vQB-6c-wDF" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="uPL-dg-Bq5"/>
                 <constraint firstItem="EyH-c9-LYD" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="wE0-aD-It8"/>
                 <constraint firstItem="jrF-aM-hrm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="z9A-o2-ThI"/>
             </constraints>
             <size key="customSize" width="596" height="715"/>
             <connections>
                 <outlet property="background" destination="EyH-c9-LYD" id="rsY-ky-wRQ"/>
+                <outlet property="imageLoadingIndicator" destination="shf-Bv-cTu" id="u6V-o3-t9b"/>
                 <outlet property="recipeImage" destination="fjd-aH-TAJ" id="EdM-sH-cia"/>
                 <outlet property="recipePreparationTime" destination="pIq-Kv-BVU" id="wAM-5m-J3h"/>
                 <outlet property="recipeServings" destination="LBP-gO-wgB" id="M1W-PO-gmH"/>
@@ -137,7 +160,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="DefaultRecipeImage" width="185.5" height="123.5"/>
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="fork.knife.circle" catalog="system" width="128" height="121"/>
         <namedColor name="orangeYellow">

@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     @IBOutlet fileprivate weak var collecitonView: UICollectionView!
     @IBOutlet fileprivate weak var lookUpForEatText: UILabel!
     @IBOutlet fileprivate weak var dailyMenuText: UILabel!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
     let searchController = UISearchController()
     
@@ -30,6 +31,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        filterButton.customView?.isHidden = true
         
         let applicationDocumentsDirectory: URL = {
                   let paths = FileManager.default.urls(for: .documentDirectory,
@@ -142,6 +145,10 @@ class HomeViewController: UIViewController {
         performSegue(withIdentifier: "getDailyMenu", sender: nil)
     }
     
+    @IBAction func filterButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "showFilters", sender: nil)
+    }
+    
 }
 
 extension HomeViewController: UICollectionViewDataSource {
@@ -189,7 +196,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        //search.terminateRequest()
+        filterButton.customView?.isHidden = false
         
         if !isSearchTrothelled{
             isSearchTrothelled = true

@@ -33,7 +33,7 @@ class FilterSearchContorller: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         carbsView.addSubview(carbsSlider)
         kcalView.addSubview(kcalSlider)
         fatView.addSubview(fatSlider)
@@ -54,6 +54,7 @@ class FilterSearchContorller: UIViewController {
         carbsSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
         carbsSlider.center = carbsView.convert(carbsView.center, from:carbsView.superview)
         carbsSlider.center.y += 15
+        carbsSlider.layer.cornerRadius = 15
         
         kcalSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
         kcalSlider.center = kcalView.convert(kcalView.center, from:kcalView.superview)

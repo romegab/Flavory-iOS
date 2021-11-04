@@ -20,13 +20,13 @@ class RangeSlider: UIControl {
         }
     }
     
-    var lowerValue: CGFloat = 0.2 {
+    var lowerValue: CGFloat = 0.05 {
         didSet {
             updateLayerFrames()
         }
     }
     
-    var upperValue: CGFloat = 0.8 {
+    var upperValue: CGFloat = 0.95 {
         didSet {
             updateLayerFrames()
         }
@@ -35,14 +35,12 @@ class RangeSlider: UIControl {
     var trackTintColor = UIColor(white: 0.9, alpha: 1) {
         didSet {
             trackLayer.setNeedsDisplay()
-            trackLayer.cornerRadius = 15
         }
     }
     // line color
-    var trackHighlightTintColor = UIColor(white: 0.7, alpha: 1) {
+    var trackHighlightTintColor = UIColor(named: "orangeYellow") {
         didSet {
             trackLayer.setNeedsDisplay()
-            trackLayer.cornerRadius = 15
         }
     }
     
@@ -74,7 +72,6 @@ class RangeSlider: UIControl {
         trackLayer.rangeSlider = self
         
         trackLayer.contentsScale = UIScreen.main.scale
-        trackLayer.rangeSlider?.layer.cornerRadius = 40
         layer.addSublayer(trackLayer)
         
         lowerThumbImageView.image = thumbImage
@@ -89,7 +86,7 @@ class RangeSlider: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func updateLayerFrames() {
+    func updateLayerFrames() {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         

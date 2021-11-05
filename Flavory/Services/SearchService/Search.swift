@@ -22,10 +22,8 @@ class Search {
     //private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
-        
             session.invalidateAndCancel()
             dataTask?.cancel()
-        
     }
     
     func performRandomSearch(_ count: Int, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void){

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilterSearchContorller: UIViewController {
+class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegate {
     
     let carbsSlider = RangeSlider(frame: .zero)
     let kcalSlider = RangeSlider(frame: .zero)
@@ -41,6 +41,7 @@ class FilterSearchContorller: UIViewController {
     private var cuisines: [String] = ["American", "British", "Chinesse", " Easter EU", "French", "German", "Greek", "Indian", "Italian", "Mediterian", "Spanish"]
     private var mealTypes: [String] = ["Main course", "Side dish", "Dessert", "Salad", "Breakfast", "Soup", "Snack", "Drink"]
     
+    private var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -156,6 +157,10 @@ class FilterSearchContorller: UIViewController {
     
     @IBAction func chooseIngredientsButtonClicked(_ sender: Any) {
         performSegue(withIdentifier: "showChooseIngredientView", sender: nil)
+    }
+    
+    func reciveIngredients(ingredints: [RecipeIngredient]) {
+        choosedIngredients = ingredints
     }
     
 }

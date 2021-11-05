@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol ChooseIngredientControlerDelegate: AnyObject {
+    func reciveIngredients(ingredints: [RecipeIngredient])
+}
+
 class ChooseIngredientController: UIViewController {
     
+    weak private var delegate: ChooseIngredientControlerDelegate?
     let searchController = UISearchController(searchResultsController: nil)
     private var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     private var currentIngredients: [RecipeIngredient] = [RecipeIngredient]()
@@ -27,6 +32,17 @@ class ChooseIngredientController: UIViewController {
         
         let ingredientCellNib = UINib(nibName: "IngredientCell", bundle: nil)
         tableView.register(ingredientCellNib, forCellReuseIdentifier: "IngredientCell")
+    }
+    
+    private func setDelegates() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
+        searchController.searchBar.placeholder = "Search Ingredients"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     private func performSearch(query: String?) {
@@ -50,15 +66,11 @@ class ChooseIngredientController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    private func setDelegates() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
-        tableView.delegate = self
-        tableView.dataSource = self
-        searchController.searchBar.placeholder = "Search Ingredients"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
+    @IBAction func doneButtonClicked(_ sender: Any) {
+        if let delegate = delegate {
+            delegate.reciveIngredients(ingredints: choosedIngredients)
+        }
+        self.dismiss(animated: true, completion: nil)
     }
 }
 extension ChooseIngredientController: UISearchResultsUpdating {

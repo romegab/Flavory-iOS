@@ -7,7 +7,6 @@ class IngredientCell: UITableViewCell, Checkable {
     var isChecked: Bool = false {
         didSet {
             ingredient?.isChecked.toggle()
-            //self.ingredientImage.alpha = 0
             configureCheckmark()
         }
     }
@@ -27,6 +26,8 @@ class IngredientCell: UITableViewCell, Checkable {
             configureCheckmark()
         }
     }
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -72,6 +73,9 @@ class IngredientCell: UITableViewCell, Checkable {
                     self?.ingredientImage.image = image
                     UIView.animate(withDuration: 0.5) {
                         self?.ingredientImage .alpha = 1
+                        self?.ingredientImage.clipsToBounds = true
+                        self?.ingredientImage.layer.masksToBounds = true
+                        self?.ingredientImage.layer.cornerRadius = 15
                     }
                 case .failure(let error):
                     print("fire from the ingredient cell card")

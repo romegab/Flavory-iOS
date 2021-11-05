@@ -92,7 +92,7 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="checkMark" destination="Q2c-ha-2Xs" id="dBx-zC-gNC"/>
                 <outlet property="imageLoadingIndicator" destination="Wtu-Yd-gRV" id="aXU-hW-nK5"/>

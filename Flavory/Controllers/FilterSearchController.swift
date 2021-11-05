@@ -153,6 +153,11 @@ class FilterSearchContorller: UIViewController {
             blurView.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
     }
+    
+    @IBAction func chooseIngredientsButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "showChooseIngredientView", sender: nil)
+    }
+    
 }
 
 extension FilterSearchContorller: UIPickerViewDelegate, UIPickerViewDataSource {

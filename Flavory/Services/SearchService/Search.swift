@@ -16,9 +16,9 @@ class Search {
     private var isRequestFinished = false
     private var dataTask: URLSessionDataTask?
     private let session = URLSession.shared
-    private let apiKey: String = "12cbc8a03407496290efed34fba57028"
+    //private let apiKey: String = "12cbc8a03407496290efed34fba57028"
     //private let apiKey: String = "5d9a3e69b4234101a69aab06fbae2aae"
-    //private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
+    private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
     //private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
@@ -108,6 +108,28 @@ class Search {
         }.resume()
     }
     
+    func performIngredientSearch (query: String, completionHandler: @escaping (Result<[RecipeIngredient], NetworkError>) -> Void) {
+        let url:URL = ingredientSearchURL(query)
+        
+        isRequestFinished = false
+        let session = URLSession.shared
+        
+        session.dataTask(with: url) {data, response, error in
+            
+            if let error = error as NSError?, error.code == -999{
+                DispatchQueue.main.async {
+                    self.isRequestFinished = true
+                    completionHandler(.failure(.badConnection))
+                }
+            } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                self.isRequestFinished = true
+                if let data = data {
+                    completionHandler(.success(SearchResultParser.parseIngredients(data: data) ?? [RecipeIngredient]()))
+                }
+            }
+        }.resume()
+    }
+    
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         isRequestFinished = false
         //let session = URLSession.shared
@@ -126,6 +148,12 @@ class Search {
                 }
             }
         }.resume()
+    }
+    
+    private func ingredientSearchURL(_ query:String) -> URL {
+        let urlString = "https://api.spoonacular.com/food/ingredients/search?query=\(query)&apiKey=\(apiKey)"
+        let url = URL(string: urlString)
+        return url!
     }
     
     private func randomSearchURL(_ count: Int) -> URL {

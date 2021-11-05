@@ -73,8 +73,6 @@ class HomeViewController: UIViewController {
     }
     
     private func loadCarouselContent() {
-
-        
         search.performRandomSearch(7) { [weak self] result in
             switch result{
             case .success(let recipes):

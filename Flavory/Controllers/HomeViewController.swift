@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
     @IBOutlet fileprivate weak var resultView: UIView!
     @IBOutlet fileprivate weak var ResultTableView: UITableView!
@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
     var carouselRecipes = [ClippedRecipe]()
     var searchResult = [ClippedRecipe]()
     private var carouselDidLoad = false
+    private var filters: FilterUnion?
     
     
     override func viewDidLoad() {
@@ -136,6 +137,10 @@ class HomeViewController: UIViewController {
             if let recipe = selectedRecipe{
                 vc?.recipe = recipe
             }
+        } else if segue.destination is FilterSearchContorller {
+            
+            let vc = segue.destination as? FilterSearchContorller
+            vc?.delegate = self
         }
     }
     
@@ -181,6 +186,10 @@ extension HomeViewController: UICollectionViewDataSource {
             }
             performSegue(withIdentifier: "showRecipePreview", sender: nil)
         }
+    }
+    
+    func loadFilters(filters: FilterUnion) {
+        self.filters = filters
     }
 }
 

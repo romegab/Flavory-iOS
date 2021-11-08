@@ -247,7 +247,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPn-Ji-vIB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1504.8" y="-6.746626686656672"/>
+            <point key="canvasLocation" x="1505" y="32"/>
         </scene>
         <!--FLAVORY-->
         <scene sceneID="UHk-lE-Qhj">
@@ -601,6 +601,9 @@
                                     <color key="baseForegroundColor" name="orangeYellow"/>
                                     <color key="baseBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="filterButtonClicked:" destination="Sbr-YH-iBS" eventType="touchUpInside" id="juH-bF-80P"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wOn-Bd-8Cd"/>
@@ -757,7 +760,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVw-Tj-8Ql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3208.8000000000002" y="-1558.4707646176912"/>
+            <point key="canvasLocation" x="3321" y="-1558"/>
         </scene>
         <!--FLAVORY-->
         <scene sceneID="RYe-Ws-mTs">
@@ -1478,11 +1481,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DzY-nW-JZF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2269.5999999999999" y="-1558.4707646176912"/>
+            <point key="canvasLocation" x="2442" y="-1558"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4g2-nC-IWM"/>
+        <segue reference="d55-1f-qSf"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CarbohydratesIcon" width="120" height="120"/>

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FilterSearchControllerDelegate: AnyObject {
+    func loadFilters(filters: FilterUnion)
+}
+
 class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegate {
     
     let carbsSlider = RangeSlider(frame: .zero)
@@ -38,8 +42,10 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var dishType: UIView!
     
-    private var cuisines: [String] = ["American", "British", "Chinesse", " Easter EU", "French", "German", "Greek", "Indian", "Italian", "Mediterian", "Spanish"]
-    private var mealTypes: [String] = ["Main course", "Side dish", "Dessert", "Salad", "Breakfast", "Soup", "Snack", "Drink"]
+    private var cuisines: [String] = ["All", "American", "British", "Chinesse", " Easter EU", "French", "German", "Greek", "Indian", "Italian", "Mediterian", "Spanish"]
+    private var mealTypes: [String] = ["All", "Main course", "Side dish", "Dessert", "Salad", "Breakfast", "Soup", "Snack", "Drink"]
+    
+    weak var delegate: FilterSearchControllerDelegate?
     
     private var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     override func viewDidLoad() {
@@ -120,6 +126,14 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         proteinSlider.addTarget(self, action: #selector(proteinSliderValueChanged(_:)), for: .valueChanged)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showChooseIngredientView" {
+            let navVc = segue.destination as? UINavigationController
+            let vc = navVc?.viewControllers.first as! ChooseIngredientController
+            vc.delegate = self
+        }
+    }
+    
     @objc func carbsSliderValueChanged(_ carbsSlider: RangeSlider) {
         minCarbs.text = "min carbs: \(String(format: "%.0f", ceil(carbsSlider.lowerValue * 500)))"
         maxCarbs.text = "max carbs: \(String(format: "%.0f", ceil(carbsSlider.upperValue * 500)))"
@@ -163,6 +177,26 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         choosedIngredients = ingredints
     }
     
+    @IBAction func filterButtonClicked(_ sender: UIButton) {
+        let minCarbValue = Int(minCarbs.text?.replacingOccurrences(of: "min carbs: ", with: "") ?? "0") ?? 0
+        let maxCarbValue = Int(maxCarbs.text?.replacingOccurrences(of: "max carbs: ", with: "") ?? "0") ?? 0
+        
+        let minProteinValue = Int(minProtein.text?.replacingOccurrences(of: "min protein: ", with: "") ?? "0") ?? 0
+        let maxProteinValue = Int(maxProtein.text?.replacingOccurrences(of: "max protein: ", with: "") ?? "0") ?? 0
+        
+        let minFatValue = Int(minFat.text?.replacingOccurrences(of: "min fat: ", with: "") ?? "0") ?? 0
+        let maxFatValue = Int(maxFat.text?.replacingOccurrences(of: "max fat: ", with: "") ?? "0") ?? 0
+        
+        let minKcalValue = Int(minKcal.text?.replacingOccurrences(of: "min kcal: ", with: "") ?? "0") ?? 0
+        let maxKcalValue: Int = Int(maxKcal.text?.replacingOccurrences(of: "max kcal: ", with: "") ?? "0") ?? 0
+        
+        let cousine = cuisines[pickerView.selectedRow(inComponent: 0)]
+        let mealType = mealTypes[cousinePicker.selectedRow(inComponent: 0)]
+        
+        delegate?.loadFilters(filters: FilterUnion(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, choosedIngredients))
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension FilterSearchContorller: UIPickerViewDelegate, UIPickerViewDataSource {

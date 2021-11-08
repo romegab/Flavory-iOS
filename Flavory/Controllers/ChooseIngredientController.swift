@@ -13,7 +13,7 @@ protocol ChooseIngredientControlerDelegate: AnyObject {
 
 class ChooseIngredientController: UIViewController {
     
-    weak private var delegate: ChooseIngredientControlerDelegate?
+    weak var delegate: ChooseIngredientControlerDelegate?
     let searchController = UISearchController(searchResultsController: nil)
     private var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     private var currentIngredients: [RecipeIngredient] = [RecipeIngredient]()

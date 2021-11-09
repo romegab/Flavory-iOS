@@ -98,6 +98,7 @@ extension ChooseIngredientController: UITableViewDelegate, UITableViewDataSource
         noResultsLabel.text = "No ingredients are searched"
         infoDescriptionLabel.text = "Searched Ingredients"
         if currentSegmentIndex == 1 {
+            infoDescriptionLabel.alpha = 0
             if currentIngredients.count != 0 {
                 noResultsView.alpha = 0
             } else {
@@ -106,7 +107,7 @@ extension ChooseIngredientController: UITableViewDelegate, UITableViewDataSource
             return currentIngredients.count
         } else {
             infoDescriptionLabel.text = "Selected Ingredients"
-
+            infoDescriptionLabel.alpha = 1
             noResultsLabel.text = "No ingredients are selected"
             if choosedIngredients.count != 0 {
                 noResultsView.alpha = 0

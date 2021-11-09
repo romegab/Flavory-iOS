@@ -197,6 +197,10 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
             self.delegate?.loadFilters(filters: FilterUnion(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, self.choosedIngredients))
        })
     }
+    
+    @IBAction func cancelButtonClicked(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension FilterSearchContorller: UIPickerViewDelegate, UIPickerViewDataSource {

@@ -7,6 +7,7 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
     @IBOutlet fileprivate weak var editButton: UIBarButtonItem!
     @IBOutlet fileprivate weak var tableView: UITableView!
     @IBOutlet fileprivate weak var viewTitle: UILabel!
+    @IBOutlet weak var noRecipesLabel: UILabel!
     
     var selectedRecipe: ClippedRecipe?
     private var isInEditingMood: Bool = false {
@@ -105,6 +106,12 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
 extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if fetchedResultsController.fetchedObjects?.count == 0 {
+            noRecipesLabel.alpha = 1
+        }
+        else {
+            noRecipesLabel.alpha = 0
+        }
         return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     

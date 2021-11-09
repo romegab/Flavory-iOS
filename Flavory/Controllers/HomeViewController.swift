@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     @IBOutlet fileprivate weak var lookUpForEatText: UILabel!
     @IBOutlet fileprivate weak var dailyMenuText: UILabel!
     @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var noSearchResultView: UIView!
     
     let searchController = UISearchController()
     
@@ -38,7 +39,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        filterButton.customView?.isHidden = true
+        filterButton.tintColor = UIColor(named: "orangeYellow")
         
         let applicationDocumentsDirectory: URL = {
                   let paths = FileManager.default.urls(for: .documentDirectory,
@@ -57,6 +58,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         ResultTableView.keyboardDismissMode = .onDrag
         ResultTableView.delegate = self
         
+        setResultStatus()
         setBlurredBackground()
         adjustNavigationBar()
         loadCarouselContent()
@@ -69,13 +71,22 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         searchController.searchResultsUpdater = self
         searchController.view.backgroundColor = .clear
         searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search recipes", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+
         searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search for eat"
+        
         searchController.hidesNavigationBarDuringPresentation = false
         
         navigationItem.searchController = searchController
         definesPresentationContext = true
+    }
+    
+    private func setResultStatus() {
+        if searchResult.count == 0 {
+            self.view.bringSubviewToFront(noSearchResultView);
+        }
     }
     
     private func loadCarouselContent() {
@@ -268,26 +279,37 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        filterButton.customView?.isHidden = false
-        
         if searchController.searchBar.text != "" {
             self.filterButton.isEnabled = false
-        } else {
-            self.filterButton.isEnabled = true
+            filterButton.tintColor = UIColor(named: "orangeYellow")
         }
         
-        if !isSearchTrothelled{
+        if !isSearchTrothelled && searchResult.count != 0{
             isSearchTrothelled = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            if searchController.searchBar.text != "" {
+                self.filterButton.isEnabled = false
+                filterButton.tintColor = UIColor(named: "orangeYellow")
+            } else {
+                self.filterButton.isEnabled = true
+                filterButton.tintColor = UIColor.white
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if searchController.searchBar.text != "" {
-                    self.filterButton.isEnabled = false
                     self.performSearch(query: searchController.searchBar.text ?? "nilValue")
                 } else {
-                    self.filterButton.isEnabled = true
                     self.searchResult.removeAll()
                     self.ResultTableView.reloadData()
                 }
                 self.isSearchTrothelled = false
+            }
+        } else {
+            if searchController.searchBar.text != "" {
+                self.filterButton.isEnabled = false
+                filterButton.tintColor = UIColor(named: "orangeYellow")
+                self.performSearch(query: searchController.searchBar.text ?? "nilValue")
+            } else {
+                self.searchResult.removeAll()
+                self.ResultTableView.reloadData()
             }
         }
     }
@@ -312,23 +334,20 @@ extension HomeViewController: UISearchResultsUpdating {
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         searchResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         let currentRecipe = searchResult[indexPath.row]
         cell.recipe = currentRecipe
         return cell
-        
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
         let id: String = String(searchResult[indexPath.row].id)
@@ -363,10 +382,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
     func presentSearchController(_ searchController: UISearchController) {
+        filterButton.isEnabled = true
+        filterButton.tintColor = UIColor.white
         resultView.isHidden = false
     }
     
     func willDismissSearchController(_ searchController: UISearchController) {
+        filterButton.isEnabled = false
+        filterButton.tintColor = UIColor(named: "orangeYellow")
         UIView.animate(withDuration: 0.3) {
             self.resultView.alpha = 0
             self.ResultTableView.alpha = 0

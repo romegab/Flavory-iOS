@@ -16,7 +16,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     @IBOutlet fileprivate weak var collecitonView: UICollectionView!
     @IBOutlet fileprivate weak var lookUpForEatText: UILabel!
     @IBOutlet fileprivate weak var dailyMenuText: UILabel!
-    @IBOutlet weak var filterButton: UIBarButtonItem!
+    @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var noSearchResultView: UIView!
     
     let searchController = UISearchController()
@@ -38,9 +38,8 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        filterButton.tintColor = UIColor(named: "orangeYellow")
-        
+        filterButton.alpha = 0
+        UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
         let applicationDocumentsDirectory: URL = {
                   let paths = FileManager.default.urls(for: .documentDirectory,
                                                         in: .userDomainMask)
@@ -281,17 +280,14 @@ extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.searchBar.text != "" {
             self.filterButton.isEnabled = false
-            filterButton.tintColor = UIColor(named: "orangeYellow")
+        } else {
+            self.filterButton.isEnabled = true
         }
         
         if !isSearchTrothelled && searchResult.count != 0{
             isSearchTrothelled = true
             if searchController.searchBar.text != "" {
-                self.filterButton.isEnabled = false
-                filterButton.tintColor = UIColor(named: "orangeYellow")
             } else {
-                self.filterButton.isEnabled = true
-                filterButton.tintColor = UIColor.white
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 if searchController.searchBar.text != "" {
@@ -305,7 +301,6 @@ extension HomeViewController: UISearchResultsUpdating {
         } else {
             if searchController.searchBar.text != "" {
                 self.filterButton.isEnabled = false
-                filterButton.tintColor = UIColor(named: "orangeYellow")
                 self.performSearch(query: searchController.searchBar.text ?? "nilValue")
             } else {
                 self.searchResult.removeAll()
@@ -383,13 +378,13 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
     func presentSearchController(_ searchController: UISearchController) {
         filterButton.isEnabled = true
-        filterButton.tintColor = UIColor.white
+        filterButton.alpha = 1
         resultView.isHidden = false
     }
     
     func willDismissSearchController(_ searchController: UISearchController) {
-        filterButton.isEnabled = false
-        filterButton.tintColor = UIColor(named: "orangeYellow")
+        self.filterButton.isEnabled = false
+        filterButton.alpha = 0
         UIView.animate(withDuration: 0.3) {
             self.resultView.alpha = 0
             self.ResultTableView.alpha = 0

@@ -26,6 +26,7 @@ class ChooseIngredientController: UIViewController {
     @IBOutlet weak var noResultsView: UIView!
     @IBOutlet weak var noResultsLabel: UILabel!
     @IBOutlet weak var infoDescriptionLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
         setDelegates()
@@ -38,6 +39,8 @@ class ChooseIngredientController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = UIColor.white
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Done"
         tableView.delegate = self
         tableView.dataSource = self
         searchController.searchBar.placeholder = "Search Ingredients"
@@ -163,6 +166,8 @@ extension ChooseIngredientController: UITableViewDelegate, UITableViewDataSource
 
 extension ChooseIngredientController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        doneButton.isHidden = true
+        doneButton.constraints.first(where: {$0.identifier == "buttonHeightConstraint"})?.constant = 0
         currentSegmentIndex = 1
         tableView.reloadData()
         
@@ -170,8 +175,11 @@ extension ChooseIngredientController: UISearchBarDelegate {
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        doneButton.isHidden = false
         currentSegmentIndex = 2
         tableView.reloadData()
+        doneButton.isHidden = false
+        doneButton.constraints.first(where: {$0.identifier == "buttonHeightConstraint"})?.constant = 50
     }
     
 }

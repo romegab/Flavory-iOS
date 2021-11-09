@@ -27,8 +27,13 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     var carouselRecipes = [ClippedRecipe]()
     var searchResult = [ClippedRecipe]()
     private var carouselDidLoad = false
-    private var filters: FilterUnion?
-    
+    private var filters: FilterUnion? {
+        didSet {
+            if searchResult.count == 0 {
+                performFilterSearch()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -128,6 +133,66 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         ])
     }
     
+    private func performFilterSearch() {
+        if filters?.ingredients?.count != 0 {
+            performSearchByIngredients()
+            if let filters = filters {
+                filterSearchResultByNutrients(filters: filters)
+            }
+        } else {
+            performSearhcByNutrients()
+        }
+    }
+    
+    private func performSearchByIngredients() {
+        if let filters = filters {
+            search.performSearchByIngredients(filters: filters) { [weak self] result in
+                switch result{
+                case .success(let recipes):
+                    self?.searchResult = recipes
+                    DispatchQueue.main.async {
+                        self?.ResultTableView.reloadData()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func performSearhcByNutrients() {
+        if let filters = filters {
+            search.performNutrientsSearch(filters: filters) { [weak self] result in
+                switch result{
+                case .success(let recipes):
+                    self?.searchResult = recipes
+                    DispatchQueue.main.async {
+                        self?.ResultTableView.reloadData()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func filterSearchResultByNutrients(filters: FilterUnion) {
+        var result: [ClippedRecipe] = [ClippedRecipe]()
+        
+        for recipe in searchResult {
+            if ((recipe.recipeDetails.calories ?? 0 >= filters.minCalories && recipe.recipeDetails.calories ?? 0 <= filters.maxCalories) && (recipe.recipeDetails.fat ?? 0 >= filters.minFat && recipe.recipeDetails.fat ?? 0 <= filters.maxFat) && (recipe.recipeDetails.protein ?? 0 >= filters.minProtein && recipe.recipeDetails.protein ?? 0 <= filters.maxProtein)) {
+                result.append(recipe)
+            }
+        }
+        
+        searchResult = result
+    }
+
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is RecipePreviewController {
@@ -205,10 +270,23 @@ extension HomeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         filterButton.customView?.isHidden = false
         
+        if searchController.searchBar.text != "" {
+            self.filterButton.isEnabled = false
+        } else {
+            self.filterButton.isEnabled = true
+        }
+        
         if !isSearchTrothelled{
             isSearchTrothelled = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                self.performSearch(query: searchController.searchBar.text ?? "asdasdasd")
+                if searchController.searchBar.text != "" {
+                    self.filterButton.isEnabled = false
+                    self.performSearch(query: searchController.searchBar.text ?? "nilValue")
+                } else {
+                    self.filterButton.isEnabled = true
+                    self.searchResult.removeAll()
+                    self.ResultTableView.reloadData()
+                }
                 self.isSearchTrothelled = false
             }
         }

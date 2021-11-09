@@ -67,10 +67,16 @@ class ChooseIngredientController: UIViewController {
     }
     
     @IBAction func doneButtonClicked(_ sender: Any) {
-        if let delegate = delegate {
-            delegate.reciveIngredients(ingredints: choosedIngredients)
+        if currentSegmentIndex == 2 {
+            if let delegate = delegate {
+                delegate.reciveIngredients(ingredints: choosedIngredients)
+            }
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+            currentSegmentIndex = 2
+            tableView.reloadData()
         }
-        self.dismiss(animated: true, completion: nil)
     }
 }
 extension ChooseIngredientController: UISearchResultsUpdating {

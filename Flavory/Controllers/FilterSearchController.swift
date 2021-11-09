@@ -193,9 +193,9 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         let cousine = cuisines[pickerView.selectedRow(inComponent: 0)]
         let mealType = mealTypes[cousinePicker.selectedRow(inComponent: 0)]
         
-        delegate?.loadFilters(filters: FilterUnion(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, choosedIngredients))
-        
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.delegate?.loadFilters(filters: FilterUnion(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, self.choosedIngredients))
+       })
     }
 }
 

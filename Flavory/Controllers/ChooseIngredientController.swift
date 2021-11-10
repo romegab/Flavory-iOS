@@ -15,7 +15,7 @@ class ChooseIngredientController: UIViewController {
     
     weak var delegate: ChooseIngredientControlerDelegate?
     let searchController = UISearchController(searchResultsController: nil)
-    private var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
+    var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     private var currentIngredients: [RecipeIngredient] = [RecipeIngredient]()
     private let search: Search = Search()
     private var isSearchTrothelled: Bool = false
@@ -40,6 +40,8 @@ class ChooseIngredientController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         searchController.searchBar.tintColor = UIColor.white
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UISearchBar.self]).title = "Done"
         tableView.delegate = self
         tableView.dataSource = self
@@ -101,7 +103,7 @@ extension ChooseIngredientController: UITableViewDelegate, UITableViewDataSource
         noResultsLabel.text = "No ingredients are searched"
         infoDescriptionLabel.text = "Searched Ingredients"
         if currentSegmentIndex == 1 {
-            infoDescriptionLabel.alpha = 0
+            //infoDescriptionLabel.alpha = 0
             if currentIngredients.count != 0 {
                 noResultsView.alpha = 0
             } else {

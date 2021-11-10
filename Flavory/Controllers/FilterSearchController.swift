@@ -130,6 +130,7 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         if segue.identifier == "showChooseIngredientView" {
             let navVc = segue.destination as? UINavigationController
             let vc = navVc?.viewControllers.first as! ChooseIngredientController
+            vc.choosedIngredients = choosedIngredients
             vc.delegate = self
         }
     }

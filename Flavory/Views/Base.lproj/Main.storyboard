@@ -249,6 +249,22 @@
             </objects>
             <point key="canvasLocation" x="1505" y="-6"/>
         </scene>
+        <!--User Stats View Controller-->
+        <scene sceneID="V7A-Av-MeI">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="tBg-e3-R4U" customClass="UserStatsViewController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="3gJ-Ry-FQg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="6tu-Vt-Bti"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bEn-zy-rlJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2442" y="18"/>
+        </scene>
         <!--FLAVORY-->
         <scene sceneID="UHk-lE-Qhj">
             <objects>
@@ -803,7 +819,7 @@
         <!--FLAVORY-->
         <scene sceneID="RYe-Ws-mTs">
             <objects>
-                <viewController storyboardIdentifier="Home" id="Wxn-Ov-OGA" customClass="HomeViewController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" modalPresentationStyle="fullScreen" id="Wxn-Ov-OGA" customClass="HomeViewController" customModule="Flavory" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WIk-s0-aGI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -931,6 +947,14 @@
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIt-jd-NpF">
+                                                                <rect key="frame" x="0.0" y="0.0" width="167.5" height="227.5"/>
+                                                                <state key="normal" title="Button"/>
+                                                                <buttonConfiguration key="configuration" style="plain"/>
+                                                                <connections>
+                                                                    <action selector="userStatsButtonPressed:" destination="Wxn-Ov-OGA" eventType="touchUpInside" id="I26-gx-II6"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -938,10 +962,14 @@
                                                             <constraint firstItem="hhX-pp-DvZ" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" constant="10" id="Aq6-ln-6qG"/>
                                                             <constraint firstItem="hhX-pp-DvZ" firstAttribute="leading" secondItem="0bv-w7-hs2" secondAttribute="leading" constant="15" id="CLh-J3-xKS"/>
                                                             <constraint firstItem="spw-cs-oHL" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" id="Ox6-zI-0JF"/>
+                                                            <constraint firstItem="oIt-jd-NpF" firstAttribute="leading" secondItem="0bv-w7-hs2" secondAttribute="leading" id="TJ7-la-eHw"/>
                                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hhX-pp-DvZ" secondAttribute="bottom" constant="30" id="TPh-BV-xu2"/>
                                                             <constraint firstAttribute="trailing" secondItem="spw-cs-oHL" secondAttribute="trailing" id="c5D-pj-mZs"/>
                                                             <constraint firstItem="spw-cs-oHL" firstAttribute="leading" secondItem="0bv-w7-hs2" secondAttribute="leading" id="elK-Vc-Kyr"/>
                                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hhX-pp-DvZ" secondAttribute="trailing" constant="15" id="lat-Sv-fmb"/>
+                                                            <constraint firstAttribute="trailing" secondItem="oIt-jd-NpF" secondAttribute="trailing" id="qLO-bo-PjI"/>
+                                                            <constraint firstItem="oIt-jd-NpF" firstAttribute="top" secondItem="0bv-w7-hs2" secondAttribute="top" id="qNh-sh-6mH"/>
+                                                            <constraint firstAttribute="bottom" secondItem="oIt-jd-NpF" secondAttribute="bottom" id="zAO-IO-OHf"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -1071,6 +1099,7 @@
                         <segue destination="0ZY-Cs-kwT" kind="presentation" identifier="showRecipePreview" id="4g2-nC-IWM"/>
                         <segue destination="lfG-a9-bee" kind="presentation" identifier="getDailyMenu" modalPresentationStyle="fullScreen" id="lxk-Mf-HmM"/>
                         <segue destination="Sbr-YH-iBS" kind="presentation" identifier="showFilters" id="mtr-Gb-Kkb"/>
+                        <segue destination="tBg-e3-R4U" kind="presentation" identifier="showUserStats" modalPresentationStyle="overFullScreen" id="txF-RS-ZHl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsy-Bl-68G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1584,7 +1613,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="d55-1f-qSf"/>
+        <segue reference="4g2-nC-IWM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CarbohydratesIcon" width="120" height="120"/>

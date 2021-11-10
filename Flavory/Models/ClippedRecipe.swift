@@ -45,6 +45,22 @@ class ClippedRecipe: Codable {
         }
     }
     
+    var dishType: String? {
+        if dishTypes.contains("main course") {
+            return "main course"
+        } else if dishTypes.contains("side dish") {
+            return "side dish"
+        } else if dishTypes.contains("dessert") {
+            return "dessert"
+        } else if dishTypes.contains("salad") {
+            return "salad"
+        } else if dishTypes.contains("soup") {
+            return "soup"
+        } else {
+            return nil
+        }
+    }
+    
     var recipePrice: Double{
         get{
             if let pricePerServing = pricePerServing{
@@ -77,6 +93,7 @@ class ClippedRecipe: Codable {
     private var summary: String?
     var extendedIngredients: [RecipeIngredient]?
     private var analyzedInstructions: [AnalyzedInstruction]?
+    private let dishTypes: [String]
     var isInProgress: Bool = false
     
     private enum CodingKeys: String, CodingKey {

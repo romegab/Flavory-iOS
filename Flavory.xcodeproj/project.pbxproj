@@ -45,6 +45,8 @@
 		BCA6856F27343CAC00FDFE8D /* ingredientsRawData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BCA6856E27343CAC00FDFE8D /* ingredientsRawData.txt */; };
 		BCA685732735293500FDFE8D /* IngredientResultArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA685722735293500FDFE8D /* IngredientResultArray.swift */; };
 		BCA6857527392AF200FDFE8D /* FilterUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA6857427392AF200FDFE8D /* FilterUnion.swift */; };
+		BCA6858D273BF32700FDFE8D /* UserStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA6858C273BF32700FDFE8D /* UserStatsViewController.swift */; };
+		BCA68590273BF36100FDFE8D /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = BCA6858F273BF36100FDFE8D /* Charts */; };
 		BCA9E9982706EFBE00783488 /* RecipesFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9E9972706EFBE00783488 /* RecipesFlowLayout.swift */; };
 		BCBA861E2710204F00912308 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA861D2710204F00912308 /* ImageService.swift */; };
 		BCBA86212710265000912308 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBA86202710265000912308 /* Cancellable.swift */; };
@@ -104,6 +106,7 @@
 		BCA6856E27343CAC00FDFE8D /* ingredientsRawData.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ingredientsRawData.txt; sourceTree = "<group>"; };
 		BCA685722735293500FDFE8D /* IngredientResultArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientResultArray.swift; sourceTree = "<group>"; };
 		BCA6857427392AF200FDFE8D /* FilterUnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterUnion.swift; sourceTree = "<group>"; };
+		BCA6858C273BF32700FDFE8D /* UserStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsViewController.swift; sourceTree = "<group>"; };
 		BCA9E9972706EFBE00783488 /* RecipesFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesFlowLayout.swift; sourceTree = "<group>"; };
 		BCBA861D2710204F00912308 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		BCBA86202710265000912308 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
@@ -127,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCA68590273BF36100FDFE8D /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +216,7 @@
 				BCBE5716272C29E700705A91 /* DailyMenuController.swift */,
 				BC10D3822732900D009F5A64 /* FilterSearchController.swift */,
 				BCA6856C273434F900FDFE8D /* ChooseIngredientController.swift */,
+				BCA6858C273BF32700FDFE8D /* UserStatsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -315,6 +320,9 @@
 			dependencies = (
 			);
 			name = Flavory;
+			packageProductDependencies = (
+				BCA6858F273BF36100FDFE8D /* Charts */,
+			);
 			productName = Flavory;
 			productReference = BC21EBFC26FDF6F500AE44CC /* Flavory.app */;
 			productType = "com.apple.product-type.application";
@@ -343,6 +351,9 @@
 				Base,
 			);
 			mainGroup = BC21EBF326FDF6F500AE44CC;
+			packageReferences = (
+				BCA6858E273BF36100FDFE8D /* XCRemoteSwiftPackageReference "Charts" */,
+			);
 			productRefGroup = BC21EBFD26FDF6F500AE44CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -385,6 +396,7 @@
 				BC21404427145BC300893DCC /* IngredientCell.swift in Sources */,
 				BC50B94C271EA07700E76E78 /* SearchResultCell.swift in Sources */,
 				BCC06D2327146CC7007A451F /* RecipeCookingController.swift in Sources */,
+				BCA6858D273BF32700FDFE8D /* UserStatsViewController.swift in Sources */,
 				BC214041271456BE00893DCC /* RecipeIngredient.swift in Sources */,
 				BC3A60F22701AD30008A9EB4 /* ResultArray.swift in Sources */,
 				BC10D3812732883E009F5A64 /* RangeSliderTrackLayer.swift in Sources */,
@@ -642,6 +654,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BCA6858E273BF36100FDFE8D /* XCRemoteSwiftPackageReference "Charts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/danielgindi/Charts.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BCA6858F273BF36100FDFE8D /* Charts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCA6858E273BF36100FDFE8D /* XCRemoteSwiftPackageReference "Charts" */;
+			productName = Charts;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		BC21EC0826FDF6F500AE44CC /* Flavory.xcdatamodeld */ = {

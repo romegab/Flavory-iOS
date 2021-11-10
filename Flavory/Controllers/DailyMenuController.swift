@@ -49,7 +49,7 @@ class DailyMenuController: UIViewController {
         
         if let loadedMenu = DataManager.shared.getDailyMenu() {
             var loadedMenuRecipes = [ClippedRecipe]()
-            var currentMenuNutritients = MenuNutrients()
+            let currentMenuNutritients = MenuNutrients()
             
             currentMenuNutritients.protein = Double(loadedMenu.protein)
             currentMenuNutritients.fat = Double(loadedMenu.fat)

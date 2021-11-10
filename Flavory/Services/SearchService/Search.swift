@@ -22,10 +22,8 @@ class Search {
     //private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
-        
             session.invalidateAndCancel()
             dataTask?.cancel()
-        
     }
     
     func performRandomSearch(_ count: Int, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void){
@@ -108,6 +106,76 @@ class Search {
         }.resume()
     }
     
+    func performIngredientSearch (query: String, completionHandler: @escaping (Result<[RecipeIngredient], NetworkError>) -> Void) {
+        let url:URL = ingredientSearchURL(query)
+        
+        isRequestFinished = false
+        let session = URLSession.shared
+        
+        session.dataTask(with: url) {data, response, error in
+            
+            if let error = error as NSError?, error.code == -999{
+                DispatchQueue.main.async {
+                    self.isRequestFinished = true
+                    completionHandler(.failure(.badConnection))
+                }
+            } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                self.isRequestFinished = true
+                if let data = data {
+                    completionHandler(.success(SearchResultParser.parseIngredients(data: data) ?? [RecipeIngredient]()))
+                }
+            }
+        }.resume()
+    }
+    
+    func performSearchByIngredients (filters: FilterUnion, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
+        if let ingredients = filters.ingredients{
+            let url:URL = recipeSearchByIngredientsURL(ingredients: ingredients)
+            
+            isRequestFinished = false
+            let session = URLSession.shared
+            
+            session.dataTask(with: url) {data, response, error in
+                
+                if let error = error as NSError?, error.code == -999{
+                    DispatchQueue.main.async {
+                        self.isRequestFinished = true
+                        completionHandler(.failure(.badConnection))
+                    }
+                } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                    self.isRequestFinished = true
+                    if let data = data {
+                       print( String(decoding: data, as: UTF8.self))
+                        completionHandler(.success(SearchResultParser.parseRecipeByIngredients(data: data)))
+                    }
+                }
+            }.resume()
+        }
+    }
+    
+    func performNutrientsSearch (filters: FilterUnion, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
+        let url:URL = nutrientsSearchURL(filters: filters)
+        
+        isRequestFinished = false
+        let session = URLSession.shared
+        
+        session.dataTask(with: url) {data, response, error in
+            
+            if let error = error as NSError?, error.code == -999{
+                DispatchQueue.main.async {
+                    self.isRequestFinished = true
+                    completionHandler(.failure(.badConnection))
+                }
+            } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
+                self.isRequestFinished = true
+                if let data = data {
+                    completionHandler(.success(SearchResultParser.parseRecipeByIngredients(data: data)))
+                }
+            }
+        }.resume()
+    
+    }
+    
     private func performRequest(with url: URL, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         isRequestFinished = false
         //let session = URLSession.shared
@@ -126,6 +194,12 @@ class Search {
                 }
             }
         }.resume()
+    }
+    
+    private func ingredientSearchURL(_ query:String) -> URL {
+        let urlString = "https://api.spoonacular.com/food/ingredients/search?query=\(query)&apiKey=\(apiKey)"
+        let url = URL(string: urlString)
+        return url!
     }
     
     private func randomSearchURL(_ count: Int) -> URL {
@@ -153,4 +227,25 @@ class Search {
         return url!
     }
     
+    private func recipeSearchByIngredientsURL(ingredients: [RecipeIngredient]) -> URL {
+        var ingredientsToString = ""
+        for ingredient in ingredients {
+            if let name = ingredient.name {
+                ingredientsToString += ",\(name.replacingOccurrences(of: " ", with: "%20"))"
+            }
+        }
+        
+        ingredientsToString.removeFirst()
+        
+        let urlString = "https://api.spoonacular.com/recipes/findByIngredients?ingredients=\(ingredientsToString)&apiKey=\(apiKey)"
+        print(urlString)
+        let url = URL(string: urlString)
+        return url!
+    }
+    
+    private func nutrientsSearchURL(filters: FilterUnion) -> URL {
+        let urlString = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=\(filters.minCarbs)&maxCarbs=\(filters.maxCarbs)&minProtein=\(filters.minProtein)&maxProtein=\(filters.maxProtein)&minCalories=\(filters.minCalories)&maxCalories=\(filters.maxCalories)&minFat=\(filters.minFat)&maxFat=\(filters.maxFat)&apiKey=\(apiKey)"
+        let url = URL(string: urlString)
+        return url!
+    }
 }

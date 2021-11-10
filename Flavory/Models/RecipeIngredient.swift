@@ -35,4 +35,5 @@ class RecipeIngredient: Codable {
         self.isChecked = ingredient.isChecked
         self.image = ingredient.image
     }
+    
 }

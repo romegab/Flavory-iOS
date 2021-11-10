@@ -50,4 +50,27 @@ class SearchResultParser{
         }
         return ([ClippedRecipe](), MenuNutrients())
     }
+    
+    static func parseIngredients(data: Data) -> [RecipeIngredient]? {
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode(IngredientResultArray.self, from:data)
+            
+            return (result.results ?? nil)
+        } catch {
+            print("JSON Error: \(error)")
+        }
+        return [RecipeIngredient]()
+    }
+    
+    static func parseRecipeByIngredients(data: Data) -> [ClippedRecipe] {
+        do {
+            let decoder = JSONDecoder()
+            let result = try decoder.decode([ClippedRecipe].self, from:data)
+            return (result)
+        } catch {
+            print("JSON Error: \(error)")
+        }
+        return [ClippedRecipe]()
+    }
 }

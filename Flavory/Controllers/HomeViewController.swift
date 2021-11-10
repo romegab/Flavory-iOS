@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
     @IBOutlet fileprivate weak var resultView: UIView!
     @IBOutlet fileprivate weak var ResultTableView: UITableView!
@@ -16,6 +16,8 @@ class HomeViewController: UIViewController {
     @IBOutlet fileprivate weak var collecitonView: UICollectionView!
     @IBOutlet fileprivate weak var lookUpForEatText: UILabel!
     @IBOutlet fileprivate weak var dailyMenuText: UILabel!
+    @IBOutlet weak var filterButton: UIButton!
+    @IBOutlet weak var noSearchResultView: UIView!
     
     let searchController = UISearchController()
     
@@ -26,11 +28,18 @@ class HomeViewController: UIViewController {
     var carouselRecipes = [ClippedRecipe]()
     var searchResult = [ClippedRecipe]()
     private var carouselDidLoad = false
-    
+    private var filters: FilterUnion? {
+        didSet {
+            if searchResult.count == 0 {
+                performFilterSearch()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        filterButton.alpha = 0
+        UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
         let applicationDocumentsDirectory: URL = {
                   let paths = FileManager.default.urls(for: .documentDirectory,
                                                         in: .userDomainMask)
@@ -48,6 +57,7 @@ class HomeViewController: UIViewController {
         ResultTableView.keyboardDismissMode = .onDrag
         ResultTableView.delegate = self
         
+        setResultStatus()
         setBlurredBackground()
         adjustNavigationBar()
         loadCarouselContent()
@@ -60,18 +70,25 @@ class HomeViewController: UIViewController {
         searchController.searchResultsUpdater = self
         searchController.view.backgroundColor = .clear
         searchController.searchBar.delegate = self
+        searchController.searchBar.tintColor = UIColor.white
+        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search recipes", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
+
         searchController.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search for eat"
+        
         searchController.hidesNavigationBarDuringPresentation = false
         
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
     
+    private func setResultStatus() {
+        if searchResult.count == 0 {
+            self.view.bringSubviewToFront(noSearchResultView);
+        }
+    }
+    
     private func loadCarouselContent() {
-
-        
         search.performRandomSearch(7) { [weak self] result in
             switch result{
             case .success(let recipes):
@@ -126,6 +143,66 @@ class HomeViewController: UIViewController {
         ])
     }
     
+    private func performFilterSearch() {
+        if filters?.ingredients?.count != 0 {
+            performSearchByIngredients()
+            if let filters = filters {
+                filterSearchResultByNutrients(filters: filters)
+            }
+        } else {
+            performSearhcByNutrients()
+        }
+    }
+    
+    private func performSearchByIngredients() {
+        if let filters = filters {
+            search.performSearchByIngredients(filters: filters) { [weak self] result in
+                switch result{
+                case .success(let recipes):
+                    self?.searchResult = recipes
+                    DispatchQueue.main.async {
+                        self?.ResultTableView.reloadData()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func performSearhcByNutrients() {
+        if let filters = filters {
+            search.performNutrientsSearch(filters: filters) { [weak self] result in
+                switch result{
+                case .success(let recipes):
+                    self?.searchResult = recipes
+                    DispatchQueue.main.async {
+                        self?.ResultTableView.reloadData()
+                    }
+                case .failure(let error):
+                    DispatchQueue.main.async {
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func filterSearchResultByNutrients(filters: FilterUnion) {
+        var result: [ClippedRecipe] = [ClippedRecipe]()
+        
+        for recipe in searchResult {
+            if ((recipe.recipeDetails.calories ?? 0 >= filters.minCalories && recipe.recipeDetails.calories ?? 0 <= filters.maxCalories) && (recipe.recipeDetails.fat ?? 0 >= filters.minFat && recipe.recipeDetails.fat ?? 0 <= filters.maxFat) && (recipe.recipeDetails.protein ?? 0 >= filters.minProtein && recipe.recipeDetails.protein ?? 0 <= filters.maxProtein)) {
+                result.append(recipe)
+            }
+        }
+        
+        searchResult = result
+    }
+
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.destination is RecipePreviewController {
@@ -135,11 +212,19 @@ class HomeViewController: UIViewController {
             if let recipe = selectedRecipe{
                 vc?.recipe = recipe
             }
+        } else if segue.destination is FilterSearchContorller {
+            
+            let vc = segue.destination as? FilterSearchContorller
+            vc?.delegate = self
         }
     }
     
     @IBAction func getDailyMenuClicked(_ sender: UIButton) {
         performSegue(withIdentifier: "getDailyMenu", sender: nil)
+    }
+    
+    @IBAction func filterButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "showFilters", sender: nil)
     }
     
 }
@@ -177,6 +262,10 @@ extension HomeViewController: UICollectionViewDataSource {
             performSegue(withIdentifier: "showRecipePreview", sender: nil)
         }
     }
+    
+    func loadFilters(filters: FilterUnion) {
+        self.filters = filters
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
@@ -189,13 +278,33 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
 extension HomeViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        //search.terminateRequest()
+        if searchController.searchBar.text != "" {
+            self.filterButton.isEnabled = false
+        } else {
+            self.filterButton.isEnabled = true
+        }
         
-        if !isSearchTrothelled{
+        if !isSearchTrothelled && searchResult.count != 0{
             isSearchTrothelled = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
-                self.performSearch(query: searchController.searchBar.text ?? "asdasdasd")
+            if searchController.searchBar.text != "" {
+            } else {
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                if searchController.searchBar.text != "" {
+                    self.performSearch(query: searchController.searchBar.text ?? "nilValue")
+                } else {
+                    self.searchResult.removeAll()
+                    self.ResultTableView.reloadData()
+                }
                 self.isSearchTrothelled = false
+            }
+        } else {
+            if searchController.searchBar.text != "" {
+                self.filterButton.isEnabled = false
+                self.performSearch(query: searchController.searchBar.text ?? "nilValue")
+            } else {
+                self.searchResult.removeAll()
+                self.ResultTableView.reloadData()
             }
         }
     }
@@ -220,23 +329,20 @@ extension HomeViewController: UISearchResultsUpdating {
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         searchResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as! SearchResultCell
         let currentRecipe = searchResult[indexPath.row]
         cell.recipe = currentRecipe
         return cell
-        
     }
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
         let id: String = String(searchResult[indexPath.row].id)
@@ -271,10 +377,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
     
     func presentSearchController(_ searchController: UISearchController) {
+        filterButton.isEnabled = true
+        filterButton.alpha = 1
         resultView.isHidden = false
     }
     
     func willDismissSearchController(_ searchController: UISearchController) {
+        self.filterButton.isEnabled = false
+        filterButton.alpha = 0
         UIView.animate(withDuration: 0.3) {
             self.resultView.alpha = 0
             self.ResultTableView.alpha = 0

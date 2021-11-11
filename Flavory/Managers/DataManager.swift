@@ -55,6 +55,32 @@ class DataManager {
         return nil
     }
     
+    func getCountOfDishType(_ dishType: String) -> Int {
+        let recipeFetchRequest: NSFetchRequest<RecipeModel>
+        recipeFetchRequest = RecipeModel.fetchRequest()
+        
+        recipeFetchRequest.predicate = NSPredicate(
+            format: "isInProgress = %isInProgress", false
+        )
+        
+        do {
+            let loadedRecipes = try context.fetch(recipeFetchRequest)
+            var result = 0
+            
+            for currentRecipe in loadedRecipes {
+                if currentRecipe.type == dishType {
+                    result += 1
+                }
+            }
+            return result
+        }
+        catch {
+            print("get started recipes is not wokring properly")
+        }
+        
+        return 0
+    }
+    
     func getDailyMenu() -> (DailyMenu?) {
         let currentData = Date()
         let format = DateFormatter()
@@ -76,6 +102,40 @@ class DataManager {
         }
         
         return nil
+    }
+    
+    func getCookedRecipeInformation() -> (count: Int, spentTime: Int) {
+        let recipeFetchRequest: NSFetchRequest<RecipeModel>
+        recipeFetchRequest = RecipeModel.fetchRequest()
+
+        recipeFetchRequest.predicate = NSPredicate(
+            format: "isInProgress = %isInProgress", false
+        )
+
+        do {
+            let loadedRecipes = try context.fetch(recipeFetchRequest)
+            var count = 0
+            var spentTime = 0
+
+            for currentRecipe in loadedRecipes {
+                if currentRecipe.origin == nil {
+                    count += 1
+                    spentTime += currentRecipe.preparationTime
+                }
+            }
+            return (count, spentTime)
+        }
+        catch {
+            print("get cooked recipes is not wokring properly")
+        }
+        
+        return (0, 0)
+    }
+    
+    func getStartedRecipesCount() -> Int {
+        
+        return getStartedRecipes()?.count ?? 0
+        
     }
     
     func removeDailyMenu() {
@@ -128,6 +188,7 @@ class DataManager {
         newRecipe.detail = saveDetail(detail: recipe.recipeDetails)
         newRecipe.servings = recipe.servings ?? 0
         newRecipe.isInProgress = recipe.isInProgress
+        newRecipe.type = recipe.dishType
         newRecipe.progress = Int(recipe.progress)
         
         if let ingredients = recipe.extendedIngredients {

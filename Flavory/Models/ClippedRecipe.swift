@@ -45,20 +45,21 @@ class ClippedRecipe: Codable {
         }
     }
     
-    var dishType: String? {
-        if dishTypes.contains("main course") {
-            return "main course"
-        } else if dishTypes.contains("side dish") {
-            return "side dish"
-        } else if dishTypes.contains("dessert") {
-            return "dessert"
-        } else if dishTypes.contains("salad") {
-            return "salad"
-        } else if dishTypes.contains("soup") {
-            return "soup"
-        } else {
-            return nil
+    var dishType: String {
+        if let dishTypes = dishTypes{
+            if dishTypes.contains("main course") {
+                return "main course"
+            } else if dishTypes.contains("side dish") {
+                return "side dish"
+            } else if dishTypes.contains("dessert") {
+                return "dessert"
+            } else if dishTypes.contains("salad") {
+                return "salad"
+            } else if dishTypes.contains("soup") {
+                return "soup"
+            }
         }
+        return ""
     }
     
     var recipePrice: Double{
@@ -93,7 +94,7 @@ class ClippedRecipe: Codable {
     private var summary: String?
     var extendedIngredients: [RecipeIngredient]?
     private var analyzedInstructions: [AnalyzedInstruction]?
-    private let dishTypes: [String]
+    private var dishTypes: [String]?
     var isInProgress: Bool = false
     
     private enum CodingKeys: String, CodingKey {
@@ -105,6 +106,7 @@ class ClippedRecipe: Codable {
         case pricePerServing
         case extendedIngredients
         case analyzedInstructions
+        case dishTypes
     }
     
     private func extractSteps(rawSteps: [Step]) -> [RecipeStep]

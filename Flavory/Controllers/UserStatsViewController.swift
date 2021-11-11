@@ -18,12 +18,24 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         return chartView
     }()
     
+    private let dishTypes: [ChartDataEntry] = [
+        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("main course")), label: "main course", icon: nil),
+        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("side dish")), label: "side dish", icon: nil),
+        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("dessert")), label: "dessert", icon: nil),
+        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("salad")), label: "salad", icon: nil),
+        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("soup")), label: "soup", icon: nil)
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        cookedRecipeLabel.adjustsFontSizeToFitWidth = true
+        spentTimeInCookingLabel.adjustsFontSizeToFitWidth = true
+        recipesInProgressLabel.adjustsFontSizeToFitWidth = true
+        
         setData()
         schemeView.addSubview(pieChartView)
+        
         if dishTypeIsEmpty() {
             noDataToShowLabel.alpha = 1
         } else {
@@ -31,15 +43,8 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         }
         
         setBlurredBackground()
-        
-        cookedRecipeLabel.adjustsFontSizeToFitWidth = true
-        spentTimeInCookingLabel.adjustsFontSizeToFitWidth = true
-        recipesInProgressLabel.adjustsFontSizeToFitWidth = true
     }
-    
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        print (entry)
-    }
+
     
     private func setupChart() {
         //set possition
@@ -60,11 +65,11 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
     }
     
     func setData() {
-        let set1 = PieChartDataSet(entries: dishTypes, label: "")
-        set1.sliceSpace = 1
-        set1.colors = ChartColorTemplates.joyful()
+        let cookedRecipes = PieChartDataSet(entries: dishTypes, label: "")
+        cookedRecipes.sliceSpace = 1
+        cookedRecipes.colors = ChartColorTemplates.joyful()
         
-        let data = PieChartData(dataSet: set1)
+        let data = PieChartData(dataSet: cookedRecipes)
         
         pieChartView.data = data
         
@@ -78,21 +83,12 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         }
         
         recipesInProgress.text = String(DataManager.shared.getStartedRecipesCount())
-    
     }
-    
-    private let dishTypes: [ChartDataEntry] = [
-        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("main course")), label: "main course", icon: nil),
-        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("side dish")), label: "side dish", icon: nil),
-        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("dessert")), label: "dessert", icon: nil),
-        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("salad")), label: "salad", icon: nil),
-        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("soup")), label: "soup", icon: nil)
-    ]
 
-    
     @IBAction func backButtonClicked(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
+    
     private func setBlurredBackground() {
         view.backgroundColor = .clear
         

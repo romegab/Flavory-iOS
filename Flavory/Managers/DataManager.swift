@@ -132,6 +132,47 @@ class DataManager {
         return (0, 0)
     }
     
+    func getMostCommonDishCategory() -> String {
+        let recipeFetchRequest: NSFetchRequest<RecipeModel>
+        recipeFetchRequest = RecipeModel.fetchRequest()
+
+        recipeFetchRequest.predicate = NSPredicate(
+            format: "isInProgress = %isInProgress", false
+        )
+
+        do {
+            let loadedRecipes = try context.fetch(recipeFetchRequest)
+            var categoryCounts = [String: Int]()
+            for currentRecipe in loadedRecipes {
+                if let diet = currentRecipe.diet{
+                    if let count = categoryCounts[diet]{
+                        categoryCounts[diet] = count + 1
+                    } else {
+                        if diet != " - "{
+                            categoryCounts[diet] = 1
+                        }
+                        
+                    }
+                }
+            }
+            var mostCommonCategory = (category: " - ", count: 0)
+            
+            for currentCategory in categoryCounts {
+                if currentCategory.value > mostCommonCategory.count && currentCategory.key != "-" {
+                    mostCommonCategory.category = currentCategory.key
+                    mostCommonCategory.count = currentCategory.value
+                }
+            }
+            
+            return mostCommonCategory.category
+        }
+        catch {
+            print("get most common dish category is not wokring properly")
+        }
+        
+        return "-"
+    }
+    
     func getStartedRecipesCount() -> Int {
         
         return getStartedRecipes()?.count ?? 0
@@ -189,6 +230,8 @@ class DataManager {
         newRecipe.servings = recipe.servings ?? 0
         newRecipe.isInProgress = recipe.isInProgress
         newRecipe.type = recipe.dishType
+        newRecipe.diet = recipe.diet
+        print("-----------------\(newRecipe.diet)")
         newRecipe.progress = Int(recipe.progress)
         
         if let ingredients = recipe.extendedIngredients {

@@ -22,7 +22,7 @@ class IngredientCell: UITableViewCell, Checkable {
     var ingredient: RecipeIngredient? {
         didSet {
             updateUI()
-            //imageLoadingIndicator.startAnimating()
+            imageLoadingIndicator.startAnimating()
             configureCheckmark()
         }
     }
@@ -72,6 +72,8 @@ class IngredientCell: UITableViewCell, Checkable {
                     self?.imageLoadingIndicator.stopAnimating()
                     self?.ingredientImage.image = image
                     UIView.animate(withDuration: 0.5) {
+                        self?.imageLoadingIndicator.stopAnimating()
+                        self?.imageLoadingIndicator.alpha = 0
                         self?.ingredientImage .alpha = 1
                         self?.ingredientImage.clipsToBounds = true
                         self?.ingredientImage.layer.masksToBounds = true

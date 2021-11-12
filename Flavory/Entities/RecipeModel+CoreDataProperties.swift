@@ -2,7 +2,7 @@
 //  RecipeModel+CoreDataProperties.swift
 //  Flavory
 //
-//  Created by Ivan Stoilov on 10.11.21.
+//  Created by Ivan Stoilov on 12.11.21.
 //
 //
 
@@ -25,6 +25,7 @@ extension RecipeModel {
     @NSManaged public var servings: Int
     @NSManaged public var title: String?
     @NSManaged public var type: String?
+    @NSManaged public var diet: String?
     @NSManaged public var detail: Detail?
     @NSManaged public var ingredient: [Ingredient]?
     @NSManaged public var origin: DailyMenu?

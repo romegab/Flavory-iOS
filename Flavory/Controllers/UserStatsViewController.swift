@@ -12,6 +12,7 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var recipesInProgress: UILabel!
     @IBOutlet weak var noDataToShowLabel: UILabel!
     @IBOutlet weak var schemeView: UIView!
+    @IBOutlet weak var favorityDishCategory: UILabel!
     
     lazy var pieChartView: PieChartView = {
         let chartView = PieChartView()
@@ -67,7 +68,7 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
     func setData() {
         let cookedRecipes = PieChartDataSet(entries: dishTypes, label: "")
         cookedRecipes.sliceSpace = 1
-        cookedRecipes.colors = ChartColorTemplates.joyful()
+        cookedRecipes.colors = ChartColorTemplates.colorful()
         
         let data = PieChartData(dataSet: cookedRecipes)
         
@@ -83,6 +84,8 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         }
         
         recipesInProgress.text = String(DataManager.shared.getStartedRecipesCount())
+        
+        favorityDishCategory.text = DataManager.shared.getMostCommonDishCategory()
     }
 
     @IBAction func backButtonClicked(_ sender: UIButton) {

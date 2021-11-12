@@ -45,6 +45,23 @@ class ClippedRecipe: Codable {
         }
     }
     
+    var dishType: String {
+        if let dishTypes = dishTypes{
+            if dishTypes.contains("main course") {
+                return "main course"
+            } else if dishTypes.contains("side dish") {
+                return "side dish"
+            } else if dishTypes.contains("dessert") {
+                return "dessert"
+            } else if dishTypes.contains("salad") {
+                return "salad"
+            } else if dishTypes.contains("soup") {
+                return "soup"
+            }
+        }
+        return ""
+    }
+    
     var recipePrice: Double{
         get{
             if let pricePerServing = pricePerServing{
@@ -69,6 +86,20 @@ class ClippedRecipe: Codable {
         }
     }
     
+    var diet: String {
+        get {
+            if let diets = diets {
+                if diets.count > 0 {
+                    return diets[0]
+                } else {
+                    return " - "
+                }
+            } else {
+                return " - "
+            }
+        }
+    }
+    
     let title: String
     let id: Int
     let readyInMinutes: Int?
@@ -77,6 +108,8 @@ class ClippedRecipe: Codable {
     private var summary: String?
     var extendedIngredients: [RecipeIngredient]?
     private var analyzedInstructions: [AnalyzedInstruction]?
+    private var dishTypes: [String]?
+    private var diets: [String]?
     var isInProgress: Bool = false
     
     private enum CodingKeys: String, CodingKey {
@@ -88,6 +121,8 @@ class ClippedRecipe: Codable {
         case pricePerServing
         case extendedIngredients
         case analyzedInstructions
+        case dishTypes
+        case diets
     }
     
     private func extractSteps(rawSteps: [Step]) -> [RecipeStep]
@@ -135,6 +170,8 @@ class ClippedRecipe: Codable {
         self.servings = loadedRecipe.servings
         self.recipeDetails = details
         self.isInProgress = loadedRecipe.isInProgress
+        self.diets = [String]()
+        diets?.append(loadedRecipe.diet ?? "-")
         
         if let rawSteps = loadedRecipe.step {
             let extractedSteps: [RecipeStep] = extractSteps(rawSteps: rawSteps)

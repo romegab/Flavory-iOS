@@ -20,13 +20,13 @@ class RangeSlider: UIControl {
         }
     }
     
-    var lowerValue: CGFloat = 0.05 {
+    var lowerValue: CGFloat = 0.04 {
         didSet {
             updateLayerFrames()
         }
     }
     
-    var upperValue: CGFloat = 0.95 {
+    var upperValue: CGFloat = 0.96 {
         didSet {
             updateLayerFrames()
         }
@@ -68,7 +68,7 @@ class RangeSlider: UIControl {
     override init(frame: CGRect) {
         super.init(frame: frame)
         trackLayer.rangeSlider?.clipsToBounds = true
-        trackLayer.cornerRadius = 20
+        trackLayer.cornerRadius = 15
         trackLayer.rangeSlider = self
         
         trackLayer.contentsScale = UIScreen.main.scale

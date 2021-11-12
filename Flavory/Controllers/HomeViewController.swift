@@ -216,7 +216,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
             
             let vc = segue.destination as? FilterSearchContorller
             vc?.delegate = self
-        }
+        } 
     }
     
     @IBAction func getDailyMenuClicked(_ sender: UIButton) {
@@ -225,6 +225,11 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
     @IBAction func filterButtonClicked(_ sender: Any) {
         performSegue(withIdentifier: "showFilters", sender: nil)
+    }
+    
+    
+    @IBAction func userStatsButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "showUserStats", sender: nil)
     }
     
 }

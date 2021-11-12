@@ -16,6 +16,7 @@ extension RecipeModel {
         return NSFetchRequest<RecipeModel>(entityName: "RecipeModel")
     }
 
+    @NSManaged public var diet: String?
     @NSManaged public var id: Int
     @NSManaged public var imageURL: String?
     @NSManaged public var isInProgress: Bool
@@ -25,7 +26,7 @@ extension RecipeModel {
     @NSManaged public var servings: Int
     @NSManaged public var title: String?
     @NSManaged public var type: String?
-    @NSManaged public var diet: String?
+    @NSManaged public var isLiked: Bool
     @NSManaged public var detail: Detail?
     @NSManaged public var ingredient: [Ingredient]?
     @NSManaged public var origin: DailyMenu?

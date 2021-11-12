@@ -1725,24 +1725,45 @@
                                     <constraint firstAttribute="bottom" secondItem="prd-wR-Mla" secondAttribute="bottom" constant="10" id="rCj-3D-PCB"/>
                                 </constraints>
                             </view>
+                            <button clipsSubviews="YES" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hyF-U3-fvp">
+                                <rect key="frame" x="330" y="15" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8bJ-yU-cz5"/>
+                                    <constraint firstAttribute="width" constant="30" id="92E-2f-PeS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="tintColor" systemColor="systemPinkColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <color key="titleColor" systemColor="systemPinkColor"/>
+                                    <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="likeButtonClicked:" destination="0ZY-Cs-kwT" eventType="touchUpInside" id="iTx-N8-sxL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="lOk-b3-UnF"/>
                         <color key="backgroundColor" name="orangeYellow"/>
                         <constraints>
                             <constraint firstItem="pjv-Wg-B2S" firstAttribute="top" secondItem="Yfc-zm-0kv" secondAttribute="bottom" constant="20" id="23f-RR-tQD"/>
                             <constraint firstItem="pjv-Wg-B2S" firstAttribute="leading" secondItem="lOk-b3-UnF" secondAttribute="leading" id="3r5-JG-RzZ"/>
-                            <constraint firstItem="lOk-b3-UnF" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Yfc-zm-0kv" secondAttribute="trailing" constant="15" id="7uu-fK-aoU"/>
                             <constraint firstItem="Yfc-zm-0kv" firstAttribute="leading" secondItem="lOk-b3-UnF" secondAttribute="leading" constant="15" id="9pK-rk-9RW"/>
+                            <constraint firstItem="hyF-U3-fvp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Yfc-zm-0kv" secondAttribute="trailing" constant="100" id="Iy0-bV-9x8"/>
                             <constraint firstItem="oov-fe-P6T" firstAttribute="trailing" secondItem="lOk-b3-UnF" secondAttribute="trailing" id="Neg-nH-Qra"/>
                             <constraint firstItem="oov-fe-P6T" firstAttribute="leading" secondItem="lOk-b3-UnF" secondAttribute="leading" id="O96-VK-GWz"/>
                             <constraint firstItem="UED-Y6-LHg" firstAttribute="leading" secondItem="lOk-b3-UnF" secondAttribute="leading" constant="10" id="Ppl-dN-hWE"/>
                             <constraint firstItem="Yfc-zm-0kv" firstAttribute="top" secondItem="lOk-b3-UnF" secondAttribute="top" constant="15" id="Q0i-C6-T8f"/>
                             <constraint firstItem="UED-Y6-LHg" firstAttribute="top" secondItem="lOk-b3-UnF" secondAttribute="top" constant="60" id="T9d-IW-fZh"/>
                             <constraint firstItem="lOk-b3-UnF" firstAttribute="bottom" secondItem="oov-fe-P6T" secondAttribute="bottom" id="X15-i2-bGd"/>
+                            <constraint firstItem="UED-Y6-LHg" firstAttribute="top" secondItem="hyF-U3-fvp" secondAttribute="bottom" constant="15" id="gzO-YE-Ibe"/>
                             <constraint firstItem="UED-Y6-LHg" firstAttribute="height" secondItem="cca-zd-Rmb" secondAttribute="height" id="h1T-DN-eIK"/>
                             <constraint firstItem="lOk-b3-UnF" firstAttribute="trailing" secondItem="UED-Y6-LHg" secondAttribute="trailing" constant="10" id="iBn-kc-Krv"/>
                             <constraint firstItem="cca-zd-Rmb" firstAttribute="height" secondItem="lOk-b3-UnF" secondAttribute="height" multiplier="0.3" id="iuU-fQ-QXQ"/>
+                            <constraint firstItem="lOk-b3-UnF" firstAttribute="trailing" secondItem="hyF-U3-fvp" secondAttribute="trailing" constant="15" id="mY8-p0-DQR"/>
                             <constraint firstItem="pjv-Wg-B2S" firstAttribute="trailing" secondItem="lOk-b3-UnF" secondAttribute="trailing" id="o7E-HN-SgH"/>
+                            <constraint firstItem="hyF-U3-fvp" firstAttribute="top" secondItem="lOk-b3-UnF" secondAttribute="top" constant="15" id="qv8-HK-ZwV"/>
                             <constraint firstItem="oov-fe-P6T" firstAttribute="top" secondItem="pjv-Wg-B2S" secondAttribute="bottom" id="xDk-Ly-mm8"/>
                             <constraint firstItem="UED-Y6-LHg" firstAttribute="width" secondItem="cca-zd-Rmb" secondAttribute="width" id="zbN-sg-hPR"/>
                         </constraints>
@@ -1750,6 +1771,7 @@
                     <connections>
                         <outlet property="closeButton" destination="Yfc-zm-0kv" id="fSW-Gr-fJb"/>
                         <outlet property="imageLoadingIndicator" destination="hCQ-Zc-QAf" id="OY1-Yd-YOB"/>
+                        <outlet property="likeButton" destination="hyF-U3-fvp" id="53o-10-cMo"/>
                         <outlet property="recipeCategory" destination="J6B-hU-fvc" id="Qb3-9N-lKu"/>
                         <outlet property="recipeDescription" destination="N89-Ev-IHI" id="1mS-QG-o8O"/>
                         <outlet property="recipeFat" destination="d61-oD-Shl" id="06o-7Y-RX5"/>
@@ -2003,6 +2025,7 @@
         <image name="LookUpForEatBackground" width="160" height="240"/>
         <image name="circle.lefthalf.filled" catalog="system" width="128" height="121"/>
         <image name="fatIcon" width="170.5" height="170.5"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="kcalIcon" width="170.5" height="170.5"/>
         <image name="mag" width="128" height="128"/>
@@ -2023,6 +2046,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

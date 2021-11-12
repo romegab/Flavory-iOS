@@ -21,14 +21,26 @@ class RecipePreviewController: UIViewController {
     @IBOutlet fileprivate weak var recipePrice: UILabel!
     @IBOutlet fileprivate weak var startCoookingButotn: UIButton!
     @IBOutlet fileprivate weak var imageLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var likeButton: UIButton!
+    
     
     private var imageRequest: Cancellable?
-    var recipe: ClippedRecipe? 
+    var recipe: ClippedRecipe? {
+        didSet {
+            if let recipe = recipe {
+                isLiked = DataManager.shared.isRecipeLiked(id: recipe.id)
+            }
+        }
+    }
+    private var isLiked: Bool? {
+        didSet {
+            updateLikedButton()
+        }
+    }
     
     override func viewDidLoad() {
-        
+        updateLikedButton()
         recipeImage.alpha = 0
-        
         imageLoadingIndicator.startAnimating()
         updateUI()
         setUpCloseButton()
@@ -41,6 +53,20 @@ class RecipePreviewController: UIViewController {
     
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func likeButtonClicked(_ sender: UIButton) {
+        isLiked?.toggle()
+    }
+    
+    private func updateLikedButton() {
+        if let isLiked = isLiked, let likeButton = likeButton {
+            if isLiked {
+                likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            } else {
+                likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
+        }
     }
     
     private func updateUI() {
@@ -77,6 +103,12 @@ class RecipePreviewController: UIViewController {
             let vc = segue.destination as? RecipeCookingController
             vc?.recipe = recipe
             startCoookingButotn.setTitle("CONTINUE COOKING", for: .normal)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let isLiked = isLiked, let id = recipe?.id {
+            DataManager.shared.updateRecipeLike(id: id, isLiked: isLiked)
         }
     }
     

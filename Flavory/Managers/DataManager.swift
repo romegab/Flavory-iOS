@@ -274,6 +274,68 @@ class DataManager {
         }
     }
     
+    private func getRecipeLike(id: Int) -> RecipeLike? {
+        let recipeLikeFetchRequest: NSFetchRequest<RecipeLike>
+        recipeLikeFetchRequest = RecipeLike.fetchRequest()
+        
+        recipeLikeFetchRequest.predicate = NSPredicate(
+            format: "id = %id", id
+        )
+        
+        do {
+            let loadedRecipeLike = try context.fetch(recipeLikeFetchRequest).first
+            
+            return loadedRecipeLike
+        }
+        catch {
+            print("get recipe by id is not wokring properly")
+        }
+        
+        return nil
+    }
+    
+    func isRecipeLiked(id: Int) -> Bool {
+        if let _  = getRecipeLike(id: id) {
+            return true
+        }
+        return false
+    }
+    
+    func updateRecipeLike(id: Int, isLiked: Bool) {
+        let loadedRecipeLike = getRecipeLike(id: id)
+        
+        if loadedRecipeLike == nil && isLiked{
+            saveRecipeLike(id: id)
+        } else if loadedRecipeLike != nil && !isLiked{
+            deleteRecipeLike(id: id)
+        }
+    }
+    
+    private func saveRecipeLike(id: Int){
+        let newLike = RecipeLike(context: self.context)
+        newLike.id = id
+        
+        do {
+            try self.context.save()
+        }
+        catch {
+            print("!!! problem with saving the ingredient")
+        }
+    }
+    
+    private func deleteRecipeLike(id: Int){
+        let loadedRecipeLike = getRecipeLike(id: id)
+        if let loadedRecipeLike = loadedRecipeLike {
+            context.delete(loadedRecipeLike)
+            do {
+                try self.context.save()
+            }
+            catch {
+                print("!!! problem with saving the ingredient")
+            }
+        }
+    }
+    
     private func updateIngredients(_ recipe: ClippedRecipe, _ loadedRecipe: RecipeModel) {
         do {
             let loadedIngredients: [Ingredient] = loadedRecipe.ingredient ?? [Ingredient]()

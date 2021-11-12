@@ -40,7 +40,6 @@
 		BCA4A77E270B216000F3EFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA4A77D270B216000F3EFBE /* Assets.xcassets */; };
 		BCA4A780270B404B00F3EFBE /* RecipePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA4A77F270B404B00F3EFBE /* RecipePreviewController.swift */; };
 		BCA6856D273434F900FDFE8D /* ChooseIngredientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA6856C273434F900FDFE8D /* ChooseIngredientController.swift */; };
-		BCA6856F27343CAC00FDFE8D /* ingredientsRawData.txt in Resources */ = {isa = PBXBuildFile; fileRef = BCA6856E27343CAC00FDFE8D /* ingredientsRawData.txt */; };
 		BCA685732735293500FDFE8D /* IngredientResultArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA685722735293500FDFE8D /* IngredientResultArray.swift */; };
 		BCA6857527392AF200FDFE8D /* FilterUnion.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA6857427392AF200FDFE8D /* FilterUnion.swift */; };
 		BCA6858D273BF32700FDFE8D /* UserStatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA6858C273BF32700FDFE8D /* UserStatsViewController.swift */; };
@@ -101,7 +100,6 @@
 		BCA4A77D270B216000F3EFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCA4A77F270B404B00F3EFBE /* RecipePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePreviewController.swift; sourceTree = "<group>"; };
 		BCA6856C273434F900FDFE8D /* ChooseIngredientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseIngredientController.swift; sourceTree = "<group>"; };
-		BCA6856E27343CAC00FDFE8D /* ingredientsRawData.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ingredientsRawData.txt; sourceTree = "<group>"; };
 		BCA685722735293500FDFE8D /* IngredientResultArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientResultArray.swift; sourceTree = "<group>"; };
 		BCA6857427392AF200FDFE8D /* FilterUnion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterUnion.swift; sourceTree = "<group>"; };
 		BCA6858C273BF32700FDFE8D /* UserStatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatsViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				BC21EC0826FDF6F500AE44CC /* Flavory.xcdatamodeld */,
 				BCA4A77D270B216000F3EFBE /* Assets.xcassets */,
 				BCBA862227102DC200912308 /* Cache.swift */,
-				BCA6856E27343CAC00FDFE8D /* ingredientsRawData.txt */,
 			);
 			path = Flavory;
 			sourceTree = "<group>";
@@ -370,7 +367,6 @@
 			files = (
 				BC5154C627182ABD0011E90F /* CookingStepCell.xib in Resources */,
 				BCBE57112727E4D400705A91 /* StartedRecipeCell.xib in Resources */,
-				BCA6856F27343CAC00FDFE8D /* ingredientsRawData.txt in Resources */,
 				BC50B94D271EA07700E76E78 /* SearchResultCell.xib in Resources */,
 				BC21EC0F26FDF6F600AE44CC /* LaunchScreen.storyboard in Resources */,
 				BC21404527145BC300893DCC /* IngredientCell.xib in Resources */,

@@ -33,6 +33,7 @@ class ChooseIngredientController: UIViewController {
         
         let ingredientCellNib = UINib(nibName: "IngredientCell", bundle: nil)
         tableView.register(ingredientCellNib, forCellReuseIdentifier: "IngredientCell")
+        searchController.searchBar.searchTextField.attributedPlaceholder = NSAttributedString(string: "Search ingredients", attributes: [NSAttributedString.Key.foregroundColor : UIColor.darkGray])
     }
     
     private func setDelegates() {

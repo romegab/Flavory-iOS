@@ -136,20 +136,64 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
     }
     
     @objc func carbsSliderValueChanged(_ carbsSlider: RangeSlider) {
-        minCarbs.text = "min carbs: \(String(format: "%.0f", ceil(carbsSlider.lowerValue * 500)))"
-        maxCarbs.text = "max carbs: \(String(format: "%.0f", ceil(carbsSlider.upperValue * 500)))"
+        var minValue = carbsSlider.lowerValue * 500 - 20
+        var maxValue = carbsSlider.upperValue * 500 + 20
+        
+        if minValue < 0 {
+            minValue = 0
+        }
+        
+        if maxValue > 500 {
+            maxValue = 500
+        }
+        
+        minCarbs.text = "min carbs: \(String(format: "%.0f", ceil(minValue)))"
+        maxCarbs.text = "max carbs: \(String(format: "%.0f", ceil(maxValue)))"
     }
     @objc func kcalSliderValueChanged(_ carbsSlider: RangeSlider) {
-        minKcal.text = "min kcal: \(String(format: "%.0f", ceil(kcalSlider.lowerValue * 500)))"
-        maxKcal.text = "max kcal: \(String(format: "%.0f", ceil(kcalSlider.upperValue * 500)))"
+        var minValue = kcalSlider.lowerValue * 500 - 20
+        var maxValue = kcalSlider.upperValue * 500 + 20
+        
+        if minValue < 0 {
+            minValue = 0
+        }
+        
+        if maxValue > 500 {
+            maxValue = 500
+        }
+        
+        minKcal.text = "min kcal: \(String(format: "%.0f", ceil(minValue)))"
+        maxKcal.text = "max kcal: \(String(format: "%.0f", ceil(maxValue)))"
     }
     @objc func proteinSliderValueChanged(_ carbsSlider: RangeSlider) {
-        minProtein.text = "min protein: \(String(format: "%.0f", ceil(proteinSlider.lowerValue * 500)))"
-        maxProtein.text = "max protein: \(String(format: "%.0f", ceil(proteinSlider.upperValue * 500)))"
+        var minValue = proteinSlider.lowerValue * 500 - 20
+        var maxValue = proteinSlider.upperValue * 500 + 20
+        
+        if minValue < 0 {
+            minValue = 0
+        }
+        
+        if maxValue > 500 {
+            maxValue = 500
+        }
+        
+        minProtein.text = "min protein: \(String(format: "%.0f", ceil(minValue)))"
+        maxProtein.text = "max protein: \(String(format: "%.0f", ceil(maxValue)))"
     }
     @objc func fatSliderValueChanged(_ carbsSlider: RangeSlider) {
-        minFat.text = "min fat: \(String(format: "%.0f", ceil(fatSlider.lowerValue * 500)))"
-        maxFat.text = "max fat: \(String(format: "%.0f", ceil(fatSlider.upperValue * 500)))"
+        var minValue = fatSlider.lowerValue * 500 - 20
+        var maxValue = fatSlider.upperValue * 500 + 20
+        
+        if minValue < 0 {
+            minValue = 0
+        }
+        
+        if maxValue > 500 {
+            maxValue = 500
+        }
+        
+        minFat.text = "min fat: \(String(format: "%.0f", ceil(minValue)))"
+        maxFat.text = "max fat: \(String(format: "%.0f", ceil(maxValue)))"
     }
     
     private func setBlurredBackground() {

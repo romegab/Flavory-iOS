@@ -294,6 +294,22 @@ class DataManager {
         return nil
     }
     
+    func getLikedRecipes() -> [RecipeLike]? {
+        let recipeLikeFetchRequest: NSFetchRequest<RecipeLike>
+        recipeLikeFetchRequest = RecipeLike.fetchRequest()
+        
+        do {
+            let loadedRecipeLike = try context.fetch(recipeLikeFetchRequest)
+            
+            return loadedRecipeLike
+        }
+        catch {
+            print("get recipe by id is not wokring properly")
+        }
+        
+        return nil
+    }
+    
     func isRecipeLiked(id: Int) -> Bool {
         if let _  = getRecipeLike(id: id) {
             return true
@@ -301,19 +317,21 @@ class DataManager {
         return false
     }
     
-    func updateRecipeLike(id: Int, isLiked: Bool) {
+    func updateRecipeLike(id: Int, name: String, url: String, isLiked: Bool) {
         let loadedRecipeLike = getRecipeLike(id: id)
         
         if loadedRecipeLike == nil && isLiked{
-            saveRecipeLike(id: id)
+            saveRecipeLike(id: id, name: name, url: url)
         } else if loadedRecipeLike != nil && !isLiked{
             deleteRecipeLike(id: id)
         }
     }
     
-    private func saveRecipeLike(id: Int){
+    private func saveRecipeLike(id: Int, name: String, url: String){
         let newLike = RecipeLike(context: self.context)
         newLike.id = id
+        newLike.recipeName = name
+        newLike.imageURL = url
         
         do {
             try self.context.save()
@@ -323,7 +341,7 @@ class DataManager {
         }
     }
     
-    private func deleteRecipeLike(id: Int){
+    func deleteRecipeLike(id: Int){
         let loadedRecipeLike = getRecipeLike(id: id)
         if let loadedRecipeLike = loadedRecipeLike {
             context.delete(loadedRecipeLike)

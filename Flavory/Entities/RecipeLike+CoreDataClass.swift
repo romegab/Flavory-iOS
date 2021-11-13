@@ -2,7 +2,7 @@
 //  RecipeLike+CoreDataClass.swift
 //  Flavory
 //
-//  Created by Ivan Stoilov on 12.11.21.
+//  Created by Ivan Stoilov on 13.11.21.
 //
 //
 

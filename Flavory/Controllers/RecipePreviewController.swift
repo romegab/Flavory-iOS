@@ -108,14 +108,14 @@ class RecipePreviewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         if let isLiked = isLiked, let id = recipe?.id {
-            DataManager.shared.updateRecipeLike(id: id, isLiked: isLiked)
+            DataManager.shared.updateRecipeLike(id: id, name: recipe?.title ?? "", url: recipe?.smallImageURL ?? "nilValue", isLiked: isLiked)
         }
     }
     
     @IBAction func startCookingButtonPressed(_ sender: UIButton) {
         if let recipe = recipe, !recipe.isInProgress{
             recipe.isInProgress.toggle()
-            DataManager.shared.saveRecipe(recipe)
+            let _ = DataManager.shared.saveRecipe(recipe)
         }
         performSegue(withIdentifier: "StartCookingSegue", sender: nil)
         

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LikedRecipeCell" rowHeight="109" id="KGk-i7-Jjw" customClass="LikedRecipeCell" customModule="Flavory" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="109"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="64U-KE-wAF">
+                        <rect key="frame" x="10" y="10" width="128" height="93"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JgV-SL-h8N">
+                        <rect key="frame" x="148" y="10" width="127" height="93"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76V-Vl-4Ir">
+                        <rect key="frame" x="285" y="5" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Cs2-IA-cuU"/>
+                            <constraint firstAttribute="height" constant="30" id="I7B-pd-BCb"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain">
+                            <imageReference key="image" image="heart.fill" catalog="system" symbolScale="large"/>
+                            <color key="baseForegroundColor" systemColor="systemPinkColor"/>
+                        </buttonConfiguration>
+                        <connections>
+                            <action selector="likeButtonClicked:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5KL-Nh-lsM"/>
+                        </connections>
+                    </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="4jJ-uT-BAB">
+                        <rect key="frame" x="10" y="10" width="128" height="93"/>
+                    </activityIndicatorView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="76V-Vl-4Ir" firstAttribute="leading" secondItem="JgV-SL-h8N" secondAttribute="trailing" constant="10" id="0PW-Ga-sT2"/>
+                    <constraint firstItem="64U-KE-wAF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="2rN-va-0qj"/>
+                    <constraint firstItem="64U-KE-wAF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="CNs-3H-wBx"/>
+                    <constraint firstItem="JgV-SL-h8N" firstAttribute="leading" secondItem="64U-KE-wAF" secondAttribute="trailing" constant="10" id="EVb-yL-MsQ"/>
+                    <constraint firstAttribute="bottom" secondItem="JgV-SL-h8N" secondAttribute="bottom" constant="10" id="FOr-GI-cpF"/>
+                    <constraint firstItem="4jJ-uT-BAB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="FpR-N5-KTy"/>
+                    <constraint firstItem="64U-KE-wAF" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.29" id="IXL-F1-LDz"/>
+                    <constraint firstAttribute="trailing" secondItem="76V-Vl-4Ir" secondAttribute="trailing" constant="5" id="TFN-AU-wo2"/>
+                    <constraint firstAttribute="bottom" secondItem="4jJ-uT-BAB" secondAttribute="bottom" constant="10" id="Tmb-Mp-UOx"/>
+                    <constraint firstItem="4jJ-uT-BAB" firstAttribute="width" secondItem="64U-KE-wAF" secondAttribute="width" id="ZBu-UR-M8L"/>
+                    <constraint firstAttribute="bottom" secondItem="64U-KE-wAF" secondAttribute="bottom" constant="10" id="e1c-kR-qCg"/>
+                    <constraint firstItem="64U-KE-wAF" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.4" id="eRx-tZ-ukH"/>
+                    <constraint firstItem="76V-Vl-4Ir" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="j7H-a9-Mq5"/>
+                    <constraint firstItem="4jJ-uT-BAB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rSH-9S-Kkz"/>
+                    <constraint firstItem="4jJ-uT-BAB" firstAttribute="height" secondItem="64U-KE-wAF" secondAttribute="height" id="t3l-CP-paa"/>
+                    <constraint firstItem="JgV-SL-h8N" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="yHO-wY-xja"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="loadingIndicator" destination="4jJ-uT-BAB" id="QEn-af-nbO"/>
+                <outlet property="recipeImage" destination="64U-KE-wAF" id="aDa-YC-0KX"/>
+                <outlet property="recipeTitle" destination="JgV-SL-h8N" id="Fxo-df-0Je"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="84.709821428571431"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -2,7 +2,7 @@
 //  RecipeLike+CoreDataProperties.swift
 //  Flavory
 //
-//  Created by Ivan Stoilov on 12.11.21.
+//  Created by Ivan Stoilov on 13.11.21.
 //
 //
 
@@ -17,6 +17,8 @@ extension RecipeLike {
     }
 
     @NSManaged public var id: Int
+    @NSManaged public var recipeName: String?
+    @NSManaged public var imageURL: String?
 
 }
 

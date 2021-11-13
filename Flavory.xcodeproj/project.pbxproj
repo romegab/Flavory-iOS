@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		764AAF3F27400228005BCBB7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764AAF3E27400228005BCBB7 /* TabBarController.swift */; };
 		BC10D37F2732881A009F5A64 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC10D37E2732881A009F5A64 /* RangeSlider.swift */; };
 		BC10D3812732883E009F5A64 /* RangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC10D3802732883E009F5A64 /* RangeSliderTrackLayer.swift */; };
 		BC10D3832732900E009F5A64 /* FilterSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC10D3822732900D009F5A64 /* FilterSearchController.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		764AAF3E27400228005BCBB7 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BC10D37E2732881A009F5A64 /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		BC10D3802732883E009F5A64 /* RangeSliderTrackLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSliderTrackLayer.swift; sourceTree = "<group>"; };
 		BC10D3822732900D009F5A64 /* FilterSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSearchController.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				BC10D3822732900D009F5A64 /* FilterSearchController.swift */,
 				BCA6856C273434F900FDFE8D /* ChooseIngredientController.swift */,
 				BCA6858C273BF32700FDFE8D /* UserStatsViewController.swift */,
+				764AAF3E27400228005BCBB7 /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				BC21EC0A26FDF6F500AE44CC /* Flavory.xcdatamodeld in Sources */,
 				BCBE57042726DBC900705A91 /* Ingredient+CoreDataClass.swift in Sources */,
 				BCBBBF26273EBA8E00239032 /* RecipeLike+CoreDataProperties.swift in Sources */,
+				764AAF3F27400228005BCBB7 /* TabBarController.swift in Sources */,
 				BCA4A780270B404B00F3EFBE /* RecipePreviewController.swift in Sources */,
 				BC5154CA2718555E0011E90F /* AnalyzedInstructions.swift in Sources */,
 				BC3A610B2704A768008A9EB4 /* RecipeCardController.swift in Sources */,

@@ -30,9 +30,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     private var carouselDidLoad = false
     private var filters: FilterUnion? {
         didSet {
-            if searchResult.count == 0 {
-                performFilterSearch()
-            }
+            performFilterSearch()
         }
     }
     
@@ -146,6 +144,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     private func performFilterSearch() {
         if filters?.ingredients?.count != 0 {
             performSearchByIngredients()
+            
             if let filters = filters {
                 filterSearchResultByNutrients(filters: filters)
             }
@@ -269,6 +268,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func loadFilters(filters: FilterUnion) {
+        print("filters loaded")
         self.filters = filters
     }
 }
@@ -336,7 +336,12 @@ extension HomeViewController: UISearchResultsUpdating {
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchResult.count
+        if searchResult.count != 0 {
+            noSearchResultView.alpha = 0
+        } else {
+            noSearchResultView.alpha = 1
+        }
+        return searchResult.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

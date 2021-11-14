@@ -26,6 +26,7 @@ class FavoriteRecipesController: UIViewController, NSFetchedResultsControllerDel
     }()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noResultsLabel: UILabel!
     
     override func viewDidLoad() {
         let recipeCellNib = UINib(nibName: "LikedRecipeCell", bundle: nil)
@@ -71,6 +72,12 @@ class FavoriteRecipesController: UIViewController, NSFetchedResultsControllerDel
 extension FavoriteRecipesController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if fetchedResultsController.fetchedObjects?.count ?? 0 == 0 {
+            noResultsLabel.alpha = 1
+        } else {
+            noResultsLabel.alpha = 0
+        }
+        
         return fetchedResultsController.fetchedObjects?.count ?? 0
     }
     

@@ -33,6 +33,7 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         cookedRecipeLabel.adjustsFontSizeToFitWidth = true
         spentTimeInCookingLabel.adjustsFontSizeToFitWidth = true
         recipesInProgressLabel.adjustsFontSizeToFitWidth = true
+        favorityDishCategory.adjustsFontSizeToFitWidth = true
         
         setData()
         schemeView.addSubview(pieChartView)

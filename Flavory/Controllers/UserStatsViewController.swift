@@ -74,7 +74,7 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         let data = PieChartData(dataSet: cookedRecipes)
         pieChartView.data = data
         
-        let cookedRecipeInformation = DataManager.shared.getCookedRecipeInformation()
+        let cookedRecipeInformation = DataManager.shared.getCookedRecipesInformation()
         cookedRecipesCount.text = String(cookedRecipeInformation.count)
         
         if cookedRecipeInformation.spentTime % 60 < 10 {

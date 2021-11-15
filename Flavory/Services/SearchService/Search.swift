@@ -17,9 +17,9 @@ class Search {
     private var dataTask: URLSessionDataTask?
     private let session = URLSession.shared
     //private let apiKey: String = "12cbc8a03407496290efed34fba57028"
-    private let apiKey: String = "5d9a3e69b4234101a69aab06fbae2aae"
+    //private let apiKey: String = "5d9a3e69b4234101a69aab06fbae2aae"
     //private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
-    //private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
+    private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
             session.invalidateAndCancel()

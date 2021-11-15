@@ -289,12 +289,10 @@ extension HomeViewController: UISearchResultsUpdating {
             self.filterButton.isEnabled = true
         }
         
-        if !isSearchTrothelled && searchResult.count != 0{
+        if !isSearchTrothelled && searchController.searchBar.text != ""{
             isSearchTrothelled = true
-            if searchController.searchBar.text != "" {
-            } else {
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
                 if searchController.searchBar.text != "" {
                     self.performSearch(query: searchController.searchBar.text ?? "nilValue")
                 } else {
@@ -306,7 +304,7 @@ extension HomeViewController: UISearchResultsUpdating {
         } else {
             if searchController.searchBar.text != "" {
                 self.filterButton.isEnabled = false
-                self.performSearch(query: searchController.searchBar.text ?? "nilValue")
+                //self.performSearch(query: searchController.searchBar.text ?? "nilValue")
             } else {
                 self.searchResult.removeAll()
                 self.ResultTableView.reloadData()

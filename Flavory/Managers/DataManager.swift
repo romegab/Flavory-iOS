@@ -24,7 +24,7 @@ class DataManager {
         )
         
         do {
-            let loadedRecipe = try context.fetch(recipeFetchRequest).first(where: { $0.isInProgress == true})
+            let loadedRecipe = try context.fetch(recipeFetchRequest).first(where: {$0.origin == nil})
             
             return loadedRecipe
         }
@@ -33,6 +33,23 @@ class DataManager {
         }
         
         return nil
+    }
+    
+    func recipeStarted(_ recipe: ClippedRecipe) {
+        if let loadedRecipe = getRecipeByID(id: recipe.id) {
+            if loadedRecipe.origin == nil{
+                loadedRecipe.isInProgress = true
+                do{
+                    try self.context.save()
+                } catch {
+                    print("!!! problem with removing daily menu")
+                }
+            } else {
+                let _ = saveRecipe(recipe)
+            }
+        } else {
+            let _ = saveRecipe(recipe)
+        }
     }
     
     func getStartedRecipes() -> [RecipeModel]? {
@@ -59,17 +76,13 @@ class DataManager {
         let recipeFetchRequest: NSFetchRequest<RecipeModel>
         recipeFetchRequest = RecipeModel.fetchRequest()
         
-        recipeFetchRequest.predicate = NSPredicate(
-            format: "isInProgress = %isInProgress", false
-        )
-        
         do {
             let loadedRecipes = try context.fetch(recipeFetchRequest)
             var result = 0
             
             for currentRecipe in loadedRecipes {
                 if currentRecipe.type == dishType {
-                    result += 1
+                    result += currentRecipe.timesCooked
                 }
             }
             return result
@@ -104,13 +117,9 @@ class DataManager {
         return nil
     }
     
-    func getCookedRecipeInformation() -> (count: Int, spentTime: Int) {
+    func getCookedRecipesInformation() -> (count: Int, spentTime: Int) {
         let recipeFetchRequest: NSFetchRequest<RecipeModel>
         recipeFetchRequest = RecipeModel.fetchRequest()
-
-        recipeFetchRequest.predicate = NSPredicate(
-            format: "isInProgress = %isInProgress", false
-        )
 
         do {
             let loadedRecipes = try context.fetch(recipeFetchRequest)
@@ -119,8 +128,8 @@ class DataManager {
 
             for currentRecipe in loadedRecipes {
                 if currentRecipe.origin == nil {
-                    count += 1
-                    spentTime += currentRecipe.preparationTime
+                    count += currentRecipe.timesCooked
+                    spentTime += currentRecipe.preparationTime * currentRecipe.timesCooked
                 }
             }
             return (count, spentTime)
@@ -136,20 +145,16 @@ class DataManager {
         let recipeFetchRequest: NSFetchRequest<RecipeModel>
         recipeFetchRequest = RecipeModel.fetchRequest()
 
-        recipeFetchRequest.predicate = NSPredicate(
-            format: "isInProgress = %isInProgress", false
-        )
-
         do {
             let loadedRecipes = try context.fetch(recipeFetchRequest)
             var categoryCounts = [String: Int]()
             for currentRecipe in loadedRecipes {
                 if let diet = currentRecipe.diet{
                     if let count = categoryCounts[diet]{
-                        categoryCounts[diet] = count + 1
+                        categoryCounts[diet] = count + currentRecipe.timesCooked
                     } else {
                         if diet != " - "{
-                            categoryCounts[diet] = 1
+                            categoryCounts[diet] = currentRecipe.timesCooked
                         }
                         
                     }
@@ -181,6 +186,11 @@ class DataManager {
     
     func removeDailyMenu() {
         if let currentDaiLyMenu = getDailyMenu() {
+            if let recipes = currentDaiLyMenu.recipes {
+                for recipe in recipes {
+                    context.delete(recipe)
+                }
+            }
             context.delete(currentDaiLyMenu)
         }
         do {
@@ -231,6 +241,7 @@ class DataManager {
         newRecipe.isInProgress = recipe.isInProgress
         newRecipe.type = recipe.dishType
         newRecipe.diet = recipe.diet
+        newRecipe.timesCooked = 0
         newRecipe.progress = Int(recipe.progress)
         
         if let ingredients = recipe.extendedIngredients {
@@ -261,6 +272,7 @@ class DataManager {
                 
                 loadedRecipe.isInProgress = recipe.isInProgress
                 loadedRecipe.progress = Int(recipe.progress)
+                loadedRecipe.timesCooked = recipe.timesCooked
                 print(recipe.progress)
                 updateIngredients(recipe, loadedRecipe)
                 updateSteps(recipe, loadedRecipe)

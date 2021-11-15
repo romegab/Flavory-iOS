@@ -12,7 +12,7 @@ protocol FilterSearchControllerDelegate: AnyObject {
 }
 
 class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegate {
-    
+    // Custom UI Elements
     let carbsSlider = RangeSlider(frame: .zero)
     let kcalSlider = RangeSlider(frame: .zero)
     let fatSlider = RangeSlider(frame: .zero)
@@ -35,8 +35,8 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
     @IBOutlet weak var maxProtein: UILabel!
     
     @IBOutlet weak var chooseIngredientsView: UIView!
-    @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var cousinePicker: UIPickerView!
+    @IBOutlet weak var mealTypePicker: UIPickerView!
+    @IBOutlet weak var cuisinePicker: UIPickerView!
     @IBOutlet weak var chooseIngredinetsImage: UIImageView!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -45,85 +45,26 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
     private var cuisines: [String] = ["All", "American", "British", "Chinesse", " Easter EU", "French", "German", "Greek", "Indian", "Italian", "Mediterian", "Spanish"]
     private var mealTypes: [String] = ["All", "Main course", "Side dish", "Dessert", "Salad", "Breakfast", "Soup", "Snack", "Drink"]
     
+    private var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     weak var delegate: FilterSearchControllerDelegate?
     
-    private var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setBlurredBackground()
-        pickerView.setValue(UIColor.white, forKey: "textColor")
-        cousinePicker.setValue(UIColor.white, forKey: "textColor")
+        setupPickers()
+        setupSliders()
         
         chooseIngredinetsImage.clipsToBounds = true
-
         chooseIngredinetsImage.layer.cornerRadius = 15
+        
         filterButton.layer.cornerRadius = 15
-        
-        carbsView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
-        carbsView.layer.cornerRadius = 15
-        
-        kcalView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
-        kcalView.layer.cornerRadius = 15
-        
-        proteinView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
-        proteinView.layer.cornerRadius = 15
-        
-        fatView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
-        fatView.layer.cornerRadius = 15
-        
-        dishType.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
-        dishType.layer.cornerRadius = 15
-        
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
-        cousinePicker.delegate = self
-        cousinePicker.dataSource = self
-        
-        proteinSlider.translatesAutoresizingMaskIntoConstraints = false
-        fatSlider.translatesAutoresizingMaskIntoConstraints = false
-        kcalSlider.translatesAutoresizingMaskIntoConstraints = false
-        carbsSlider.translatesAutoresizingMaskIntoConstraints = false
-        
-        carbsView.addSubview(carbsSlider)
-        kcalView.addSubview(kcalSlider)
-        fatView.addSubview(fatSlider)
-        proteinView.addSubview(proteinSlider)
-        
-        pickerView.selectRow(3, inComponent: 0, animated: false)
-        cousinePicker.selectRow(3, inComponent: 0, animated: false)
-
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let margin: CGFloat = 50
-        let width = carbsView.bounds.width - 2 * margin
-        let height: CGFloat = 30
-      
-        carbsSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        carbsSlider.center = carbsView.convert(carbsView.center, from: carbsView.superview)
-        carbsSlider.center.y += 20
-        carbsSlider.addTarget(self, action: #selector(carbsSliderValueChanged(_:)), for: .valueChanged)
         
-        kcalSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        kcalSlider.updateLayerFrames()
-        kcalSlider.center = kcalView.convert(kcalView.center, from:kcalView.superview)
-        kcalSlider.center.y += 15
-        kcalSlider.addTarget(self, action: #selector(kcalSliderValueChanged(_:)), for: .valueChanged)
-
-        fatSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        fatSlider.updateLayerFrames()
-        fatSlider.center = fatView.convert(fatView.center, from:fatView.superview)
-        fatSlider.center.y += 15
-        fatSlider.addTarget(self, action: #selector(fatSliderValueChanged(_:)), for: .valueChanged)
-        
-        proteinSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        proteinSlider.updateLayerFrames()
-        proteinSlider.center = proteinView.convert(proteinView.center, from: proteinView.superview)
-        proteinSlider.center.y += 15
-        proteinSlider.addTarget(self, action: #selector(proteinSliderValueChanged(_:)), for: .valueChanged)
+        setSlidersLayout()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -196,6 +137,76 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         maxFat.text = "max fat: \(String(format: "%.0f", ceil(maxValue)))"
     }
     
+    private func setupSliders() {
+        carbsView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        carbsView.layer.cornerRadius = 15
+        
+        kcalView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        kcalView.layer.cornerRadius = 15
+        
+        proteinView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        proteinView.layer.cornerRadius = 15
+        
+        fatView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        fatView.layer.cornerRadius = 15
+        
+        dishType.backgroundColor = UIColor.darkGray.withAlphaComponent(0.5)
+        dishType.layer.cornerRadius = 15
+        
+        proteinSlider.translatesAutoresizingMaskIntoConstraints = false
+        fatSlider.translatesAutoresizingMaskIntoConstraints = false
+        kcalSlider.translatesAutoresizingMaskIntoConstraints = false
+        carbsSlider.translatesAutoresizingMaskIntoConstraints = false
+        
+        carbsView.addSubview(carbsSlider)
+        kcalView.addSubview(kcalSlider)
+        fatView.addSubview(fatSlider)
+        proteinView.addSubview(proteinSlider)
+    }
+    
+    private func setSlidersLayout() {
+        let margin: CGFloat = 50
+        let width = carbsView.bounds.width - 2 * margin
+        let height: CGFloat = 30
+      
+        carbsSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        carbsSlider.center = carbsView.convert(carbsView.center, from: carbsView.superview)
+        carbsSlider.center.y += 20
+        carbsSlider.addTarget(self, action: #selector(carbsSliderValueChanged(_:)), for: .valueChanged)
+        
+        kcalSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        kcalSlider.updateLayerFrames()
+        kcalSlider.center = kcalView.convert(kcalView.center, from:kcalView.superview)
+        kcalSlider.center.y += 15
+        kcalSlider.addTarget(self, action: #selector(kcalSliderValueChanged(_:)), for: .valueChanged)
+
+        fatSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        fatSlider.updateLayerFrames()
+        fatSlider.center = fatView.convert(fatView.center, from:fatView.superview)
+        fatSlider.center.y += 15
+        fatSlider.addTarget(self, action: #selector(fatSliderValueChanged(_:)), for: .valueChanged)
+        
+        proteinSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        proteinSlider.updateLayerFrames()
+        proteinSlider.center = proteinView.convert(proteinView.center, from: proteinView.superview)
+        proteinSlider.center.y += 15
+        proteinSlider.addTarget(self, action: #selector(proteinSliderValueChanged(_:)), for: .valueChanged)
+    }
+    
+    private func setupPickers() {
+        mealTypePicker.setValue(UIColor.white, forKey: "textColor")
+        cuisinePicker.setValue(UIColor.white, forKey: "textColor")
+        
+        mealTypePicker.delegate = self
+        mealTypePicker.dataSource = self
+        
+        cuisinePicker.delegate = self
+        cuisinePicker.dataSource = self
+        
+        mealTypePicker.selectRow(3, inComponent: 0, animated: false)
+        cuisinePicker.selectRow(3, inComponent: 0, animated: false)
+    }
+    
     private func setBlurredBackground() {
         view.backgroundColor = .clear
         
@@ -214,12 +225,12 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         ])
     }
     
-    @IBAction func chooseIngredientsButtonClicked(_ sender: Any) {
-        performSegue(withIdentifier: "showChooseIngredientView", sender: nil)
-    }
-    
     func reciveIngredients(ingredints: [RecipeIngredient]) {
         choosedIngredients = ingredints
+    }
+    
+    @IBAction func chooseIngredientsButtonClicked(_ sender: Any) {
+        performSegue(withIdentifier: "showChooseIngredientView", sender: nil)
     }
     
     @IBAction func filterButtonClicked(_ sender: UIButton) {
@@ -235,8 +246,8 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         let minKcalValue = Int(minKcal.text?.replacingOccurrences(of: "min kcal: ", with: "") ?? "0") ?? 0
         let maxKcalValue: Int = Int(maxKcal.text?.replacingOccurrences(of: "max kcal: ", with: "") ?? "0") ?? 0
         
-        let cousine = cuisines[pickerView.selectedRow(inComponent: 0)]
-        let mealType = mealTypes[cousinePicker.selectedRow(inComponent: 0)]
+        let cousine = cuisines[cuisinePicker.selectedRow(inComponent: 0)]
+        let mealType = mealTypes[mealTypePicker.selectedRow(inComponent: 0)]
         
         self.dismiss(animated: true, completion: {
             self.delegate?.loadFilters(filters: FilterUnion(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, self.choosedIngredients))

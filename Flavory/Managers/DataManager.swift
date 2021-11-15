@@ -231,7 +231,6 @@ class DataManager {
         newRecipe.isInProgress = recipe.isInProgress
         newRecipe.type = recipe.dishType
         newRecipe.diet = recipe.diet
-        print("-----------------\(newRecipe.diet)")
         newRecipe.progress = Int(recipe.progress)
         
         if let ingredients = recipe.extendedIngredients {

@@ -9,6 +9,12 @@ import UIKit
 
 class SearchResultCell: UITableViewCell {
     
+    @IBOutlet private weak var recipeTitle: UILabel!
+    @IBOutlet private weak var recipeImage: UIImageView!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
+    private var imageRequest: Cancellable?
+    
     var recipe: ClippedRecipe? {
         didSet {
             
@@ -17,12 +23,7 @@ class SearchResultCell: UITableViewCell {
             updateUI()
         }
     }
-    private var imageRequest: Cancellable?
-    
-    @IBOutlet fileprivate weak var recipeTitle: UILabel!
-    @IBOutlet fileprivate weak var recipeImage: UIImageView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         loadingIndicator.startAnimating()

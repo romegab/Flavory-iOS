@@ -9,13 +9,13 @@ import UIKit
 
 class RecipeCookingController: UIViewController {
     
-    @IBOutlet fileprivate weak var recipeTitleLable: UILabel!
-    @IBOutlet fileprivate weak var segmentedControl: UISegmentedControl!
-    @IBOutlet fileprivate weak var tableView: UITableView!
-    @IBOutlet fileprivate weak var readyButton: UIButton!
+    @IBOutlet private weak var recipeTitleLable: UILabel!
+    @IBOutlet private weak var segmentedControl: UISegmentedControl!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var readyButton: UIButton!
     
-    var recipe: ClippedRecipe?
     private var currentSegmentIndex = 1
+    var recipe: ClippedRecipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +31,12 @@ class RecipeCookingController: UIViewController {
         tableView.register(cookingStepCellNib, forCellReuseIdentifier: "CookingStepCell")
         
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if let recipe = recipe {
+            DataManager.shared.updateRecipe(recipe)
+        }
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
@@ -63,12 +69,6 @@ class RecipeCookingController: UIViewController {
             }
         }
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        if let recipe = recipe {
-            DataManager.shared.updateRecipe(recipe)
-        }
     }
 }
 

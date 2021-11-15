@@ -1,10 +1,3 @@
-//
-//  LikedRecipeCellTableViewCell.swift
-//  Flavory
-//
-//  Created by Ivan Stoilov on 13.11.21.
-//
-
 import UIKit
 
 protocol LikedRecipeCellDelegate: AnyObject {
@@ -14,8 +7,14 @@ protocol LikedRecipeCellDelegate: AnyObject {
 }
 
 class LikedRecipeCell: UITableViewCell {
+
+    @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet weak var recipeTitle: UILabel!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     private var imageRequest: Cancellable?
+    
+    weak var delegate: LikedRecipeCellDelegate?
     
     var likedRecipe: RecipeLike? {
         didSet {
@@ -24,21 +23,9 @@ class LikedRecipeCell: UITableViewCell {
         }
     }
     
-    weak var delegate: LikedRecipeCellDelegate?
-    
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     override func prepareForReuse() {

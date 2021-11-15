@@ -13,20 +13,19 @@ protocol ChooseIngredientControlerDelegate: AnyObject {
 
 class ChooseIngredientController: UIViewController {
     
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var noResultsView: UIView!
+    @IBOutlet private weak var noResultsLabel: UILabel!
+    @IBOutlet private weak var infoDescriptionLabel: UILabel!
+    @IBOutlet private weak var doneButton: UIButton!
+    
     weak var delegate: ChooseIngredientControlerDelegate?
-    let searchController = UISearchController(searchResultsController: nil)
+    private let searchController = UISearchController(searchResultsController: nil)
     var choosedIngredients: [RecipeIngredient] = [RecipeIngredient]()
     private var currentIngredients: [RecipeIngredient] = [RecipeIngredient]()
     private let search: Search = Search()
     private var isSearchTrothelled: Bool = false
     private var currentSegmentIndex = 2
-    
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noResultsView: UIView!
-    @IBOutlet weak var noResultsLabel: UILabel!
-    @IBOutlet weak var infoDescriptionLabel: UILabel!
-    @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
         setDelegates()
@@ -85,6 +84,7 @@ class ChooseIngredientController: UIViewController {
         }
     }
 }
+
 extension ChooseIngredientController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {

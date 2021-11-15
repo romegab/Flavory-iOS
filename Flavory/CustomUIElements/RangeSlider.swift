@@ -2,6 +2,7 @@
 import UIKit
 
 class RangeSlider: UIControl {
+    
     override var frame: CGRect {
         didSet {
             updateLayerFrames()

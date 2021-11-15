@@ -10,6 +10,9 @@ import CoreData
 
 class FavoriteRecipesController: UIViewController, NSFetchedResultsControllerDelegate, LikedRecipeCellDelegate {
     
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noResultsLabel: UILabel!
+    
     private var likedRecipes: [RecipeLike]?
     private var selectedRecipe: ClippedRecipe?
     private let search: Search = Search()
@@ -24,9 +27,6 @@ class FavoriteRecipesController: UIViewController, NSFetchedResultsControllerDel
         
         return fetchedResultsController
     }()
-    
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noResultsLabel: UILabel!
     
     override func viewDidLoad() {
         let recipeCellNib = UINib(nibName: "LikedRecipeCell", bundle: nil)

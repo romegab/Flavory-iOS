@@ -14,7 +14,7 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var schemeView: UIView!
     @IBOutlet weak var favorityDishCategory: UILabel!
     
-    lazy var pieChartView: PieChartView = {
+    private lazy var pieChartView: PieChartView = {
         let chartView = PieChartView()
         return chartView
     }()
@@ -24,7 +24,7 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("side dish")), label: "side dish", icon: nil),
         PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("dessert")), label: "dessert", icon: nil),
         PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("salad")), label: "salad", icon: nil),
-        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("soup")), label: "soup", icon: nil)
+        PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("soup")), label: "soup", icon: nil),
     ]
     
     override func viewDidLoad() {
@@ -66,13 +66,12 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         pieChartView.holeColor = UIColor.clear
     }
     
-    func setData() {
+    private func setData() {
         let cookedRecipes = PieChartDataSet(entries: dishTypes, label: "")
         cookedRecipes.sliceSpace = 1
         cookedRecipes.colors = ChartColorTemplates.colorful()
         
         let data = PieChartData(dataSet: cookedRecipes)
-        
         pieChartView.data = data
         
         let cookedRecipeInformation = DataManager.shared.getCookedRecipeInformation()
@@ -85,13 +84,9 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         }
         
         recipesInProgress.text = String(DataManager.shared.getStartedRecipesCount())
-        
         favorityDishCategory.text = DataManager.shared.getMostCommonDishCategory()
     }
 
-    @IBAction func backButtonClicked(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     private func setBlurredBackground() {
         view.backgroundColor = .clear
@@ -117,5 +112,9 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
             }
         }
         return true
+    }
+    
+    @IBAction func backButtonClicked(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

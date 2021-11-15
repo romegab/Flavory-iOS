@@ -9,22 +9,21 @@ import UIKit
 
 class RecipePreviewController: UIViewController {
     
-    @IBOutlet fileprivate weak var closeButton: UIButton!
-    @IBOutlet fileprivate weak var recipeImage: UIImageView!
-    @IBOutlet fileprivate weak var recipeTitle: UILabel!
-    @IBOutlet fileprivate weak var recipeCategory: UILabel!
-    @IBOutlet fileprivate weak var recipeDescription: UILabel!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var recipeImage: UIImageView!
+    @IBOutlet private weak var recipeTitle: UILabel!
+    @IBOutlet private weak var recipeCategory: UILabel!
+    @IBOutlet private weak var recipeDescription: UILabel!
     
-    @IBOutlet fileprivate weak var recipeFat: UILabel!
-    @IBOutlet fileprivate weak var recipeProtein: UILabel!
-    @IBOutlet fileprivate weak var recipeKcal: UILabel!
-    @IBOutlet fileprivate weak var recipePrice: UILabel!
-    @IBOutlet fileprivate weak var startCoookingButotn: UIButton!
-    @IBOutlet fileprivate weak var imageLoadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var recipeFat: UILabel!
+    @IBOutlet private weak var recipeProtein: UILabel!
+    @IBOutlet private weak var recipeKcal: UILabel!
+    @IBOutlet private weak var recipePrice: UILabel!
+    @IBOutlet private weak var startCoookingButotn: UIButton!
+    @IBOutlet private weak var imageLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var likeButton: UIButton!
     
     
-    private var imageRequest: Cancellable?
     var recipe: ClippedRecipe? {
         didSet {
             if let recipe = recipe {
@@ -32,11 +31,14 @@ class RecipePreviewController: UIViewController {
             }
         }
     }
+    
     private var isLiked: Bool? {
         didSet {
             updateLikedButton()
         }
     }
+    
+    private var imageRequest: Cancellable?
     
     override func viewDidLoad() {
         updateLikedButton()
@@ -49,14 +51,6 @@ class RecipePreviewController: UIViewController {
         
         //set button appear settings
         startCoookingButotn.layer.cornerRadius = 15
-    }
-    
-    @IBAction func closeButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func likeButtonClicked(_ sender: UIButton) {
-        isLiked?.toggle()
     }
     
     private func updateLikedButton() {
@@ -112,15 +106,6 @@ class RecipePreviewController: UIViewController {
         }
     }
     
-    @IBAction func startCookingButtonPressed(_ sender: UIButton) {
-        if let recipe = recipe, !recipe.isInProgress{
-            recipe.isInProgress.toggle()
-            let _ = DataManager.shared.saveRecipe(recipe)
-        }
-        performSegue(withIdentifier: "StartCookingSegue", sender: nil)
-        
-    }
-    
     private func setUpCloseButton() {
         closeButton.layer.cornerRadius = 30
         closeButton.layer.masksToBounds = false
@@ -140,6 +125,23 @@ class RecipePreviewController: UIViewController {
             recipeProtein.text = String(recipe.recipeDetails.protein ?? 0)
             recipeFat.text = String(recipe.recipeDetails.fat ?? 0)
         }
+    }
+    
+    @IBAction func startCookingButtonPressed(_ sender: UIButton) {
+        if let recipe = recipe, !recipe.isInProgress{
+            recipe.isInProgress.toggle()
+            let _ = DataManager.shared.saveRecipe(recipe)
+        }
+        performSegue(withIdentifier: "StartCookingSegue", sender: nil)
+        
+    }
+    
+    @IBAction func closeButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func likeButtonClicked(_ sender: UIButton) {
+        isLiked?.toggle()
     }
 }
 

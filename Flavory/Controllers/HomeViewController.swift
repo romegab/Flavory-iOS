@@ -9,24 +9,24 @@ import UIKit
 
 class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
-    @IBOutlet fileprivate weak var resultView: UIView!
-    @IBOutlet fileprivate weak var ResultTableView: UITableView!
-    @IBOutlet fileprivate weak var dailyMenuImage: UIImageView!
-    @IBOutlet fileprivate weak var lookUpForEatImage: UIImageView!
-    @IBOutlet fileprivate weak var collecitonView: UICollectionView!
-    @IBOutlet fileprivate weak var lookUpForEatText: UILabel!
-    @IBOutlet fileprivate weak var dailyMenuText: UILabel!
+    @IBOutlet private weak var resultView: UIView!
+    @IBOutlet private weak var ResultTableView: UITableView!
+    @IBOutlet private weak var dailyMenuImage: UIImageView!
+    @IBOutlet private weak var lookUpForEatImage: UIImageView!
+    @IBOutlet private weak var collecitonView: UICollectionView!
+    @IBOutlet private weak var lookUpForEatText: UILabel!
+    @IBOutlet private weak var dailyMenuText: UILabel!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var noSearchResultView: UIView!
     
     let searchController = UISearchController()
     
-    private let search: Search = Search()
-    private var isSearchTrothelled = false
     var selectedRecipe: ClippedRecipe?
     var recipeInProgress: RecipeModel?
     var carouselRecipes = [ClippedRecipe]()
     var searchResult = [ClippedRecipe]()
+    private let search: Search = Search()
+    private var isSearchTrothelled = false
     private var carouselDidLoad = false
     private var filters: FilterUnion? {
         didSet {
@@ -42,9 +42,9 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                   let paths = FileManager.default.urls(for: .documentDirectory,
                                                         in: .userDomainMask)
                   return paths[0]
-                }()
+            }()
                 
-                print(applicationDocumentsDirectory)
+        print(applicationDocumentsDirectory)
         
         let cellNib = UINib(nibName: "RecipeCardView" , bundle: nil)
         collecitonView.register(cellNib, forCellWithReuseIdentifier: "RecipeCard")

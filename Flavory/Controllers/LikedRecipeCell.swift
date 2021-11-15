@@ -1,33 +1,31 @@
-//
-//  SearchResultCell.swift
-//  Flavory
-//
-//  Created by Ivan Stoilov on 19.10.21.
-//
-
 import UIKit
 
-class SearchResultCell: UITableViewCell {
+protocol LikedRecipeCellDelegate: AnyObject {
     
-    @IBOutlet private weak var recipeTitle: UILabel!
-    @IBOutlet private weak var recipeImage: UIImageView!
+    func deleteCell(withLikedRecipe likedRecipe: RecipeLike)
+    
+}
+
+class LikedRecipeCell: UITableViewCell {
+
+    @IBOutlet weak var recipeImage: UIImageView!
+    @IBOutlet weak var recipeTitle: UILabel!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     private var imageRequest: Cancellable?
     
-    var recipe: ClippedRecipe? {
+    weak var delegate: LikedRecipeCellDelegate?
+    
+    var likedRecipe: RecipeLike? {
         didSet {
-            
-            self.recipeImage.alpha = 0
-            
+            loadingIndicator.startAnimating()
             updateUI()
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        loadingIndicator.startAnimating()
-        setUpLook()
+        // Initialization code
     }
     
     override func prepareForReuse() {
@@ -38,20 +36,11 @@ class SearchResultCell: UITableViewCell {
         imageRequest?.cancel()
     }
     
-    private func setUpLook() {
-        self.backgroundColor = UIColor.clear
-        let blurEffect = UIBlurEffect(style: .extraLight)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.frame
-        self.backgroundView = blurEffectView
-        recipeImage.layer.cornerRadius = 15
-    }
-    
     private func updateUI() {
-        if let recipe = recipe {
-            recipeTitle.text = recipe.title
+        if let likedRecipe = likedRecipe {
+            recipeTitle.text = likedRecipe.recipeName
             
-            imageRequest = ImageService.shared.getImage(rawUrl: recipe.smallImageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: likedRecipe.imageURL ?? "") { [weak self] result in
                 
                 switch result{
                 case .success(let image):
@@ -66,6 +55,12 @@ class SearchResultCell: UITableViewCell {
                     
                 }
             }
+        }
+    }
+    
+    @IBAction func likeButtonClicked(_ sender: UIButton) {
+        if let likedRecipe = likedRecipe {
+            delegate?.deleteCell(withLikedRecipe: likedRecipe)
         }
     }
 }

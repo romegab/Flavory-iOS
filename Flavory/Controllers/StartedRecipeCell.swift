@@ -15,6 +15,17 @@ protocol StartedRecipeCellDelegate: AnyObject {
 
 class StartedRecipeCell: UITableViewCell {
     
+    @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet private weak var recipeImage: UIImageView!
+    @IBOutlet private weak var recipeTitle: UILabel!
+    @IBOutlet private weak var recipeProgress: UILabel!
+    @IBOutlet private weak var background: UIView!
+    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
+    
+    private var imageRequest: Cancellable?
+    
+    weak var delegate: StartedRecipeCellDelegate?
+    
     var recipe: ClippedRecipe? {
         didSet {
             recipeImage.alpha = 0
@@ -23,25 +34,6 @@ class StartedRecipeCell: UITableViewCell {
         }
     }
     
-    weak var delegate: StartedRecipeCellDelegate?
-    
-    private var imageRequest: Cancellable?
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        recipeImage.image = nil
-        
-        imageRequest?.cancel()
-    }
-    
-    @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet fileprivate weak var recipeImage: UIImageView!
-    @IBOutlet fileprivate weak var recipeTitle: UILabel!
-    @IBOutlet fileprivate weak var recipeProgress: UILabel!
-    @IBOutlet fileprivate weak var background: UIView!
-    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -49,6 +41,14 @@ class StartedRecipeCell: UITableViewCell {
         imageLoadingIndicator.startAnimating()
         setUpCornerRadius()
         setUpShadow()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        recipeImage.image = nil
+        
+        imageRequest?.cancel()
     }
     
     private func updateUI() {

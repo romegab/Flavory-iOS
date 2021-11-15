@@ -7,20 +7,21 @@
 import UIKit
 
 class DailyMenuController: UIViewController {
+    
+    @IBOutlet private weak var segmentControl: UISegmentedControl!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var menuIndexesView: UIView!
+    @IBOutlet private weak var getNewMenuButton: UIButton!
+    @IBOutlet private weak var proteinLabel: UILabel!
+    @IBOutlet private weak var caloriesLabel: UILabel!
+    @IBOutlet private weak var fatLabel: UILabel!
+    @IBOutlet private weak var carbohydratesLabel: UILabel!
+    
     private let search: Search = Search()
     private var menu: [ClippedRecipe] = [ClippedRecipe]()
     private var currentRecipe: ClippedRecipe?
     private var selectedRecipe: ClippedRecipe?
     private var menuNutritients: MenuNutrients = MenuNutrients()
-    
-    @IBOutlet weak var segmentControl: UISegmentedControl!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var menuIndexesView: UIView!
-    @IBOutlet weak var getNewMenuButton: UIButton!
-    @IBOutlet weak var proteinLabel: UILabel!
-    @IBOutlet weak var caloriesLabel: UILabel!
-    @IBOutlet weak var fatLabel: UILabel!
-    @IBOutlet weak var carbohydratesLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +47,6 @@ class DailyMenuController: UIViewController {
     }
     
     private func loadDailyMenu() {
-        
         if let loadedMenu = DataManager.shared.getDailyMenu() {
             var loadedMenuRecipes = [ClippedRecipe]()
             let currentMenuNutritients = MenuNutrients()
@@ -118,7 +118,6 @@ class DailyMenuController: UIViewController {
     }
     
     @IBAction func getNewMenuButtonClicked(_ sender: UIButton) {
-        
         DataManager.shared.removeDailyMenu()
         
         loadDailyMenu()
@@ -127,6 +126,7 @@ class DailyMenuController: UIViewController {
 }
 
 extension DailyMenuController: UICollectionViewDataSource {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -135,7 +135,6 @@ extension DailyMenuController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCard", for: indexPath) as! RecipeCardController
         cell.recipe = currentRecipe
         
@@ -143,7 +142,6 @@ extension DailyMenuController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let loadedRecipe: RecipeModel? = DataManager.shared.getRecipeByID(id: Int(currentRecipe?.id ?? -1))
         if let loadedRecipe = loadedRecipe{
             selectedRecipe = ClippedRecipe(loadedRecipe: loadedRecipe)
@@ -167,10 +165,12 @@ extension DailyMenuController: UICollectionViewDataSource {
 }
 
 extension DailyMenuController: UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         print(collectionView.frame.width)
         print(collectionView.frame.height)
         return CGSize(width: collectionView.frame.width , height: collectionView.frame.height)
     }
+    
 }
 

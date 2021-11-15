@@ -4,20 +4,20 @@ import UIKit
 
 class IngredientCell: UITableViewCell, Checkable {
     
+    @IBOutlet private weak var ingredientImage: UIImageView!
+    @IBOutlet private weak var ingredientName: UILabel!
+    @IBOutlet private weak var ingredientDescription: UILabel!
+    @IBOutlet private weak var checkMark: UILabel!
+    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
+    
+    private var imageRequest: Cancellable?
+    
     var isChecked: Bool = false {
         didSet {
             ingredient?.isChecked.toggle()
             configureCheckmark()
         }
     }
-    
-    private var imageRequest: Cancellable?
-    
-    @IBOutlet fileprivate weak var ingredientImage: UIImageView!
-    @IBOutlet fileprivate weak var ingredientName: UILabel!
-    @IBOutlet fileprivate weak var ingredientDescription: UILabel!
-    @IBOutlet fileprivate weak var checkMark: UILabel!
-    @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
     
     var ingredient: RecipeIngredient? {
         didSet {
@@ -27,18 +27,9 @@ class IngredientCell: UITableViewCell, Checkable {
         }
     }
     
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         imageLoadingIndicator.startAnimating()
-        // Initialization code
-    }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     override func prepareForReuse() {

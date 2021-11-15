@@ -9,11 +9,11 @@ import UIKit
 
 class RecipeCardController: UICollectionViewCell {
     
-    @IBOutlet fileprivate weak var recipeImage: UIImageView!
-    @IBOutlet fileprivate weak var recipeTitle: UILabel!
-    @IBOutlet fileprivate weak var background: UIView!
-    @IBOutlet fileprivate weak var recipePreparationTime: UILabel!
-    @IBOutlet fileprivate weak var recipeServings: UILabel!
+    @IBOutlet private weak var recipeImage: UIImageView!
+    @IBOutlet private weak var recipeTitle: UILabel!
+    @IBOutlet private weak var background: UIView!
+    @IBOutlet private weak var recipePreparationTime: UILabel!
+    @IBOutlet private weak var recipeServings: UILabel!
     @IBOutlet weak var imageLoadingIndicator: UIActivityIndicatorView!
     
     
@@ -48,7 +48,7 @@ class RecipeCardController: UICollectionViewCell {
         imageRequest?.cancel()
     }
     
-    func updateUI() {
+    private func updateUI() {
         recipeImage.image = nil
         
         recipeTitle.adjustsFontSizeToFitWidth = true

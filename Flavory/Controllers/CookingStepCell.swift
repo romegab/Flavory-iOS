@@ -9,15 +9,15 @@ import UIKit
 
 class CookingStepCell: UITableViewCell, Checkable {
     
+    @IBOutlet private weak var stepDescription: UILabel!
+    @IBOutlet private weak var checkMark: UILabel!
+    
     var isChecked: Bool = false {
         didSet {
             cookingStep?.isChecked.toggle()
             updateUI()
         }
     }
-    
-    @IBOutlet fileprivate weak var stepDescription: UILabel!
-    @IBOutlet fileprivate weak var checkMark: UILabel!
     
     var cookingStep: RecipeStep? {
         didSet {

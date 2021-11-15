@@ -4,12 +4,11 @@ import CoreData
 
 class StartedRecipeController: UIViewController, NSFetchedResultsControllerDelegate, StartedRecipeCellDelegate {
     
-    @IBOutlet fileprivate weak var editButton: UIBarButtonItem!
-    @IBOutlet fileprivate weak var tableView: UITableView!
-    @IBOutlet fileprivate weak var viewTitle: UILabel!
+    @IBOutlet private weak var editButton: UIBarButtonItem!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var viewTitle: UILabel!
     @IBOutlet weak var noRecipesLabel: UILabel!
     
-    var selectedRecipe: ClippedRecipe?
     private var isInEditingMood: Bool = false {
         didSet {
             configureEditButton()
@@ -32,6 +31,8 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         
         return fetchedResultsController
     }()
+    
+    var selectedRecipe: ClippedRecipe?
     
     override func viewDidLoad() {
         fetchedResultsController.delegate = self
@@ -90,16 +91,16 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         DataManager.shared.updateRecipe(recipe)
     }
     
-    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
-        isInEditingMood.toggle()
-    }
-    
     private func configureEditButton(){
         if isInEditingMood {
             editButton.title = "Done"
         } else {
             editButton.title = "Edit"
         }
+    }
+    
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+        isInEditingMood.toggle()
     }
 }
 

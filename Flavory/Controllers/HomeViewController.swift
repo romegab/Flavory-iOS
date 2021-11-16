@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     @IBOutlet private weak var dailyMenuImage: UIImageView!
     @IBOutlet private weak var lookUpForEatImage: UIImageView!
     @IBOutlet private weak var collecitonView: UICollectionView!
-    @IBOutlet private weak var lookUpForEatText: UILabel!
+    @IBOutlet private weak var lookAtYourStatsText: UILabel!
     @IBOutlet private weak var dailyMenuText: UILabel!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var noSearchResultView: UIView!
@@ -28,7 +28,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     private let search: Search = Search()
     private var isSearchTrothelled = false
     private var carouselDidLoad = false
-    private var filters: FilterUnion? {
+    private var filters: FilterSet? {
         didSet {
             performFilterSearch()
         }
@@ -119,8 +119,8 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         
         dailyMenuText.text = "GET\nYOUR\nDAILY\nMENU"
         dailyMenuText.adjustsFontSizeToFitWidth = true
-        lookUpForEatText.text = "LOOK\nUP\nFOR\nEAT"
-        lookUpForEatText.adjustsFontSizeToFitWidth = true
+        lookAtYourStatsText.text = "LOOK\nAT\nYOUR\nSTATS"
+        lookAtYourStatsText.adjustsFontSizeToFitWidth = true
     }
     
     private func setBlurredBackground() {
@@ -189,7 +189,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         }
     }
     
-    private func filterSearchResultByNutrients(filters: FilterUnion) {
+    private func filterSearchResultByNutrients(filters: FilterSet) {
         var result: [ClippedRecipe] = [ClippedRecipe]()
         
         for recipe in searchResult {
@@ -267,7 +267,7 @@ extension HomeViewController: UICollectionViewDataSource {
         }
     }
     
-    func loadFilters(filters: FilterUnion) {
+    func loadFilters(filters: FilterSet) {
         print("filters loaded")
         self.filters = filters
     }

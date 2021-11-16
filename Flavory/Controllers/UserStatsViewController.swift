@@ -69,12 +69,12 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
     private func setData() {
         let cookedRecipes = PieChartDataSet(entries: dishTypes, label: "")
         cookedRecipes.sliceSpace = 1
-        cookedRecipes.colors = ChartColorTemplates.colorful()
+        cookedRecipes.colors = ChartColorTemplates.material()
         
         let data = PieChartData(dataSet: cookedRecipes)
         pieChartView.data = data
         
-        let cookedRecipeInformation = DataManager.shared.getCookedRecipeInformation()
+        let cookedRecipeInformation = DataManager.shared.getCookedRecipesInformation()
         cookedRecipesCount.text = String(cookedRecipeInformation.count)
         
         if cookedRecipeInformation.spentTime % 60 < 10 {

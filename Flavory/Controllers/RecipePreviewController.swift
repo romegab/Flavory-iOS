@@ -130,7 +130,7 @@ class RecipePreviewController: UIViewController {
     @IBAction func startCookingButtonPressed(_ sender: UIButton) {
         if let recipe = recipe, !recipe.isInProgress{
             recipe.isInProgress.toggle()
-            let _ = DataManager.shared.saveRecipe(recipe)
+            let _ = DataManager.shared.recipeStarted(recipe)
         }
         performSegue(withIdentifier: "StartCookingSegue", sender: nil)
         

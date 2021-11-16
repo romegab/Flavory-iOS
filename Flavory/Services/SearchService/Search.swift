@@ -13,13 +13,14 @@ enum NetworkError: Error {
 
 class Search {
     
-    private var isRequestFinished = false
+    private var isRequestFinished: Bool = false
+    private let searchParser: SearchResultParser = SearchResultParser()
     private var dataTask: URLSessionDataTask?
     private let session = URLSession.shared
     //private let apiKey: String = "12cbc8a03407496290efed34fba57028"
-    private let apiKey: String = "5d9a3e69b4234101a69aab06fbae2aae"
+    //private let apiKey: String = "5d9a3e69b4234101a69aab06fbae2aae"
     //private let apiKey: String = "3b4becbee2e143f18c78ba7f929bbfd4"
-    //private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
+    private let apiKey: String = "a853b2a46bc743db882b2c8a48b76329"
     
     func terminateRequest() {
             session.invalidateAndCancel()
@@ -78,7 +79,7 @@ class Search {
             } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                 self.isRequestFinished = true
                 if let data = data {
-                    completionHandler(.success(SearchResultParser.parseCertainRecipe(data: data)!))
+                    completionHandler(.success(self.searchParser.parseCertainRecipe(data: data)!))
                 }
             }
         }.resume()
@@ -100,7 +101,7 @@ class Search {
             } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                 self.isRequestFinished = true
                 if let data = data {
-                    completionHandler(.success(SearchResultParser.parseDailyMenu(data: data)))
+                    completionHandler(.success(self.searchParser.parseDailyMenu(data: data)))
                 }
             }
         }.resume()
@@ -128,7 +129,7 @@ class Search {
         }.resume()
     }
     
-    func performSearchByIngredients (filters: FilterUnion, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
+    func performSearchByIngredients (filters: FilterSet, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         if let ingredients = filters.ingredients{
             let url:URL = recipeSearchByIngredientsURL(ingredients: ingredients)
             
@@ -146,14 +147,14 @@ class Search {
                     self.isRequestFinished = true
                     if let data = data {
                        print( String(decoding: data, as: UTF8.self))
-                        completionHandler(.success(SearchResultParser.parseRecipeByIngredients(data: data)))
+                        completionHandler(.success(self.searchParser.parseRecipeByIngredients(data: data)))
                     }
                 }
             }.resume()
         }
     }
     
-    func performNutrientsSearch (filters: FilterUnion, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
+    func performNutrientsSearch (filters: FilterSet, completionHandler: @escaping (Result<[ClippedRecipe], NetworkError>) -> Void) {
         let url:URL = nutrientsSearchURL(filters: filters)
         
         isRequestFinished = false
@@ -169,7 +170,7 @@ class Search {
             } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                 self.isRequestFinished = true
                 if let data = data {
-                    completionHandler(.success(SearchResultParser.parseRecipeByIngredients(data: data)))
+                    completionHandler(.success(self.searchParser.parseRecipeByIngredients(data: data)))
                 }
             }
         }.resume()
@@ -190,7 +191,7 @@ class Search {
                 self.isRequestFinished = true
                 if let data = data {
 
-                    completionHandler(.success(SearchResultParser.parse(data: data)))
+                    completionHandler(.success(self.searchParser.parse(data: data)))
                 }
             }
         }.resume()
@@ -243,7 +244,7 @@ class Search {
         return url!
     }
     
-    private func nutrientsSearchURL(filters: FilterUnion) -> URL {
+    private func nutrientsSearchURL(filters: FilterSet) -> URL {
         let urlString = "https://api.spoonacular.com/recipes/findByNutrients?minCarbs=\(filters.minCarbs)&maxCarbs=\(filters.maxCarbs)&minProtein=\(filters.minProtein)&maxProtein=\(filters.maxProtein)&minCalories=\(filters.minCalories)&maxCalories=\(filters.maxCalories)&minFat=\(filters.minFat)&maxFat=\(filters.maxFat)&apiKey=\(apiKey)"
         let url = URL(string: urlString)
         return url!

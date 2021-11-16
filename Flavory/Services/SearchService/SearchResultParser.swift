@@ -9,7 +9,7 @@ import Foundation
 
 class SearchResultParser{
     
-    static func parse(data: Data) -> [ClippedRecipe] {
+    func parse(data: Data) -> [ClippedRecipe] {
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode(ResultArray.self, from:data)
@@ -25,7 +25,7 @@ class SearchResultParser{
         return [ClippedRecipe]()
     }
     
-    static func parseCertainRecipe(data: Data) -> ClippedRecipe? {
+    func parseCertainRecipe(data: Data) -> ClippedRecipe? {
         
         do {
             let decoder = JSONDecoder()
@@ -39,7 +39,7 @@ class SearchResultParser{
         return nil
     }
     
-    static func parseDailyMenu(data: Data) -> ([ClippedRecipe], MenuNutrients) {
+    func parseDailyMenu(data: Data) -> ([ClippedRecipe], MenuNutrients) {
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode(ResultArray.self, from:data)
@@ -63,7 +63,7 @@ class SearchResultParser{
         return [RecipeIngredient]()
     }
     
-    static func parseRecipeByIngredients(data: Data) -> [ClippedRecipe] {
+    func parseRecipeByIngredients(data: Data) -> [ClippedRecipe] {
         do {
             let decoder = JSONDecoder()
             let result = try decoder.decode([ClippedRecipe].self, from:data)

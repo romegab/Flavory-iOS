@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FilterUnion {
+struct FilterSet {
     let minCarbs: Int
     let maxCarbs: Int
     

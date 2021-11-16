@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FilterSearchControllerDelegate: AnyObject {
-    func loadFilters(filters: FilterUnion)
+    func loadFilters(filters: FilterSet)
 }
 
 class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegate {
@@ -250,7 +250,7 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         let mealType = mealTypes[mealTypePicker.selectedRow(inComponent: 0)]
         
         self.dismiss(animated: true, completion: {
-            self.delegate?.loadFilters(filters: FilterUnion(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, self.choosedIngredients))
+            self.delegate?.loadFilters(filters: FilterSet(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, self.choosedIngredients))
        })
     }
     

@@ -111,6 +111,7 @@ class ClippedRecipe: Codable {
     private var dishTypes: [String]?
     private var diets: [String]?
     var isInProgress: Bool = false
+    var timesCooked: Int = 0
     
     private enum CodingKeys: String, CodingKey {
         case title
@@ -170,6 +171,7 @@ class ClippedRecipe: Codable {
         self.servings = loadedRecipe.servings
         self.recipeDetails = details
         self.isInProgress = loadedRecipe.isInProgress
+        self.timesCooked = loadedRecipe.timesCooked
         self.diets = [String]()
         diets?.append(loadedRecipe.diet ?? "-")
         

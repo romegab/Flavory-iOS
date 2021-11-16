@@ -60,6 +60,7 @@ class RecipeCookingController: UIViewController {
     @IBAction func readyButtonClicked(_ sender: Any) {
         if let recipe = recipe {
             recipe.isInProgress.toggle()
+            recipe.timesCooked += 1
             for currentIngredient in recipe.extendedIngredients ?? [] {
                 currentIngredient.isChecked = false
             }

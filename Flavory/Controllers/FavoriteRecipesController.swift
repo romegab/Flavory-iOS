@@ -10,8 +10,8 @@ import CoreData
 
 class FavoriteRecipesController: UIViewController, NSFetchedResultsControllerDelegate, LikedRecipeCellDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noResultsLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var noResultsLabel: UILabel!
     
     private var likedRecipes: [RecipeLike]?
     private var selectedRecipe: ClippedRecipe?

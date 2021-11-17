@@ -8,9 +8,9 @@ protocol LikedRecipeCellDelegate: AnyObject {
 
 class LikedRecipeCell: UITableViewCell {
 
-    @IBOutlet weak var recipeImage: UIImageView!
-    @IBOutlet weak var recipeTitle: UILabel!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var recipeImage: UIImageView!
+    @IBOutlet private weak var recipeTitle: UILabel!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     
     private var imageRequest: Cancellable?
     

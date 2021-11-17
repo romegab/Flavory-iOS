@@ -18,29 +18,29 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
     let fatSlider = RangeSlider(frame: .zero)
     let proteinSlider = RangeSlider(frame: .zero)
     
-    @IBOutlet weak var carbsView: UIView!
-    @IBOutlet weak var maxCarbs: UILabel!
-    @IBOutlet weak var minCarbs: UILabel!
+    @IBOutlet private weak var carbsView: UIView!
+    @IBOutlet private weak var maxCarbs: UILabel!
+    @IBOutlet private weak var minCarbs: UILabel!
+
+    @IBOutlet private weak var kcalView: UIView!
+    @IBOutlet private weak var minKcal: UILabel!
+    @IBOutlet private weak var maxKcal: UILabel!
+
+    @IBOutlet private weak var fatView: UIView!
+    @IBOutlet private weak var minFat: UILabel!
+    @IBOutlet private weak var maxFat: UILabel!
+
+    @IBOutlet private weak var proteinView: UIView!
+    @IBOutlet private weak var minProtein: UILabel!
+    @IBOutlet private weak var maxProtein: UILabel!
     
-    @IBOutlet weak var kcalView: UIView!
-    @IBOutlet weak var minKcal: UILabel!
-    @IBOutlet weak var maxKcal: UILabel!
-    
-    @IBOutlet weak var fatView: UIView!
-    @IBOutlet weak var minFat: UILabel!
-    @IBOutlet weak var maxFat: UILabel!
-    
-    @IBOutlet weak var proteinView: UIView!
-    @IBOutlet weak var minProtein: UILabel!
-    @IBOutlet weak var maxProtein: UILabel!
-    
-    @IBOutlet weak var chooseIngredientsView: UIView!
-    @IBOutlet weak var mealTypePicker: UIPickerView!
-    @IBOutlet weak var cuisinePicker: UIPickerView!
-    @IBOutlet weak var chooseIngredinetsImage: UIImageView!
-    @IBOutlet weak var filterButton: UIButton!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var dishType: UIView!
+    @IBOutlet private weak var chooseIngredientsView: UIView!
+    @IBOutlet private weak var mealTypePicker: UIPickerView!
+    @IBOutlet private weak var cuisinePicker: UIPickerView!
+    @IBOutlet private weak var chooseIngredinetsImage: UIImageView!
+    @IBOutlet private weak var filterButton: UIButton!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var dishType: UIView!
     
     private var cuisines: [String] = ["All", "American", "British", "Chinesse", " Easter EU", "French", "German", "Greek", "Indian", "Italian", "Mediterian", "Spanish"]
     private var mealTypes: [String] = ["All", "Main course", "Side dish", "Dessert", "Salad", "Breakfast", "Soup", "Snack", "Drink"]

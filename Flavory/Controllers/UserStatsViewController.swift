@@ -3,16 +3,16 @@ import Charts
 
 class UserStatsViewController: UIViewController, ChartViewDelegate {
     
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var cookedRecipeLabel: UILabel!
-    @IBOutlet weak var spentTimeInCookingLabel: UILabel!
-    @IBOutlet weak var recipesInProgressLabel: UILabel!
-    @IBOutlet weak var cookedRecipesCount: UILabel!
-    @IBOutlet weak var spentTimeInCooking: UILabel!
-    @IBOutlet weak var recipesInProgress: UILabel!
-    @IBOutlet weak var noDataToShowLabel: UILabel!
-    @IBOutlet weak var schemeView: UIView!
-    @IBOutlet weak var favorityDishCategory: UILabel!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var cookedRecipeLabel: UILabel!
+    @IBOutlet private weak var spentTimeInCookingLabel: UILabel!
+    @IBOutlet private weak var recipesInProgressLabel: UILabel!
+    @IBOutlet private weak var cookedRecipesCount: UILabel!
+    @IBOutlet private weak var spentTimeInCooking: UILabel!
+    @IBOutlet private weak var recipesInProgress: UILabel!
+    @IBOutlet private weak var noDataToShowLabel: UILabel!
+    @IBOutlet private weak var schemeView: UIView!
+    @IBOutlet private weak var favorityDishCategory: UILabel!
     
     private lazy var pieChartView: PieChartView = {
         let chartView = PieChartView()

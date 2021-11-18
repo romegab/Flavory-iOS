@@ -53,17 +53,15 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         
         setBlurredBackground()
         setupPickers()
-        setupSliders()
-        
+
         chooseIngredinetsImage.clipsToBounds = true
         chooseIngredinetsImage.layer.cornerRadius = 15
         
         filterButton.layer.cornerRadius = 15
+        setupSliders()
     }
     
     override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
         setSlidersLayout()
     }
     
@@ -162,34 +160,41 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         kcalView.addSubview(kcalSlider)
         fatView.addSubview(fatSlider)
         proteinView.addSubview(proteinSlider)
+        
+        setSlidersLayout()
     }
     
     private func setSlidersLayout() {
         let margin: CGFloat = 50
-        let width = carbsView.bounds.width - 2 * margin
+        let width = view.bounds.width - 2 * margin // alright
         let height: CGFloat = 30
       
         carbsSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        kcalSlider.updateLayerFrames()
         carbsSlider.center = carbsView.convert(carbsView.center, from: carbsView.superview)
-        carbsSlider.center.y += 20
+        carbsSlider.center.y += 15
+        carbsSlider.center.x = view.center.x - 10
         carbsSlider.addTarget(self, action: #selector(carbsSliderValueChanged(_:)), for: .valueChanged)
         
         kcalSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
         kcalSlider.updateLayerFrames()
         kcalSlider.center = kcalView.convert(kcalView.center, from:kcalView.superview)
         kcalSlider.center.y += 15
+        kcalSlider.center.x = view.center.x - 10
         kcalSlider.addTarget(self, action: #selector(kcalSliderValueChanged(_:)), for: .valueChanged)
 
         fatSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
         fatSlider.updateLayerFrames()
         fatSlider.center = fatView.convert(fatView.center, from:fatView.superview)
         fatSlider.center.y += 15
+        fatSlider.center.x = view.center.x - 10
         fatSlider.addTarget(self, action: #selector(fatSliderValueChanged(_:)), for: .valueChanged)
         
         proteinSlider.frame = CGRect(x: 0, y: 0, width: width, height: height)
         proteinSlider.updateLayerFrames()
         proteinSlider.center = proteinView.convert(proteinView.center, from: proteinView.superview)
         proteinSlider.center.y += 15
+        proteinSlider.center.x = view.center.x - 10
         proteinSlider.addTarget(self, action: #selector(proteinSliderValueChanged(_:)), for: .valueChanged)
     }
     

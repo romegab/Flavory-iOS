@@ -962,6 +962,8 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="6Vt-CX-DcA" firstAttribute="centerX" secondItem="SdA-FD-9Jd" secondAttribute="centerX" id="2YX-TX-Pdf"/>
+                                            <constraint firstItem="EWx-kQ-kwZ" firstAttribute="centerX" secondItem="SdA-FD-9Jd" secondAttribute="centerX" id="4bv-wX-qIF"/>
                                             <constraint firstAttribute="trailing" secondItem="YiT-bb-FMA" secondAttribute="trailing" constant="10" id="6TX-CE-ucx"/>
                                             <constraint firstItem="YiT-bb-FMA" firstAttribute="top" secondItem="EWx-kQ-kwZ" secondAttribute="bottom" constant="10" id="6To-pT-Z0u"/>
                                             <constraint firstItem="6GF-gx-dgW" firstAttribute="top" secondItem="ZGC-3e-LVM" secondAttribute="bottom" constant="10" id="AQ2-90-mhv"/>
@@ -977,7 +979,10 @@
                                             <constraint firstAttribute="trailing" secondItem="17x-IC-MxF" secondAttribute="trailing" constant="10" id="Vwq-yh-zIN"/>
                                             <constraint firstItem="ZGC-3e-LVM" firstAttribute="top" secondItem="YiT-bb-FMA" secondAttribute="bottom" constant="10" id="XDC-RW-lkn"/>
                                             <constraint firstItem="17x-IC-MxF" firstAttribute="top" secondItem="SdA-FD-9Jd" secondAttribute="top" constant="10" id="Zai-Gt-XY1"/>
+                                            <constraint firstItem="17x-IC-MxF" firstAttribute="centerX" secondItem="SdA-FD-9Jd" secondAttribute="centerX" id="bee-8H-moz"/>
                                             <constraint firstAttribute="trailing" secondItem="6GF-gx-dgW" secondAttribute="trailing" constant="10" id="bnd-fJ-f2V"/>
+                                            <constraint firstItem="17x-IC-MxF" firstAttribute="centerX" secondItem="SdA-FD-9Jd" secondAttribute="centerX" id="dft-E4-8QA"/>
+                                            <constraint firstItem="YiT-bb-FMA" firstAttribute="centerX" secondItem="SdA-FD-9Jd" secondAttribute="centerX" id="iR8-mP-Cwy"/>
                                             <constraint firstAttribute="trailing" secondItem="ZGC-3e-LVM" secondAttribute="trailing" constant="10" id="lWz-aB-7H6"/>
                                             <constraint firstAttribute="bottom" secondItem="6GF-gx-dgW" secondAttribute="bottom" constant="10" id="x5r-sL-0w4"/>
                                             <constraint firstAttribute="trailing" secondItem="EWx-kQ-kwZ" secondAttribute="trailing" constant="10" id="yZr-dX-Jfz"/>

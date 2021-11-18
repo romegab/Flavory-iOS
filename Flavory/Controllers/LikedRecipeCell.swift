@@ -45,10 +45,10 @@ class LikedRecipeCell: UITableViewCell {
                 switch result{
                 case .success(let image):
                     self?.loadingIndicator.stopAnimating()
-                    self?.recipeImage.image = image
                     UIView.animate(withDuration: 0.5) {
                         self?.recipeImage.alpha = 1
                     }
+                    self?.recipeImage.image = image
                 case .failure(let error):
                     print("fire from the ingredient cell card")
                     print(error.localizedDescription)

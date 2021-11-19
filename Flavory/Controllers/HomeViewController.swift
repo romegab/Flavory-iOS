@@ -63,6 +63,12 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if carouselRecipes.count == 0 {
+            loadCarouselContent()
+        }
+    }
+    
     private func adjustNavigationBar() {
         
         searchController.searchResultsUpdater = self
@@ -97,10 +103,8 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                     self?.collecitonView.reloadData()
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
                 }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    print(error.localizedDescription)
-                }
+            case .failure(let error): break
+                
             }
         }
         

@@ -38,9 +38,7 @@ class Search {
                 }
             case .failure(let error):
                 print(error.localizedDescription)
-                DispatchQueue.main.async {
-                    completionHandler(.failure(.badConnection))
-                }
+                completionHandler(.failure(.badConnection))
             }
         }
     }
@@ -183,10 +181,8 @@ class Search {
         
         session.dataTask(with: url) {data, response, error in
             if let error = error as NSError?, error.code == -999{
-                DispatchQueue.main.async {
-                    self.isRequestFinished = true
-                    completionHandler(.failure(.badConnection))
-                }
+                self.isRequestFinished = true
+                completionHandler(.failure(.badConnection))
             } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                 self.isRequestFinished = true
                 if let data = data {

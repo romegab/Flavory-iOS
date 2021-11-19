@@ -51,7 +51,7 @@ class SearchResultCell: UITableViewCell {
         if let recipe = recipe {
             recipeTitle.text = recipe.title
             
-            imageRequest = ImageService.shared.getImage(rawUrl: recipe.smallImageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.smallImageURL, id: recipe.id) { [weak self] result in
                 
                 switch result{
                 case .success(let image):

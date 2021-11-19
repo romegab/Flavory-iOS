@@ -42,6 +42,7 @@
 		BC60C11D272FDBC500EA1D9C /* MenuNutrients.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60C11C272FDBC500EA1D9C /* MenuNutrients.swift */; };
 		BC60C1302730398D00EA1D9C /* DailyMenu+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60C12E2730398D00EA1D9C /* DailyMenu+CoreDataClass.swift */; };
 		BC60C1312730398D00EA1D9C /* DailyMenu+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC60C12F2730398D00EA1D9C /* DailyMenu+CoreDataProperties.swift */; };
+		BC882D7A2746B5DB007D274D /* CacheImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC882D792746B5DB007D274D /* CacheImage.swift */; };
 		BCA188B2270F095D00B7A3F4 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA188B1270F095D00B7A3F4 /* ImageManager.swift */; };
 		BCA4A77E270B216000F3EFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCA4A77D270B216000F3EFBE /* Assets.xcassets */; };
 		BCA4A780270B404B00F3EFBE /* RecipePreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA4A77F270B404B00F3EFBE /* RecipePreviewController.swift */; };
@@ -108,6 +109,7 @@
 		BC60C11C272FDBC500EA1D9C /* MenuNutrients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNutrients.swift; sourceTree = "<group>"; };
 		BC60C12E2730398D00EA1D9C /* DailyMenu+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyMenu+CoreDataClass.swift"; sourceTree = "<group>"; };
 		BC60C12F2730398D00EA1D9C /* DailyMenu+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DailyMenu+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		BC882D792746B5DB007D274D /* CacheImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheImage.swift; sourceTree = "<group>"; };
 		BCA188B1270F095D00B7A3F4 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		BCA4A77D270B216000F3EFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BCA4A77F270B404B00F3EFBE /* RecipePreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipePreviewController.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				BCBA861D2710204F00912308 /* ImageService.swift */,
+				BC882D792746B5DB007D274D /* CacheImage.swift */,
 			);
 			path = ImageService;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				764AAF4127400703005BCBB7 /* FavoriteRecipesController.swift in Sources */,
 				BCA6857527392AF200FDFE8D /* FilterSet.swift in Sources */,
 				BCBE57092726DBC900705A91 /* Detail+CoreDataProperties.swift in Sources */,
+				BC882D7A2746B5DB007D274D /* CacheImage.swift in Sources */,
 				BCBA861E2710204F00912308 /* ImageService.swift in Sources */,
 				BCBE57102727E4D400705A91 /* StartedRecipeCell.swift in Sources */,
 			);
@@ -602,13 +606,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = D9TZ99Y72Z;
+				DEVELOPMENT_TEAM = DVMRYPRM28;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flavory/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Flavory;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -616,7 +621,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ivstoilov.Flavory;
+				PRODUCT_BUNDLE_IDENTIFIER = bg.melon.flavory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -633,13 +638,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = D9TZ99Y72Z;
+				DEVELOPMENT_TEAM = DVMRYPRM28;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Flavory/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Flavory;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -647,7 +653,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ivstoilov.Flavory;
+				PRODUCT_BUNDLE_IDENTIFIER = bg.melon.flavory;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -55,11 +55,14 @@ class SearchResultCell: UITableViewCell {
                 
                 switch result{
                 case .success(let image):
-                    self?.loadingIndicator.stopAnimating()
-                    self?.recipeImage.image = image
-                    UIView.animate(withDuration: 0.5) {
-                        self?.recipeImage.alpha = 1
+                    DispatchQueue.main.async {
+                        self?.loadingIndicator.stopAnimating()
+                        self?.recipeImage.image = image
+                        UIView.animate(withDuration: 0.5) {
+                            self?.recipeImage.alpha = 1
+                        }
                     }
+                    
                 case .failure(let error):
                     print("fire from the ingredient cell card")
                     print(error.localizedDescription)

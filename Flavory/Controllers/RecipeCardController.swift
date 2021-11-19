@@ -9,7 +9,7 @@ import UIKit
 
 class RecipeCardController: UICollectionViewCell {
     
-    @IBOutlet private weak var recipeImage: UIImageView!
+    @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet private weak var recipeTitle: UILabel!
     @IBOutlet private weak var background: UIView!
     @IBOutlet private weak var recipePreparationTime: UILabel!
@@ -74,7 +74,6 @@ class RecipeCardController: UICollectionViewCell {
                         }
                     }
                 case .failure(let error):
-                    print("qj mi kuraaaaaaaaaaa")
                     if let image = UIImage(named: "DefaultRecipeImage"){
                         DispatchQueue.main.async {
                             self?.recipeImage.image = image

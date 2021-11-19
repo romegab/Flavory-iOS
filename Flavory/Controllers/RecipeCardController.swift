@@ -9,7 +9,7 @@ import UIKit
 
 class RecipeCardController: UICollectionViewCell {
     
-    @IBOutlet private weak var recipeImage: UIImageView!
+    @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet private weak var recipeTitle: UILabel!
     @IBOutlet private weak var background: UIView!
     @IBOutlet private weak var recipePreparationTime: UILabel!
@@ -62,20 +62,25 @@ class RecipeCardController: UICollectionViewCell {
             recipeServings.text = "\(recipe.servings ?? 0) servs"
             recipeTitle.lineBreakMode = NSLineBreakMode.byTruncatingTail
             
-            imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL, id: recipe.id) { [weak self] result in
                 
                 switch result {
                 case .success(let image):
-                    self?.imageLoadingIndicator.stopAnimating()
-                    self?.recipeImage.image = image
-                    UIView.animate(withDuration: 0.5) {
-                        self?.recipeImage.alpha = 1
+                    DispatchQueue.main.async {
+                        self?.imageLoadingIndicator.stopAnimating()
+                        self?.recipeImage.image = image
+                        UIView.animate(withDuration: 0.5) {
+                            self?.recipeImage.alpha = 1
+                        }
                     }
                 case .failure(let error):
-                    
-                    print("fire from the recipe card")
-                    print(error.localizedDescription)
-                    
+                    if let image = UIImage(named: "DefaultRecipeImage"){
+                        DispatchQueue.main.async {
+                            self?.recipeImage.image = image
+                        }
+                        print("fire from the recipe card")
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }

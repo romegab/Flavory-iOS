@@ -56,7 +56,7 @@ class IngredientCell: UITableViewCell, Checkable {
             ingredientName.text = ingredient.name
             ingredientDescription.text = ingredient.original
             
-            imageRequest = ImageService.shared.getImage(rawUrl: ingredient.imageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: ingredient.imageURL, id: ingredient.id ?? 0) { [weak self] result in
                 
                 switch result{
                 case .success(let image):

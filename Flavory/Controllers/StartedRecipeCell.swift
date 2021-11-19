@@ -57,7 +57,7 @@ class StartedRecipeCell: UITableViewCell {
             
             setUpProgressColor(recipe)
             
-            imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL) { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL, id: recipe.id) { [weak self] result in
                 switch result{
                 case .success(let image):
                     self?.imageLoadingIndicator.stopAnimating()

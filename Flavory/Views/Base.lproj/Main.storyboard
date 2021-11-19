@@ -1976,6 +1976,7 @@
         <!--Navigation Controller-->
         <scene sceneID="j10-vw-vNV">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qxq-th-jIZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lfG-a9-bee" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BXI-8d-ja0">
@@ -1991,7 +1992,6 @@
                         <segue destination="MOt-fs-ASi" kind="relationship" relationship="rootViewController" id="K6X-Bl-OTL"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qxq-th-jIZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="606" y="36"/>
         </scene>

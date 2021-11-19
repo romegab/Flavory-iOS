@@ -40,7 +40,7 @@ class LikedRecipeCell: UITableViewCell {
         if let likedRecipe = likedRecipe {
             recipeTitle.text = likedRecipe.recipeName
             
-            imageRequest = ImageService.shared.getImage(rawUrl: likedRecipe.imageURL ?? "") { [weak self] result in
+            imageRequest = ImageService.shared.getImage(rawUrl: likedRecipe.imageURL ?? "", id: likedRecipe.id) { [weak self] result in
                 
                 switch result{
                 case .success(let image):

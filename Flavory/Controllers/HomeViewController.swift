@@ -60,7 +60,18 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         adjustNavigationBar()
         loadCarouselContent()
         adjustBottomSection()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
+        if carouselRecipes.count == 0 {
+            loadCarouselContent()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let indexPath = IndexPath(item: 1, section: 0)
+        collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
     }
     
     private func adjustNavigationBar() {
@@ -91,16 +102,14 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
             switch result{
             case .success(let recipes):
                 self?.carouselDidLoad = true
-                let indexPath = IndexPath(item: 4, section: 0)
+                let indexPath = IndexPath(item: 3, section: 0)
                 self?.carouselRecipes = recipes
                 DispatchQueue.main.async {
                     self?.collecitonView.reloadData()
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
                 }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    print(error.localizedDescription)
-                }
+            case .failure(let error): break
+                
             }
         }
         
@@ -251,6 +260,8 @@ extension HomeViewController: UICollectionViewDataSource {
         if carouselDidLoad {
             let searchResult = carouselRecipes[indexPath.row]
             cell.recipe = searchResult
+        } else {
+            cell.recipeImage.image = UIImage(named: "DefaultRecipeImage")
         }
         return cell
     }

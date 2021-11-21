@@ -18,14 +18,10 @@ class ImageManager{
         downlaodImage(url: url!) { result in
             switch result{
             case .success(let image):
-                DispatchQueue.main.async{
                     completionHandler(.success(image))
-                }
             case .failure(let error):
                 print(error.localizedDescription)
-                DispatchQueue.main.async {
                     completionHandler(.failure(.badConnection))
-                }
             }
         }
     }
@@ -36,9 +32,7 @@ class ImageManager{
             if error == nil, let url = url,
                let data = try? Data(contentsOf: url),
                let image = UIImage(data: data) {
-                DispatchQueue.main.async {
                     completionHandler(.success(image))
-                }
             }
             completionHandler(.failure(.badConnection))
         })

@@ -54,7 +54,6 @@ class ChooseIngredientController: UIViewController {
         search.performIngredientSearch(query: query ?? "") { [weak self] result in
             switch result{
             case .success(let result):
-                print(result)
                 self?.currentIngredients = result
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()

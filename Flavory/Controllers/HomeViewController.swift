@@ -172,9 +172,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                         self?.ResultTableView.reloadData()
                     }
                 case .failure(let error):
-                    DispatchQueue.main.async {
                         print(error.localizedDescription)
-                    }
                 }
             }
         }
@@ -190,9 +188,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                         self?.ResultTableView.reloadData()
                     }
                 case .failure(let error):
-                    DispatchQueue.main.async {
-                        print(error.localizedDescription)
-                    }
+                    print(error.localizedDescription)
                 }
             }
         }

@@ -70,8 +70,10 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let indexPath = IndexPath(item: 1, section: 0)
-        collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
+        if carouselRecipes.count < 5 {
+            let indexPath = IndexPath(item: 1, section: 0)
+            collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
+        }
     }
     
     private func adjustNavigationBar() {
@@ -108,8 +110,8 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                     self?.collecitonView.reloadData()
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
                 }
-            case .failure(let error): break
-                
+            case .failure(let error): 
+                print(error)
             }
         }
         
@@ -172,9 +174,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                         self?.ResultTableView.reloadData()
                     }
                 case .failure(let error):
-                    DispatchQueue.main.async {
                         print(error.localizedDescription)
-                    }
                 }
             }
         }
@@ -190,9 +190,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                         self?.ResultTableView.reloadData()
                     }
                 case .failure(let error):
-                    DispatchQueue.main.async {
-                        print(error.localizedDescription)
-                    }
+                    print(error.localizedDescription)
                 }
             }
         }

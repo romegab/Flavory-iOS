@@ -76,10 +76,12 @@ class RecipePreviewController: UIViewController {
                 
                 switch result{
                 case .success(let image):
-                    self?.imageLoadingIndicator.stopAnimating()
-                    self?.recipeImage.image = image
-                    UIView.animate(withDuration: 0.5) {
-                        self?.recipeImage.alpha = 1
+                    DispatchQueue.main.async {
+                        self?.imageLoadingIndicator.stopAnimating()
+                        self?.recipeImage.image = image
+                        UIView.animate(withDuration: 0.5) {
+                            self?.recipeImage.alpha = 1
+                        }
                     }
                 case .failure(let error):
                     DispatchQueue.main.async {

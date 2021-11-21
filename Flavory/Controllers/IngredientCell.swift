@@ -60,15 +60,17 @@ class IngredientCell: UITableViewCell, Checkable {
                 
                 switch result{
                 case .success(let image):
-                    self?.imageLoadingIndicator.stopAnimating()
-                    self?.ingredientImage.image = image
-                    UIView.animate(withDuration: 0.5) {
+                    DispatchQueue.main.async {
                         self?.imageLoadingIndicator.stopAnimating()
-                        self?.imageLoadingIndicator.alpha = 0
-                        self?.ingredientImage .alpha = 1
-                        self?.ingredientImage.clipsToBounds = true
-                        self?.ingredientImage.layer.masksToBounds = true
-                        self?.ingredientImage.layer.cornerRadius = 15
+                        self?.ingredientImage.image = image
+                        UIView.animate(withDuration: 0.5) {
+                            self?.imageLoadingIndicator.stopAnimating()
+                            self?.imageLoadingIndicator.alpha = 0
+                            self?.ingredientImage .alpha = 1
+                            self?.ingredientImage.clipsToBounds = true
+                            self?.ingredientImage.layer.masksToBounds = true
+                            self?.ingredientImage.layer.cornerRadius = 15
+                        }
                     }
                 case .failure(let error):
                     print("fire from the ingredient cell card")

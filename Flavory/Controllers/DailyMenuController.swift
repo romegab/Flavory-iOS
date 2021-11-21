@@ -150,8 +150,8 @@ extension DailyMenuController: UICollectionViewDataSource {
             search.performSearchByID(String(currentRecipe?.id ?? -1)) { [weak self] result in
                 switch result{
                 case .success(let recipe):
-                    self?.selectedRecipe = recipe
                     DispatchQueue.main.async {
+                        self?.selectedRecipe = recipe
                         self?.performSegue(withIdentifier: "showRecipePreview", sender: nil)
                     }
                 case .failure(let error):

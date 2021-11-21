@@ -60,10 +60,12 @@ class StartedRecipeCell: UITableViewCell {
             imageRequest = ImageService.shared.getImage(rawUrl: recipe.largeImageURL, id: recipe.id) { [weak self] result in
                 switch result{
                 case .success(let image):
-                    self?.imageLoadingIndicator.stopAnimating()
-                    self?.recipeImage.image = image
-                    UIView.animate(withDuration: 0.5) {
-                        self?.recipeImage.alpha = 1
+                    DispatchQueue.main.async {
+                        self?.imageLoadingIndicator.stopAnimating()
+                        self?.recipeImage.image = image
+                        UIView.animate(withDuration: 0.5) {
+                            self?.recipeImage.alpha = 1
+                        }
                     }
                 case .failure(let error):
                     print("fire from the ingredient cell card")

@@ -33,9 +33,7 @@ class Search {
         performRequest(with: url) { result in
             switch result{
             case .success(let recipies):
-                DispatchQueue.main.async{
                     completionHandler(.success(recipies))
-                }
             case .failure(let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(.badConnection))
@@ -49,14 +47,10 @@ class Search {
         performRequest(with: url) { result in
             switch result{
             case .success(let recipies):
-                DispatchQueue.main.async{
                     completionHandler(.success(recipies))
-                }
             case .failure(let error):
                 print(error.localizedDescription)
-                DispatchQueue.main.async {
                     completionHandler(.failure(.badConnection))
-                }
             }
         }
     }
@@ -186,7 +180,6 @@ class Search {
             } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {
                 self.isRequestFinished = true
                 if let data = data {
-
                     completionHandler(.success(self.searchParser.parse(data: data)))
                 }
             }

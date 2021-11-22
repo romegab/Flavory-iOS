@@ -29,7 +29,6 @@ class ImageService{
                     self.cacheImageInData(image: image, name: String(id))
                     completionHandler(.success(image))
                 case .failure(let error):
-                    print("qj mi kuraaaaaa")
                     print(error.localizedDescription)
                     completionHandler(.failure(.badConnection))
                 }
@@ -48,7 +47,6 @@ class ImageService{
                 completionHandler(.success(image))
             }
             if error != nil {
-                print("qj mi kuraaaaaa")
                 completionHandler(.failure(.badConnection))
             }
         })

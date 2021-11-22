@@ -110,7 +110,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                     self?.collecitonView.reloadData()
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
                 }
-            case .failure(let error): 
+            case .failure(let error):
                 print(error)
             }
         }

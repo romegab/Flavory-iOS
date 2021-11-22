@@ -18,6 +18,8 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     @IBOutlet private weak var dailyMenuText: UILabel!
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var noSearchResultView: UIView!
+    @IBOutlet weak var carouselLoadingIndicator: UIActivityIndicatorView!
+    
     
     let searchController = UISearchController()
     
@@ -36,6 +38,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        carouselLoadingIndicator.startAnimating()
         filterButton.alpha = 0
         UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
         let applicationDocumentsDirectory: URL = {
@@ -107,11 +110,17 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                 let indexPath = IndexPath(item: 3, section: 0)
                 self?.carouselRecipes = recipes
                 DispatchQueue.main.async {
+                    self?.carouselLoadingIndicator.stopAnimating()
+                    self?.carouselLoadingIndicator.alpha = 0
                     self?.collecitonView.reloadData()
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
                 }
             case .failure(let error):
                 print(error)
+                DispatchQueue.main.async {
+                    self?.carouselLoadingIndicator.stopAnimating()
+                    self?.carouselLoadingIndicator.alpha = 0
+                }
             }
         }
         

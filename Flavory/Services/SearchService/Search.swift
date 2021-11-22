@@ -174,7 +174,7 @@ class Search {
         //let session = URLSession.shared
         
         session.dataTask(with: url) {data, response, error in
-            if let error = error as NSError?, error.code == -999{
+            if let _ = error as NSError?{
                 self.isRequestFinished = true
                 completionHandler(.failure(.badConnection))
             } else if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode == 200 {

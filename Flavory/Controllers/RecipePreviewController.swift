@@ -124,8 +124,8 @@ class RecipePreviewController: UIViewController {
     private func setUpRecipeNutrients() {
         if let recipe = recipe {
             recipeKcal.text = String(recipe.recipeDetails.calories ?? 0)
-            recipeProtein.text = String(recipe.recipeDetails.protein ?? 0)
-            recipeFat.text = String(recipe.recipeDetails.fat ?? 0)
+            recipeProtein.text = String("\(recipe.recipeDetails.protein ?? 0) g")
+            recipeFat.text = String("\(recipe.recipeDetails.fat ?? 0) g")
         }
     }
     

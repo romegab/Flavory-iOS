@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Reachability
 
 class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
@@ -19,7 +20,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var noSearchResultView: UIView!
     @IBOutlet weak var carouselLoadingIndicator: UIActivityIndicatorView!
-    
+    @IBOutlet weak var noConnectionIndicator: UILabel!
     
     let searchController = UISearchController()
     
@@ -35,10 +36,12 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
             performFilterSearch()
         }
     }
+    private let reachability = try! Reachability()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        carouselLoadingIndicator.startAnimating()
+        
+        noConnectionIndicator.alpha = 0
         filterButton.alpha = 0
         UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
         let applicationDocumentsDirectory: URL = {
@@ -66,16 +69,20 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        try? addReachabilityObserver()
         if carouselRecipes.count == 0 {
             loadCarouselContent()
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        removeReachabilityObserver()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         if carouselRecipes.count < 5 {
-            let indexPath = IndexPath(item: 1, section: 0)
-            collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
+//            let indexPath = IndexPath(item: 1, section: 0)
+//            collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
         }
     }
     
@@ -103,6 +110,9 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     }
     
     private func loadCarouselContent() {
+        noConnectionIndicator.alpha = 0
+        carouselLoadingIndicator.alpha = 1
+        carouselLoadingIndicator.startAnimating()
         search.performRandomSearch(7) { [weak self] result in
             switch result{
             case .success(let recipes):
@@ -113,13 +123,14 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                     self?.carouselLoadingIndicator.stopAnimating()
                     self?.carouselLoadingIndicator.alpha = 0
                     self?.collecitonView.reloadData()
-                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
+                    self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
                 }
             case .failure(let error):
                 print(error)
                 DispatchQueue.main.async {
                     self?.carouselLoadingIndicator.stopAnimating()
                     self?.carouselLoadingIndicator.alpha = 0
+                    self?.noConnectionIndicator.alpha = 1
                 }
             }
         }
@@ -257,7 +268,7 @@ extension HomeViewController: UICollectionViewDataSource {
         if carouselRecipes.count > 0 {
             return carouselRecipes.count
         } else {
-            return 3
+            return 0
         }
     }
     
@@ -423,4 +434,16 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
             self.ResultTableView.alpha = 1
         }
     }
+}
+
+extension HomeViewController: ReachabilityObserverDelegate {
+        
+    func reachabilityChanged(_ isReachable: Bool) {
+        if !isReachable {
+            print("No internet connection")
+        } else if carouselRecipes.count == 0 {
+            loadCarouselContent()
+        }
+    }
+    
 }

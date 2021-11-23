@@ -1241,6 +1241,12 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </activityIndicatorView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Check your internet connection" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVt-YU-9De">
+                                                <rect key="frame" x="40.5" y="103.5" width="239" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1250,10 +1256,12 @@
                                             <constraint firstItem="YhD-lJ-6hY" firstAttribute="top" secondItem="m35-vW-SrO" secondAttribute="top" constant="30" id="Oha-D9-d1p"/>
                                             <constraint firstItem="YhD-lJ-6hY" firstAttribute="leading" secondItem="m35-vW-SrO" secondAttribute="leading" id="Q9L-OM-RYc"/>
                                             <constraint firstAttribute="trailing" secondItem="WAS-ur-BUi" secondAttribute="trailing" id="Qdd-SL-65Y"/>
+                                            <constraint firstItem="rVt-YU-9De" firstAttribute="centerX" secondItem="m35-vW-SrO" secondAttribute="centerX" id="ZMV-90-Cx4"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fxJ-cp-uVN" secondAttribute="trailing" constant="20" id="ZTq-6x-eTe"/>
                                             <constraint firstAttribute="bottom" secondItem="YhD-lJ-6hY" secondAttribute="bottom" id="Zj8-IZ-SLz"/>
                                             <constraint firstItem="fxJ-cp-uVN" firstAttribute="centerX" secondItem="m35-vW-SrO" secondAttribute="centerX" id="buv-Bx-Z1U"/>
                                             <constraint firstAttribute="trailing" secondItem="YhD-lJ-6hY" secondAttribute="trailing" id="bwN-cs-psH"/>
+                                            <constraint firstItem="rVt-YU-9De" firstAttribute="centerY" secondItem="m35-vW-SrO" secondAttribute="centerY" id="cJl-e4-oFf"/>
                                             <constraint firstItem="fxJ-cp-uVN" firstAttribute="top" secondItem="m35-vW-SrO" secondAttribute="top" constant="10" id="es5-RG-l0J"/>
                                             <constraint firstItem="fxJ-cp-uVN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m35-vW-SrO" secondAttribute="leading" constant="20" id="rft-6L-dgK"/>
                                             <constraint firstAttribute="bottom" secondItem="WAS-ur-BUi" secondAttribute="bottom" id="rvD-iL-3b9"/>
@@ -1478,6 +1486,7 @@
                         <outlet property="filterButton" destination="LX3-Cv-fUI" id="Bj6-d3-AHd"/>
                         <outlet property="lookAtYourStatsText" destination="hhX-pp-DvZ" id="yfX-Ge-UI4"/>
                         <outlet property="lookUpForEatImage" destination="spw-cs-oHL" id="blI-4Z-V2H"/>
+                        <outlet property="noConnectionIndicator" destination="rVt-YU-9De" id="ebb-q8-Mvp"/>
                         <outlet property="noSearchResultView" destination="hB4-gY-eCI" id="Qi2-8f-sJo"/>
                         <outlet property="resultView" destination="yCo-ES-27t" id="eEg-NU-tPN"/>
                         <segue destination="0ZY-Cs-kwT" kind="presentation" identifier="showRecipePreview" id="4g2-nC-IWM"/>
@@ -2119,7 +2128,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="d55-1f-qSf"/>
+        <segue reference="4g2-nC-IWM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CarbohydratesIcon" width="120" height="120"/>

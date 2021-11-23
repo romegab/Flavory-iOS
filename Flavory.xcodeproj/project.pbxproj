@@ -69,6 +69,8 @@
 		BCBE5717272C29E800705A91 /* DailyMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBE5716272C29E700705A91 /* DailyMenuController.swift */; };
 		BCC06D2327146CC7007A451F /* RecipeCookingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC06D2227146CC7007A451F /* RecipeCookingController.swift */; };
 		BCC58EA7270C2787001942EA /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC58EA6270C2787001942EA /* RecipeDetails.swift */; };
+		BCF2A50B274CE9AB004D0292 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = BCF2A50A274CE9AB004D0292 /* Reachability */; };
+		BCF2A50D274CEE30004D0292 /* ReachabilityObserverDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF2A50C274CEE30004D0292 /* ReachabilityObserverDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +137,7 @@
 		BCBE5716272C29E700705A91 /* DailyMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMenuController.swift; sourceTree = "<group>"; };
 		BCC06D2227146CC7007A451F /* RecipeCookingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCookingController.swift; sourceTree = "<group>"; };
 		BCC58EA6270C2787001942EA /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
+		BCF2A50C274CEE30004D0292 /* ReachabilityObserverDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityObserverDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCA68590273BF36100FDFE8D /* Charts in Frameworks */,
+				BCF2A50B274CE9AB004D0292 /* Reachability in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +313,7 @@
 			children = (
 				BCBA86202710265000912308 /* Cancellable.swift */,
 				BC5154CD27185A190011E90F /* Checkable.swift */,
+				BCF2A50C274CEE30004D0292 /* ReachabilityObserverDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 			name = Flavory;
 			packageProductDependencies = (
 				BCA6858F273BF36100FDFE8D /* Charts */,
+				BCF2A50A274CE9AB004D0292 /* Reachability */,
 			);
 			productName = Flavory;
 			productReference = BC21EBFC26FDF6F500AE44CC /* Flavory.app */;
@@ -371,6 +377,7 @@
 			mainGroup = BC21EBF326FDF6F500AE44CC;
 			packageReferences = (
 				BCA6858E273BF36100FDFE8D /* XCRemoteSwiftPackageReference "Charts" */,
+				BCF2A509274CE9AB004D0292 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = BC21EBFD26FDF6F500AE44CC /* Products */;
 			projectDirPath = "";
@@ -420,6 +427,7 @@
 				BC214041271456BE00893DCC /* RecipeIngredient.swift in Sources */,
 				BC3A60F22701AD30008A9EB4 /* ResultArray.swift in Sources */,
 				BC10D3812732883E009F5A64 /* RangeSliderTrackLayer.swift in Sources */,
+				BCF2A50D274CEE30004D0292 /* ReachabilityObserverDelegate.swift in Sources */,
 				BC21EC0026FDF6F500AE44CC /* AppDelegate.swift in Sources */,
 				BCBE5717272C29E800705A91 /* DailyMenuController.swift in Sources */,
 				BC60C11D272FDBC500EA1D9C /* MenuNutrients.swift in Sources */,
@@ -694,6 +702,14 @@
 				kind = branch;
 			};
 		};
+		BCF2A509274CE9AB004D0292 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -701,6 +717,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BCA6858E273BF36100FDFE8D /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = Charts;
+		};
+		BCF2A50A274CE9AB004D0292 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BCF2A509274CE9AB004D0292 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
 		};
 /* End XCSwiftPackageProductDependency section */
 

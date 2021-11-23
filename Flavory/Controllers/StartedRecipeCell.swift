@@ -77,7 +77,7 @@ class StartedRecipeCell: UITableViewCell {
     }
     
     private func setUpProgressColor(_ recipe: ClippedRecipe) {
-        recipeProgress.text = String("\(recipe.progress)% done")
+        recipeProgress.text = String("\(String(format: "%.0f", recipe.progress))% done")
         if (0...25).contains(recipe.progress) {
             recipeProgress.backgroundColor = UIColor.init(named: "0-25green")
         } else if (26...50).contains(recipe.progress) {

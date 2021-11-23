@@ -1221,7 +1221,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCardController" customModule="Flavory">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" reuseIdentifier="RecipeCard" translatesAutoresizingMaskIntoConstraints="NO" id="gMI-Np-JNo" customClass="RecipeCardController" customModule="Flavory">
                                                         <rect key="frame" x="0.0" y="-26.5" width="249" height="236"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="o31-U7-fYC">
@@ -2036,7 +2036,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dwF-j7-3w0">
-                                <rect key="frame" x="0.0" y="90.5" width="320" height="428.5"/>
+                                <rect key="frame" x="0.0" y="84.5" width="320" height="434.5"/>
                                 <color key="backgroundColor" white="1" alpha="0.98535104349356928" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" red="1" green="1" blue="1" alpha="0.9542135653089362" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
@@ -2048,7 +2048,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Qq-ux-jue">
-                                <rect key="frame" x="0.0" y="44" width="320" height="46.5"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="40.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAVORITES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Cg-gX-HnJ">
                                         <rect key="frame" x="10" y="10" width="300" height="20.5"/>
@@ -2056,24 +2056,14 @@
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Snr-rB-SfC">
-                                        <rect key="frame" x="10" y="40.5" width="300" height="1"/>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="YbP-Qi-KBS"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Snr-rB-SfC" firstAttribute="top" secondItem="6Cg-gX-HnJ" secondAttribute="bottom" constant="10" id="5OU-tN-B8T"/>
+                                    <constraint firstAttribute="bottom" secondItem="6Cg-gX-HnJ" secondAttribute="bottom" constant="10" id="56J-er-xUX"/>
                                     <constraint firstItem="6Cg-gX-HnJ" firstAttribute="top" secondItem="0Qq-ux-jue" secondAttribute="top" constant="10" id="9JJ-dP-t2M"/>
                                     <constraint firstItem="6Cg-gX-HnJ" firstAttribute="leading" secondItem="0Qq-ux-jue" secondAttribute="leading" constant="10" id="AfI-lI-awx"/>
-                                    <constraint firstItem="Snr-rB-SfC" firstAttribute="leading" secondItem="0Qq-ux-jue" secondAttribute="leading" constant="10" id="Fpi-vV-uGm"/>
-                                    <constraint firstAttribute="bottom" secondItem="Snr-rB-SfC" secondAttribute="bottom" constant="5" id="bYt-rB-n5O"/>
                                     <constraint firstAttribute="trailing" secondItem="6Cg-gX-HnJ" secondAttribute="trailing" constant="10" id="qGj-gG-XgJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="Snr-rB-SfC" secondAttribute="trailing" constant="10" id="sZ1-AI-Yjo"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2129,7 +2119,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4g2-nC-IWM"/>
+        <segue reference="d7N-KQ-Zbl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CarbohydratesIcon" width="120" height="120"/>

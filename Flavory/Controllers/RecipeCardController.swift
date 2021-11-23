@@ -21,7 +21,6 @@ class RecipeCardController: UICollectionViewCell {
     
     var recipe: ClippedRecipe? {
         didSet{
-            recipeImage.alpha = 0
             imageLoadingIndicator.startAnimating()
             updateUI()
         }
@@ -69,9 +68,6 @@ class RecipeCardController: UICollectionViewCell {
                     DispatchQueue.main.async {
                         self?.imageLoadingIndicator.stopAnimating()
                         self?.recipeImage.image = image
-                        UIView.animate(withDuration: 0.5) {
-                            self?.recipeImage.alpha = 1
-                        }
                     }
                 case .failure(let error):
                     if let image = UIImage(named: "DefaultRecipeImage"){

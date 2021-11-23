@@ -18,7 +18,6 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
         let chartView = PieChartView()
         return chartView
     }()
-    
     private let dishTypes: [ChartDataEntry] = [
         PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("main course")), label: "main course", icon: nil),
         PieChartDataEntry(value: Double(DataManager.shared.getCountOfDishType("side dish")), label: "side dish", icon: nil),
@@ -67,11 +66,19 @@ class UserStatsViewController: UIViewController, ChartViewDelegate {
     }
     
     private func setData() {
+        let format = NumberFormatter()
+        format.numberStyle = .none
+        let formatter = DefaultValueFormatter(formatter: format)
+        
         let cookedRecipes = PieChartDataSet(entries: dishTypes, label: "")
         cookedRecipes.sliceSpace = 1
+        cookedRecipes.valueFormatter = formatter
         cookedRecipes.colors = ChartColorTemplates.material()
         
         let data = PieChartData(dataSet: cookedRecipes)
+
+        data.setValueFormatter(formatter)
+        
         pieChartView.data = data
         
         let cookedRecipeInformation = DataManager.shared.getCookedRecipesInformation()

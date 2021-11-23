@@ -31,6 +31,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     private let search: Search = Search()
     private var isSearchTrothelled = false
     private var carouselDidLoad = false
+    private var paginationEnabled = false
     private var filters: FilterSet? {
         didSet {
             performFilterSearch()
@@ -41,6 +42,8 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collecitonView.dataSource = self
+        collecitonView.delegate = self
         noConnectionIndicator.alpha = 0
         filterButton.alpha = 0
         UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
@@ -113,17 +116,18 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
         noConnectionIndicator.alpha = 0
         carouselLoadingIndicator.alpha = 1
         carouselLoadingIndicator.startAnimating()
-        search.performRandomSearch(7) { [weak self] result in
+        search.performRandomSearch(20) { [weak self] result in
             switch result{
             case .success(let recipes):
-                self?.carouselDidLoad = true
-                let indexPath = IndexPath(item: 3, section: 0)
+                
+                let indexPath = IndexPath(item: 10, section: 0)
                 self?.carouselRecipes = recipes
                 DispatchQueue.main.async {
                     self?.carouselLoadingIndicator.stopAnimating()
                     self?.carouselLoadingIndicator.alpha = 0
                     self?.collecitonView.reloadData()
                     self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+                    self?.carouselDidLoad = true
                 }
             case .failure(let error):
                 print(error)
@@ -135,8 +139,7 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
             }
         }
         
-        collecitonView.dataSource = self
-        collecitonView.delegate = self
+        
     }
     
     private func adjustBottomSection() {
@@ -294,6 +297,57 @@ extension HomeViewController: UICollectionViewDataSource {
             }
             performSegue(withIdentifier: "showRecipePreview", sender: nil)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row > 9 && !paginationEnabled{
+            paginationEnabled = true
+            print("pagination ready to use")
+            
+        }
+        if indexPath.row == 0 && paginationEnabled {
+            search.performRandomSearch(10) { [weak self] result in
+                switch result{
+                case .success(let recipes):
+                    var result = recipes
+                    result.append(contentsOf: self!.carouselRecipes)
+                    DispatchQueue.main.async {
+                        self?.carouselRecipes = result
+                        collectionView.reloadData()
+                        self?.paginationEnabled = false
+                        let indexPath = IndexPath(item: 11, section: 0)
+                        self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
+                    }
+                case .failure(let error):
+                    print(error)
+                    DispatchQueue.main.async {
+                        self?.carouselLoadingIndicator.stopAnimating()
+                        self?.carouselLoadingIndicator.alpha = 0
+                    }
+                }
+        }
+        }
+        if indexPath.row == carouselRecipes.count - 1  && paginationEnabled {
+            search.performRandomSearch(10) { [weak self] result in
+                switch result{
+                case .success(let recipes):
+                    DispatchQueue.main.async {
+                        self?.carouselRecipes.append(contentsOf: recipes)
+                        collectionView.reloadData()
+                        self?.paginationEnabled = false
+                        let indexPath = IndexPath(item: ((self?.carouselRecipes.count ?? 11) - 12), section: 0)
+                        self?.collecitonView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: false)
+                    }
+                case .failure(let error):
+                    print(error)
+                    DispatchQueue.main.async {
+                        self?.carouselLoadingIndicator.stopAnimating()
+                        self?.carouselLoadingIndicator.alpha = 0
+                    }
+                }
+        }
+        
+    }
     }
     
     func loadFilters(filters: FilterSet) {

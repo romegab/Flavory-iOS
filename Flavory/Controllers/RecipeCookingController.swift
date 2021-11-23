@@ -47,6 +47,7 @@ class RecipeCookingController: UIViewController {
     }
     
     @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+
         if currentSegmentIndex == 1 {
             currentSegmentIndex = 2
         }
@@ -55,6 +56,9 @@ class RecipeCookingController: UIViewController {
         }
         
         tableView.reloadData()
+        
+        let topRow = IndexPath(row: 0, section: 0)
+        self.tableView.scrollToRow(at: topRow, at: .top, animated: false)
     }
     
     @IBAction func readyButtonClicked(_ sender: Any) {

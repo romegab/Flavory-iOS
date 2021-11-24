@@ -21,13 +21,23 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     @IBOutlet weak var noSearchResultView: UIView!
     @IBOutlet weak var carouselLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var noConnectionIndicator: UILabel!
+    @IBOutlet weak var searchIndicator: UIActivityIndicatorView!
     
     let searchController = UISearchController()
     
     var selectedRecipe: ClippedRecipe?
     var recipeInProgress: RecipeModel?
     var carouselRecipes = [ClippedRecipe]()
-    var searchResult = [ClippedRecipe]()
+    var searchResult = [ClippedRecipe]() {
+        didSet {
+            DispatchQueue.main.async {
+                if self.searchResult.count > 0 {
+                    self.searchIndicator.stopAnimating()
+                    self.searchIndicator.alpha = 0
+                }
+            }
+        }
+    }
     private let search: Search = Search()
     private var isSearchTrothelled = false
     private var carouselDidLoad = false
@@ -41,7 +51,6 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collecitonView.dataSource = self
         collecitonView.delegate = self
         noConnectionIndicator.alpha = 0
@@ -138,8 +147,6 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                 }
             }
         }
-        
-        
     }
     
     private func adjustBottomSection() {
@@ -192,12 +199,13 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
             search.performSearchByIngredients(filters: filters) { [weak self] result in
                 switch result{
                 case .success(let recipes):
-                    self?.searchResult = recipes
                     DispatchQueue.main.async {
+                        self?.searchResult = recipes
                         self?.ResultTableView.reloadData()
                     }
                 case .failure(let error):
-                        print(error.localizedDescription)
+                    self?.noSearchResultView.alpha = 1
+                    print(error.localizedDescription)
                 }
             }
         }
@@ -208,11 +216,12 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
             search.performNutrientsSearch(filters: filters) { [weak self] result in
                 switch result{
                 case .success(let recipes):
-                    self?.searchResult = recipes
                     DispatchQueue.main.async {
+                        self?.searchResult = recipes
                         self?.ResultTableView.reloadData()
                     }
                 case .failure(let error):
+                    self?.noSearchResultView.alpha = 1
                     print(error.localizedDescription)
                 }
             }
@@ -227,7 +236,6 @@ class HomeViewController: UIViewController, FilterSearchControllerDelegate {
                 result.append(recipe)
             }
         }
-        
         searchResult = result
     }
 
@@ -351,7 +359,10 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func loadFilters(filters: FilterSet) {
-        print("filters loaded")
+        noSearchResultView.alpha = 0
+        searchIndicator.alpha = 1
+        searchIndicator.layer.zPosition = CGFloat(Float.greatestFiniteMagnitude)
+        searchIndicator.startAnimating()
         self.filters = filters
     }
 }
@@ -403,10 +414,14 @@ extension HomeViewController: UISearchResultsUpdating {
                 print(result)
                 self?.searchResult = result
                 DispatchQueue.main.async {
+                    if self?.searchResult.count == 0 {
+                        self?.noSearchResultView.alpha = 1
+                    }
                     self?.ResultTableView.reloadData()
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
+                    self?.noSearchResultView.alpha = 1
                     print(error.localizedDescription)
                 }
             }
@@ -420,7 +435,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         if searchResult.count != 0 {
             noSearchResultView.alpha = 0
         } else {
-            noSearchResultView.alpha = 1
+            //noSearchResultView.alpha = 1
         }
         return searchResult.count
     }
@@ -476,6 +491,7 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func willDismissSearchController(_ searchController: UISearchController) {
         self.filterButton.isEnabled = false
         filterButton.alpha = 0
+        noSearchResultView.alpha = 1
         UIView.animate(withDuration: 0.3) {
             self.resultView.alpha = 0
             self.ResultTableView.alpha = 0
@@ -483,6 +499,9 @@ extension HomeViewController: UISearchControllerDelegate, UISearchBarDelegate {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if self.searchResult.count == 0 {
+            self.noSearchResultView.alpha = 1
+        }
         UIView.animate(withDuration: 0.3) {
             self.resultView.alpha = 1
             self.ResultTableView.alpha = 1
@@ -499,5 +518,4 @@ extension HomeViewController: ReachabilityObserverDelegate {
             loadCarouselContent()
         }
     }
-    
 }

@@ -254,9 +254,9 @@ class FilterSearchContorller: UIViewController, ChooseIngredientControlerDelegat
         let cousine = cuisines[cuisinePicker.selectedRow(inComponent: 0)]
         let mealType = mealTypes[mealTypePicker.selectedRow(inComponent: 0)]
         
-        self.dismiss(animated: true, completion: {
-            self.delegate?.loadFilters(filters: FilterSet(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, self.choosedIngredients))
-       })
+        self.delegate?.loadFilters(filters: FilterSet(minCarbValue, maxCarbValue, minProteinValue, maxProteinValue, minKcalValue, maxKcalValue, minFatValue, maxFatValue, cousine, mealType, self.choosedIngredients))
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelButtonClicked(_ sender: UIButton) {

@@ -1445,17 +1445,25 @@
                                             <outlet property="dataSource" destination="Wxn-Ov-OGA" id="bVb-oT-GgP"/>
                                         </connections>
                                     </tableView>
+                                    <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="0mH-y2-8bO">
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="755"/>
+                                        <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration" identifier="SearchResultVIew"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="hB4-gY-eCI" secondAttribute="trailing" id="0Na-uS-w1i"/>
                                     <constraint firstAttribute="bottom" secondItem="qpR-cl-GJm" secondAttribute="bottom" id="AXL-QJ-7RL"/>
+                                    <constraint firstItem="0mH-y2-8bO" firstAttribute="top" secondItem="yCo-ES-27t" secondAttribute="top" id="ByV-Lf-hLo"/>
                                     <constraint firstAttribute="trailing" secondItem="qpR-cl-GJm" secondAttribute="trailing" id="DSA-rR-pln"/>
                                     <constraint firstItem="qpR-cl-GJm" firstAttribute="top" secondItem="yCo-ES-27t" secondAttribute="top" id="JVu-wY-GYI"/>
                                     <constraint firstAttribute="bottom" secondItem="hB4-gY-eCI" secondAttribute="bottom" id="TVw-fL-gaa"/>
+                                    <constraint firstAttribute="bottom" secondItem="0mH-y2-8bO" secondAttribute="bottom" id="UxC-uS-LGY"/>
                                     <constraint firstItem="hB4-gY-eCI" firstAttribute="top" secondItem="yCo-ES-27t" secondAttribute="top" id="cnz-hu-ljP"/>
+                                    <constraint firstItem="0mH-y2-8bO" firstAttribute="leading" secondItem="yCo-ES-27t" secondAttribute="leading" id="knd-wy-LsK"/>
                                     <constraint firstItem="hB4-gY-eCI" firstAttribute="leading" secondItem="yCo-ES-27t" secondAttribute="leading" id="nTs-RH-LyE"/>
+                                    <constraint firstAttribute="trailing" secondItem="0mH-y2-8bO" secondAttribute="trailing" id="tUW-3z-SCx"/>
                                     <constraint firstItem="qpR-cl-GJm" firstAttribute="leading" secondItem="yCo-ES-27t" secondAttribute="leading" id="woX-DO-tYm"/>
                                 </constraints>
                             </view>
@@ -1500,6 +1508,7 @@
                         <outlet property="noConnectionIndicator" destination="rVt-YU-9De" id="ebb-q8-Mvp"/>
                         <outlet property="noSearchResultView" destination="hB4-gY-eCI" id="Qi2-8f-sJo"/>
                         <outlet property="resultView" destination="yCo-ES-27t" id="eEg-NU-tPN"/>
+                        <outlet property="searchIndicator" destination="0mH-y2-8bO" id="w1T-yX-Lzi"/>
                         <segue destination="0ZY-Cs-kwT" kind="presentation" identifier="showRecipePreview" id="4g2-nC-IWM"/>
                         <segue destination="lfG-a9-bee" kind="presentation" identifier="getDailyMenu" modalPresentationStyle="fullScreen" id="lxk-Mf-HmM"/>
                         <segue destination="Sbr-YH-iBS" kind="presentation" identifier="showFilters" id="mtr-Gb-Kkb"/>
@@ -2139,7 +2148,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9n9-hm-KMj"/>
+        <segue reference="4g2-nC-IWM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CarbohydratesIcon" width="120" height="120"/>

@@ -133,11 +133,6 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            let cell = tableView.cellForRow(at: indexPath) as! StartedRecipeCell
-            
-            if var recipe = cell.recipe {
-                deleteCell(withRecipe: &recipe)
-            }
         }
     }
     
@@ -147,7 +142,11 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
 
         let delete = UIContextualAction(style: .normal, title: nil) { [weak self] (contextualAction, view, completion) in
 
-            // Delete something
+            let cell = tableView.cellForRow(at: indexPath) as! StartedRecipeCell
+            
+            if var recipe = cell.recipe {
+                self?.deleteCell(withRecipe: &recipe)
+            }
 
             completion(true)
         }

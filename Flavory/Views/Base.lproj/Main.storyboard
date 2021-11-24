@@ -1637,10 +1637,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="100"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kcalIcon" translatesAutoresizingMaskIntoConstraints="NO" id="W6X-wE-3R2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="77"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="70"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFM-7m-CVB">
-                                                        <rect key="frame" x="0.0" y="81.999999999999943" width="127.33333333333333" height="13"/>
+                                                        <rect key="frame" x="0.0" y="74.999999999999943" width="127.33333333333333" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1648,7 +1648,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" name="orangeYellow"/>
                                                 <constraints>
-                                                    <constraint firstItem="W6X-wE-3R2" firstAttribute="height" secondItem="3ma-OV-rYK" secondAttribute="height" multiplier="0.77" id="23k-WV-Rh3"/>
+                                                    <constraint firstItem="W6X-wE-3R2" firstAttribute="height" secondItem="3ma-OV-rYK" secondAttribute="height" multiplier="0.7" id="23k-WV-Rh3"/>
                                                     <constraint firstAttribute="trailing" secondItem="YFM-7m-CVB" secondAttribute="trailing" id="2Yf-iG-e1T"/>
                                                     <constraint firstItem="YFM-7m-CVB" firstAttribute="leading" secondItem="3ma-OV-rYK" secondAttribute="leading" id="4xe-VP-wFw"/>
                                                     <constraint firstItem="W6X-wE-3R2" firstAttribute="leading" secondItem="3ma-OV-rYK" secondAttribute="leading" id="CHP-6T-0n2"/>
@@ -1662,10 +1662,10 @@
                                                 <rect key="frame" x="130.33333333333334" y="0.0" width="127.33333333333334" height="100"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="proteinIcon" translatesAutoresizingMaskIntoConstraints="NO" id="HbY-D1-lCV">
-                                                        <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="77"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="70"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ryr-lm-sen">
-                                                        <rect key="frame" x="0.0" y="76.999999999999943" width="127.33333333333333" height="18"/>
+                                                        <rect key="frame" x="0.0" y="69.999999999999943" width="127.33333333333333" height="25"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1674,7 +1674,7 @@
                                                 <color key="backgroundColor" name="orangeYellow"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="HbY-D1-lCV" secondAttribute="trailing" id="HPK-x6-ewJ"/>
-                                                    <constraint firstItem="HbY-D1-lCV" firstAttribute="height" secondItem="fQ4-E1-nzn" secondAttribute="height" multiplier="0.77" id="KrJ-h7-z4f"/>
+                                                    <constraint firstItem="HbY-D1-lCV" firstAttribute="height" secondItem="fQ4-E1-nzn" secondAttribute="height" multiplier="0.7" id="KrJ-h7-z4f"/>
                                                     <constraint firstAttribute="trailing" secondItem="ryr-lm-sen" secondAttribute="trailing" id="O0k-rm-iry"/>
                                                     <constraint firstItem="HbY-D1-lCV" firstAttribute="leading" secondItem="fQ4-E1-nzn" secondAttribute="leading" id="VKx-Ee-UCe"/>
                                                     <constraint firstItem="ryr-lm-sen" firstAttribute="top" secondItem="HbY-D1-lCV" secondAttribute="bottom" id="Vlw-lI-nnb"/>
@@ -1687,10 +1687,10 @@
                                                 <rect key="frame" x="260.66666666666669" y="0.0" width="127.33333333333331" height="100"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fatIcon" translatesAutoresizingMaskIntoConstraints="NO" id="2lx-2a-CDs">
-                                                        <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="77"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="127.33333333333333" height="70"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d61-oD-Shl">
-                                                        <rect key="frame" x="0.0" y="81.999999999999943" width="127.33333333333333" height="13"/>
+                                                        <rect key="frame" x="0.0" y="74.999999999999943" width="127.33333333333333" height="20"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -1702,7 +1702,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="d61-oD-Shl" secondAttribute="trailing" id="3Eu-OD-bmf"/>
                                                     <constraint firstItem="2lx-2a-CDs" firstAttribute="top" secondItem="pUX-mv-YBq" secondAttribute="top" id="9jb-2o-nsy"/>
                                                     <constraint firstItem="d61-oD-Shl" firstAttribute="leading" secondItem="pUX-mv-YBq" secondAttribute="leading" id="Ayq-Eg-UWJ"/>
-                                                    <constraint firstItem="2lx-2a-CDs" firstAttribute="height" secondItem="pUX-mv-YBq" secondAttribute="height" multiplier="0.77" id="Lbl-PO-ocD"/>
+                                                    <constraint firstItem="2lx-2a-CDs" firstAttribute="height" secondItem="pUX-mv-YBq" secondAttribute="height" multiplier="0.7" id="Lbl-PO-ocD"/>
                                                     <constraint firstAttribute="bottom" secondItem="d61-oD-Shl" secondAttribute="bottom" constant="5" id="ZOm-IK-QMx"/>
                                                     <constraint firstItem="d61-oD-Shl" firstAttribute="top" secondItem="2lx-2a-CDs" secondAttribute="bottom" constant="5" id="dYl-SD-n1F"/>
                                                     <constraint firstAttribute="trailing" secondItem="2lx-2a-CDs" secondAttribute="trailing" id="rBx-fn-kxS"/>

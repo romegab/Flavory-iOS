@@ -122,4 +122,41 @@ extension FavoriteRecipesController: UITableViewDelegate, UITableViewDataSource 
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let cell = tableView.cellForRow(at: indexPath) as! LikedRecipeCell
+            
+            if let recipe = cell.likedRecipe {
+                deleteCell(withLikedRecipe: recipe)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        var actions = [UIContextualAction]()
+
+        let delete = UIContextualAction(style: .normal, title: nil) { [weak self] (contextualAction, view, completion) in
+
+            // Delete something
+
+            completion(true)
+        }
+
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 17.0, weight: .bold, scale: .large)
+        delete.image = UIImage(systemName: "trash", withConfiguration: largeConfig)?.withTintColor(.white, renderingMode: .alwaysTemplate).addBackgroundCircle(.systemRed)
+        delete.backgroundColor = .white
+
+        actions.append(delete)
+
+        let config = UISwipeActionsConfiguration(actions: actions)
+        config.performsFirstActionWithFullSwipe = false
+
+        return config
+    }
 }

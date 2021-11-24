@@ -709,16 +709,8 @@
                             <constraint firstItem="qmF-Pg-opd" firstAttribute="top" secondItem="iXh-1T-T88" secondAttribute="top" id="tYO-of-Hk3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="FLAVORY" id="nxN-J1-M6g">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="OeW-bf-qTJ">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="editButtonPressed:" destination="lY4-C5-2nT" id="RO0-jt-ud1"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="FLAVORY" id="nxN-J1-M6g"/>
                     <connections>
-                        <outlet property="editButton" destination="OeW-bf-qTJ" id="cz1-no-EjB"/>
                         <outlet property="noRecipesLabel" destination="B4N-Aw-zoH" id="9VL-vk-YA9"/>
                         <outlet property="tableView" destination="FZJ-pn-sWI" id="jqu-7o-3m2"/>
                         <outlet property="viewTitle" destination="pma-Zt-DYk" id="QMC-Rv-Xtr"/>
@@ -2148,7 +2140,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4g2-nC-IWM"/>
+        <segue reference="9n9-hm-KMj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="CarbohydratesIcon" width="120" height="120"/>

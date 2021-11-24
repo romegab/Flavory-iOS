@@ -4,14 +4,12 @@ import CoreData
 
 class StartedRecipeController: UIViewController, NSFetchedResultsControllerDelegate, StartedRecipeCellDelegate {
     
-    @IBOutlet private weak var editButton: UIBarButtonItem!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var viewTitle: UILabel!
     @IBOutlet weak var noRecipesLabel: UILabel!
     
     private var isInEditingMood: Bool = false {
         didSet {
-            configureEditButton()
             tableView.reloadData()
         }
     }
@@ -91,17 +89,6 @@ class StartedRecipeController: UIViewController, NSFetchedResultsControllerDeleg
         DataManager.shared.updateRecipe(recipe)
     }
     
-    private func configureEditButton(){
-        if isInEditingMood {
-            editButton.title = "Done"
-        } else {
-            editButton.title = "Edit"
-        }
-    }
-    
-    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
-        isInEditingMood.toggle()
-    }
 }
 
 extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
@@ -139,5 +126,73 @@ extension StartedRecipeController: UITableViewDelegate, UITableViewDataSource {
         cellHeight = floor(UIScreen.main.bounds.width * 0.3)
         return cellHeight
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            let cell = tableView.cellForRow(at: indexPath) as! StartedRecipeCell
+            
+            if var recipe = cell.recipe {
+                deleteCell(withRecipe: &recipe)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        var actions = [UIContextualAction]()
+
+        let delete = UIContextualAction(style: .normal, title: nil) { [weak self] (contextualAction, view, completion) in
+
+            // Delete something
+
+            completion(true)
+        }
+
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 17.0, weight: .bold, scale: .large)
+        delete.image = UIImage(systemName: "trash", withConfiguration: largeConfig)?.withTintColor(.white, renderingMode: .alwaysTemplate).addBackgroundCircle(.systemRed)
+        delete.backgroundColor = .white
+
+        actions.append(delete)
+
+        let config = UISwipeActionsConfiguration(actions: actions)
+        config.performsFirstActionWithFullSwipe = false
+
+        return config
+    }
 }
 
+extension UIImage {
+
+    func addBackgroundCircle(_ color: UIColor?) -> UIImage? {
+
+        let circleDiameter = max(size.width * 2, size.height * 2)
+        let circleRadius = circleDiameter * 0.5
+        let circleSize = CGSize(width: circleDiameter, height: circleDiameter)
+        let circleFrame = CGRect(x: 0, y: 0, width: circleSize.width, height: circleSize.height)
+        let imageFrame = CGRect(x: circleRadius - (size.width * 0.5), y: circleRadius - (size.height * 0.5), width: size.width, height: size.height)
+
+        let view = UIView(frame: circleFrame)
+        view.backgroundColor = color ?? .systemRed
+        view.layer.cornerRadius = circleDiameter * 0.5
+
+        UIGraphicsBeginImageContextWithOptions(circleSize, false, UIScreen.main.scale)
+
+        let renderer = UIGraphicsImageRenderer(size: circleSize)
+        let circleImage = renderer.image { ctx in
+            view.drawHierarchy(in: circleFrame, afterScreenUpdates: true)
+        }
+
+        circleImage.draw(in: circleFrame, blendMode: .normal, alpha: 1.0)
+        draw(in: imageFrame, blendMode: .normal, alpha: 1.0)
+
+        let image: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+
+        UIGraphicsEndImageContext()
+
+        return image
+    }
+}
